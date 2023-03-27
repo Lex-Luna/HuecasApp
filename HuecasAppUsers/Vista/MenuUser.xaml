@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:degradado="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="HuecasAppUsers.Vista.MenuUser">
+    <ScrollView>
+        <Grid RowDefinitions="auto,auto,auto,auto,*"
+          BackgroundColor="#1C1D22">
+            <StackLayout Orientation="Horizontal"
+                     HorizontalOptions="Center"
+                     Margin="0,10,0,0"
+                    >
+                <Label Text="Huecas"
+                   TextColor="Yellow"
+                   FontSize="25"
+                   FontAttributes="Bold"
+                   Margin="0,0,-5,0"/>
+                <Label Text="App"
+                   TextColor="White"
+                   FontSize="25"
+                   FontAttributes="Bold"
+                   />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Grid.Row="1"
+                     
+                     Margin="15,0,15,0">
+                <StackLayout >
+                    <Label Text="Hola,"
+                       TextColor="White"
+                       FontSize="30"
+                       FontAttributes="Bold"/>
+                    <Label Text="{Binding Nombre}"
+                       TextColor="White"
+                       FontSize="20"/>
+
+                </StackLayout>
+                <Button Text="Encuestar un local"
+                    CornerRadius="15"
+                    HeightRequest="40"
+                    VerticalOptions="CenterAndExpand"
+                    BackgroundColor="blue"
+                    TextColor="#509D52"
+                    FontAttributes="Bold"
+                    TextTransform="None"
+                    HorizontalOptions="EndAndExpand"
+                    
+                    Command="{Binding IrEncuestacomamd}"/>
+            </StackLayout>
+            <degradado:PancakeView Grid.Row="2"
+                               Margin="15"
+                               CornerRadius="15"
+                               BackgroundGradientStartPoint="0.9,0.1"
+                               BackgroundGradientEndPoint="0.1,1.0">
+                <degradado:PancakeView.BackgroundGradientStops>
+                    <degradado:GradientStopCollection>
+                        <degradado:GradientStop Color="#A4FFAA" Offset="0.0"/>
+                        <degradado:GradientStop Color="Blue" Offset="0.9"/>
+                    </degradado:GradientStopCollection>
+                </degradado:PancakeView.BackgroundGradientStops>
+                <StackLayout Margin="10,0,10,0">
+                    <StackLayout Orientation="Horizontal"
+                             HeightRequest="83"
+                            VerticalOptions="Center">
+                        <Frame Padding="-10"
+                           BackgroundColor="Transparent"
+                           HeightRequest="150"
+                           WidthRequest="150"
+                           CornerRadius="75"
+                           Margin="0,10,0,5">
+                            <Image Source="usuario.png"/>
+                        </Frame>
+
+                        <Label Text="Perfil verificado"
+                            TextColor="#1A9960"
+                           FontAttributes="Bold"
+                           HorizontalOptions="EndAndExpand"
+                           VerticalOptions="Center"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal"
+                             HeightRequest="83"
+                             >
+                        <StackLayout >
+                            <Label Text="# Encuestas 
+                               Realizadas:"
+                               TextColor="White"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Start"    
+                               FontSize="18"/>
+                            <Label Text="{Binding Lbltotalcobrado}"
+                               TextColor="White"
+                               FontAttributes="Bold"
+                               FontSize="25"/>
+
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="EndAndExpand">
+                            <Label Text="# Encuestas Removidas"
+                               TextColor="White"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                            <Label Text="{Binding Lbltotalporcobrar}"
+                               TextColor="White"
+                               FontAttributes="Bold"
+                               FontSize="25"/>
+
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal"
+                             Margin="0,0,0,10">
+                        <Button Text="Ver mi perfil"
+                            TextColor="White"
+                            BackgroundColor="Transparent"
+                            BorderWidth="2"
+                            BorderColor="White"
+                            CornerRadius="20"
+                            Command="{Binding Detallecommand}"/>
+                        <Label Text="{Binding Lblkgacumulados}"
+                           TextColor="White"
+                           FontSize="18"
+                           VerticalOptions="Center"/>
+                    </StackLayout>
+                </StackLayout>
+            </degradado:PancakeView>
+            <StackLayout Grid.Row="3" Margin="15,0,15,0">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Label Text="Mis Encuestas"
+                       TextColor="White"/>
+
+                </StackLayout>
+
+            </StackLayout>
+            <CollectionView Grid.Row="4" 
+                        ItemsSource="{Binding Listadetallecompra}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid RowDefinitions="*,1"
+                          ColumnDefinitions="50,*"
+                        >
+                            <Image Source="{Binding Icono}"
+                               Margin="8"/>
+                            <Frame Grid.Column="1"
+                                 Margin="0,0,15,0"
+                               Padding="0"
+                               BackgroundColor="Transparent"
+                               CornerRadius="10"
+                               >
+                                <StackLayout Orientation="Horizontal"
+                                     Grid.Column="1"
+                                     Margin="0,0,15,0"
+                                       
+                                     >
+                                    <StackLayout>
+                                        <Label Text="{Binding DescripcionPro}"
+                                   TextColor="{Binding Color}"
+                                         FontSize="18"/>
+                                        <Label Text="{Binding Preciocompra}"
+                                   TextColor="#798683"/>
+                                    </StackLayout>
+                                    <Label Text="{Binding Total}"
+                                   TextColor="White"
+                                   HorizontalOptions="EndAndExpand"
+                                   VerticalOptions="Center"
+                                   FontSize="20"/>
+
+                                </StackLayout>
+                            </Frame>
+
+                            <BoxView BackgroundColor="#3F3F3F"
+                                 Grid.Row="1"
+                                 Grid.Column="1"/>
+
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </Grid>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            NavigationPage.HasNavigationBar="False"
+            xmlns:local="clr-namespace:HuecasAppUsers.Vista"
+            xmlns:local1="clr-namespace:HuecasAppUsers.Vista"
+             x:Class="HuecasAppUsers.Vista.Contenedor"
+            BarTextColor="WhiteSmoke" BarBackgroundColor="#E83D40"
+            SelectedTabColor="White"
+            UnselectedTabColor="#F99680">
+    <!--Pages can be added as references or inline-->
+    <local:MenuUser Title="Usuario" IconImageSource="userqueda.png"/>
+    <local:PagCommunity Title="Comunidad" IconImageSource="Home.png"/>
+    <local:Informacion Title="Informacion" IconImageSource="megafono.png"/>
+</TabbedPage>

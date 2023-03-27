@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:degradado="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="HuecasAppUsers.Vista.CrearCorreo">
+    <ScrollView>
+        <Grid >
+            <Grid.RowDefinitions >
+                <RowDefinition Height="240"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <degradado:PancakeView Grid.RowSpan="2"
+                               BackgroundGradientStartPoint="0,1"
+                               BackgroundGradientEndPoint="0,0" >
+                <degradado:PancakeView.BackgroundGradientStops >
+                    <degradado:GradientStopCollection >
+                        <degradado:GradientStop Color="#F44A32" Offset="0"/>
+                        <degradado:GradientStop Color="#E83C40" Offset="0.8"/>
+
+                    </degradado:GradientStopCollection>
+                </degradado:PancakeView.BackgroundGradientStops>
+
+            </degradado:PancakeView>
+            <Image Source="bjorn1.png" Margin="0,20,0,0" Grid.Row="0"/>
+            <StackLayout Grid.Row="1"
+                     Margin="20"
+                     Orientation="Vertical">
+                <StackLayout Orientation="Horizontal" HeightRequest="50">
+                    
+                    <Image Source="https://i.ibb.co/RjRCr5M/camara-fotografica.png"
+                       x:Name="Fotoperfil"/>
+                </StackLayout>
+                <Entry TextColor="White" FontAttributes="Bold" 
+                   PlaceholderColor="White"
+                   Placeholder="Nombres"
+                       Text="{Binding TxtNombre}"/>
+                <Entry TextColor="White" FontAttributes="Bold" 
+                   PlaceholderColor="White"
+                   Placeholder="Apellido"
+                       Text="{Binding TxtApellido}"/>
+                <Entry TextColor="White" FontAttributes="Bold" 
+                   Text="{Binding TxtCorreo}"
+                   PlaceholderColor="White"
+                   Placeholder="Correo"/>
+                <Entry TextColor="White" FontAttributes="Bold"
+                   Text="{Binding TxtContraseña}"
+                   PlaceholderColor="White"
+                   Placeholder="Contraseña"
+                   IsPassword="True"/>
+                <Button Text="Crear cuenta"
+                        Command="{Binding btnCrearcuentaComand}"
+                    BackgroundColor="White"
+                    TextColor="Black"
+                    CornerRadius="10"
+                    WidthRequest="250"
+                    HorizontalOptions="Center"
+                    FontAttributes="Bold"
+                    x:Name="btnCrearcuenta"/>
+
+
+            </StackLayout>
+
+        </Grid>
+    </ScrollView>
+</ContentPage>

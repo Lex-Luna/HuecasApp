@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vistamodelo="clr-namespace:HuecasAppUsers.VistaModelo" x:DataType="vistamodelo:EncuestaVM"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="HuecasAppUsers.Vista.Encuesta">
+    <ScrollView>
+        <Grid RowDefinitions="*,*,*">
+            <Grid RowDefinitions="*, 2*, Auto" Grid.Row="0" x:Name="GridLocal">
+
+                <!--Degradados-->
+                <BoxView Grid.RowSpan="3">
+                    <BoxView.Background>
+                        <LinearGradientBrush>
+                            <GradientStopCollection>
+                                <GradientStop Color="#161616" Offset="0"/>
+                                <GradientStop Color="#30343F" Offset="1"/>
+                            </GradientStopCollection>
+                        </LinearGradientBrush>
+                    </BoxView.Background>
+                </BoxView>
+
+                <Grid>
+
+                    <Path Data="M0,0H375V262.033s-9.025,4.813-55.426-10.71-70.141-83.047-130.3-83.22-83.544,67.7-130.893,83.22S0,262.033,0,262.033Z" Aspect="Fill" Fill="#5B55E1"/>
+                </Grid>
+                <!--Cuerpo -->
+                <StackLayout Grid.Row="0"  HorizontalOptions="Center" Margin="10">
+                    <Label Text="Encuesta" FontSize="50" TextColor="White" />
+                    <Label Text="1/3" HorizontalTextAlignment="Center" FontSize="Large"/>
+                </StackLayout>
+                <StackLayout Grid.Row="1" HorizontalOptions="Center" Margin="0,-140,0,0" Spacing="30">
+                    <!--Grid de la imagen principal-->
+                    <Grid HeightRequest="210" WidthRequest="210" HorizontalOptions="Center">
+                        <Ellipse Stroke="white" StrokeThickness="2" Aspect="Fill"/>
+                        <Image x:Name="BannerImg1" Source="tienda.png" HeightRequest="195" WidthRequest="195" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Grid>
+
+                    <StackLayout HorizontalOptions="Center" Spacing="15">
+                        <Label Text="Datos generales del local" TextColor="White" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" />
+                        <Frame Grid.Row="1" Padding="5"
+                   Margin="0" CornerRadius="40"
+                   BackgroundColor="#5B55E1">
+                            <StackLayout Margin="10" VerticalOptions="Center">
+                                <!--Indicaciones-->
+
+
+                                <!--INICIO PAGINA LOCAL-->
+                                <!--Stack nombre local-->
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Nombre:"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               TextColor="White"/>
+                                    <Entry FontSize="18"
+                               Placeholder="Nombre del local"
+                               HorizontalOptions="FillAndExpand"
+                               TextColor="White" Text="{Binding TxtNombreLocal}"
+                               />
+                                </StackLayout>
+                                <!--Piker pais local -->
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Pais:" FontSize="15"
+                               FontAttributes="Bold" TextColor="White"
+                               VerticalOptions="Center"
+                               />
+                                    <Picker HorizontalOptions="FillAndExpand"                            
+                                ItemsSource="{Binding Listpais}"
+                                ItemDisplayBinding="{Binding Pais}"
+                                SelectedItem="{Binding SelectPais}"
+                                Title="Pais del local"/>
+                                </StackLayout>
+                                <!--Piker Ciudad local-->
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Ciudad:" FontSize="15"
+                               FontAttributes="Bold" TextColor="White"
+                               VerticalOptions="Center"
+                               />
+                                    <Picker HorizontalOptions="FillAndExpand"
+                                ItemsSource="{Binding Listciudad}"
+                                ItemDisplayBinding="{Binding Ciudad}"
+                                SelectedItem="{Binding SelectCiudad}"
+                                Title="Ciudad del local"/>
+                                </StackLayout>
+                                <!--stak barrio local-->
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Barrio:"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               TextColor="White"/>
+                                    <Entry FontSize="18"
+                               Placeholder="Ingrese el Barrio del local"
+                               HorizontalOptions="FillAndExpand"
+                               TextColor="White"
+                               Text="{Binding TxtBarrio}"/>
+                                </StackLayout>
+                                <!--stack Direccion local-->
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Direccion:"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               TextColor="White"/>
+                                    <Entry FontSize="18"
+                               Placeholder="Calles-1 N° calle-2"
+                               HorizontalOptions="FillAndExpand"
+                               TextColor="White"
+                               Text="{Binding TxtDireccion}"/>
+                                </StackLayout>
+
+                                <!--frame ir a plato-->
+
+                                <!--Boton guardar-->
+                            </StackLayout>
+                        </Frame>
+                        <ImageButton x:Name="BtnLocal" Clicked="BtnLocal_Clicked" Source="fleAbajo.png" BackgroundColor="#5B55E1" 
+                                     HeightRequest="50" CornerRadius="20"  
+                                 HorizontalOptions="Center" Command="{Binding AgregarLocalComamd}" />
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+
+            <Grid RowDefinitions="*, 2*, Auto" Grid.Row="1" x:Name="gridPlato">
+                <!--Degradados-->
+                <BoxView Grid.RowSpan="3">
+                    <BoxView.Background>
+                        <LinearGradientBrush>
+                            <GradientStopCollection>
+                                <GradientStop Color="#161616" Offset="0"/>
+                                <GradientStop Color="#30343F" Offset="1"/>
+                            </GradientStopCollection>
+                        </LinearGradientBrush>
+                    </BoxView.Background>
+                </BoxView>
+                <Grid>
+                    <Path Data="M0,0H375V262.033s-9.025,4.813-55.426-10.71-70.141-83.047-130.3-83.22-83.544,67.7-130.893,83.22S0,262.033,0,262.033Z" Aspect="Fill" Fill="#5B55E1"/>
+                    <!--Imagenes importantes q no estan aun-->
+                    <Image Source="menu." WidthRequest="20" HeightRequest="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="25"/>
+                    <Image Source="search.png" WidthRequest="20" HeightRequest="20" HorizontalOptions="End" VerticalOptions="Start" Margin="25" />
+                </Grid>
+                <!--Cuerpo -->
+                <StackLayout  Grid.Row="0"  HorizontalOptions="Center" Margin="10">
+                    <Label Text="Encuesta" FontSize="50" TextColor="White" />
+                    <Label Text="2/3" HorizontalTextAlignment="Center" FontSize="Large"/>
+                </StackLayout>
+
+                <StackLayout  Grid.Row="1" HorizontalOptions="Center" Margin="0,-140,0,0" Spacing="30">
+                    <!--Grid de la imagen principal-->
+                    <Grid HeightRequest="210" WidthRequest="210" HorizontalOptions="Center">
+                        <Ellipse Stroke="white" StrokeThickness="2" Aspect="Fill"/>
+                        <Image x:Name="Bannerimg3" Source="IMG03.png" HeightRequest="195" WidthRequest="195" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Grid>
+
+                    <StackLayout HorizontalOptions="Center" Spacing="15">
+                        <Label Text="¿Que tal la comida?" TextColor="White" FontAttributes="Bold" 
+                               FontSize="18" HorizontalOptions="Center" />
+                        <Frame Grid.Row="1" Padding="0" HeightRequest="275"  Margin="0" CornerRadius="15"
+                   BackgroundColor="#5B55E1">
+                            <StackLayout Margin="10" VerticalOptions="Center">
+                                <!--Stack nobre plato-->
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Que plato pediste?"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               TextColor="White"/>
+                                    <Entry  FontSize="18"
+                               Placeholder="Nombre del plato"
+                               HorizontalOptions="FillAndExpand"
+                               TextColor="White"
+                               Text="{Binding TxtNombrePlato}"/>
+                                </StackLayout>
+                                <!--stak   precio del plato-->
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="¿Precio de tu plato?"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               TextColor="White"/>
+                                    <Entry FontSize="18"
+                               Placeholder="Precio"
+                               HorizontalOptions="FillAndExpand"
+                               TextColor="White"
+                               Text="{Binding TxtPrecioPlato}"/>
+                                </StackLayout>
+
+                                <!--stak local Comntario-->
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text="¿Que opinion tienes de tu comida?"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               TextColor="White"/>
+                                    <Entry FontSize="18" 
+                               HorizontalOptions="FillAndExpand"
+                               TextColor="White" 
+                               Text="{Binding TxtComentario}"/>
+                                </StackLayout>
+                                <!-- stack descripcion PLato-->
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text="¿Como describirias tu plato?"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               TextColor="White"/>
+                                    <Entry FontSize="18" 
+                               HorizontalOptions="FillAndExpand"
+                               TextColor="White" 
+                               Text="{Binding TxtDescripcion}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                        <ImageButton x:Name="BtnPlato" Clicked="BtnPlato_Clicked" 
+                                     Source="fleAbajo.png" BackgroundColor="#5B55E1" 
+                                     HeightRequest="50" CornerRadius="20"  
+                                 HorizontalOptions="Center" Command="{Binding AgregarPlatoComand}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+
+            <Grid RowDefinitions="*, 2*, Auto" Grid.Row="2" x:Name="gridCalificaciones">
+                <!--Degradados-->
+                <BoxView Grid.RowSpan="3">
+                    <BoxView.Background>
+                        <LinearGradientBrush>
+                            <GradientStopCollection>
+                                <GradientStop Color="#161616" Offset="0"/>
+                                <GradientStop Color="#30343F" Offset="1"/>
+                            </GradientStopCollection>
+                        </LinearGradientBrush>
+                    </BoxView.Background>
+                </BoxView>
+                <Grid>
+                    <Path Data="M0,0H375V262.033s-9.025,4.813-55.426-10.71-70.141-83.047-130.3-83.22-83.544,67.7-130.893,83.22S0,262.033,0,262.033Z" Aspect="Fill" Fill="#5B55E1"/>
+                    <!--Imagenes importantes q no estan aun-->
+                </Grid>
+                <!--Cuerpo -->
+                <StackLayout Grid.Row="0"  HorizontalOptions="Center" Margin="10">
+                    <Label Text="Encuesta" FontSize="50" TextColor="White" />
+                    <Label Text="3/3" HorizontalTextAlignment="Center" FontSize="Large"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" HorizontalOptions="Center" Margin="0,-140,0,0" Spacing="30">
+                    <!--Grid de la imagen principal-->
+                    <Grid HeightRequest="210" WidthRequest="210" HorizontalOptions="Center">
+                        <Ellipse Stroke="white" StrokeThickness="2" Aspect="Fill"/>
+                        <Image x:Name="BannerImg2" Source="comprobado.png" HeightRequest="195" WidthRequest="195" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Grid>
+
+                    <StackLayout HorizontalOptions="Center" Spacing="15">
+                        <Label Text="¿Desliza para mostrarnos tu Calificacion ;)?" TextColor="White" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" />
+                        <Frame Grid.Row="1" Padding="0" HeightRequest="275" Margin="0" CornerRadius="15" BackgroundColor="#5B55E1">
+                            <StackLayout>
+                                <!--Stack Slider atencion-->
+                                <StackLayout Orientation="Horizontal" Margin="13">
+                                    <Label Text="Atencion:" FontSize="18" FontAttributes="Bold" 
+                                       VerticalOptions="Center" TextColor="White"/>
+                                    <Slider Minimum="0" Maximum="10" WidthRequest="150" 
+                                            ValueChanged="Slider_Atencion"/>
+                                    <Label Text="{Binding TxtAtencion, Mode=TwoWay}" x:Name="sliderAtencion" 
+                                           BackgroundColor="Red" />
+                                </StackLayout>
+                                <!--Stack Slider Comida-->
+                                <StackLayout Orientation="Horizontal" Margin="13">
+                                    <Label Text="Comida:" FontSize="18" FontAttributes="Bold" 
+                                           VerticalOptions="Center" TextColor="White"/>
+                                    <Slider Minimum="0" Maximum="10" WidthRequest="150" 
+                                            ValueChanged="Slider_Comida"/>
+                                    <Label Text="{Binding TxtComida, Mode=TwoWay}" x:Name="sliderComida"  
+                                           BackgroundColor="Red"/>
+                                </StackLayout>
+                                <!--Stack slider Local-->
+                                <StackLayout Orientation="Horizontal" Margin="13">
+                                    <Label Text="Local:"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   TextColor="White"/>
+                                    <Slider Minimum="0" Maximum="10" WidthRequest="150" 
+                                            ValueChanged="Slider_EstadoLocal"/>
+                                    <Label Text="{Binding TxtLocal, Mode=TwoWay}" x:Name="sliderEstadoLocal" 
+                                           BackgroundColor="Red" />
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="¿Lo recomiendas?"
+                                            FontSize="15"
+                                            FontAttributes="Bold"
+                                            VerticalOptions="Center"
+                                            TextColor="White"/>
+                                    <Label Text="No" />
+                                    <Switch x:Name="recomendacion" IsToggled="{Binding Recomendado}" />
+                                    <Label Text="Si" />
+                                </StackLayout>
+
+
+                            </StackLayout>
+
+                        </Frame>
+                        <Button Text="Guardar" TextColor="White" x:Name="Calificacion" Clicked="Calificacion_Clicked" 
+                                BackgroundColor="#FFBE00" WidthRequest="150" HeightRequest="46"
+                                Command="{Binding AdEncustaCommand}"
+                                CornerRadius="23" HorizontalOptions="Center" />
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+
+        </Grid>
+    </ScrollView>
+</ContentPage>
