@@ -20,6 +20,7 @@ namespace HuecasAppUsers.VistaModelo
         string _IdUsuario;
         string _correo;
         string _nombre;
+        string _apellido;
         #endregion
         #region CONSTRUCTOR
         public VMcontenedor(INavigation navigation)
@@ -28,19 +29,17 @@ namespace HuecasAppUsers.VistaModelo
             obtenerDataUserAsync();
         }
         #endregion
-        #region VARIABLES
-        string identificacion;
-        #endregion
         #region OBJETOS 
         public string Nombre
         {
             get { return _nombre; }
             set { SetValue(ref _nombre, value); }
         }
-        public string Identificacion
+
+        public string Apellido
         {
-            get { return identificacion; }
-            set { SetValue(ref identificacion, value); }
+            get { return _apellido; }
+            set { SetValue(ref _apellido, value); }
         }
         public string Correo
         {
@@ -63,6 +62,8 @@ namespace HuecasAppUsers.VistaModelo
                 p.Correo = Correo;
                 var data = await f.MostUsuarioXcorreo(p);
                 Nombre = data[0].Nombre;
+                //Apellido = data[0].Apellido;
+                //Correo = data[0].Correo;
                 //Preferences.Remove("MyFirebaseRefreshToken");
 
             }

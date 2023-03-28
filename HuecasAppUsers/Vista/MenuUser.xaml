@@ -25,14 +25,17 @@
             <StackLayout Orientation="Horizontal" Grid.Row="1"
                      
                      Margin="15,0,15,0">
-                <StackLayout >
-                    <Label Text="Hola,"
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Hola"
                        TextColor="White"
                        FontSize="30"
                        FontAttributes="Bold"/>
                     <Label Text="{Binding Nombre}"
                        TextColor="White"
-                       FontSize="20"/>
+                       FontAttributes="Bold"   
+                           
+                       FontSize="30"/>
+
 
                 </StackLayout>
                 <Button Text="Encuestar un local"
@@ -87,9 +90,10 @@
                                FontAttributes="Bold"
                                HorizontalTextAlignment="Start"    
                                FontSize="18"/>
-                            <Label Text="{Binding Lbltotalcobrado}"
+                            <Label Text="{Binding NumEncuesta}"
                                TextColor="White"
                                FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"
                                FontSize="25"/>
 
                         </StackLayout>
@@ -98,7 +102,7 @@
                                TextColor="White"
                                FontAttributes="Bold"
                                FontSize="18"/>
-                            <Label Text="{Binding Lbltotalporcobrar}"
+                            <Label Text="{Binding NumEncuesta}"
                                TextColor="White"
                                FontAttributes="Bold"
                                FontSize="25"/>

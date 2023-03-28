@@ -108,7 +108,7 @@ namespace HuecasAppUsers.VistaModelo
         }
         #endregion
         #region COMANDOS
-        //public ICommand InsertarRecolecoresComand => new Command(async () => await InsertarRecolecoresProces());
+        
         public ICommand btnIniciarcomamd => new Command(async () => await btnIniciar());
         public ICommand btnCrearCuentaComand => new Command(async () => await btnCrearCuenta());
 

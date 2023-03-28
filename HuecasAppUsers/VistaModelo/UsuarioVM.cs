@@ -21,12 +21,14 @@ namespace HuecasAppUsers.VistaModelo
         {
             Navigation = navigation;
             obtenerDataUserAsync();
+            //obtenerDataUserAsync();
         }
         #endregion
         #region VARIABLES
         string _IdUsuario;
         string _correo;
         string _nombre;
+        int _numEncuesta=0;
         string identificacion;
         #endregion
         #region OBJETOS 
@@ -34,6 +36,17 @@ namespace HuecasAppUsers.VistaModelo
         {
             get { return _nombre; }
             set { SetValue(ref _nombre, value); }
+        }
+
+        public int NumEncuesta
+        {
+            get { return _numEncuesta; }
+            set { SetValue(ref _numEncuesta, value); }
+        }
+        public string IdUsuario
+        {
+            get { return _IdUsuario; }
+            set { SetValue(ref _IdUsuario, value); }
         }
         public string Identificacion
         {
@@ -62,6 +75,8 @@ namespace HuecasAppUsers.VistaModelo
                 p.Correo = Correo;
                 var data = await f.MostUsuarioXcorreo(p);
                 Nombre = data[0].Nombre;
+                IdUsuario = data[0].IdUsuario;
+                NumEncuesta = data[0].NumEncuesta;                
                 //Preferences.Remove("MyFirebaseRefreshToken");  parece que el CPU esta a tope     , v
 
             }
