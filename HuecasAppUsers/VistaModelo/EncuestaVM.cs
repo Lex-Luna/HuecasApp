@@ -31,6 +31,7 @@ namespace HuecasAppUsers.VistaModelo
             {
                 await MostrarCiudad();
             }).Wait();
+            obtenerDataUserAsync();
         }
         #endregion
 
@@ -181,18 +182,65 @@ namespace HuecasAppUsers.VistaModelo
         public string txtComida;
         public string txtAtencion;
         public bool recomendado = true;
+        string _idUsuario;
+        string _correo;
+        string _nombre;
+        string _apellido;
         #endregion
         #region Objetos
         public string TxtAtencion { get { return txtAtencion; } set { SetValue(ref txtAtencion, value); } }
         public string TxtLocal { get { return txtLocal; } set { SetValue(ref txtLocal, value); } }
         public string TxtComida { get { return txtComida; } set { SetValue(ref txtComida, value); } }
         public bool Recomendado { get { return recomendado; } set { SetValue(ref recomendado, value); } }
+        public string Apellido { get { return _apellido; } set { SetValue(ref _apellido, value); } }
 
+        public string Correo
+        {
+            get { return _correo; }
+            set { SetValue(ref _correo, value); }
+        }
+
+        public string IdUsuario
+        {
+            get { return _idUsuario; }
+            set { SetValue(ref _idUsuario, value); }
+        }
+
+        public string Nombre
+        {
+            get { return _nombre; }
+            set { SetValue(ref _nombre, value); }
+        }
         #endregion
         #region ProcesosEncuesta
 
+        private async Task obtenerDataUserAsync()
+        {
+            try
+            {
+                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.WebapyFirebase));
+                var guardarId = JsonConvert.DeserializeObject<FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
+                var refrescarCOntenido = await authProvider.RefreshAuthAsync(guardarId);
+                Preferences.Set("MyFirebaseRefreshToken", JsonConvert.SerializeObject(refrescarCOntenido));
+                Correo = guardarId.User.Email;
+                var f = new UsuarioD();
+                var p = new UsuarioM();
+                p.Correo = Correo;
+                var data = await f.MostUsuarioXcorreo(p);
+                Nombre = data[0].Nombre;
+                IdUsuario = data[0].IdUsuario;
+                Apellido = data[0].Apellido;
+                //Preferences.Remove("MyFirebaseRefreshToken");  parece que el CPU esta a tope     , v
 
-        public async Task AdEncusta()
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Alerta", "X tu seguridad la sesion se a cerrado", "Ok");
+
+            }
+        }
+
+        public async Task AddEncusta()
         {
             var funcion = new CalificacionD();
             var parametros = new CalificacionM();
@@ -208,16 +256,19 @@ namespace HuecasAppUsers.VistaModelo
             var parametros2 = new EncuestaM();
             parametros2.IdPlatoLocal = _IdPlatoLocal;
             parametros2.IdCalificacion= _IdCalificacion;
+            parametros2.IdUsuario = IdUsuario;
             parametros2.FechaEncuesta = DateTime.Now.ToString("dd/MM/yyyy");
             parametros2.Estado = true;
-            
+            parametros2.ApellUsuario = Apellido;
+            parametros2.NomUsuario = Nombre;
             _IdEncuesta = await funcion2.InsertarEncuesta(parametros2);
         }
 
 
+
         #endregion
         #region ComandosEncuesta
-        public ICommand AdEncustaCommand => new Command(async () => await AdEncusta());
+        public ICommand AdEncustaCommand => new Command(async () => await AddEncusta());
         //public ICommand NavClientesComand => new Command(async () => await NavClientes());
 
         #endregion

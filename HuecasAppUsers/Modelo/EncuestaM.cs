@@ -13,5 +13,7 @@ namespace HuecasAppUsers.Modelo
         public string IdCalificacion { get; set; }
         public string IdPlatoLocal { get; set; }
         public string IdUsuario { get; set; }
+        public string NomUsuario { get; set; }
+        public string ApellUsuario { get; set; }
     }
 }

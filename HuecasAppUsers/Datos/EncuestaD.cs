@@ -22,7 +22,9 @@ namespace HuecasAppUsers.Datos
                     FechaEncuesta = parametros.FechaEncuesta,
                     IdCalificacion = parametros.IdCalificacion,
                     IdPlatoLocal = parametros.IdPlatoLocal,
-                    IdUsuario = parametros.IdUsuario
+                    IdUsuario = parametros.IdUsuario,
+                    NomUsuario = parametros.NomUsuario,
+                    ApellUsuario = parametros.ApellUsuario
                 });
             IdEncuesta = data.Key;
             return IdEncuesta;
