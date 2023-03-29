@@ -46,5 +46,38 @@ namespace HuecasAppUsers.Datos
 
                 }).ToList();
         }
+
+        /*public async Task<List<UsuarioM>> MostUsuarioXcorreo(UsuarioM p)
+        {
+            return (await Constantes.firebase
+                .Child("Usuario")
+                .OnceAsync<UsuarioM>()).Where(a => a.Object.Correo == p.Correo).Select(item => new UsuarioM
+                {
+                    IdUsuario = item.Key,
+                    Apellido = item.Object.Apellido,
+                    Contrasenia = item.Object.Contrasenia,
+                    Correo = item.Object.Correo,
+                    Estado = item.Object.Estado,
+                    IdAdministrador = item.Object.IdAdministrador,
+                    Nombre = item.Object.Nombre
+                }).ToList();
+        }*/
+
+        public async Task<List<EncuestaM>> MostEncuestaIdUser(string p)
+        {
+            return (await Constantes.firebase
+                .Child("Encuesta")
+                .OnceAsync<EncuestaM>()).Where(a => a.Object.IdUsuario == p).Select(item => new EncuestaM
+                {
+
+                    IdEncuesta = item.Key,
+                    Estado = item.Object.Estado,
+                    FechaEncuesta = item.Object.FechaEncuesta,
+                    IdCalificacion = item.Object.IdCalificacion,
+                    IdPlatoLocal = item.Object.IdPlatoLocal,
+                    IdUsuario = item.Object.IdUsuario
+
+                }).ToList();
+        }
     }
 }

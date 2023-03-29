@@ -134,46 +134,15 @@
 
             </StackLayout>
             <CollectionView Grid.Row="4" 
-                        ItemsSource="{Binding Listadetallecompra}">
+                        ItemsSource="{Binding LisEncueta}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid RowDefinitions="*,1"
-                          ColumnDefinitions="50,*"
-                        >
-                            <Image Source="{Binding Icono}"
-                               Margin="8"/>
-                            <Frame Grid.Column="1"
-                                 Margin="0,0,15,0"
-                               Padding="0"
-                               BackgroundColor="Transparent"
-                               CornerRadius="10"
-                               >
-                                <StackLayout Orientation="Horizontal"
-                                     Grid.Column="1"
-                                     Margin="0,0,15,0"
-                                       
-                                     >
-                                    <StackLayout>
-                                        <Label Text="{Binding DescripcionPro}"
-                                   TextColor="{Binding Color}"
-                                         FontSize="18"/>
-                                        <Label Text="{Binding Preciocompra}"
-                                   TextColor="#798683"/>
-                                    </StackLayout>
-                                    <Label Text="{Binding Total}"
-                                   TextColor="White"
-                                   HorizontalOptions="EndAndExpand"
-                                   VerticalOptions="Center"
-                                   FontSize="20"/>
-
-                                </StackLayout>
-                            </Frame>
-
-                            <BoxView BackgroundColor="#3F3F3F"
-                                 Grid.Row="1"
-                                 Grid.Column="1"/>
-
-                        </Grid>
+                        <StackLayout>
+                            <Label Text="{Binding FechaEncuesta}" />
+                            <Label Text="{Binding IdCalificacion}" />
+                            <Label Text="{Binding IdPlatoLocal}" />
+                            <Label Text="{Binding IdUsuario}" />
+                        </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 

@@ -11,6 +11,7 @@ using HuecasAppUsers.Datos;
 using HuecasAppUsers.Modelo;
 using Newtonsoft.Json;
 using Xamarin.Essentials;
+using System.Collections.ObjectModel;
 
 namespace HuecasAppUsers.VistaModelo
 {
@@ -21,7 +22,12 @@ namespace HuecasAppUsers.VistaModelo
         {
             Navigation = navigation;
             obtenerDataUserAsync();
-            //obtenerDataUserAsync();
+            
+            Task.Run(async () =>
+            {
+                await MostrarMisEncuestas(IdUsuario);
+            }).Wait();
+
         }
         #endregion
         #region VARIABLES
@@ -29,9 +35,25 @@ namespace HuecasAppUsers.VistaModelo
         string _correo;
         string _nombre;
         int _numEncuesta=0;
-        string identificacion;
+
+        public List<EncuestaM> listaEncueta= new List<EncuestaM>();
+
+
         #endregion
         #region OBJETOS 
+
+        public ObservableCollection<EncuestaM> LisEncueta { get; set; }
+
+
+        public List<EncuestaM> ListaEncueta
+        {
+            get { return listaEncueta; }
+            set
+            {
+                SetValue(ref listaEncueta, value);
+            }
+        }
+
         public string Nombre
         {
             get { return _nombre; }
@@ -48,11 +70,7 @@ namespace HuecasAppUsers.VistaModelo
             get { return _IdUsuario; }
             set { SetValue(ref _IdUsuario, value); }
         }
-        public string Identificacion
-        {
-            get { return identificacion; }
-            set { SetValue(ref identificacion, value); }
-        }
+        
         public string Correo
         {
             get { return _correo; }
@@ -86,6 +104,16 @@ namespace HuecasAppUsers.VistaModelo
 
             }
         }
+
+
+        public async Task MostrarMisEncuestas(string idUser)
+        {
+            //UsuarioM p = new UsuarioM();
+            EncuestaD f = new EncuestaD();
+            var encuestas = await f.MostEncuestaIdUser(idUser);
+            LisEncueta = new ObservableCollection<EncuestaM>(encuestas);
+        }
+
         private async Task Volver()
         {
             await Navigation.PopAsync();

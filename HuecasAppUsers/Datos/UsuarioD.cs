@@ -22,6 +22,7 @@ namespace HuecasAppUsers.Datos
                     Correo = parametros.Correo,
                     Estado = true,
                     Nombre = parametros.Nombre,
+                    NumEncuesta = parametros.NumEncuesta,
                     IdAdministrador = "lUUpQuSwqibNTFqEq4LVQKK8kEG2"
                 });
             _IdUsuario = data.Key;
