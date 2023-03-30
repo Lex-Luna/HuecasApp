@@ -9,9 +9,9 @@ namespace HuecasAppUsers.Modelo
         public string IdCalificacion { get; set; }
         public string IdLocal { get; set; }
         public string IdPlato { get; set; }
-        public string CalificacionAtencion { get; set; }
-        public string CalificacionComida { get; set; }
-        public string CalificacionLugar { get; set; }
+        public int CalificacionAtencion { get; set; }
+        public int CalificacionComida { get; set; }
+        public int CalificacionLugar { get; set; }
         public bool Recomendacion { get; set; }
 
     }

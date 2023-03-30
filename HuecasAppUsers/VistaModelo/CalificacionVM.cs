@@ -20,15 +20,15 @@ namespace HuecasAppUsers.VistaModelo
         }
         #endregion
         #region VariablesCalificacion
-        public string txtLocal;
-        public string txtComida;
-        public string txtAtencion;
+        public int txtLocal;
+        public int txtComida;
+        public int  txtAtencion;
         public bool recomendado = true;
         #endregion
         #region ObjetosCalificacion 
-        public string TxtAtencion { get { return txtAtencion; } set { SetValue(ref txtAtencion, value); } }
-        public string TxtLocal { get { return txtLocal; } set { SetValue(ref txtLocal, value); } }
-        public string TxtComida { get { return txtComida; } set { SetValue(ref txtComida, value); } }
+        public int TxtAtencion { get { return txtAtencion; } set { SetValue(ref txtAtencion, value); } }
+        public int TxtLocal { get { return txtLocal; } set { SetValue(ref txtLocal, value); } }
+        public int TxtComida { get { return txtComida; } set { SetValue(ref txtComida, value); } }
         public bool Recomendado { get { return recomendado; } set { SetValue(ref recomendado, value); } }
 
         #endregion

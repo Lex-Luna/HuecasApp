@@ -9,11 +9,14 @@ namespace HuecasAppUsers.Modelo
         
         public string IdEncuesta { get; set; }
         public bool Estado { get; set; }
+        public string NomPlato { get; set; }
+        public string NomLocal{ get; set; }
+        public int PromCalificacion{ get; set; }
         public string FechaEncuesta { get; set; }
         public string IdCalificacion { get; set; }
         public string IdPlatoLocal { get; set; }
         public string IdUsuario { get; set; }
         public string NomUsuario { get; set; }
-        public string ApellUsuario { get; set; }
+        
     }
 }

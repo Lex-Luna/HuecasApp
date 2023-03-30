@@ -139,9 +139,9 @@
                     <DataTemplate>
                         <StackLayout>
                             <Label Text="{Binding FechaEncuesta}" />
-                            <Label Text="{Binding IdCalificacion}" />
-                            <Label Text="{Binding IdPlatoLocal}" />
-                            <Label Text="{Binding IdUsuario}" />
+                            <Label Text="{Binding txtNombreLocal}" />
+                            <Label Text="{Binding txtNombrePlato}" />
+                            <Label Text="{Binding Promedio}" />
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

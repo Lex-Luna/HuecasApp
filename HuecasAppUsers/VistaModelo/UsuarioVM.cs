@@ -120,7 +120,7 @@ namespace HuecasAppUsers.VistaModelo
         }
 
         private async Task IrEncuesta()
-        {
+        {                                   
             await Navigation.PushAsync(new Encuesta());
         }
 

@@ -31,11 +31,30 @@ namespace HuecasAppUsers.VistaModelo
             {
                 await MostrarCiudad();
             }).Wait();
-            obtenerDataUserAsync();
+            /*Task.Run(async () =>
+            {
+                await obtenerDataUserAsync();
+            }).Wait();
+            Task.Run(async () =>
+            {
+                await AgregarLocal();
+            }).Wait();
+            Task.Run(async () =>
+            {
+                await AgregarPlato();
+            }).Wait();
+            Task.Run(async () =>
+            {
+                await AddEncusta();
+            }).Wait();*/
+            
+            
+            
         }
         #endregion
 
-        #region VariablesIds
+        #region VariablesGlobales
+        //id
         public string _IdPais;
         public string _IdCiudad;
         public string _IdLocal;
@@ -44,8 +63,45 @@ namespace HuecasAppUsers.VistaModelo
         public string _IdCalificacion;
         public string _IdEncuesta;
         public string _IdUsuario;
-        #endregion
+        //usuario
+        string _idUsuario;
+        string _correo;
+        string _nombre;
+        string _apellido;
+        //local
+        string txtNombreLocal;
+        //plato
+        string txtNombrePlato;
 
+
+
+
+        #endregion
+        #region ObjetosGlobales
+
+
+
+        //usuario
+        public string Apellido { get { return _apellido; } set { SetValue(ref _apellido, value); } }
+        public string Nombre{get { return _nombre; }set { SetValue(ref _nombre, value); }}
+
+        public string Correo{get { return _correo; }set { SetValue(ref _correo, value); }}
+
+        public string IdUsuario{get { return _idUsuario; }set { SetValue(ref _idUsuario, value); }}
+
+
+        public string NombreCompleto
+        {
+            get { return string.Format("{0} {1}", Nombre, Apellido); }
+        }
+
+        //local
+        public string TxtNombreLocal { get { return txtNombreLocal; } set { SetValue(ref txtNombreLocal, value); } }
+        //plato
+        public string TxtNombrePlato { get { return txtNombrePlato; } set { SetValue(ref txtNombrePlato, value); } }
+
+
+        #endregion
 
         #region  VariablesLocal
         public string idLocal;
@@ -54,7 +110,7 @@ namespace HuecasAppUsers.VistaModelo
 
         //string pais;
         //string ciudad;
-        string txtNombreLocal;
+        
         string txtBarrio;
         string txtDireccion;
         public string IdPais;
@@ -69,7 +125,6 @@ namespace HuecasAppUsers.VistaModelo
 
         #endregion
         #region ObjetosLocal 
-        public string TxtNombreLocal { get { return txtNombreLocal; } set { SetValue(ref txtNombreLocal, value); } }
         public string TxtBarrio { get { return txtBarrio; } set { SetValue(ref txtBarrio, value); } }
         public string TxtDireccion { get { return txtDireccion; } set { SetValue(ref txtDireccion, value); } }
         //Mostrar los lista de pais y ciudad
@@ -114,13 +169,13 @@ namespace HuecasAppUsers.VistaModelo
         }
         
 
-        public async  Task<string> ObtenerIdEncuesta(EncuestaM encuesta)
+        /*public async  Task<string> ObtenerIdEncuesta(EncuestaM encuesta)
         {
             FirebaseClient firebaseClient = new FirebaseClient("https://huecasapp-d8da1-default-rtdb.firebaseio.com/");
             var pushResponse = await Constantes.firebase.Child("Encuestas").PostAsync(encuesta);
             return pushResponse.Key;
 
-        }
+        } */
 
 
         #endregion
@@ -133,13 +188,11 @@ namespace HuecasAppUsers.VistaModelo
 
 
         #region VariablesPlato
-        string txtNombrePlato;
         string txtPrecioPlato;
         string txtComentario;
         string txtDescripcion;
         #endregion
         #region ObjetosPlato 
-        public string TxtNombrePlato { get { return txtNombrePlato; } set { SetValue(ref txtNombrePlato, value); } }
         public string TxtPrecioPlato { get { return txtPrecioPlato; } set { SetValue(ref txtPrecioPlato, value); } }
         public string TxtComentario { get { return txtComentario; } set { SetValue(ref txtComentario, value); } }
         public string TxtDescripcion { get { return txtDescripcion; } set { SetValue(ref txtDescripcion, value); } }
@@ -178,39 +231,20 @@ namespace HuecasAppUsers.VistaModelo
 
 
         #region VariablesEncuesta
-        public string txtLocal;
-        public string txtComida;
-        public string txtAtencion;
+        public int txtLocal;
+        public int txtComida;
+        public int txtAtencion;
+        public int _promedio;
         public bool recomendado = true;
-        string _idUsuario;
-        string _correo;
-        string _nombre;
-        string _apellido;
+                
         #endregion
         #region Objetos
-        public string TxtAtencion { get { return txtAtencion; } set { SetValue(ref txtAtencion, value); } }
-        public string TxtLocal { get { return txtLocal; } set { SetValue(ref txtLocal, value); } }
-        public string TxtComida { get { return txtComida; } set { SetValue(ref txtComida, value); } }
+        public int TxtAtencion { get { return txtAtencion; } set { SetValue(ref txtAtencion, value); } }
+        public int TxtLocal { get { return txtLocal; } set { SetValue(ref txtLocal, value); } }
+        public int TxtComida { get { return txtComida; } set { SetValue(ref txtComida, value); } }
+        public int Promedio { get { return _promedio; } set { SetValue(ref _promedio, value); } }
         public bool Recomendado { get { return recomendado; } set { SetValue(ref recomendado, value); } }
-        public string Apellido { get { return _apellido; } set { SetValue(ref _apellido, value); } }
-
-        public string Correo
-        {
-            get { return _correo; }
-            set { SetValue(ref _correo, value); }
-        }
-
-        public string IdUsuario
-        {
-            get { return _idUsuario; }
-            set { SetValue(ref _idUsuario, value); }
-        }
-
-        public string Nombre
-        {
-            get { return _nombre; }
-            set { SetValue(ref _nombre, value); }
-        }
+        
         #endregion
         #region ProcesosEncuesta
 
@@ -230,7 +264,7 @@ namespace HuecasAppUsers.VistaModelo
                 Nombre = data[0].Nombre;
                 IdUsuario = data[0].IdUsuario;
                 Apellido = data[0].Apellido;
-                //Preferences.Remove("MyFirebaseRefreshToken");  parece que el CPU esta a tope     , v
+                
 
             }
             catch (Exception)
@@ -240,6 +274,7 @@ namespace HuecasAppUsers.VistaModelo
             }
         }
 
+        //añade la encuesta y la calificacion
         public async Task AddEncusta()
         {
             var funcion = new CalificacionD();
@@ -248,6 +283,7 @@ namespace HuecasAppUsers.VistaModelo
             parametros.CalificacionComida = TxtComida;
             parametros.CalificacionLugar = TxtLocal;
             parametros.Recomendacion = Recomendado;
+            Promedio = (TxtAtencion + TxtComida + TxtLocal) / 3;
 
             _IdCalificacion = await funcion.InserCalificacion(parametros);
 
@@ -259,8 +295,10 @@ namespace HuecasAppUsers.VistaModelo
             parametros2.IdUsuario = IdUsuario;
             parametros2.FechaEncuesta = DateTime.Now.ToString("dd/MM/yyyy");
             parametros2.Estado = true;
-            parametros2.ApellUsuario = Apellido;
-            parametros2.NomUsuario = Nombre;
+            parametros2.NomUsuario = NombreCompleto;
+            parametros2.NomLocal = txtNombreLocal;
+            parametros2.NomPlato = txtNombrePlato;
+            parametros2.PromCalificacion = Promedio;
             _IdEncuesta = await funcion2.InsertarEncuesta(parametros2);
         }
 

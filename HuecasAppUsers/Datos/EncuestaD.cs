@@ -24,7 +24,9 @@ namespace HuecasAppUsers.Datos
                     IdPlatoLocal = parametros.IdPlatoLocal,
                     IdUsuario = parametros.IdUsuario,
                     NomUsuario = parametros.NomUsuario,
-                    ApellUsuario = parametros.ApellUsuario
+                    NomLocal = parametros.NomLocal,
+                    NomPlato = parametros.NomPlato,
+                    PromCalificacion = parametros.PromCalificacion
                 });
             IdEncuesta = data.Key;
             return IdEncuesta;
@@ -62,7 +64,7 @@ namespace HuecasAppUsers.Datos
                     Nombre = item.Object.Nombre
                 }).ToList();
         }*/
-
+                                                    
         public async Task<List<EncuestaM>> MostEncuestaIdUser(string p)
         {
             return (await Constantes.firebase
@@ -75,7 +77,11 @@ namespace HuecasAppUsers.Datos
                     FechaEncuesta = item.Object.FechaEncuesta,
                     IdCalificacion = item.Object.IdCalificacion,
                     IdPlatoLocal = item.Object.IdPlatoLocal,
-                    IdUsuario = item.Object.IdUsuario
+                    IdUsuario = item.Object.IdUsuario,
+                    NomUsuario = item.Object.NomUsuario,
+                    NomLocal = item.Object.NomLocal,
+                    NomPlato = item.Object.NomPlato,
+                    PromCalificacion = item.Object.PromCalificacion
 
                 }).ToList();
         }
