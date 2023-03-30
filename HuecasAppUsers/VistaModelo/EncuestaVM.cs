@@ -31,11 +31,11 @@ namespace HuecasAppUsers.VistaModelo
             {
                 await MostrarCiudad();
             }).Wait();
-            /*Task.Run(async () =>
+            Task.Run(async () =>
             {
                 await obtenerDataUserAsync();
             }).Wait();
-            Task.Run(async () =>
+            /*Task.Run(async () =>
             {
                 await AgregarLocal();
             }).Wait();
@@ -307,7 +307,6 @@ namespace HuecasAppUsers.VistaModelo
         #endregion
         #region ComandosEncuesta
         public ICommand AdEncustaCommand => new Command(async () => await AddEncusta());
-        //public ICommand NavClientesComand => new Command(async () => await NavClientes());
 
         #endregion
 

@@ -39,13 +39,17 @@ namespace HuecasAppUsers.Datos
                 .OnceAsync<EncuestaM>()).Select(item => new EncuestaM
                 {
 
+
                     IdEncuesta = item.Key,
                     Estado = item.Object.Estado,
                     FechaEncuesta = item.Object.FechaEncuesta,
                     IdCalificacion = item.Object.IdCalificacion,
                     IdPlatoLocal = item.Object.IdPlatoLocal,
-                    IdUsuario = item.Object.IdUsuario
-
+                    IdUsuario = item.Object.IdUsuario,
+                    NomUsuario = item.Object.NomUsuario,
+                    NomLocal = item.Object.NomLocal,
+                    NomPlato = item.Object.NomPlato,
+                    PromCalificacion = item.Object.PromCalificacion
                 }).ToList();
         }
 
@@ -69,7 +73,9 @@ namespace HuecasAppUsers.Datos
         {
             return (await Constantes.firebase
                 .Child("Encuesta")
-                .OnceAsync<EncuestaM>()).Where(a => a.Object.IdUsuario == p).Select(item => new EncuestaM
+                .OnceAsync<EncuestaM>()).
+                Where(a => a.Object.IdUsuario == p).
+                Select(item => new EncuestaM
                 {
 
                     IdEncuesta = item.Key,

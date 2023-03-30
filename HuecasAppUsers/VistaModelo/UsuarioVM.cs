@@ -21,8 +21,10 @@ namespace HuecasAppUsers.VistaModelo
         public UsuarioVM(INavigation navigation)
         {
             Navigation = navigation;
-            obtenerDataUserAsync();
-            
+            Task.Run(async () =>
+            {
+                await obtenerDataUserAsync();
+            }).Wait();
             Task.Run(async () =>
             {
                 await MostrarMisEncuestas(IdUsuario);

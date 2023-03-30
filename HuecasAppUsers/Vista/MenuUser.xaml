@@ -137,11 +137,11 @@
                         ItemsSource="{Binding LisEncueta}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout>
+                        <StackLayout BackgroundColor="red">
                             <Label Text="{Binding FechaEncuesta}" />
-                            <Label Text="{Binding txtNombreLocal}" />
-                            <Label Text="{Binding txtNombrePlato}" />
-                            <Label Text="{Binding Promedio}" />
+                            <Label Text="{Binding NomLocal}" />
+                            <Label Text="{Binding NomPlato}" />
+                            <Label Text="{Binding PromCalificacion}" />
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
