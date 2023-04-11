@@ -26,7 +26,11 @@ namespace HuecasAppUsers.VistaModelo
         public VMcontenedor(INavigation navigation)
         {
             Navigation = navigation;
-            obtenerDataUserAsync();
+            Task.Run(async () =>
+            {
+                await obtenerDataUserAsync();
+            }).Wait();
+            
         }
         #endregion
         #region OBJETOS 

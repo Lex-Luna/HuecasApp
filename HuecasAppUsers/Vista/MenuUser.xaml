@@ -133,20 +133,60 @@
                 </StackLayout>
 
             </StackLayout>
-            <CollectionView Grid.Row="4" 
-                        ItemsSource="{Binding LisEncueta}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout BackgroundColor="red">
-                            <Label Text="{Binding FechaEncuesta}" />
-                            <Label Text="{Binding NomLocal}" />
-                            <Label Text="{Binding NomPlato}" />
-                            <Label Text="{Binding PromCalificacion}" />
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
 
-            </CollectionView>
+            <ScrollView Grid.Row="4" >
+                <CollectionView ItemsSource="{Binding LisEncueta}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate >
+                            <Frame BorderColor="Black" Padding="1" BackgroundColor="Black">
+                                <StackLayout Margin="0,0,0,3" >
+                                    <StackLayout.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Offset="0.1" Color="#A4FFAA" />
+                                            <GradientStop Offset="0.9" Color="Blue" />
+                                        </LinearGradientBrush>
+                                    </StackLayout.Background>
+                                    <Grid Margin="5" RowDefinitions="Auto,Auto" ColumnDefinitions="230,1,*">
+                                        <!--Nombre del local-->
+                                        <StackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                            <Frame Padding="0" CornerRadius="5" BackgroundColor="#F0F0F0" BorderColor="#D8D8D8" HasShadow="True" HorizontalOptions="FillAndExpand">
+                                                <Label Text="{Binding NomLocal, StringFormat='Nombre del local: {0}'}" FontSize="16" TextColor="#333" HorizontalTextAlignment="Start" />
+                                                <!--Label Text="{Binding NomLocal}" FontSize="20" TextColor="Black" -->
+                                            </Frame>
+                                        </StackLayout>
+                                        <!--Nombre del plato-->
+                                        <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                                            <Frame Padding="0" CornerRadius="5" BackgroundColor="#F0F0F0" BorderColor="#D8D8D8" HasShadow="True" HorizontalOptions="FillAndExpand">
+                                                <Label Text="{Binding NomPlato, StringFormat='Nombre de su plato: {0}'}" FontSize="16" TextColor="#333" HorizontalTextAlignment="Start" />
+                                            </Frame>
+                                        </StackLayout>
+                                        <!--Calificacion del local-->
+                                        <StackLayout Grid.Row="1" Grid.Column="2" Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="EndAndExpand">
+                                            <Frame CornerRadius="5" BackgroundColor="#E7E114" BorderColor="#D8D8D8" HasShadow="True" Padding="5" Opacity="0.7">
+                                                <Label Text="{Binding PromCalificacion, StringFormat='Promedio: {0}/10'}" HorizontalTextAlignment="Center" FontSize="18" TextColor="Black" HorizontalOptions="Center" />
+                                            </Frame>
+                                        </StackLayout>
+
+                                        <!--Calificacion del local-->
+                                        <StackLayout Grid.Row="0" Grid.Column="2" Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="EndAndExpand">
+                                            <Frame CornerRadius="5" BackgroundColor="transparent" BorderColor="#D8D8D8" HasShadow="True" Padding="5">
+                                                <Label Text="{Binding FechaEncuesta, StringFormat=' {0}'}" HorizontalTextAlignment="Center" FontSize="18" TextColor="White" HorizontalOptions="Center" />
+                                            </Frame>
+                                        </StackLayout>
+
+                                    </Grid>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+
+
+
+
+
+
         </Grid>
     </ScrollView>
 </ContentPage>
