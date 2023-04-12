@@ -255,34 +255,41 @@
                                 <!--Stack Slider atencion-->
                                 <StackLayout Orientation="Horizontal" Margin="13">
                                     <Label Text="Atencion:" FontSize="18" FontAttributes="Bold" 
-                                       VerticalOptions="Center" TextColor="White"/>
+                                       VerticalOptions="Center" TextColor="White" WidthRequest="90"/>
                                     <Slider Minimum="0" Maximum="10" WidthRequest="150" 
                                             ValueChanged="Slider_Atencion"/>
-                                    <Label Text="{Binding TxtAtencion, Mode=TwoWay}" x:Name="sliderAtencion" 
-                                           BackgroundColor="Red" />
+                                    <Frame BackgroundColor="Black" Padding="8" CornerRadius="15" x:Name="FrAtencion" >
+                                        <Label Text="{Binding TxtAtencion, Mode=TwoWay}" x:Name="sliderAtencion" 
+                                           TextColor="White" FontAttributes="Bold"/>
+                                    </Frame>
                                 </StackLayout>
+
                                 <!--Stack Slider Comida-->
                                 <StackLayout Orientation="Horizontal" Margin="13">
-                                    <Label Text="Comida:" FontSize="18" FontAttributes="Bold" 
+                                    <Label Text="Comida:" FontSize="18" FontAttributes="Bold" WidthRequest="90" 
                                            VerticalOptions="Center" TextColor="White"/>
                                     <Slider Minimum="0" Maximum="10" WidthRequest="150" 
                                             ValueChanged="Slider_Comida"/>
-                                    <Label Text="{Binding TxtComida, Mode=TwoWay}" x:Name="sliderComida"  
-                                           BackgroundColor="Red"/>
+                                    <Frame BackgroundColor="Black" Padding="8" CornerRadius="15" x:Name="FrComida">
+                                        <Label Text="{Binding TxtComida, Mode=TwoWay}" x:Name="sliderComida" 
+                                               TextColor="White" FontAttributes="Bold"/>
+                                    </Frame>
                                 </StackLayout>
                                 <!--Stack slider Local-->
                                 <StackLayout Orientation="Horizontal" Margin="13">
-                                    <Label Text="Local:"
+                                    <Label Text="Local:" WidthRequest="90"
                                    FontSize="18"
                                    FontAttributes="Bold"
                                    VerticalOptions="Center"
                                    TextColor="White"/>
                                     <Slider Minimum="0" Maximum="10" WidthRequest="150" 
                                             ValueChanged="Slider_EstadoLocal"/>
-                                    <Label Text="{Binding TxtLocal, Mode=TwoWay}" x:Name="sliderEstadoLocal" 
-                                           BackgroundColor="Red" />
+                                    <Frame BackgroundColor="Black" Padding="8" CornerRadius="15" x:Name="FrLocal">
+                                        <Label Text="{Binding TxtLocal, Mode=TwoWay}" x:Name="sliderEstadoLocal" 
+                                           TextColor="White" FontAttributes="Bold" />
+                                    </Frame>
                                 </StackLayout>
-
+                                <!--Stack Recomendado-->    
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="¿Lo recomiendas?"
                                             FontSize="15"

@@ -293,9 +293,9 @@ namespace HuecasAppUsers.VistaModelo
             parametros2.IdPlatoLocal = _IdPlatoLocal;
             parametros2.IdCalificacion= _IdCalificacion;
             parametros2.IdUsuario = IdUsuario;
-            parametros2.FechaEncuesta = DateTime.Now.ToString("dd/MM/yyyy");
+            parametros2.FechaData = DateTime.Now;
             parametros2.Estado = true;
-            parametros2.NomUsuario = NombreCompleto;
+            parametros2.NomUsuario = NombreCompleto;                                                                                                                    
             parametros2.NomLocal = txtNombreLocal;
             parametros2.NomPlato = txtNombrePlato;
             parametros2.PromCalificacion = Promedio;

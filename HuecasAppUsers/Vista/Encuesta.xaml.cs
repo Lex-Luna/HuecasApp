@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace HuecasAppUsers.Vista
 {
@@ -23,19 +24,38 @@ namespace HuecasAppUsers.Vista
         private void Slider_Atencion(object sender, ValueChangedEventArgs e)
         {
             double newValue = Math.Round(e.NewValue);
+            
             sliderAtencion.Text = newValue.ToString();
+            if (e.NewValue >= 7)
+            {
+                FrAtencion.BackgroundColor = Color.Green;
+            }  else
+                FrAtencion.BackgroundColor = Color.Black;
+            
         }
 
         private void Slider_Comida(object sender, ValueChangedEventArgs e)
         {
             double newValue = Math.Round(e.NewValue);
             sliderComida.Text = newValue.ToString();
+            if (e.NewValue >=7)
+            {
+                FrComida.BackgroundColor = Color.Green;
+            }
+            else
+                FrComida.BackgroundColor = Color.Black;
         }
 
         private void Slider_EstadoLocal(object sender, ValueChangedEventArgs e)
         {
             double newValue = Math.Round(e.NewValue);
             sliderEstadoLocal.Text = newValue.ToString();
+            if (e.NewValue >= 7)
+            {
+                FrLocal.BackgroundColor = Color.Green;
+            }
+            else
+                FrLocal.BackgroundColor = Color.Black;
         }
         #endregion
         #region BotonScroll
