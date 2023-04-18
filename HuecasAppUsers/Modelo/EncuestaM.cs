@@ -18,6 +18,7 @@ namespace HuecasAppUsers.Modelo
         public string IdPlatoLocal { get; set; }
         public string IdUsuario { get; set; }
         public string NomUsuario { get; set; }
+        public int TotalEncuesta { get; set; }
         
     }
 }

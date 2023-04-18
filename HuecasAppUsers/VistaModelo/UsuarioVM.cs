@@ -34,9 +34,13 @@ namespace HuecasAppUsers.VistaModelo
         #endregion
         #region VARIABLES
         string _IdUsuario;
+        string _apellido;
         string _correo;
         string _nombre;
-        int _numEncuesta=0;
+        string _contrania;
+        string _idAdmin;
+        bool _estado;
+        int _numEncuesta;
 
         public List<EncuestaM> listaEncueta= new List<EncuestaM>();
 
@@ -46,14 +50,32 @@ namespace HuecasAppUsers.VistaModelo
 
         public ObservableCollection<EncuestaM> LisEncueta { get; set; }
 
-
-        public List<EncuestaM> ListaEncueta
+        public int NumEncuesta
         {
-            get { return listaEncueta; }
-            set
-            {
-                SetValue(ref listaEncueta, value);
-            }
+            get { return _numEncuesta; }
+            set { SetValue(ref _numEncuesta, value); }
+        }
+        public string Apellido
+        {
+            get { return _apellido; }
+            set { SetValue(ref _apellido, value); }
+        }
+        public string Contrania
+        {
+            get { return _contrania; }
+            set { SetValue(ref _contrania, value); }
+        }
+
+        public string IdAdmin
+        {
+            get { return _idAdmin; }
+            set { SetValue(ref _idAdmin, value); }
+        }
+
+        public bool Estado
+        {
+            get { return _estado; }
+            set { SetValue(ref _estado, value); }
         }
 
         public string Nombre
@@ -62,11 +84,7 @@ namespace HuecasAppUsers.VistaModelo
             set { SetValue(ref _nombre, value); }
         }
 
-        public int NumEncuesta
-        {
-            get { return _numEncuesta; }
-            set { SetValue(ref _numEncuesta, value); }
-        }
+        
         public string IdUsuario
         {
             get { return _IdUsuario; }
@@ -81,6 +99,12 @@ namespace HuecasAppUsers.VistaModelo
     
         #endregion
         #region PROCESOS
+        /*async Task MostrarNumEncuesta()
+        {
+            var f = new UsuarioD();
+            NumEncuesta = await f.MostUsuario();
+
+        } */
         private async Task obtenerDataUserAsync()
         {
             try
@@ -95,8 +119,14 @@ namespace HuecasAppUsers.VistaModelo
                 p.Correo = Correo;
                 var data = await f.MostUsuarioXcorreo(p);
                 Nombre = data[0].Nombre;
+                Apellido = data[0].Apellido;
                 IdUsuario = data[0].IdUsuario;
-                NumEncuesta = data[0].NumEncuesta;                
+                NumEncuesta = data[0].NumEncuesta;
+                IdAdmin = data[0].IdAdministrador;
+                Contrania = data[0].Contrasenia;
+                Estado = data[0].Estado;
+                
+                
                 //Preferences.Remove("MyFirebaseRefreshToken");  parece que el CPU esta a tope     , v
 
             }
@@ -126,6 +156,18 @@ namespace HuecasAppUsers.VistaModelo
             await Navigation.PushAsync(new Encuesta());
         }
 
+        private async Task EditEncuestaUserAdd()
+        {
+            var f = new UsuarioD();
+            var p = new UsuarioM();
+            p.NumEncuesta = NumEncuesta++;
+            p.Apellido = Apellido;
+            p.Nombre = Nombre;
+            p.Estado= Estado;
+            p.Correo = Correo;
+            p.Contrasenia= Contrania;
+            await f.AddNumEncuesta(p);
+        }
         
         #endregion
         #region COMANDOS

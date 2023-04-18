@@ -65,9 +65,13 @@ namespace HuecasAppUsers.VistaModelo
         public string _IdUsuario;
         //usuario
         string _idUsuario;
+        string _apellido;
         string _correo;
         string _nombre;
-        string _apellido;
+        string _contrania;
+        string _idAdmin;
+        bool _estado;
+        int _numEncuesta = 1;
         //local
         string txtNombreLocal;
         //plato
@@ -82,7 +86,24 @@ namespace HuecasAppUsers.VistaModelo
 
 
         //usuario
+        public string Contrania
+        {
+            get { return _contrania; }
+            set { SetValue(ref _contrania, value); }
+        }
+        public string IdAdmin
+        {
+            get { return _idAdmin; }
+            set { SetValue(ref _idAdmin, value); }
+        }
+
+        public bool Estado
+        {
+            get { return _estado; }
+            set { SetValue(ref _estado, value); }
+        }
         public string Apellido { get { return _apellido; } set { SetValue(ref _apellido, value); } }
+        public int NumEncuesta { get { return _numEncuesta; } set { SetValue(ref _numEncuesta, value); } }
         public string Nombre{get { return _nombre; }set { SetValue(ref _nombre, value); }}
 
         public string Correo{get { return _correo; }set { SetValue(ref _correo, value); }}
@@ -235,6 +256,7 @@ namespace HuecasAppUsers.VistaModelo
         public int txtComida;
         public int txtAtencion;
         public int _promedio;
+        public int _totalencuesta;
         public bool recomendado = true;
                 
         #endregion
@@ -243,8 +265,9 @@ namespace HuecasAppUsers.VistaModelo
         public int TxtLocal { get { return txtLocal; } set { SetValue(ref txtLocal, value); } }
         public int TxtComida { get { return txtComida; } set { SetValue(ref txtComida, value); } }
         public int Promedio { get { return _promedio; } set { SetValue(ref _promedio, value); } }
+        public int Totalencuesta { get { return _totalencuesta; } set { SetValue(ref _totalencuesta, value); } }
         public bool Recomendado { get { return recomendado; } set { SetValue(ref recomendado, value); } }
-        
+
         #endregion
         #region ProcesosEncuesta
 
@@ -262,9 +285,15 @@ namespace HuecasAppUsers.VistaModelo
                 p.Correo = Correo;
                 var data = await f.MostUsuarioXcorreo(p);
                 Nombre = data[0].Nombre;
-                IdUsuario = data[0].IdUsuario;
                 Apellido = data[0].Apellido;
-                
+                IdUsuario = data[0].IdUsuario;
+                NumEncuesta = data[0].NumEncuesta;
+                IdAdmin = data[0].IdAdministrador;
+                Contrania = data[0].Contrasenia;
+                Estado = data[0].Estado;
+
+
+                //Preferences.Remove("MyFirebaseRefreshToken");  parece que el CPU esta a tope     , v
 
             }
             catch (Exception)
@@ -275,7 +304,7 @@ namespace HuecasAppUsers.VistaModelo
         }
 
         //añade la encuesta y la calificacion
-        public async Task AddEncusta()
+        public async Task AddCalificacion()
         {
             var funcion = new CalificacionD();
             var parametros = new CalificacionM();
@@ -286,8 +315,23 @@ namespace HuecasAppUsers.VistaModelo
             Promedio = (TxtAtencion + TxtComida + TxtLocal) / 3;
 
             _IdCalificacion = await funcion.InserCalificacion(parametros);
+        }
 
+        private async Task EditEncuestaUserAdd()
+        {
+            var f = new UsuarioD();
+            var p = new UsuarioM();
+            p.NumEncuesta = ++NumEncuesta;
+            p.Apellido = Apellido;
+            p.Nombre = Nombre;
+            p.Estado = Estado;
+            p.Correo = Correo;
+            p.Contrasenia = Contrania;
+            await f.AddNumEncuesta(p);
+        }
 
+        public async Task AddEncusta()
+        {
             var funcion2 = new EncuestaD();
             var parametros2 = new EncuestaM();
             parametros2.IdPlatoLocal = _IdPlatoLocal;
@@ -299,8 +343,15 @@ namespace HuecasAppUsers.VistaModelo
             parametros2.NomLocal = txtNombreLocal;
             parametros2.NomPlato = txtNombrePlato;
             parametros2.PromCalificacion = Promedio;
+            parametros2.TotalEncuesta =  Totalencuesta;
+            
+            await EditEncuestaUserAdd();
+            await AddCalificacion();
+            
+            await Navigation.PushAsync(new MenuUser());
             _IdEncuesta = await funcion2.InsertarEncuesta(parametros2);
         }
+        
 
 
 

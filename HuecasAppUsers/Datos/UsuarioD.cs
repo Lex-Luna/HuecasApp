@@ -14,7 +14,8 @@ namespace HuecasAppUsers.Datos
         public string _IdUsuario;
         public async Task <string> InserUsuario(UsuarioM parametros)
         {
-            var data = await Constantes.firebase.Child("Usuario")
+            var data = await Constantes.firebase
+                .Child("Usuario")
                 .PostAsync(new UsuarioM()
                 {
                     Apellido = parametros.Apellido,
@@ -41,14 +42,18 @@ namespace HuecasAppUsers.Datos
                     Correo = item.Object.Correo,
                     Estado = item.Object.Estado,
                     IdAdministrador = item.Object.IdAdministrador,
-                    Nombre = item.Object.Nombre
+                    Nombre = item.Object.Nombre,
+                    NumEncuesta = item.Object.NumEncuesta
+
                 }).ToList();
         }
         public async Task<List<UsuarioM>> MostUsuarioXcorreo(UsuarioM p)
         {
             return (await Constantes.firebase
                 .Child("Usuario")
-                .OnceAsync<UsuarioM>()).Where(a=>a.Object.Correo==p.Correo).Select(item => new UsuarioM
+                .OnceAsync<UsuarioM>())
+                .Where(a=>a.Object.Correo==p.Correo)
+                .Select(item => new UsuarioM
                 {
                     IdUsuario = item.Key,
                     Apellido = item.Object.Apellido,
@@ -56,8 +61,50 @@ namespace HuecasAppUsers.Datos
                     Correo = item.Object.Correo,
                     Estado = item.Object.Estado,
                     IdAdministrador = item.Object.IdAdministrador,
-                    Nombre = item.Object.Nombre
+                    Nombre = item.Object.Nombre,
+                    NumEncuesta = item.Object.NumEncuesta
+
                 }).ToList();
         }
+
+        /*public async Task AddNumEncuesta(UsuarioM p)
+        {
+            var obtenerData = (await Conexiones.Constantes.firebase
+                .Child("Usuario")
+                .OnceAsync<UsuarioM>()).Where(a => a.Object.Correo == p.Correo)
+                .FirstOrDefault();
+            await Conexiones.Constantes.firebase
+               .Child("Usuario")
+               .Child(obtenerData.Key)
+               .PutAsync(new UsuarioM()
+               {
+                   Nombre =p.Nombre,
+                   Apellido = p.Apellido,
+                   Correo = p.Correo,
+                   Contrasenia = p.Contrasenia,
+                   IdAdministrador=p.IdAdministrador,
+                   Estado = p.Estado,
+                   NumEncuesta = ++p.NumEncuesta     
+               });  
+
+        } */
+        public async Task AddNumEncuesta(UsuarioM p)
+        {
+            var obtenerData = (await Conexiones.Constantes.firebase
+                .Child("Usuario")
+                .OnceAsync<UsuarioM>()).Where(a => a.Object.Correo == p.Correo)
+                .FirstOrDefault();
+
+            var usuario = obtenerData.Object;
+            usuario.NumEncuesta++;
+
+            await Conexiones.Constantes.firebase
+               .Child("Usuario")
+               .Child(obtenerData.Key)
+               .PutAsync(usuario);
+        }
+
+
+
     }
 }

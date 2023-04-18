@@ -15,6 +15,7 @@ namespace HuecasAppUsers.Datos
         public string IdEncuesta;
         public async Task <string> InsertarEncuesta(EncuestaM parametros)
         {
+            
             var data = await Constantes.firebase.Child("Encuesta")
                 .PostAsync(new EncuestaM()
                 {
@@ -27,8 +28,11 @@ namespace HuecasAppUsers.Datos
                     NomUsuario = parametros.NomUsuario,
                     NomLocal = parametros.NomLocal,
                     NomPlato = parametros.NomPlato,
-                    PromCalificacion = parametros.PromCalificacion
+                    PromCalificacion = parametros.PromCalificacion,
+                    TotalEncuesta = parametros.TotalEncuesta
+                    
                 }) ;
+            
             IdEncuesta = data.Key;
             return IdEncuesta;
         }
@@ -54,21 +58,7 @@ namespace HuecasAppUsers.Datos
                 }).ToList();
         }
 
-        /*public async Task<List<UsuarioM>> MostUsuarioXcorreo(UsuarioM p)
-        {
-            return (await Constantes.firebase
-                .Child("Usuario")
-                .OnceAsync<UsuarioM>()).Where(a => a.Object.Correo == p.Correo).Select(item => new UsuarioM
-                {
-                    IdUsuario = item.Key,
-                    Apellido = item.Object.Apellido,
-                    Contrasenia = item.Object.Contrasenia,
-                    Correo = item.Object.Correo,
-                    Estado = item.Object.Estado,
-                    IdAdministrador = item.Object.IdAdministrador,
-                    Nombre = item.Object.Nombre
-                }).ToList();
-        }*/
+        
 
         public async Task<List<EncuestaM>> MostEncuestaIdUser(string p)
         {
