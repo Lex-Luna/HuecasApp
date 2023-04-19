@@ -15,7 +15,7 @@ using System.Collections.ObjectModel;
 
 namespace HuecasAppUsers.VistaModelo
 {
-    public class UsuarioVM :BaseVM
+    public class UsuarioVM : BaseVM
     {
         #region CONSTRUCTOR
         public UsuarioVM(INavigation navigation)
@@ -41,13 +41,15 @@ namespace HuecasAppUsers.VistaModelo
         string _idAdmin;
         bool _estado;
         int _numEncuesta;
+        string IdEncuesta;
 
-        public List<EncuestaM> listaEncueta= new List<EncuestaM>();
+        EncuestaM selectEncuesta;
+        public List<EncuestaM> listaEncueta = new List<EncuestaM>();
 
 
         #endregion
         #region OBJETOS 
-
+        public EncuestaM SelectEncuesta { get { return selectEncuesta; } set { SetProperty(ref selectEncuesta, value); IdEncuesta = selectEncuesta.IdEncuesta; } }
         public ObservableCollection<EncuestaM> LisEncueta { get; set; }
 
         public int NumEncuesta
@@ -84,27 +86,22 @@ namespace HuecasAppUsers.VistaModelo
             set { SetValue(ref _nombre, value); }
         }
 
-        
+
         public string IdUsuario
         {
             get { return _IdUsuario; }
             set { SetValue(ref _IdUsuario, value); }
         }
-        
+
         public string Correo
         {
             get { return _correo; }
             set { SetValue(ref _correo, value); }
         }
-    
+
         #endregion
         #region PROCESOS
-        /*async Task MostrarNumEncuesta()
-        {
-            var f = new UsuarioD();
-            NumEncuesta = await f.MostUsuario();
 
-        } */
         private async Task obtenerDataUserAsync()
         {
             try
@@ -125,8 +122,8 @@ namespace HuecasAppUsers.VistaModelo
                 IdAdmin = data[0].IdAdministrador;
                 Contrania = data[0].Contrasenia;
                 Estado = data[0].Estado;
-                
-                
+
+
                 //Preferences.Remove("MyFirebaseRefreshToken");  parece que el CPU esta a tope     , v
 
             }
@@ -146,35 +143,29 @@ namespace HuecasAppUsers.VistaModelo
             LisEncueta = new ObservableCollection<EncuestaM>(encuestas);
         }
 
-        private async Task Volver()
-        {
-            await Navigation.PopAsync();
-        }
-
         private async Task IrEncuesta()
-        {                                   
+        {
             await Navigation.PushAsync(new Encuesta());
         }
 
-        private async Task EditEncuestaUserAdd()
+        private async Task Alerta(EncuestaM p)
         {
-            var f = new UsuarioD();
-            var p = new UsuarioM();
-            p.NumEncuesta = NumEncuesta++;
-            p.Apellido = Apellido;
-            p.Nombre = Nombre;
-            p.Estado= Estado;
-            p.Correo = Correo;
-            p.Contrasenia= Contrania;
-            await f.AddNumEncuesta(p);
+
+
+            /*string id;
+            id = selectedItem.IdEncuesta;
+            Navigation.PushAsync(new DetalleEncuestaUser(id));*/
+            await DisplayAlert("Alerta", p.IdEncuesta, "Ok");
+
+
         }
-        
+
         #endregion
         #region COMANDOS
         //public ICommand InsertarRecolecoresComand => new Command(async () => await InsertarRecolecoresProces());
-        public ICommand Volvercomamd => new Command(async () => await Volver());
+
         public ICommand IrEncuestacomamd => new Command(async () => await IrEncuesta());
-        //public ICommand NavClientesComand => new Command(async () => await NavClientes());
+        public ICommand AlertaCommand => new Command<EncuestaM>(async (p) => await Alerta(p));
 
         #endregion
     }

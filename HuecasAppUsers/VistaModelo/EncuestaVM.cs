@@ -18,7 +18,7 @@ namespace HuecasAppUsers.VistaModelo
 {
     public class EncuestaVM : BaseVM
     {
-        #region CONSTRUCTOR
+        #region ConstrutorGlobal
         public EncuestaVM(INavigation navigation)
         {
             Navigation = navigation;

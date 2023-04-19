@@ -58,8 +58,6 @@ namespace HuecasAppUsers.Datos
                 }).ToList();
         }
 
-        
-
         public async Task<List<EncuestaM>> MostEncuestaIdUser(string p)
         {
             return (await Constantes.firebase
