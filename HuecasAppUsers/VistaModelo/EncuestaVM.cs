@@ -270,7 +270,10 @@ namespace HuecasAppUsers.VistaModelo
 
         #endregion
         #region ProcesosEncuesta
-
+        private async Task IrMenuUser()
+        {
+            await Navigation.PushAsync(new MenuUser());
+        }
         private async Task obtenerDataUserAsync()
         {
             try
@@ -302,9 +305,8 @@ namespace HuecasAppUsers.VistaModelo
 
             }
         }
-
         //añade la encuesta y la calificacion
-        public async Task AddCalificacion()
+        /*public async Task AddCalificacion()
         {
             var funcion = new CalificacionD();
             var parametros = new CalificacionM();
@@ -315,7 +317,7 @@ namespace HuecasAppUsers.VistaModelo
             Promedio = (TxtAtencion + TxtComida + TxtLocal) / 3;
 
             _IdCalificacion = await funcion.InserCalificacion(parametros);
-        }
+        }  */
 
         private async Task EditEncuestaUserAdd()
         {
@@ -332,6 +334,16 @@ namespace HuecasAppUsers.VistaModelo
 
         public async Task AddEncusta()
         {
+            var funcion = new CalificacionD();
+            var parametros = new CalificacionM();
+            parametros.CalificacionAtencion = TxtAtencion;
+            parametros.CalificacionComida = TxtComida;
+            parametros.CalificacionLugar = TxtLocal;
+            parametros.Recomendacion = Recomendado;
+            Promedio = (TxtAtencion + TxtComida + TxtLocal) / 3;
+
+            _IdCalificacion = await funcion.InserCalificacion(parametros);
+
             var funcion2 = new EncuestaD();
             var parametros2 = new EncuestaM();
             parametros2.IdPlatoLocal = _IdPlatoLocal;
@@ -346,10 +358,9 @@ namespace HuecasAppUsers.VistaModelo
             parametros2.TotalEncuesta =  Totalencuesta;
             
             await EditEncuestaUserAdd();
-            await AddCalificacion();
             
-            await Navigation.PushAsync(new MenuUser());
             _IdEncuesta = await funcion2.InsertarEncuesta(parametros2);
+            await IrMenuUser();
         }
         
 
