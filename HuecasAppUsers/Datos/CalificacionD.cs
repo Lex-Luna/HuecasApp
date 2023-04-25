@@ -45,5 +45,27 @@ namespace HuecasAppUsers.Datos
 
                 }).ToList();
         }
+
+        
+        public  async Task<List<CalificacionM>> MostCalificacionXId(string p)
+        {
+            return (await Constantes.firebase
+                .Child("Calificacion")
+                .OnceAsync<CalificacionM>())
+                .Where(a => a.Object.IdCalificacion == p)
+
+                .Select(item => new CalificacionM
+                {
+                    CalificacionAtencion = item.Object.CalificacionAtencion,
+                    CalificacionComida = item.Object.CalificacionComida,
+                    CalificacionLugar = item.Object.CalificacionLugar,
+                    IdCalificacion = item.Object.IdCalificacion,
+                    IdLocal = item.Object.IdLocal,
+                    IdPlato = item.Object.IdPlato,
+                    Recomendacion = item.Object.Recomendacion
+                }).ToList();
+            
+        }
     }
 }
+
