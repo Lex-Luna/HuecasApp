@@ -289,7 +289,7 @@
                                            TextColor="White" FontAttributes="Bold" />
                                     </Frame>
                                 </StackLayout>
-                                <!--Stack Recomendado-->    
+                                <!--Stack Recomendado-->
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="¿Lo recomiendas?"
                                             FontSize="15"

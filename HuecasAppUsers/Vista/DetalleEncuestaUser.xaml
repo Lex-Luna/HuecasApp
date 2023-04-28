@@ -1,22 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
              x:Class="HuecasAppUsers.Vista.DetalleEncuestaUser">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Pais:" FontSize="15"
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+
+            <StackLayout Orientation="Horizontal" BackgroundColor="Blue" >
+                <Label Text="{Binding IdCalificacion}" FontSize="15"
                                FontAttributes="Bold" TextColor="White"
-                               VerticalOptions="Center"
-                               />
-                <Picker HorizontalOptions="FillAndExpand"                            
-                                ItemsSource="{Binding Listpais}"
-                                ItemDisplayBinding="{Binding Pais}"
-                                SelectedItem="{Binding SelectPais}"
-                                Title="Pais del local"/>
+                               VerticalOptions="Center"/>
+                <!--ListView ItemsSource="{Binding ListaCalificacion}" Margin="5,15,5,5" BackgroundColor="Red">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout  Orientation="Vertical">
+                                    <Label Text="{Binding CalificacionAtencion}" />
+                                    <Label Text="{Binding CalificacionComida}" />
+                                    <Label Text="{Binding CalificacionLugar}" />
+                                    <Label Text="{Binding Recomendacion}" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView-->
+                <CollectionView ItemsSource="{Binding LisCalificacion}"
+                Margin="5,15,5,5"
+                BackgroundColor="Red">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid RowDefinitions="*,*,*,*">
+
+                                <Label Grid.Row="0" Text="{Binding CalificacionAtencion}" />
+                                <Label Grid.Row="1" Text="{Binding CalificacionComida}" />
+                                <Label Grid.Row="2" Text="{Binding CalificacionLugar}" />
+                                <Label Grid.Row="3" Text="{Binding Recomendacion}" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+
+
+
+
+
+
+
+
+
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

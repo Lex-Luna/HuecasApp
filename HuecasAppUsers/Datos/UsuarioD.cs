@@ -67,27 +67,7 @@ namespace HuecasAppUsers.Datos
                 }).ToList();
         }
 
-        /*public async Task AddNumEncuesta(UsuarioM p)
-        {
-            var obtenerData = (await Conexiones.Constantes.firebase
-                .Child("Usuario")
-                .OnceAsync<UsuarioM>()).Where(a => a.Object.Correo == p.Correo)
-                .FirstOrDefault();
-            await Conexiones.Constantes.firebase
-               .Child("Usuario")
-               .Child(obtenerData.Key)
-               .PutAsync(new UsuarioM()
-               {
-                   Nombre =p.Nombre,
-                   Apellido = p.Apellido,
-                   Correo = p.Correo,
-                   Contrasenia = p.Contrasenia,
-                   IdAdministrador=p.IdAdministrador,
-                   Estado = p.Estado,
-                   NumEncuesta = ++p.NumEncuesta     
-               });  
-
-        } */
+      
         public async Task AddNumEncuesta(UsuarioM p)
         {
             var obtenerData = (await Conexiones.Constantes.firebase

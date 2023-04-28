@@ -14,10 +14,10 @@ namespace HuecasAppUsers.Vista
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DetalleEncuestaUser : ContentPage
     {
-        public DetalleEncuestaUser(string idEncuesta)
+        public DetalleEncuestaUser(EncuestaM e)
         {
             InitializeComponent();
-            BindingContext = new DetalleEncuestaUserVM();
+            BindingContext = new DetalleEncuestaUserVM(Navigation, e);
         }
     }
 }

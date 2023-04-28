@@ -49,11 +49,11 @@ namespace HuecasAppUsers.Datos
         
         public  async Task<List<CalificacionM>> MostCalificacionXId(string p)
         {
+
             return (await Constantes.firebase
                 .Child("Calificacion")
                 .OnceAsync<CalificacionM>())
                 .Where(a => a.Object.IdCalificacion == p)
-
                 .Select(item => new CalificacionM
                 {
                     CalificacionAtencion = item.Object.CalificacionAtencion,
@@ -63,8 +63,7 @@ namespace HuecasAppUsers.Datos
                     IdLocal = item.Object.IdLocal,
                     IdPlato = item.Object.IdPlato,
                     Recomendacion = item.Object.Recomendacion
-                }).ToList();
-            
+                }).ToList();   
         }
     }
 }

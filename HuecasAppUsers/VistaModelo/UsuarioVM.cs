@@ -12,6 +12,7 @@ using HuecasAppUsers.Modelo;
 using Newtonsoft.Json;
 using Xamarin.Essentials;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace HuecasAppUsers.VistaModelo
 {
@@ -49,6 +50,8 @@ namespace HuecasAppUsers.VistaModelo
 
         #endregion
         #region OBJETOS 
+
+        public List<EncuestaM> ListaEncueta { get { return listaEncueta; } set { SetProperty(ref listaEncueta, value); IdEncuesta = selectEncuesta.IdEncuesta; } }
         public EncuestaM SelectEncuesta { get { return selectEncuesta; } set { SetProperty(ref selectEncuesta, value); IdEncuesta = selectEncuesta.IdEncuesta; } }
         public ObservableCollection<EncuestaM> LisEncueta { get; set; }
 
@@ -133,31 +136,32 @@ namespace HuecasAppUsers.VistaModelo
 
             }
         }
-
-
-        public async Task MostrarMisEncuestas(string idUser)
-        {
-            //UsuarioM p = new UsuarioM();
-            EncuestaD f = new EncuestaD();
-            var encuestas = await f.MostEncuestaIdUser(idUser);
-            LisEncueta = new ObservableCollection<EncuestaM>(encuestas);
-        }
-
         private async Task IrEncuesta()
         {
             await Navigation.PushAsync(new Encuesta());
         }
 
-        private async Task Alerta(EncuestaM p)
+
+        public async Task MostrarMisEncuestas(string idUser)
         {
+            EncuestaD f = new EncuestaD();
+            var encuestas = await f.MostEncuestaIdUser(idUser);
+            LisEncueta = new ObservableCollection<EncuestaM>(encuestas);
+        }
 
 
-            /*string id;
-            id = selectedItem.IdEncuesta;
-            Navigation.PushAsync(new DetalleEncuestaUser(id));*/
-            await DisplayAlert("Alerta", p.IdEncuesta, "Ok");
+        private async Task IrDetalleEncuesta(EncuestaM p)
+        {
+            try
+            {
+                await Navigation.PushAsync(new DetalleEncuestaUser(p));
+            }
+            catch (Exception e)
+            {
 
+                Debug.WriteLine("Error: No se pudo tomar el ID " + e);
 
+            }
         }
 
         #endregion
@@ -165,7 +169,7 @@ namespace HuecasAppUsers.VistaModelo
         //public ICommand InsertarRecolecoresComand => new Command(async () => await InsertarRecolecoresProces());
 
         public ICommand IrEncuestacomamd => new Command(async () => await IrEncuesta());
-        public ICommand AlertaCommand => new Command<EncuestaM>(async (p) => await Alerta(p));
+        public ICommand IrDetalleEncuestaCommand => new Command<EncuestaM>(async (p) => await IrDetalleEncuesta(p));
 
         #endregion
     }
