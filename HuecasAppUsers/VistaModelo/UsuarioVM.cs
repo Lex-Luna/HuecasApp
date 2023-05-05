@@ -163,7 +163,10 @@ namespace HuecasAppUsers.VistaModelo
 
             }
         }
-
+        /*private async Task MostrarPerfil()
+        {
+            Navigation.PushModalAsync(new PerfilUser() );
+        } */
         #endregion
         #region COMANDOS
         //public ICommand InsertarRecolecoresComand => new Command(async () => await InsertarRecolecoresProces());
