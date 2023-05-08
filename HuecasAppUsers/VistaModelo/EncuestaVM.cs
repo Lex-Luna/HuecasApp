@@ -125,7 +125,7 @@ namespace HuecasAppUsers.VistaModelo
         #endregion
 
         #region  VariablesLocal
-        public string idLocal;
+        public string IdLocal;
         public List<UbicacionM> listPais = new List<UbicacionM>();
         public List<UbicacionM> listCiudad = new List<UbicacionM>();
 
@@ -340,6 +340,8 @@ namespace HuecasAppUsers.VistaModelo
             parametros.CalificacionComida = TxtComida;
             parametros.CalificacionLugar = TxtLocal;
             parametros.Recomendacion = Recomendado;
+            parametros.IdLocal = _IdLocal;
+            parametros.IdPlato = _IdPlato;
             Promedio = (TxtAtencion + TxtComida + TxtLocal) / 3;
 
             _IdCalificacion = await funcion.InserCalificacion(parametros);

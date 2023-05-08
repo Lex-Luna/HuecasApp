@@ -18,7 +18,7 @@ namespace HuecasAppUsers.VistaModelo
     public class DetalleEncuestaUserVM : BaseVM
     {
         #region CONSTRUCTOR
-        public DetalleEncuestaUserVM(INavigation navigation, EncuestaM e)//
+        public DetalleEncuestaUserVM(INavigation navigation, EncuestaM e)
         {
             Navigation = navigation;
             IdCalificacion = e.IdCalificacion;

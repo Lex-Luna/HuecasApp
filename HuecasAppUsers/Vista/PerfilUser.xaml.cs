@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HuecasAppUsers.VistaModelo;
+using Rg.Plugins.Popup.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,27 +12,17 @@ using Xamarin.Forms.Xaml;
 namespace HuecasAppUsers.Vista
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PerfilUser : FlyoutPage
+    public partial class PerfilUser : Rg.Plugins.Popup.Pages.PopupPage
     {
         public PerfilUser()
         {
             InitializeComponent();
-            FlyoutPage.ListView.ItemSelected += ListView_ItemSelected;
+            BindingContext = new PerfilUserVM(Navigation);
         }
 
-        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void Cerra_Clicked(object sender, EventArgs e)
         {
-            var item = e.SelectedItem as PerfilUserFlyoutMenuItem;
-            if (item == null)
-                return;
-
-            var page = (Page)Activator.CreateInstance(item.TargetType);
-            page.Title = item.Title;
-
-            Detail = new NavigationPage(page);
-            IsPresented = false;
-
-            FlyoutPage.ListView.SelectedItem = null;
+            PopupNavigation.Instance.PopAsync();
         }
     }
 }

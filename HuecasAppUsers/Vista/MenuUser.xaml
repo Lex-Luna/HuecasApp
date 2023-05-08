@@ -118,7 +118,7 @@
                             BorderWidth="2"
                             BorderColor="White"
                             CornerRadius="20"
-                            Command="{Binding Detallecommand}"/>
+                            Command="{Binding MostrarPerfilcomamd}"/>
                         <Label Text="{Binding Lblkgacumulados}"
                            TextColor="White"
                            FontSize="18"

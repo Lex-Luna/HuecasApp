@@ -10,20 +10,7 @@
                 <Label Text="{Binding IdCalificacion}" FontSize="15"
                                FontAttributes="Bold" TextColor="White"
                                VerticalOptions="Center"/>
-                <!--ListView ItemsSource="{Binding ListaCalificacion}" Margin="5,15,5,5" BackgroundColor="Red">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout  Orientation="Vertical">
-                                    <Label Text="{Binding CalificacionAtencion}" />
-                                    <Label Text="{Binding CalificacionComida}" />
-                                    <Label Text="{Binding CalificacionLugar}" />
-                                    <Label Text="{Binding Recomendacion}" />
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView-->
+               
                 <CollectionView ItemsSource="{Binding LisCalificacion}"
                 Margin="5,15,5,5"
                 BackgroundColor="Red">

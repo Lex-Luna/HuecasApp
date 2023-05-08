@@ -182,7 +182,7 @@
                                Placeholder="Precio"
                                HorizontalOptions="FillAndExpand"
                                TextColor="White"
-                               Text="{Binding TxtPrecioPlato}"/>
+                               Text="{Binding TxtPrecioPlato}" Keyboard="Numeric" />
                                 </StackLayout>
 
                                 <!--stak local Comntario-->

@@ -1,16 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<FlyoutPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HuecasAppUsers.Vista.PerfilUser"
-             xmlns:pages="clr-namespace:HuecasAppUsers.Vista">
-  <FlyoutPage.Flyout>
-    <pages:PerfilUserFlyout x:Name="FlyoutPage" />
-  </FlyoutPage.Flyout>
-  <FlyoutPage.Detail>
-    <NavigationPage>
-      <x:Arguments>
-        <pages:PerfilUserDetail />
-      </x:Arguments>
-    </NavigationPage>
-  </FlyoutPage.Detail>
-</FlyoutPage>
+﻿<pages:PopupPage xmlns:pages="http://rotorgames.com"
+                 xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 x:Class="HuecasAppUsers.Vista.PerfilUser"
+                 CloseWhenBackgroundIsClicked="True">
+    <StackLayout BackgroundColor="Black">
+        <Label Text="Mis datos presonales"
+               
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="CenterAndExpand" />
+        <Label Text="{Binding Nombre, StringFormat='Nombre del Usuario: {0}'}"
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="CenterAndExpand" />
+        <Label Text="{Binding Apellido, StringFormat='Apellido del Usuario: {0}'}" 
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="CenterAndExpand" />
+        <Label Text="{Binding Correo, StringFormat='Email del Usuario: {0}'}" 
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="CenterAndExpand" />
+        <Label Text="{Binding Contrania, StringFormat='Contraseña del Usuario: {0}'}" 
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="CenterAndExpand" />
+        <Button Text="Cerrar" x:Name="Cerra" Clicked="Cerra_Clicked"/>
+    </StackLayout>
+</pages:PopupPage>

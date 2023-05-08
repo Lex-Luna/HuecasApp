@@ -1,36 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Xamarin.Forms;
-using HuecasAppUsers.Vista;
-using Firebase.Auth;
+﻿using Firebase.Auth;
 using HuecasAppUsers.Conexiones;
 using HuecasAppUsers.Datos;
 using HuecasAppUsers.Modelo;
+using HuecasAppUsers.Vista;
 using Newtonsoft.Json;
-using Xamarin.Essentials;
+using Rg.Plugins.Popup.Extensions;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using Rg.Plugins.Popup.Extensions;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace HuecasAppUsers.VistaModelo
 {
-    public class UsuarioVM : BaseVM
+    public class PerfilUserVM : BaseVM
     {
         #region CONSTRUCTOR
-        public UsuarioVM(INavigation navigation)
+        public PerfilUserVM(INavigation navigation)
         {
             Navigation = navigation;
             Task.Run(async () =>
             {
                 await obtenerDataUserAsync();
             }).Wait();
-            Task.Run(async () =>
-            {
-                await MostrarMisEncuestas(IdUsuario);
-            }).Wait();
+            
 
         }
         #endregion
@@ -137,44 +134,18 @@ namespace HuecasAppUsers.VistaModelo
 
             }
         }
-        private async Task IrEncuesta()
-        {
-            await Navigation.PushAsync(new Encuesta());
-        }
+       
 
 
-        public async Task MostrarMisEncuestas(string idUser)
-        {
-            EncuestaD f = new EncuestaD();
-            var encuestas = await f.MostEncuestaIdUser(idUser);
-            LisEncueta = new ObservableCollection<EncuestaM>(encuestas);
-        }
+       
 
 
-        private async Task IrDetalleEncuesta(EncuestaM p)
-        {
-            try
-            {
-                await Navigation.PushAsync(new DetalleEncuestaUser(p));
-            }
-            catch (Exception e)
-            {
-
-                Debug.WriteLine("Error: No se pudo tomar el ID " + e);
-
-            }
-        }
-        private async Task MostrarPerfil()
-        {
-            await Navigation.PushPopupAsync(new PerfilUser() );
-        } 
+       
+        
         #endregion
         #region COMANDOS
         //public ICommand InsertarRecolecoresComand => new Command(async () => await InsertarRecolecoresProces());
 
-        public ICommand IrEncuestacomamd => new Command(async () => await IrEncuesta());
-        public ICommand MostrarPerfilcomamd => new Command(async () => await MostrarPerfil());
-        public ICommand IrDetalleEncuestaCommand => new Command<EncuestaM>(async (p) => await IrDetalleEncuesta(p));
 
         #endregion
     }
