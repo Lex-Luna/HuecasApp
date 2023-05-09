@@ -16,6 +16,8 @@ namespace HuecasAppUsers.Modelo
         public DateTime FechaData { get; set; }
         public string IdCalificacion { get; set; }
         public string IdPlatoLocal { get; set; }
+        public string IdPlato{ get; set; }
+        public string IdLocal { get; set; }
         public string IdUsuario { get; set; }
         public string NomUsuario { get; set; }
         public int TotalEncuesta { get; set; }

@@ -42,5 +42,15 @@ namespace HuecasAppUsers.Datos
 
                 }).ToList();
         }
+
+        public async Task<List<PlatoM>> MostPlatoXId(string p)
+        {
+            var plato = await Constantes.firebase
+                .Child("Plato")
+                .Child(p)
+                .OnceSingleAsync<PlatoM>();
+
+            return new List<PlatoM> { plato };
+        }
     }
 }

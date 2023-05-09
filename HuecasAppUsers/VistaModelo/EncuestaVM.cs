@@ -349,6 +349,8 @@ namespace HuecasAppUsers.VistaModelo
             var funcion2 = new EncuestaD();
             var parametros2 = new EncuestaM();
             parametros2.IdPlatoLocal = _IdPlatoLocal;
+            parametros2.IdPlato= _IdPlato;
+            parametros2.IdLocal = _IdLocal;
             parametros2.IdCalificacion= _IdCalificacion;
             parametros2.IdUsuario = IdUsuario;
             parametros2.FechaData = DateTime.Now;

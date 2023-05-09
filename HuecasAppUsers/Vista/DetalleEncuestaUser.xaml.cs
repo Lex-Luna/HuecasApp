@@ -18,6 +18,53 @@ namespace HuecasAppUsers.Vista
         {
             InitializeComponent();
             BindingContext = new DetalleEncuestaUserVM(Navigation, e);
+            VIstaPrincipal();
+
+        }
+
+        private void VIstaPrincipal()
+        {
+            MenuBotones.IsVisible = true;
+            InfoCalificacion.IsVisible = false;
+            InfoLocal.IsVisible = false;
+            InfoPlato.IsVisible = false;
+        }
+
+        private void btnLocal_Clicked(object sender, EventArgs e)
+        {
+            MenuBotones.IsVisible = false;
+            InfoCalificacion.IsVisible = false;
+            InfoLocal.IsVisible = true;
+            InfoPlato.IsVisible = false;
+        }
+
+        private void btnComida_Clicked(object sender, EventArgs e)
+        {
+            MenuBotones.IsVisible = false;
+            InfoCalificacion.IsVisible = false;
+            InfoLocal.IsVisible = false;
+            InfoPlato.IsVisible = true;
+        }
+
+        private void btnCalificacion_Clicked(object sender, EventArgs e)
+        {
+            MenuBotones.IsVisible = false;
+            InfoCalificacion.IsVisible = true;
+            InfoLocal.IsVisible = false;
+            InfoPlato.IsVisible = false;
+        }
+
+        private void btnCerrar1_Clicked(object sender, EventArgs e)
+        {
+            VIstaPrincipal();
+        }
+        private void btnCerrar2_Clicked(object sender, EventArgs e)
+        {
+            VIstaPrincipal();
+        }
+        private void btnCerrar3_Clicked(object sender, EventArgs e)
+        {
+            VIstaPrincipal();
         }
     }
 }

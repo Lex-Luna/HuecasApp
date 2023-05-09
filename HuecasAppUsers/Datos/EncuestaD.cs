@@ -24,6 +24,8 @@ namespace HuecasAppUsers.Datos
                     FechaData = parametros.FechaData,
                     IdCalificacion = parametros.IdCalificacion,
                     IdPlatoLocal = parametros.IdPlatoLocal,
+                    IdPlato = parametros.IdPlato,
+                    IdLocal = parametros.IdLocal,
                     IdUsuario = parametros.IdUsuario,
                     NomUsuario = parametros.NomUsuario,
                     NomLocal = parametros.NomLocal,
@@ -43,13 +45,13 @@ namespace HuecasAppUsers.Datos
                 .Child("Encuesta")
                 .OnceAsync<EncuestaM>()).Select(item => new EncuestaM
                 {
-
-
                     IdEncuesta = item.Key,
                     Estado = item.Object.Estado,
                     FechaData = item.Object.FechaData,
                     IdCalificacion = item.Object.IdCalificacion,
                     IdPlatoLocal = item.Object.IdPlatoLocal,
+                    IdPlato = item.Object.IdPlato,
+                    IdLocal = item.Object.IdLocal,
                     IdUsuario = item.Object.IdUsuario,
                     NomUsuario = item.Object.NomUsuario,
                     NomLocal = item.Object.NomLocal,
@@ -72,6 +74,8 @@ namespace HuecasAppUsers.Datos
                     FechaData = item.Object.FechaData,
                     IdCalificacion = item.Object.IdCalificacion,
                     IdPlatoLocal = item.Object.IdPlatoLocal,
+                    IdPlato = item.Object.IdPlato,
+                    IdLocal = item.Object.IdLocal,
                     IdUsuario = item.Object.IdUsuario,
                     NomUsuario = item.Object.NomUsuario,
                     NomLocal = item.Object.NomLocal,
@@ -80,8 +84,6 @@ namespace HuecasAppUsers.Datos
                 })
                 .ToList();
         }
-
-
 
     }
 }

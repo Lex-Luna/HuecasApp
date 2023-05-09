@@ -22,12 +22,27 @@ namespace HuecasAppUsers.VistaModelo
         {
             Navigation = navigation;
             IdCalificacion = e.IdCalificacion;
+            IdPlato = e.IdPlato;
+            IdLocal = e.IdLocal;
 
             Task.Run(async () =>
             {
                 await MostrarCalificacionId(IdCalificacion);
 
             }).Wait();
+
+            Task.Run(async () =>
+            {
+                await MostrarLocalId(IdLocal);
+
+            }).Wait();
+
+            Task.Run(async () =>
+            {
+                await MostrarPlatoId(IdPlato);
+
+            }).Wait();
+
             Task.Run(async () =>
             {
                 await obtenerDataUserAsync();
@@ -51,6 +66,8 @@ namespace HuecasAppUsers.VistaModelo
         #region Objetos
 
         public ObservableCollection<CalificacionM> LisCalificacion { get; set; }
+        public ObservableCollection<PlatoM> LisPlato{ get; set; }
+        public ObservableCollection<LocalM> LisLocal{ get; set; }
         public int NumEncuesta
         {
             get { return _numEncuesta; }
@@ -101,6 +118,8 @@ namespace HuecasAppUsers.VistaModelo
         #endregion
         #region Procesos
         public string IdCalificacion { get; set; }
+        public string IdPlato{ get; set; }
+        public string IdLocal{ get; set; }
         private async Task Volver()
         {
             await Navigation.PopAsync();
@@ -151,7 +170,36 @@ namespace HuecasAppUsers.VistaModelo
 
         }
 
+        public async Task MostrarLocalId(string Id)
+        {
+            try
+            {
+                LocalD f = new LocalD();
+                var local = await f.MostLocalXId(Id);
+                LisLocal = new ObservableCollection<LocalM>(local);
+                
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error: No se pudo consulta la tabla Calificacion " + e);
+            }
 
+        } 
+
+        public async Task MostrarPlatoId(string Id)
+        {
+            try
+            {
+                PlatoD f = new PlatoD();
+                var plato = await f.MostPlatoXId(Id);
+                LisPlato = new ObservableCollection<PlatoM>(plato);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error: No se pudo consulta la tabla Calificacion " + e);
+            }
+
+        } 
 
         #endregion
         #region Comandos
