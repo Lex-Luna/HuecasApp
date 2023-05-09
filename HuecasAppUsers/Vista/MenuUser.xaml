@@ -195,7 +195,7 @@
                                                      VerticalOptions="Center" HorizontalOptions="EndAndExpand">
                                             <Frame CornerRadius="5" BackgroundColor="transparent" 
                                                    BorderColor="#D8D8D8" HasShadow="True" Padding="5">
-                                                <Label Text="{Binding FechaData, StringFormat=' {0}'}" 
+                                                <Label Text="{Binding FechaData, StringFormat=' {0:d MMMM yyyy}'}" 
                                                        HorizontalTextAlignment="Center" FontSize="18" 
                                                        TextColor="White" HorizontalOptions="Center" />
                                             </Frame>
