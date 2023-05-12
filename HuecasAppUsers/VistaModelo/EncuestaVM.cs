@@ -1,11 +1,13 @@
 ﻿using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Database.Query;
+using Firebase.Storage;
 using HuecasAppUsers.Conexiones;
 using HuecasAppUsers.Datos;
 using HuecasAppUsers.Modelo;
 using HuecasAppUsers.Vista;
 using Newtonsoft.Json;
+using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,7 +18,9 @@ using Xamarin.Forms;
 
 namespace HuecasAppUsers.VistaModelo
 {
-    public class EncuestaVM : BaseVM
+   
+
+    public class EncuestaVM : BaseVM            
     {
         #region ConstrutorGlobal
         public EncuestaVM(INavigation navigation)
@@ -136,8 +140,10 @@ namespace HuecasAppUsers.VistaModelo
         string txtDireccion;
         public string IdPais;
         public string IdCiudad;
+        string rutafoto;
+        MediaFile foto;
+        string _identificacion;
 
-        
 
         UbicacionM selectPais;
         UbicacionM selectCiudad;
@@ -146,6 +152,7 @@ namespace HuecasAppUsers.VistaModelo
 
         #endregion
         #region ObjetosLocal 
+        public string Identificacion { get { return _identificacion; } set { SetValue(ref _identificacion, value); } }
         public string TxtBarrio { get { return txtBarrio; } set { SetValue(ref txtBarrio, value); } }
         public string TxtDireccion { get { return txtDireccion; } set { SetValue(ref txtDireccion, value); } }
         //Mostrar los lista de pais y ciudad
@@ -175,10 +182,9 @@ namespace HuecasAppUsers.VistaModelo
         {
             await Navigation.PopAsync();
         }
-
+                                 
         public async Task AgregarLocal()
         {
-            //await Subirfoto();
             var funcion = new LocalD();
             var parametros = new LocalM();
             parametros.NombreLocal = TxtNombreLocal;
@@ -186,24 +192,40 @@ namespace HuecasAppUsers.VistaModelo
             parametros.Barrio = TxtBarrio;
             parametros.IdPais = IdPais;
             parametros.IdCiudad = IdCiudad;
+            await SubirFoto();
             _IdLocal = await funcion.InsertarLocal(parametros);
         }
-        
 
-        /*public async  Task<string> ObtenerIdEncuesta(EncuestaM encuesta)
+       
+
+        public async Task SubirFoto()
         {
-            FirebaseClient firebaseClient = new FirebaseClient("https://huecasapp-d8da1-default-rtdb.firebaseio.com/");
-            var pushResponse = await Constantes.firebase.Child("Encuestas").PostAsync(encuesta);
-            return pushResponse.Key;
-
-        } */
+            var funcion = new LocalD();
+            rutafoto = await funcion.SubirFotoFachada(foto.GetStream(),IdLocal);  
+        } 
+        
+        public async Task TomarFoto()
+        {
+            var camara = new StoreCameraMediaOptions();
+            camara.PhotoSize = PhotoSize.Medium;
+            camara.SaveToAlbum = true;
+            foto = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(camara);
+            if (foto != null)
+            {
+                Foto = ImageSource.FromStream(() =>
+                {
+                    return foto.GetStream();
+                });
+            }
+        } 
 
 
         #endregion
         #region ComandosLocal
         public ICommand Volvercomamd => new Command(async () => await Volver());
         public ICommand AgregarLocalComamd => new Command(async () => await AgregarLocal());
-        //public ICommand NavClientesComand => new Command(async () => await NavClientes());
+        public ICommand TomarFotoComamd => new Command(async () => await TomarFoto());
+        
 
         #endregion
 
@@ -243,7 +265,7 @@ namespace HuecasAppUsers.VistaModelo
         #endregion
         #region ComandosPlato
         public ICommand AgregarPlatoComand => new Command(async () => await AgregarPlato());
-        //public ICommand NavClientesComand => new Command(async () => await NavClientes());
+        
 
         #endregion
 
@@ -305,7 +327,7 @@ namespace HuecasAppUsers.VistaModelo
 
             }
         }
-        //añade la encuesta y la calificacion
+        
         /*public async Task AddCalificacion()
         {
             var funcion = new CalificacionD();

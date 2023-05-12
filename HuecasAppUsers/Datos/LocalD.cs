@@ -28,7 +28,7 @@ namespace HuecasAppUsers.Datos
                 {
                     Barrio = parametros.Barrio,
                     Direccion = parametros.Direccion,
-                    //FotoFachada = parametros.FotoFachada,
+                    FotoFachada = parametros.FotoFachada,
                     //Geolocalizacion = parametros.Geolocalizacion,
                     NombreLocal = parametros.NombreLocal,
                     IdPais = parametros.IdPais,
@@ -39,7 +39,17 @@ namespace HuecasAppUsers.Datos
             return _IdLocal;
         }
 
-        
+        public async Task<string> SubirFotoFachada(Stream image, string identificacion)
+        {
+            string rutafoto;
+            var storageImagen = await new FirebaseStorage("huecasapp-d8da1.appspot.com")
+                .Child("Local")
+                .Child(identificacion + ".jpg")
+                .PutAsync(image);
+            rutafoto = storageImagen;
+            return rutafoto;
+        }
+
 
         public async Task<List<LocalM>> MostLocal()
         {
