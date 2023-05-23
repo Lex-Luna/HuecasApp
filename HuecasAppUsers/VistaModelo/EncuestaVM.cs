@@ -18,9 +18,9 @@ using Xamarin.Forms;
 
 namespace HuecasAppUsers.VistaModelo
 {
-   
 
-    public class EncuestaVM : BaseVM            
+
+    public class EncuestaVM : BaseVM
     {
         #region ConstrutorGlobal
         public EncuestaVM(INavigation navigation)
@@ -39,21 +39,12 @@ namespace HuecasAppUsers.VistaModelo
             {
                 await obtenerDataUserAsync();
             }).Wait();
-            /*Task.Run(async () =>
-            {
-                await AgregarLocal();
-            }).Wait();
+            
             Task.Run(async () =>
             {
-                await AgregarPlato();
+                await VistaNormal();
             }).Wait();
-            Task.Run(async () =>
-            {
-                await AddEncusta();
-            }).Wait();*/
-            
-            
-            
+
         }
         #endregion
 
@@ -108,11 +99,11 @@ namespace HuecasAppUsers.VistaModelo
         }
         public string Apellido { get { return _apellido; } set { SetValue(ref _apellido, value); } }
         public int NumEncuesta { get { return _numEncuesta; } set { SetValue(ref _numEncuesta, value); } }
-        public string Nombre{get { return _nombre; }set { SetValue(ref _nombre, value); }}
+        public string Nombre { get { return _nombre; } set { SetValue(ref _nombre, value); } }
 
-        public string Correo{get { return _correo; }set { SetValue(ref _correo, value); }}
+        public string Correo { get { return _correo; } set { SetValue(ref _correo, value); } }
 
-        public string IdUsuario{get { return _idUsuario; }set { SetValue(ref _idUsuario, value); }}
+        public string IdUsuario { get { return _idUsuario; } set { SetValue(ref _idUsuario, value); } }
 
 
         public string NombreCompleto
@@ -132,26 +123,24 @@ namespace HuecasAppUsers.VistaModelo
         public string IdLocal;
         public List<UbicacionM> listPais = new List<UbicacionM>();
         public List<UbicacionM> listCiudad = new List<UbicacionM>();
-
-        //string pais;
-        //string ciudad;
-        
         string txtBarrio;
         string txtDireccion;
         public string IdPais;
         public string IdCiudad;
-        string rutafoto;
-        MediaFile foto;
+        public string FotoFachada;
         string _identificacion;
-
-
         UbicacionM selectPais;
         UbicacionM selectCiudad;
-
-
+        bool gridFoto;
+        bool localStatus;
+        //variables de las fotos
+        string rutafoto;
+        MediaFile foto;
 
         #endregion
         #region ObjetosLocal 
+        public bool GridFoto { get { return gridFoto; } set { SetValue(ref gridFoto, value); } }
+        public bool LocalStatus { get { return localStatus; } set { SetValue(ref localStatus, value); } }
         public string Identificacion { get { return _identificacion; } set { SetValue(ref _identificacion, value); } }
         public string TxtBarrio { get { return txtBarrio; } set { SetValue(ref txtBarrio, value); } }
         public string TxtDireccion { get { return txtDireccion; } set { SetValue(ref txtDireccion, value); } }
@@ -177,14 +166,15 @@ namespace HuecasAppUsers.VistaModelo
             var funcion = new UbicacionD();
             Listciudad = await funcion.MostCiudad();
         }
-        
+
         private async Task Volver()
         {
             await Navigation.PopAsync();
         }
-                                 
+
         public async Task AgregarLocal()
         {
+            await SubirFoto();
             var funcion = new LocalD();
             var parametros = new LocalM();
             parametros.NombreLocal = TxtNombreLocal;
@@ -192,40 +182,88 @@ namespace HuecasAppUsers.VistaModelo
             parametros.Barrio = TxtBarrio;
             parametros.IdPais = IdPais;
             parametros.IdCiudad = IdCiudad;
-            await SubirFoto();
+            parametros.FotoFachada = rutafoto;
             _IdLocal = await funcion.InsertarLocal(parametros);
         }
 
-       
+
 
         public async Task SubirFoto()
         {
-            var funcion = new LocalD();
-            rutafoto = await funcion.SubirFotoFachada(foto.GetStream(),IdLocal);  
-        } 
-        
+            try
+            {
+                var funcion = new LocalD();
+                rutafoto = await funcion.SubirFotoFachada(foto.GetStream(), IdLocal);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
+        }
+
         public async Task TomarFoto()
         {
             var camara = new StoreCameraMediaOptions();
             camara.PhotoSize = PhotoSize.Medium;
             camara.SaveToAlbum = true;
-            foto = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(camara);
-            if (foto != null)
+            try
             {
-                Foto = ImageSource.FromStream(() =>
+                foto = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(camara);
+                if (foto != null)
                 {
-                    return foto.GetStream();
-                });
+                    Foto = ImageSource.FromStream(() =>
+                    {
+                        return foto.GetStream();
+                    });
+                    LocalStatus = false;
+                    GridFoto = true;
+                }
             }
-        } 
+            catch (Exception e)
+            {
 
+                throw e;
+            }
+            
+        }
+
+        public async Task  Ok()
+        {
+            try
+            {
+                LocalStatus = true;
+                GridFoto = false;
+                await Task.Delay(1000); 
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+        public async Task VistaNormal()
+        {
+            try
+            {
+                LocalStatus = true;
+                GridFoto = false;
+                await Task.Delay(500);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
 
         #endregion
         #region ComandosLocal
         public ICommand Volvercomamd => new Command(async () => await Volver());
         public ICommand AgregarLocalComamd => new Command(async () => await AgregarLocal());
+        public ICommand OkComamd => new Command(async () => await Ok());
         public ICommand TomarFotoComamd => new Command(async () => await TomarFoto());
-        
+
 
         #endregion
 
@@ -242,7 +280,7 @@ namespace HuecasAppUsers.VistaModelo
 
         #endregion
         #region ProcesosPlato
-        
+
 
         public async Task AgregarPlato()
         {
@@ -253,7 +291,7 @@ namespace HuecasAppUsers.VistaModelo
             parametros.Descripcion = TxtDescripcion;
             parametros.Comentario = TxtComentario;
             parametros.Precio = TxtPrecioPlato;
-            _IdPlato= await funcion.InserPlato(parametros);
+            _IdPlato = await funcion.InserPlato(parametros);
             var funcion2 = new PlatoLocalD();
             var parametros2 = new PlatoLocalM();
             parametros2.IdLocal = _IdLocal;
@@ -265,12 +303,12 @@ namespace HuecasAppUsers.VistaModelo
         #endregion
         #region ComandosPlato
         public ICommand AgregarPlatoComand => new Command(async () => await AgregarPlato());
-        
+
 
         #endregion
 
 
-        
+
 
 
         #region VariablesEncuesta
@@ -280,9 +318,9 @@ namespace HuecasAppUsers.VistaModelo
         public int _promedio;
         public int _totalencuesta;
         public bool recomendado = true;
-                
+
         #endregion
-        #region Objetos
+        #region ObjetosEncuesta
         public int TxtAtencion { get { return txtAtencion; } set { SetValue(ref txtAtencion, value); } }
         public int TxtLocal { get { return txtLocal; } set { SetValue(ref txtLocal, value); } }
         public int TxtComida { get { return txtComida; } set { SetValue(ref txtComida, value); } }
@@ -327,19 +365,8 @@ namespace HuecasAppUsers.VistaModelo
 
             }
         }
-        
-        /*public async Task AddCalificacion()
-        {
-            var funcion = new CalificacionD();
-            var parametros = new CalificacionM();
-            parametros.CalificacionAtencion = TxtAtencion;
-            parametros.CalificacionComida = TxtComida;
-            parametros.CalificacionLugar = TxtLocal;
-            parametros.Recomendacion = Recomendado;
-            Promedio = (TxtAtencion + TxtComida + TxtLocal) / 3;
 
-            _IdCalificacion = await funcion.InserCalificacion(parametros);
-        }  */
+
 
         private async Task EditEncuestaUserAdd()
         {
@@ -371,24 +398,24 @@ namespace HuecasAppUsers.VistaModelo
             var funcion2 = new EncuestaD();
             var parametros2 = new EncuestaM();
             parametros2.IdPlatoLocal = _IdPlatoLocal;
-            parametros2.IdPlato= _IdPlato;
+            parametros2.IdPlato = _IdPlato;
             parametros2.IdLocal = _IdLocal;
-            parametros2.IdCalificacion= _IdCalificacion;
+            parametros2.IdCalificacion = _IdCalificacion;
             parametros2.IdUsuario = IdUsuario;
             parametros2.FechaData = DateTime.Now;
             parametros2.Estado = true;
-            parametros2.NomUsuario = NombreCompleto;                                                                                                                    
+            parametros2.NomUsuario = NombreCompleto;
             parametros2.NomLocal = txtNombreLocal;
             parametros2.NomPlato = txtNombrePlato;
             parametros2.PromCalificacion = Promedio;
-            parametros2.TotalEncuesta =  Totalencuesta;
-            
+            parametros2.TotalEncuesta = Totalencuesta;
+
             await EditEncuestaUserAdd();
-            
+
             _IdEncuesta = await funcion2.InsertarEncuesta(parametros2);
             await IrMenuUser();
         }
-        
+
 
 
 
@@ -399,7 +426,7 @@ namespace HuecasAppUsers.VistaModelo
         #endregion
 
 
-        
+
 
     }
 }

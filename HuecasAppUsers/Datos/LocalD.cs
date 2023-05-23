@@ -20,6 +20,7 @@ namespace HuecasAppUsers.Datos
 {
     public class LocalD
     {
+        string rutafoto;
         public string _IdLocal;
         public async Task <string> InsertarLocal(LocalM parametros)
         {
@@ -39,13 +40,13 @@ namespace HuecasAppUsers.Datos
             return _IdLocal;
         }
 
-        public async Task<string> SubirFotoFachada(Stream image, string identificacion)
+        public async Task<string> SubirFotoFachada(Stream imagen, string identificacion)
         {
-            string rutafoto;
+            
             var storageImagen = await new FirebaseStorage("huecasapp-d8da1.appspot.com")
                 .Child("Local")
                 .Child(identificacion + ".jpg")
-                .PutAsync(image);
+                .PutAsync(imagen);
             rutafoto = storageImagen;
             return rutafoto;
         }

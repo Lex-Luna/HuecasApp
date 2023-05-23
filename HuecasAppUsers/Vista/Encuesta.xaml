@@ -5,7 +5,7 @@
              x:Class="HuecasAppUsers.Vista.Encuesta">
     <ScrollView>
         <Grid RowDefinitions="*,*,*">
-            <Grid RowDefinitions="*, 2*, Auto" Grid.Row="0" x:Name="GridLocal">
+            <Grid RowDefinitions="*, 2*, Auto" Grid.Row="0" x:Name="GridLocal" IsVisible="{Binding LocalStatus}">
 
                 <!--Degradados-->
                 <BoxView Grid.RowSpan="3">
@@ -34,19 +34,20 @@
                         <Image x:Name="BannerImg1" Source="tienda.png" HeightRequest="195" WidthRequest="195" HorizontalOptions="Center" VerticalOptions="Center"/>
                     </Grid>
                     <StackLayout HorizontalOptions="Center" Spacing="15">
+                        <!--Aqui va la foto-->
                         <Frame BackgroundColor="Gray" Padding="0" CornerRadius="20">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding TomarFotoComamd}"/>
                             </Frame.GestureRecognizers>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                            
+
                                 <Label Text="Fachada del local" TextColor="White" 
                                        HorizontalOptions="Center"
                                        FontAttributes="Bold" FontSize="14"  HorizontalTextAlignment="Center" />
                                 <Image Source="camara.png" HeightRequest="30" />
                             </StackLayout>
-                        </Frame>    
-                            <Frame Grid.Row="1" Padding="5"
+                        </Frame>
+                        <Frame Grid.Row="1" Padding="5"
                    Margin="0" CornerRadius="40"
                    BackgroundColor="#5B55E1" >
                             <StackLayout Margin="10" VerticalOptions="Center">
@@ -321,6 +322,14 @@
                     </StackLayout>
                 </StackLayout>
             </Grid>
+
+            <StackLayout Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding GridFoto}" BackgroundColor="Transparent"  >
+
+                <Image HeightRequest="400"  Source="{Binding Foto}" BackgroundColor="Transparent"/>
+                <Button Text="OK" Command="{Binding OkComamd}" HeightRequest="40"/>
+
+            </StackLayout>
+
 
         </Grid>
     </ScrollView>
