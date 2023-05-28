@@ -9,6 +9,7 @@ using HuecasAppUsers.Vista;
 using Newtonsoft.Json;
 using Plugin.Media.Abstractions;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,7 +50,13 @@ namespace HuecasAppUsers.VistaModelo
         #endregion
 
         #region VariablesGlobales
-        //id
+        //paneles 
+        bool panelFoto;
+        bool panelEncuesta;
+        public bool panelGeo;
+        //UBICACION GEO
+        public static string Geolocalizacion { get; set; }
+        //id                                                                                    
         public string _IdPais;
         public string _IdCiudad;
         public string _IdLocal;
@@ -78,6 +85,9 @@ namespace HuecasAppUsers.VistaModelo
         #endregion
         #region ObjetosGlobales
 
+        public bool PanelFoto { get { return panelFoto; } set { SetValue(ref panelFoto, value); } }
+        public bool PanelEncuesta { get { return panelEncuesta; } set { SetValue(ref panelEncuesta, value); } }
+        public bool PanelGeo { get { return panelGeo; } set { SetValue(ref panelGeo, value); } }
 
 
         //usuario
@@ -118,6 +128,24 @@ namespace HuecasAppUsers.VistaModelo
 
 
         #endregion
+        #region ProcesosGoblaes
+
+        public async Task VistaNormal()
+        {
+            try
+            {
+                PanelEncuesta = true;
+                PanelGeo= false;
+                PanelFoto = false;
+                await Task.Delay(500);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+        #endregion
 
         #region  VariablesLocal
         public string IdLocal;
@@ -131,16 +159,15 @@ namespace HuecasAppUsers.VistaModelo
         string _identificacion;
         UbicacionM selectPais;
         UbicacionM selectCiudad;
-        bool gridFoto;
-        bool localStatus;
         //variables de las fotos
         string rutafoto;
         MediaFile foto;
 
+        
+
         #endregion
         #region ObjetosLocal 
-        public bool GridFoto { get { return gridFoto; } set { SetValue(ref gridFoto, value); } }
-        public bool LocalStatus { get { return localStatus; } set { SetValue(ref localStatus, value); } }
+        
         public string Identificacion { get { return _identificacion; } set { SetValue(ref _identificacion, value); } }
         public string TxtBarrio { get { return txtBarrio; } set { SetValue(ref txtBarrio, value); } }
         public string TxtDireccion { get { return txtDireccion; } set { SetValue(ref txtDireccion, value); } }
@@ -156,37 +183,45 @@ namespace HuecasAppUsers.VistaModelo
         #endregion
         #region ProcesosLocal
 
-        public async Task MostrarPais()
+        async Task MostrarPais()
         {
             var funcion = new UbicacionD();
             Listpais = await funcion.MostPais();
         }
-        public async Task MostrarCiudad()
+        async Task MostrarCiudad()
         {
             var funcion = new UbicacionD();
             Listciudad = await funcion.MostCiudad();
         }
 
-        private async Task Volver()
+        async Task Volver()
         {
             await Navigation.PopAsync();
         }
-
-        public async Task AgregarLocal()
+        
+        async Task AgregarLocal()
         {
-            await SubirFoto();
-            var funcion = new LocalD();
-            var parametros = new LocalM();
-            parametros.NombreLocal = TxtNombreLocal;
-            parametros.Direccion = TxtDireccion;
-            parametros.Barrio = TxtBarrio;
-            parametros.IdPais = IdPais;
-            parametros.IdCiudad = IdCiudad;
-            parametros.FotoFachada = rutafoto;
-            _IdLocal = await funcion.InsertarLocal(parametros);
+            try
+            {
+                await SubirFoto();
+                var funcion = new LocalD();
+                var parametros = new LocalM();
+                parametros.Geolocalizacion = Geolocalizacion;
+                parametros.FotoFachada = rutafoto;
+                parametros.NombreLocal = TxtNombreLocal;
+                parametros.Direccion = TxtDireccion;
+                parametros.Barrio = TxtBarrio;
+                parametros.IdPais = IdPais;
+                parametros.IdCiudad = IdCiudad;
+                _IdLocal = await funcion.InsertarLocal(parametros);
+            }
+                catch (Exception e)
+            {
+
+                throw e;
+            }
+            
         }
-
-
 
         public async Task SubirFoto()
         {
@@ -216,8 +251,8 @@ namespace HuecasAppUsers.VistaModelo
                     {
                         return foto.GetStream();
                     });
-                    LocalStatus = false;
-                    GridFoto = true;
+                    PanelEncuesta = false;
+                    PanelFoto = true;
                 }
             }
             catch (Exception e)
@@ -228,41 +263,53 @@ namespace HuecasAppUsers.VistaModelo
             
         }
 
-        public async Task  Ok()
+        void MostrarpanelGeo()
+        {
+            PanelGeo= true;
+            PanelEncuesta= false;
+        }
+
+        async Task  OkFoto()
         {
             try
             {
-                LocalStatus = true;
-                GridFoto = false;
-                await Task.Delay(1000); 
+                PanelEncuesta = true;
+                PanelFoto = false;
+                await Task.Delay(500); 
             }
             catch (Exception e)
             {
-
                 throw e;
             }
         }
-        public async Task VistaNormal()
+        async Task OkGeo()
         {
             try
             {
-                LocalStatus = true;
-                GridFoto = false;
+                PanelEncuesta = true;
+                PanelGeo= false;
                 await Task.Delay(500);
             }
             catch (Exception e)
             {
-
                 throw e;
             }
+        }
+
+        async Task PagGeo()
+        {
+            await Navigation.PushAsync(new Geo());
         }
 
         #endregion
         #region ComandosLocal
         public ICommand Volvercomamd => new Command(async () => await Volver());
         public ICommand AgregarLocalComamd => new Command(async () => await AgregarLocal());
-        public ICommand OkComamd => new Command(async () => await Ok());
+        public ICommand OkFotoComamd => new Command(async () => await OkFoto());
+        public ICommand OkGeoComamd => new Command(async () => await OkGeo());
+        public ICommand MostrarpanelGeoComamd => new Command(() => MostrarpanelGeo());
         public ICommand TomarFotoComamd => new Command(async () => await TomarFoto());
+        public ICommand PagGeoComamd => new Command(async () => await PagGeo());
 
 
         #endregion
@@ -306,9 +353,6 @@ namespace HuecasAppUsers.VistaModelo
 
 
         #endregion
-
-
-
 
 
         #region VariablesEncuesta

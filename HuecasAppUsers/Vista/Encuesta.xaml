@@ -5,7 +5,8 @@
              x:Class="HuecasAppUsers.Vista.Encuesta">
     <ScrollView>
         <Grid RowDefinitions="*,*,*">
-            <Grid RowDefinitions="*, 2*, Auto" Grid.Row="0" x:Name="GridLocal" IsVisible="{Binding LocalStatus}">
+            <Grid RowDefinitions="*, 2*, Auto" Grid.Row="0" 
+                  x:Name="GridLocal" IsVisible="{Binding PanelEncuesta}">
 
                 <!--Degradados-->
                 <BoxView Grid.RowSpan="3">
@@ -34,7 +35,7 @@
                         <Image x:Name="BannerImg1" Source="tienda.png" HeightRequest="195" WidthRequest="195" HorizontalOptions="Center" VerticalOptions="Center"/>
                     </Grid>
                     <StackLayout HorizontalOptions="Center" Spacing="15">
-                        <!--Aqui va la foto-->
+                        <!--frame Foto-->
                         <Frame BackgroundColor="Gray" Padding="0" CornerRadius="20">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding TomarFotoComamd}"/>
@@ -45,6 +46,19 @@
                                        HorizontalOptions="Center"
                                        FontAttributes="Bold" FontSize="14"  HorizontalTextAlignment="Center" />
                                 <Image Source="camara.png" HeightRequest="30" />
+                            </StackLayout>
+                        </Frame>
+                        <!--frame Geo-->
+                        <Frame BackgroundColor="#D7E720" Padding="0" CornerRadius="20">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding MostrarpanelGeoComamd}"/>
+                            </Frame.GestureRecognizers>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+
+                                <Label Text=" Guarda Geolocalizacion" TextColor="White" 
+                                       HorizontalOptions="Center"
+                                       FontAttributes="Bold" FontSize="14"  HorizontalTextAlignment="Center" />
+                                <Image Source="geolocalizacion.png" HeightRequest="30" />
                             </StackLayout>
                         </Frame>
                         <Frame Grid.Row="1" Padding="5"
@@ -323,10 +337,45 @@
                 </StackLayout>
             </Grid>
 
-            <StackLayout Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding GridFoto}" BackgroundColor="Transparent"  >
+            <!--Panel Fotos-->
+            <StackLayout Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" 
+                         IsVisible="{Binding PanelFoto}" BackgroundColor="Transparent"  >
 
                 <Image HeightRequest="400"  Source="{Binding Foto}" BackgroundColor="Transparent"/>
-                <Button Text="OK" Command="{Binding OkComamd}" HeightRequest="40"/>
+                <Button Text="OK" Command="{Binding OkFotoComamd}" HeightRequest="40"/>
+
+            </StackLayout>
+
+            <!--Panel Geolocalizacion-->
+            <StackLayout x:Name="Panelgeolocalizacion" Grid.Row="0"
+                         VerticalOptions="Center" IsVisible="{Binding PanelGeo}">
+                <Label Text="Geolocalizar"
+                       FontSize="30"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       />
+                <ImageButton Source="https://i.ibb.co/KsppHRw/002-de-origen-local-1.png"
+                             BackgroundColor="#6FEDB4"
+                             HorizontalOptions="Center"
+                             CornerRadius="20"
+                             HeightRequest="80"
+                             Padding="10"
+                             BorderColor="White"
+                             BorderWidth="4" Command="{Binding PagGeoComamd}"/>
+                
+                <Button Text="Guardar" Margin="0,10,0,0"
+                        HorizontalOptions="Center"
+                        CornerRadius="10"
+                        FontAttributes="Bold" />
+                        <!--/Button>Command="{Binding Agregarclientecommand}"/-->
+                    
+                <Button Text="Volver"
+                        HorizontalOptions="Center"
+                        CornerRadius="10"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Bold"
+                        Command="{Binding OkGeoComamd}"/>
+
 
             </StackLayout>
 

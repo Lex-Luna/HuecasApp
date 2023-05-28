@@ -10,8 +10,15 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />
 		</provider>
+		<!-- Segun el google maps aumente esta linea-->
+		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyB9wL83cfuVVhtBKW_HW7muDjr4LSf6GUc" />
 	</application>
+
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="31" />
 </manifest>

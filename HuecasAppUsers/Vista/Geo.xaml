@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             x:Class="HuecasAppUsers.Vista.Geo">
+    <Grid BackgroundColor="#6FEDB4"
+          RowDefinitions="90,*">
+        <StackLayout Margin="0,30,10,0"
+                     VerticalOptions="Center">
+            <Button Text="Confirmar"
+                    TextTransform="None"
+                    HorizontalOptions="EndAndExpand"
+                    CornerRadius="10"
+                    FontAttributes="Bold"
+                    x:Name="btnConfirmar1" Clicked="btnConfirmar1_Clicked"/>
+            <Label x:Name="coordenadas"  />
+
+
+        </StackLayout>
+        <maps:Map Grid.Row="1"
+                  x:Name="map"
+                  PinDragEnd="map_PinDragEnd"
+                  HasZoomEnabled="True"/>
+    </Grid>
+</ContentPage>

@@ -20,6 +20,7 @@ namespace HuecasAppUsers.Droid
             //UserDialogs.Init(this);
             Rg.Plugins.Popup.Popup.Init(this);
             LoadApplication(new App());
+            Xamarin.FormsGoogleMaps.Init(this, savedInstanceState);
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
