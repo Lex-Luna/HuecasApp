@@ -228,7 +228,16 @@ namespace HuecasAppUsers.VistaModelo
             try
             {
                 var funcion = new LocalD();
-                rutafoto = await funcion.SubirFotoFachada(foto.GetStream(), IdLocal);
+                if (rutafoto != null)
+                {
+                    rutafoto = await funcion.SubirFotoFachada(foto.GetStream(), IdLocal);
+                }
+                else
+                {
+                    await DisplayAlert("No tomaste foto", "La seccion foto saldra vacia", "Ok");
+                    rutafoto = "No hay foto";
+                }
+
             }
             catch (Exception e)
             {
