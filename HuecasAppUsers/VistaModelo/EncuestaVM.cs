@@ -11,11 +11,15 @@ using Plugin.Media.Abstractions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.TizenSpecific;
+using Label = Xamarin.Forms.Label;
 
 namespace HuecasAppUsers.VistaModelo
 {
@@ -151,23 +155,31 @@ namespace HuecasAppUsers.VistaModelo
         public string IdLocal;
         public List<UbicacionM> listPais = new List<UbicacionM>();
         public List<UbicacionM> listCiudad = new List<UbicacionM>();
+        
         string txtBarrio;
         string txtDireccion;
         public string IdPais;
         public string IdCiudad;
+        public string IdCategorias;
         public string FotoFachada;
         string _identificacion;
         UbicacionM selectPais;
         UbicacionM selectCiudad;
+        //CategoriasM selectCategorias;
         //variables de las fotos
         string rutafoto;
         MediaFile foto;
 
-        
+
 
         #endregion
         #region ObjetosLocal 
+        //De la categoria
         
+        
+        public List<string> Propiedades { get; set; } = new List<string> { "Comida Internacional", "Comida Marina", "Comida Rápida", "Comida Típica", "Postres", "Bebidas", "Otros" };
+        public string PropiedadSeleccionada { get; set; }
+        //FIn
         public string Identificacion { get { return _identificacion; } set { SetValue(ref _identificacion, value); } }
         public string TxtBarrio { get { return txtBarrio; } set { SetValue(ref txtBarrio, value); } }
         public string TxtDireccion { get { return txtDireccion; } set { SetValue(ref txtDireccion, value); } }
@@ -175,13 +187,42 @@ namespace HuecasAppUsers.VistaModelo
 
         public UbicacionM SelectPais { get { return selectPais; } set { SetProperty(ref selectPais, value); IdPais = selectPais.IdPais; } }
         public UbicacionM SelectCiudad { get { return selectCiudad; } set { SetProperty(ref selectCiudad, value); IdCiudad = selectCiudad.IdCiudad; } }
-        //selesccionar pais ciudad 
+        
+        // pais ciudad 
 
-        public List<UbicacionM> Listpais { get { return listPais; } set { SetValue(ref listPais, value); } }//
-        public List<UbicacionM> Listciudad { get { return listCiudad; } set { SetValue(ref listCiudad, value); } }//ciudad = selectPais.Ciudad.ToString();
+        public List<UbicacionM> Listpais { get { return listPais; } set { SetValue(ref listPais, value); } } 
+        public List<UbicacionM> Listciudad { get { return listCiudad; } set { SetValue(ref listCiudad, value); } }
 
+        //public List<UbicacionM> Listpais { get { return listPais; } set { SetValue(ref listPais, value); } }//
+        //public List<UbicacionM> Listciudad { get { return listCiudad; } set { SetValue(ref listCiudad, value); } }//ciudad = selectPais.Ciudad.ToString();
         #endregion
         #region ProcesosLocal
+
+        async Task AgregarLocal()
+        {
+            try
+            {
+                await SubirFoto();
+                var funcion = new LocalD();
+                var parametros = new LocalM();
+                parametros.Geolocalizacion = Geolocalizacion;
+                parametros.FotoFachada = rutafoto;
+                parametros.NombreLocal = TxtNombreLocal;
+                parametros.Direccion = TxtDireccion;
+                parametros.Barrio = TxtBarrio;
+                parametros.IdPais = IdPais;
+                parametros.IdCiudad = IdCiudad;
+                parametros.Categorias = PropiedadSeleccionada;
+                _IdLocal = await funcion.InsertarLocal(parametros);
+            }
+                catch (Exception e)
+            {
+                throw e;
+            }
+            
+        }
+
+        
 
         async Task MostrarPais()
         {
@@ -199,36 +240,13 @@ namespace HuecasAppUsers.VistaModelo
             await Navigation.PopAsync();
         }
         
-        async Task AgregarLocal()
-        {
-            try
-            {
-                await SubirFoto();
-                var funcion = new LocalD();
-                var parametros = new LocalM();
-                parametros.Geolocalizacion = Geolocalizacion;
-                parametros.FotoFachada = rutafoto;
-                parametros.NombreLocal = TxtNombreLocal;
-                parametros.Direccion = TxtDireccion;
-                parametros.Barrio = TxtBarrio;
-                parametros.IdPais = IdPais;
-                parametros.IdCiudad = IdCiudad;
-                _IdLocal = await funcion.InsertarLocal(parametros);
-            }
-                catch (Exception e)
-            {
-
-                throw e;
-            }
-            
-        }
 
         public async Task SubirFoto()
         {
             try
             {
                 var funcion = new LocalD();
-                if (rutafoto != null)
+                if (rutafoto == null)
                 {
                     rutafoto = await funcion.SubirFotoFachada(foto.GetStream(), IdLocal);
                 }
@@ -237,7 +255,6 @@ namespace HuecasAppUsers.VistaModelo
                     await DisplayAlert("No tomaste foto", "La seccion foto saldra vacia", "Ok");
                     rutafoto = "No hay foto";
                 }
-
             }
             catch (Exception e)
             {
@@ -266,7 +283,6 @@ namespace HuecasAppUsers.VistaModelo
             }
             catch (Exception e)
             {
-
                 throw e;
             }
             
@@ -308,6 +324,8 @@ namespace HuecasAppUsers.VistaModelo
         async Task PagGeo()
         {
             await Navigation.PushAsync(new Geo());
+            await Task.Delay(3000).ContinueWith(t => VistaNormal());
+
         }
 
         #endregion

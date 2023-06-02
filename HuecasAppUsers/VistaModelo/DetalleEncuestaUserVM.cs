@@ -59,7 +59,7 @@ namespace HuecasAppUsers.VistaModelo
         string _idAdmin;
         bool _estado;
         int _numEncuesta;
-        string IdEncuesta;
+        
 
 
         #endregion

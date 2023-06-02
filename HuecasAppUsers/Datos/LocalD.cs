@@ -30,10 +30,11 @@ namespace HuecasAppUsers.Datos
                     Barrio = parametros.Barrio,
                     Direccion = parametros.Direccion,
                     FotoFachada = parametros.FotoFachada,
-                    //Geolocalizacion = parametros.Geolocalizacion,
+                    Geolocalizacion = parametros.Geolocalizacion,
                     NombreLocal = parametros.NombreLocal,
                     IdPais = parametros.IdPais,
                     IdCiudad= parametros.IdCiudad,
+                    Categorias= parametros.Categorias,
                     IdLocal = parametros.IdLocal
                 });
             _IdLocal = data.Key;
@@ -65,9 +66,8 @@ namespace HuecasAppUsers.Datos
                     FotoFachada = item.Object.FotoFachada,
                     Geolocalizacion = item.Object.Geolocalizacion,
                     NombreLocal = item.Object.NombreLocal,
-                    IdPais = item.Object.IdPais
-
-
+                    IdPais = item.Object.IdPais,
+                    Categorias = item.Object.Categorias
                 }).ToList();
         }
 
@@ -77,8 +77,7 @@ namespace HuecasAppUsers.Datos
             var local = await Constantes.firebase
                 .Child("Local")
                 .Child(p)
-            .OnceSingleAsync<LocalM>();
-
+                .OnceSingleAsync<LocalM>();
             return new List<LocalM> { local };
         }
 

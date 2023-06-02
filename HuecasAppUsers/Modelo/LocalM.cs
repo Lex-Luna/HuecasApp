@@ -14,5 +14,7 @@ namespace HuecasAppUsers.Modelo
         public string Geolocalizacion { get; set; }
         public string NombreLocal { get; set; }
         public string IdPais { get; set; }
+        public string Categorias { get; set; }
+        
     }
 }
