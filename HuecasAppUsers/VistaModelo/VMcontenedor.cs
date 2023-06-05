@@ -17,7 +17,7 @@ namespace HuecasAppUsers.VistaModelo
     public class VMcontenedor : BaseVM
     {
         #region VARIABLES
-        string _IdUsuario;
+        
         string _correo;
         string _nombre;
         string _apellido;
