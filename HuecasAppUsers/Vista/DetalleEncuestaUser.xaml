@@ -22,12 +22,13 @@
                         <Button Text="Informacion de la comida" x:Name="btnComida" Clicked="btnComida_Clicked" CornerRadius="30" />
                         <Button Text="Informacion de la calificacion" x:Name="btnCalificacion" Clicked="btnCalificacion_Clicked" CornerRadius="30" />
                         <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
-                                     BackgroundColor="Red" Margin="0,120,0,0" CornerRadius="50" Padding="10"/>
+                                     BackgroundColor="Red" Margin="0,120,0,0" CornerRadius="50" Padding="10"
+                                      x:Name="Atras" Clicked="Atras_Clicked"/>
                     </StackLayout>
 
                 </StackLayout>
                 <!--Informacion de tu Local-->
-                <Grid  RowDefinitions="auto,*,*,auto" VerticalOptions="Center" x:Name="InfoLocal" HeightRequest ="600"
+                <Grid  RowDefinitions="auto,*,*,auto" VerticalOptions="Center" x:Name="InfoLocal" HeightRequest ="800"
                       HorizontalOptions="Center" BackgroundColor="Black">
 
                     <Label Text="Local" FontSize="25" Grid.Row="0"
@@ -47,7 +48,7 @@
                                     <Label Text="{Binding NombreLocal, 
                                             StringFormat='Nombre del local: {0}'}" HorizontalTextAlignment="Center"
                                            Margin="7" FontSize="Medium" TextColor="#4196E8"/>
-                                    
+
                                     <Label Text="{Binding Categorias, 
                                             StringFormat='El tipo de local es: {0}'}" 
                                                HorizontalTextAlignment="Center"
@@ -70,88 +71,115 @@
                                            HorizontalOptions="Center" TextColor="#4196E8"/>
 
                                     <Image Source="{Binding FotoFachada}"  />
-                                    
+
                                 </StackLayout>
 
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                     <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
-                                     BackgroundColor="Red" Margin="0,0,0,0" CornerRadius="50" Padding="10"  Grid.Row="3"/>
-                    
+                                     BackgroundColor="Red" Margin="0,0,0,0" CornerRadius="50" Padding="10"  Grid.Row="3"
+                                 x:Name="CerrarLocal" Clicked="btnCerrar2_Clicked"/>
+
                 </Grid>
 
                 <Grid  RowDefinitions="auto,*,*,auto" x:Name="InfoPlato" HeightRequest="800" BackgroundColor="Black"
-                      HorizontalOptions="Center" VerticalOptions="Center" >
+                      HorizontalOptions="Center" VerticalOptions="Center"  >
 
                     <Label Grid.Row="0" Text="Plato" FontSize="Large"
                                FontAttributes="Bold" TextColor="#E1E841"
                            Margin="0,90,0,0"  VerticalOptions="Center" 
                            HorizontalOptions="Center"/>
-                    
-                        <CollectionView ItemsSource="{Binding LisPlato}"
-                        Margin="5,15,5,5" Grid.Row="1" Grid.RowSpan="2">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid RowDefinitions="*,*,*,*" >
 
+                    <CollectionView ItemsSource="{Binding LisPlato}"
+                        Margin="5,15,5,5" Grid.Row="1" Grid.RowSpan="2">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid RowDefinitions="*,*,*,*" >
+                                    <Frame Grid.Row="0" CornerRadius="20" BackgroundColor="Transparent" 
+                                           Margin="7" Padding="2" BorderColor="#52524A">
                                         <Label Grid.Row="0" Text="{Binding Nombre, 
                                             StringFormat='Nombre del Plato: {0}'}"  Margin="7" FontSize="Medium"
                                                HorizontalTextAlignment="Center" TextColor="#4196E8"/>
+                                    </Frame>
+                                    <Frame Grid.Row="1" CornerRadius="20" BackgroundColor="Transparent" 
+                                           Margin="7" Padding="2" BorderColor="#52524A">
                                         <Label Grid.Row="1" Text="{Binding Precio, 
-                                            StringFormat='Precio del Plato: {0}$$'}" Margin="7" FontSize="Medium"
+                                            StringFormat='Precio del Plato: $ {0} '}" Margin="7" FontSize="Medium"
                                                HorizontalTextAlignment="Center" TextColor="#4196E8"/>
+                                    </Frame>
+                                    <Frame Grid.Row="2" CornerRadius="20" BackgroundColor="Transparent" 
+                                           Margin="7" Padding="2" BorderColor="#52524A">
                                         <Label Grid.Row="2" Text="{Binding Descripcion, 
                                             StringFormat='Descripcion de lo que viene: {0}'}" Margin="7" FontSize="Medium"
                                                HorizontalTextAlignment="Center" TextColor="#4196E8"/>
+                                    </Frame>
+                                    <Frame Grid.Row="3" CornerRadius="20" BackgroundColor="Transparent" 
+                                           Margin="7" Padding="2" BorderColor="#52524A">
                                         <Label Grid.Row="3" Text="{Binding Comentario, 
                                             StringFormat='Comentario sobre la calidad de su comida: {0}'}" Margin="7" FontSize="Medium"
                                                HorizontalTextAlignment="Center" TextColor="#4196E8"/>
+                                    </Frame>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
-                                    </Grid>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    
                     <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
-                                     BackgroundColor="Red" Margin="0,0,0,0" CornerRadius="50" Padding="10" Grid.Row="3"/>
+                                     BackgroundColor="Red" Margin="0,0,0,0" CornerRadius="50" Padding="10" Grid.Row="3" 
+                                x:Name="CerrarPlato" Clicked="btnCerrar1_Clicked" />
 
                 </Grid>
 
 
-
-                <Grid RowDefinitions="Auto,Auto,Auto,Auto" VerticalOptions="Center" BackgroundColor="Black"
-                      HorizontalOptions="Center" x:Name="InfoCalificacion" >
+                <Grid RowDefinitions="Auto,auto,Auto" VerticalOptions="Center" BackgroundColor="Black"
+                      HorizontalOptions="Center" x:Name="InfoCalificacion" HeightRequest="800"  >
                     <Label Grid.Row="0" Text="Calificacion" FontSize="Large"
                                FontAttributes="Bold" TextColor="#E1E841"
-                           Margin="20"
-                           VerticalOptions="Center" HorizontalOptions="Center"/>
-                    <Frame VerticalOptions="Center" HorizontalOptions="Center" 
-                           Grid.Row="1" Grid.RowSpan="2"  BackgroundColor="Transparent" Margin="5,15,5,5" HeightRequest="100"  >
-                        <CollectionView ItemsSource="{Binding LisCalificacion} ">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate >
-                                    <Grid RowDefinitions="*,*,*,*" >
-                                        <Label Grid.Row="0" Text="{Binding CalificacionAtencion, 
-                                            StringFormat='la calificacion de la atencion brindada fue  de : {0}/10'}" 
-                                               HorizontalTextAlignment="Center" TextColor="#4196E8"/>
-                                        <Label Grid.Row="1" Text="{Binding CalificacionComida, 
-                                            StringFormat='la calificacion de su plato fue de : {0}/10'}" 
-                                               HorizontalTextAlignment="Center" TextColor="#4196E8"/>
-                                        <Label Grid.Row="2" Text="{Binding CalificacionLugar, 
-                                            StringFormat='la calificacion de las condiciones de este local fue de: {0}/10'}" 
-                                               HorizontalTextAlignment="Center" TextColor="#4196E8"/>
-                                        <Label Grid.Row="3" Text="{Binding Recomendacion,
+                           Margin="20" HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+
+                    <CollectionView ItemsSource="{Binding LisCalificacion}" Grid.Row="1" 
+                        Margin="5,15,5,5" >
+                        <CollectionView.ItemTemplate >
+                            <DataTemplate  >
+                                <Grid RowDefinitions="*,*,*,*"   Padding="20" VerticalOptions="Center" >
+
+                                    <Frame Grid.Row="0" CornerRadius="20" BackgroundColor="Transparent" 
+                                           Margin="7" Padding="2" BorderColor="#52524A">
+                                        <Label Text="{Binding CalificacionComida, 
+                                            StringFormat='Calificacion de su plato fue de : {0}/10'}" 
+                                               HorizontalTextAlignment="Center" TextColor="#4196E8" FontSize="Medium"/>
+                                    </Frame>
+                                    <Frame Grid.Row="1" CornerRadius="20" BackgroundColor="Transparent" 
+                                           Margin="7" Padding="2" BorderColor="#52524A">
+                                        <Label  Text="{Binding CalificacionLugar, 
+                                            StringFormat='Calificacion de condiciones de este local fue de: {0}/10'}" 
+                                               HorizontalTextAlignment="Center" TextColor="#4196E8" FontSize="Medium"/>
+                                    </Frame>
+                                    <Frame Grid.Row="2" CornerRadius="20" BackgroundColor="Transparent" 
+                                           Margin="7" Padding="2" BorderColor="#52524A">
+                                        <Label Text="{Binding Recomendacion,
                                             StringFormat='La recomendacion es: {0}'}" 
-                                               HorizontalTextAlignment="Center" TextColor="#4196E8"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </Frame>
+                                               HorizontalTextAlignment="Center" TextColor="#4196E8" FontSize="Medium"/>
+                                    </Frame>
+                                    <Frame Grid.Row="3"  CornerRadius="20" BackgroundColor="Transparent" 
+                                           Margin="7" Padding="2" BorderColor="#52524A">
+                                        <Label Text="{Binding CalificacionAtencion, 
+                                            StringFormat='Calificacion de la atencion brindada fue  de : {0}/10'}" 
+                                               HorizontalTextAlignment="Center" TextColor="#4196E8" FontSize="Medium"/>
+                                    </Frame>
+                                    
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    
                     <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
-                                     BackgroundColor="Red" Margin="0,0,0,0" CornerRadius="50" Padding="10"/>
-                </Grid>
+                                     BackgroundColor="Red" Margin="0,0,0,0" CornerRadius="50" Padding="10" Grid.Row="2"
+                                 x:Name="CerrarCalificacion" Clicked="btnCerrar3_Clicked"/>
+                
+                    </Grid>
 
             </Grid>
         </StackLayout>

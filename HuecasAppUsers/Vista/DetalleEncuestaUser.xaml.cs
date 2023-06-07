@@ -66,5 +66,10 @@ namespace HuecasAppUsers.Vista
         {
             VIstaPrincipal();
         }
+
+        private void Atras_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+        }
     }
 }

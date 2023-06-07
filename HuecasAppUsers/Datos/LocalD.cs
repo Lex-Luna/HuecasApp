@@ -59,7 +59,6 @@ namespace HuecasAppUsers.Datos
                 .Child("Local")
                 .OnceAsync<LocalM>()).Select(item => new LocalM
                 {
-
                     IdLocal = item.Key,
                     IdCiudad = item.Object.IdCiudad,
                     Direccion = item.Object.Direccion,

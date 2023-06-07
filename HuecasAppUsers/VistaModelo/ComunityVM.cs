@@ -2,7 +2,9 @@
 using HuecasAppUsers.Conexiones;
 using HuecasAppUsers.Datos;
 using HuecasAppUsers.Modelo;
+using HuecasAppUsers.Vista;
 using Newtonsoft.Json;
+using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,42 +17,24 @@ using Xamarin.Forms;
 
 namespace HuecasAppUsers.VistaModelo
 {
-    public class DetalleEncuestaUserVM : BaseVM
+    public class ComunityVM : BaseVM
     {
         #region CONSTRUCTOR
-        public DetalleEncuestaUserVM(INavigation navigation, EncuestaM e)
+        public ComunityVM(INavigation navigation)
         {
             Navigation = navigation;
-            IdCalificacion = e.IdCalificacion;
-            IdPlato = e.IdPlato;
-            IdLocal = e.IdLocal;
-
-            Task.Run(async () =>
-            {
-                await MostrarCalificacionId(IdCalificacion);
-
-            }).Wait();
-
-            Task.Run(async () =>
-            {
-                await MostrarLocalId(IdLocal);
-
-            }).Wait();
-
-            Task.Run(async () =>
-            {
-                await MostrarPlatoId(IdPlato);
-
-            }).Wait();
-
             Task.Run(async () =>
             {
                 await obtenerDataUserAsync();
             }).Wait();
-        }
+            Task.Run(async () =>
+            {
+                await MostrarMisEncuestas(IdUsuario);
+            }).Wait();
 
+        }
         #endregion
-        #region Variables
+        #region VARIABLES
         string _IdUsuario;
         string _apellido;
         string _correo;
@@ -59,15 +43,19 @@ namespace HuecasAppUsers.VistaModelo
         string _idAdmin;
         bool _estado;
         int _numEncuesta;
-        
+        string IdEncuesta;
+
+        EncuestaM selectEncuesta;
+        public List<EncuestaM> listaEncueta = new List<EncuestaM>();
 
 
         #endregion
-        #region Objetos
+        #region OBJETOS 
 
-        public ObservableCollection<CalificacionM> LisCalificacion { get; set; }
-        public ObservableCollection<PlatoM> LisPlato{ get; set; }
-        public ObservableCollection<LocalM> LisLocal{ get; set; }
+        public List<EncuestaM> ListaEncueta { get { return listaEncueta; } set { SetProperty(ref listaEncueta, value); IdEncuesta = selectEncuesta.IdEncuesta; } }
+        public EncuestaM SelectEncuesta { get { return selectEncuesta; } set { SetProperty(ref selectEncuesta, value); IdEncuesta = selectEncuesta.IdEncuesta; } }
+        public ObservableCollection<EncuestaM> LisEncueta { get; set; }
+
         public int NumEncuesta
         {
             get { return _numEncuesta; }
@@ -116,14 +104,8 @@ namespace HuecasAppUsers.VistaModelo
         }
 
         #endregion
-        #region Procesos
-        public string IdCalificacion { get; set; }
-        public string IdPlato{ get; set; }
-        public string IdLocal{ get; set; }
-        private async Task Volver()
-        {
-            await Navigation.PopAsync();
-        }
+        #region PROCESOS
+
         private async Task obtenerDataUserAsync()
         {
             try
@@ -152,61 +134,48 @@ namespace HuecasAppUsers.VistaModelo
             catch (Exception)
             {
                 await DisplayAlert("Alerta", "X tu seguridad la sesion se a cerrado", "Ok");
+
             }
         }
-        public async Task MostrarCalificacionId(string Id)
+        private async Task IrEncuesta()
         {
-            try
-            {
-                CalificacionD f = new CalificacionD();
-                var calificacion = await f.MostCalificacionXId(Id);
-                LisCalificacion = new ObservableCollection<CalificacionM>(calificacion);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Error: No se pudo consulta la tabla Calificacion " + e);
-            }
-
+            await Navigation.PushAsync(new Encuesta());
         }
 
-        public async Task MostrarLocalId(string Id)
+
+        public async Task MostrarMisEncuestas(string idUser)
+        {
+            EncuestaD f = new EncuestaD();
+            var encuestas = await f.MostEncuestaIdUser(idUser);
+            LisEncueta = new ObservableCollection<EncuestaM>(encuestas);
+        }
+
+
+        private async Task IrDetalleEncuesta(EncuestaM p)
         {
             try
             {
-                LocalD f = new LocalD();
-                var local = await f.MostLocalXId(Id);
-                LisLocal = new ObservableCollection<LocalM>(local);
-                
+                await Navigation.PushAsync(new DetalleEncuestaUser(p));
             }
             catch (Exception e)
             {
-                Debug.WriteLine("Error: No se pudo consulta la tabla Calificacion " + e);
+
+                Debug.WriteLine("Error: No se pudo tomar el ID " + e);
+
             }
-
-        } 
-
-        public async Task MostrarPlatoId(string Id)
+        }
+        private async Task MostrarPerfil()
         {
-            try
-            {
-                PlatoD f = new PlatoD();
-                var plato = await f.MostPlatoXId(Id);
-                LisPlato = new ObservableCollection<PlatoM>(plato);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Error: No se pudo consulta la tabla Calificacion " + e);
-            }
-
-        } 
-
+            await Navigation.PushPopupAsync(new PerfilUser());
+        }
         #endregion
-        #region Comandos
+        #region COMANDOS
         //public ICommand InsertarRecolecoresComand => new Command(async () => await InsertarRecolecoresProces());
-        public ICommand Volvercomamd => new Command(async () => await Volver());
-        //public ICommand NavClientesComand => new Command(async () => await NavClientes());
+
+        public ICommand IrEncuestacomamd => new Command(async () => await IrEncuesta());
+        public ICommand MostrarPerfilcomamd => new Command(async () => await MostrarPerfil());
+        public ICommand IrDetalleEncuestaCommand => new Command<EncuestaM>(async (p) => await IrDetalleEncuesta(p));
 
         #endregion
-
     }
 }
