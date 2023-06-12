@@ -1,9 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:HuecasAppUsers.Convertidores"
              NavigationPage.HasNavigationBar="False"
              x:Class="HuecasAppUsers.Vista.DetalleEncuestaUser">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+               <local:BoolToRecomendationConverter x:Key="BoolToRecommendationConverter"/>
+            <!--local:BoolToRecommendationConverter x:Key="BoolToRecommendationConverter"/-->
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content  >
+        
         <StackLayout BackgroundColor="Black" VerticalOptions="Center" HorizontalOptions="Center" >
             <Grid  RowDefinitions="*">
 
@@ -82,7 +89,7 @@
                                  x:Name="CerrarLocal" Clicked="btnCerrar2_Clicked"/>
 
                 </Grid>
-
+                <!--Info del la comida-->
                 <Grid  RowDefinitions="auto,*,*,auto" x:Name="InfoPlato" HeightRequest="800" BackgroundColor="Black"
                       HorizontalOptions="Center" VerticalOptions="Center"  >
 
@@ -130,8 +137,7 @@
                                 x:Name="CerrarPlato" Clicked="btnCerrar1_Clicked" />
 
                 </Grid>
-
-
+                <!--info de tu calificacion-->
                 <Grid RowDefinitions="Auto,auto,Auto" VerticalOptions="Center" BackgroundColor="Black"
                       HorizontalOptions="Center" x:Name="InfoCalificacion" HeightRequest="800"  >
                     <Label Grid.Row="0" Text="Calificacion" FontSize="Large"
@@ -157,16 +163,16 @@
                                             StringFormat='Calificacion de condiciones de este local fue de: {0}/10'}" 
                                                HorizontalTextAlignment="Center" TextColor="#4196E8" FontSize="Medium"/>
                                     </Frame>
-                                    <Frame Grid.Row="2" CornerRadius="20" BackgroundColor="Transparent" 
-                                           Margin="7" Padding="2" BorderColor="#52524A">
-                                        <Label Text="{Binding Recomendacion,
-                                            StringFormat='La recomendacion es: {0}'}" 
-                                               HorizontalTextAlignment="Center" TextColor="#4196E8" FontSize="Medium"/>
-                                    </Frame>
-                                    <Frame Grid.Row="3"  CornerRadius="20" BackgroundColor="Transparent" 
+                                    <Frame Grid.Row="2"  CornerRadius="20" BackgroundColor="Transparent" 
                                            Margin="7" Padding="2" BorderColor="#52524A">
                                         <Label Text="{Binding CalificacionAtencion, 
                                             StringFormat='Calificacion de la atencion brindada fue  de : {0}/10'}" 
+                                               HorizontalTextAlignment="Center" TextColor="#4196E8" FontSize="Medium"/>
+                                    </Frame>
+                                    <Frame Grid.Row="3" CornerRadius="20" BackgroundColor="Transparent" 
+                                           Margin="7" Padding="2" BorderColor="#52524A">
+                                        <Label Text="{Binding Recomendacion, Converter={StaticResource BoolToRecommendationConverter}, 
+                                            StringFormat='La Local fue: {0}'}" 
                                                HorizontalTextAlignment="Center" TextColor="#4196E8" FontSize="Medium"/>
                                     </Frame>
                                     

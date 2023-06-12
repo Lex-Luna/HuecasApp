@@ -29,7 +29,7 @@ namespace HuecasAppUsers.VistaModelo
             }).Wait();
             Task.Run(async () =>
             {
-                await MostrarMisEncuestas(IdUsuario);
+                await MostrarEncuestas();
             }).Wait();
 
         }
@@ -45,6 +45,10 @@ namespace HuecasAppUsers.VistaModelo
         int _numEncuesta;
         string IdEncuesta;
 
+        
+        
+
+
         EncuestaM selectEncuesta;
         public List<EncuestaM> listaEncueta = new List<EncuestaM>();
 
@@ -54,7 +58,7 @@ namespace HuecasAppUsers.VistaModelo
 
         public List<EncuestaM> ListaEncueta { get { return listaEncueta; } set { SetProperty(ref listaEncueta, value); IdEncuesta = selectEncuesta.IdEncuesta; } }
         public EncuestaM SelectEncuesta { get { return selectEncuesta; } set { SetProperty(ref selectEncuesta, value); IdEncuesta = selectEncuesta.IdEncuesta; } }
-        public ObservableCollection<EncuestaM> LisEncueta { get; set; }
+        public ObservableCollection<EncuestaM> LisEncueta1 { get; set; }
 
         public int NumEncuesta
         {
@@ -126,54 +130,33 @@ namespace HuecasAppUsers.VistaModelo
                 IdAdmin = data[0].IdAdministrador;
                 Contrania = data[0].Contrasenia;
                 Estado = data[0].Estado;
-
-
-                //Preferences.Remove("MyFirebaseRefreshToken");  parece que el CPU esta a tope     , v
-
             }
             catch (Exception)
             {
                 await DisplayAlert("Alerta", "X tu seguridad la sesion se a cerrado", "Ok");
-
             }
         }
-        private async Task IrEncuesta()
-        {
-            await Navigation.PushAsync(new Encuesta());
-        }
 
 
-        public async Task MostrarMisEncuestas(string idUser)
+
+        public async Task MostrarEncuestas()
         {
-            EncuestaD f = new EncuestaD();
-            var encuestas = await f.MostEncuestaIdUser(idUser);
-            LisEncueta = new ObservableCollection<EncuestaM>(encuestas);
+                EncuestaD f = new EncuestaD();
+                var encuestas = await f.MostEncuesta();
+                LisEncueta1 = new ObservableCollection<EncuestaM>(encuestas);
+
         }
+
 
 
         private async Task IrDetalleEncuesta(EncuestaM p)
         {
-            try
-            {
                 await Navigation.PushAsync(new DetalleEncuestaUser(p));
-            }
-            catch (Exception e)
-            {
-
-                Debug.WriteLine("Error: No se pudo tomar el ID " + e);
-
-            }
         }
-        private async Task MostrarPerfil()
-        {
-            await Navigation.PushPopupAsync(new PerfilUser());
-        }
+        
         #endregion
         #region COMANDOS
-        //public ICommand InsertarRecolecoresComand => new Command(async () => await InsertarRecolecoresProces());
 
-        public ICommand IrEncuestacomamd => new Command(async () => await IrEncuesta());
-        public ICommand MostrarPerfilcomamd => new Command(async () => await MostrarPerfil());
         public ICommand IrDetalleEncuestaCommand => new Command<EncuestaM>(async (p) => await IrDetalleEncuesta(p));
 
         #endregion

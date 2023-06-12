@@ -7,15 +7,18 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.Shapes;
 
 namespace HuecasAppUsers.Datos
 {
     public class EncuestaD
     {
+        
         public string IdEncuesta;
-        public async Task <string> InsertarEncuesta(EncuestaM parametros)
+        public async Task<string> InsertarEncuesta(EncuestaM parametros)
         {
-            
+
             var data = await Constantes.firebase.Child("Encuesta")
                 .PostAsync(new EncuestaM()
                 {
@@ -32,33 +35,45 @@ namespace HuecasAppUsers.Datos
                     NomPlato = parametros.NomPlato,
                     PromCalificacion = parametros.PromCalificacion,
                     TotalEncuesta = parametros.TotalEncuesta
-                    
-                }) ;
-            
+
+                });
             IdEncuesta = data.Key;
             return IdEncuesta;
         }
 
         public async Task<List<EncuestaM>> MostEncuesta()
         {
-            return (await Constantes.firebase
-                .Child("Encuesta")
-                .OnceAsync<EncuestaM>()).Select(item => new EncuestaM
-                {
-                    IdEncuesta = item.Key,
-                    Estado = item.Object.Estado,
-                    FechaData = item.Object.FechaData,
-                    IdCalificacion = item.Object.IdCalificacion,
-                    IdPlatoLocal = item.Object.IdPlatoLocal,
-                    IdPlato = item.Object.IdPlato,
-                    IdLocal = item.Object.IdLocal,
-                    IdUsuario = item.Object.IdUsuario,
-                    NomUsuario = item.Object.NomUsuario,
-                    NomLocal = item.Object.NomLocal,
-                    NomPlato = item.Object.NomPlato,
-                    PromCalificacion = item.Object.PromCalificacion
-                }).ToList();
+            try
+            {
+                var result = await Constantes.firebase.Child("Encuesta").OnceAsync<EncuestaM>();
+                return result
+                    .Select(item => new EncuestaM
+                    {
+                        IdEncuesta = item.Key,
+                        Estado = item.Object.Estado,
+                        FechaData = item.Object.FechaData,
+                        IdCalificacion = item.Object.IdCalificacion,
+                        IdPlatoLocal = item.Object.IdPlatoLocal,
+                        IdPlato = item.Object.IdPlato,
+                        IdLocal = item.Object.IdLocal,
+                        IdUsuario = item.Object.IdUsuario,
+                        NomUsuario = item.Object.NomUsuario,
+                        NomLocal = item.Object.NomLocal,
+                        NomPlato = item.Object.NomPlato,
+                        PromCalificacion = item.Object.PromCalificacion
+                    })
+                    .OrderByDescending(x => x.FechaData)
+                    .ToList();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            
         }
+
+
 
         public async Task<List<EncuestaM>> MostEncuestaIdUser(string p)
         {
@@ -84,6 +99,7 @@ namespace HuecasAppUsers.Datos
                 })
                 .ToList();
         }
+
 
     }
 }
