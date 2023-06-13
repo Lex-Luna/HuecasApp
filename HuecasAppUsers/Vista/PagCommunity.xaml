@@ -42,64 +42,74 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate >
-                        <Frame BorderColor="Black" Padding="1" BackgroundColor="Black">
+                        <Frame BorderColor="Black" Padding="1" BackgroundColor="Black" CornerRadius="30">
                             <!--Agregar el comando ir a DeetalleEncuesta-->
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaCommand, 
                                         Source={x:Reference EncuestasCommunity}}" CommandParameter="{Binding .}"/>
                             </Frame.GestureRecognizers>
                             <StackLayout Margin="0,0,0,10" >
-                                <!--Degradado-->
+                                <!--color Degradado-->
                                 <StackLayout.Background>
                                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                                         <GradientStop Offset="0.1" Color="#A4FFAA" />
                                         <GradientStop Offset="0.9" Color="Blue" />
                                     </LinearGradientBrush>
                                 </StackLayout.Background>
-                                <Grid Margin="5" RowDefinitions="Auto,Auto" ColumnDefinitions="230,1,*">
-                                    <StackLayout Grid.Row="0" Grid.Column="0" 
+                                <StackLayout Margin="5" >
+
+                                    <!--Stack Local-->
+                                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                        <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                   HasShadow="True" HorizontalOptions="FillAndExpand" >
+                                            <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding NomLocal, StringFormat='El local {0}'}" />
+                                                        <Span Text="{Binding Categorias, StringFormat=' de {0}'}" />
+                                                        <Span Text="{Binding Barrio, StringFormat=' del barrio {0}'}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </Frame>
+                                    </StackLayout>
+                                 
+                                    
+                                    <!--Stack Plato-->
+                                    <StackLayout Grid.Row="1" Grid.Column="0" 
                                                      HorizontalOptions="FillAndExpand" 
-                                                     Orientation="Horizontal">
+                                                     Orientation="Horizontal" >
                                         <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                    HasShadow="True" HorizontalOptions="FillAndExpand">
-                                            <Label Text="{Binding NomLocal, StringFormat='Local: {0}'}" 
-                                                       FontAttributes="Bold" FontSize="16" TextColor="#333" 
-                                                       HorizontalTextAlignment="Start" />
 
+                                            <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding NomPlato, StringFormat='Hizo un pedido fue un {0} '}"/>
+                                                        <Span Text="{Binding Precio, StringFormat='con un costo de $ {0}'}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
                                         </Frame>
                                     </StackLayout>
-                                    <!--Nombre del plato-->
-                                    <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal" >
+
+                                    <!--Stack Usuario calificacion Fecha-->
+                                    <StackLayout Grid.Row="2" Grid.Column="3" Orientation="Horizontal" >
                                         <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                    HasShadow="True" HorizontalOptions="FillAndExpand">
-                                            <Label Text="{Binding NomPlato, StringFormat='Plato: {0}'}" 
-                                                       FontAttributes="Bold" FontSize="16" TextColor="#333" 
-                                                       HorizontalTextAlignment="Start" />
-                                        </Frame>
-                                    </StackLayout>
-                                    <!--Calificacion del local-->
-                                    <StackLayout Grid.Row="1" Grid.Column="2" Orientation="Vertical" 
-                                                     VerticalOptions="Center" HorizontalOptions="EndAndExpand">
-                                        <Frame CornerRadius="30" BackgroundColor="#E7E114" BorderColor="#D8D8D8"
-                                                   HasShadow="True" Padding="5" Opacity="0.7">
-                                            <Label Text="{Binding PromCalificacion, StringFormat='Promedio: {0}/10'}" 
-                                                       HorizontalTextAlignment="Center" FontSize="18" TextColor="Black" 
-                                                       HorizontalOptions="Center" />
+                                            <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding NomUsuario, StringFormat='Recomendado por {0}'}"/>
+                                                        <Span Text="{Binding PromCalificacion, StringFormat=' con un promedio de {0}/10'}"/>
+                                                        <!--Span Text="{Binding FechaData, StringFormat=' el {0:dd/MMMM/yyyy}'}"/-->
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
                                         </Frame>
                                     </StackLayout>
 
-                                    <!-- Fecha-->
-                                    <StackLayout Grid.Row="0" Grid.Column="2" Orientation="Vertical" 
-                                                     VerticalOptions="Center" HorizontalOptions="EndAndExpand">
-                                        <Frame CornerRadius="5" BackgroundColor="transparent" 
-                                                   BorderColor="#D8D8D8" HasShadow="True" Padding="5">
-                                            <Label Text="{Binding FechaData, StringFormat=' {0:d MMMM yyyy}'}" 
-                                                       HorizontalTextAlignment="Center" FontSize="18" 
-                                                       TextColor="White" HorizontalOptions="Center" />
-                                        </Frame>
-                                    </StackLayout>
-
-                                </Grid>
+                                </StackLayout>
                             </StackLayout>
                         </Frame>
                     </DataTemplate>

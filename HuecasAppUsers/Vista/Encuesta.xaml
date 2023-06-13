@@ -319,7 +319,7 @@
                                 </StackLayout>
                                 <!--Stack Recomendado-->
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="¿Lo recomiendas?"
+                                    <Label Text="¿Lo recomiendarias a la comunidad de usuarios?"
                                             FontSize="15"
                                             FontAttributes="Bold"
                                             VerticalOptions="Center"

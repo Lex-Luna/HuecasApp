@@ -142,9 +142,8 @@ namespace HuecasAppUsers.VistaModelo
         public async Task MostrarEncuestas()
         {
                 EncuestaD f = new EncuestaD();
-                var encuestas = await f.MostEncuesta();
+                var encuestas = await f.MostEncuestaRecomendada();
                 LisEncueta1 = new ObservableCollection<EncuestaM>(encuestas);
-
         }
 
 

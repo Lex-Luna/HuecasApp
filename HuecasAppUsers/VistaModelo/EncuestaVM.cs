@@ -74,7 +74,7 @@ namespace HuecasAppUsers.VistaModelo
         string _apellido;
         string _correo;
         string _nombre;
-        string _contrania;
+        string _contrasenia;
         string _idAdmin;
         bool _estado;
         int _numEncuesta = 1;
@@ -95,10 +95,10 @@ namespace HuecasAppUsers.VistaModelo
 
 
         //usuario
-        public string Contrania
+        public string Contrasenia
         {
-            get { return _contrania; }
-            set { SetValue(ref _contrania, value); }
+            get { return _contrasenia; }
+            set { SetValue(ref _contrasenia, value); }
         }
         public string IdAdmin
         {
@@ -160,12 +160,12 @@ namespace HuecasAppUsers.VistaModelo
         string txtDireccion;
         public string IdPais;
         public string IdCiudad;
-        public string IdCategorias;
+        
         public string FotoFachada;
         string _identificacion;
         UbicacionM selectPais;
         UbicacionM selectCiudad;
-        //CategoriasM selectCategorias;
+        
         //variables de las fotos
         string rutafoto;
         MediaFile foto;
@@ -193,15 +193,13 @@ namespace HuecasAppUsers.VistaModelo
         public List<UbicacionM> Listpais { get { return listPais; } set { SetValue(ref listPais, value); } } 
         public List<UbicacionM> Listciudad { get { return listCiudad; } set { SetValue(ref listCiudad, value); } }
 
-        //public List<UbicacionM> Listpais { get { return listPais; } set { SetValue(ref listPais, value); } }//
-        //public List<UbicacionM> Listciudad { get { return listCiudad; } set { SetValue(ref listCiudad, value); } }//ciudad = selectPais.Ciudad.ToString();
+        
         #endregion
         #region ProcesosLocal
 
         async Task AgregarLocal()
         {
-            try
-            {
+            
                 await SubirFoto();
                 var funcion = new LocalD();
                 var parametros = new LocalM();
@@ -214,11 +212,6 @@ namespace HuecasAppUsers.VistaModelo
                 parametros.IdCiudad = IdCiudad;
                 parametros.Categorias = PropiedadSeleccionada;
                 _IdLocal = await funcion.InsertarLocal(parametros);
-            }
-                catch (Exception e)
-            {
-                throw e;
-            }
             
         }
 
@@ -423,7 +416,7 @@ namespace HuecasAppUsers.VistaModelo
                 IdUsuario = data[0].IdUsuario;
                 NumEncuesta = data[0].NumEncuesta;
                 IdAdmin = data[0].IdAdministrador;
-                Contrania = data[0].Contrasenia;
+                Contrasenia = data[0].Contrasenia;
                 Estado = data[0].Estado;
 
 
@@ -448,7 +441,7 @@ namespace HuecasAppUsers.VistaModelo
             p.Nombre = Nombre;
             p.Estado = Estado;
             p.Correo = Correo;
-            p.Contrasenia = Contrania;
+            p.Contrasenia = Contrasenia;
             await f.AddNumEncuesta(p);
         }
 
@@ -480,6 +473,10 @@ namespace HuecasAppUsers.VistaModelo
             parametros2.NomPlato = txtNombrePlato;
             parametros2.PromCalificacion = Promedio;
             parametros2.TotalEncuesta = Totalencuesta;
+            parametros2.Recomendado = Recomendado;
+            parametros2.Categorias = PropiedadSeleccionada;
+            parametros2.Barrio = TxtBarrio;
+            parametros2.Precio = TxtPrecioPlato;
 
             await EditEncuestaUserAdd();
 

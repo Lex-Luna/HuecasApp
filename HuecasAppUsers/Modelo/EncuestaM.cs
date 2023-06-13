@@ -20,7 +20,12 @@ namespace HuecasAppUsers.Modelo
         public string IdLocal { get; set; }
         public string IdUsuario { get; set; }
         public string NomUsuario { get; set; }
+        public string Categorias { get; set; }
+        public string Barrio { get; set; }
+        public string Precio { get; set; }
         public int TotalEncuesta { get; set; }
+        public bool Recomendado { get; set; }
+        
         
     }
 }
