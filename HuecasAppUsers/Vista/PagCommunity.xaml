@@ -2,9 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              NavigationPage.HasNavigationBar="False"
-             xmlns:degradado="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:degradado="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:local="clr-namespace:HuecasAppUsers.Convertidores"
              x:Class="HuecasAppUsers.Vista.PagCommunity">
-    
+    <ContentPage.Resources>
+        <local:SearchConverter x:Key="searchConverter" />
+    </ContentPage.Resources>
+
+
     <Grid RowDefinitions="auto,auto,auto,auto,*"
           BackgroundColor="#1C1D22">
         <!--Stack Titulo-->
@@ -16,12 +20,13 @@
                        FontAttributes="Bold"
                        HorizontalOptions="Center"/>
         </StackLayout>
+        <!--Stack Degradado-->
         <degradado:PancakeView Grid.Row="1"
                                Margin="5"
                                CornerRadius="15"
                                BackgroundGradientStartPoint="0.9,0.1"
                                BackgroundGradientEndPoint="0.1,1.0">
-            <!--Coloresd del degradado-->
+            <!--Colores degradado-->
             <degradado:PancakeView.BackgroundGradientStops>
                 <degradado:GradientStopCollection>
                     <degradado:GradientStop Color="#0E0F04" Offset="0.0"/>
@@ -29,19 +34,27 @@
                 </degradado:GradientStopCollection>
             </degradado:PancakeView.BackgroundGradientStops>
             <!--Subtitulo-->
-            <StackLayout Margin="10,0,10,0" Padding="10" >
+            <StackLayout Margin="10,0,10,0" Padding="10" Grid.Row="0"  >
                 <Label FontSize="Medium" TextColor="#DEF017" FontAttributes="Bold,Italic"
                        HorizontalTextAlignment="Center"
                     Text="Recomendaciones de la Comunidad de usuarios" />
             </StackLayout>
         </degradado:PancakeView>
-
+        <!--Stack SearchBar-->
+        <StackLayout Margin="10,60,10,0" Grid.Row="0" >
+            <Frame Padding="0" CornerRadius="25">
+                <SearchBar Text="{Binding SearchBarText}"  
+                           x:Name="BuscarLista"
+                           TextChanged="SearchBar_TextChanged"
+                           BackgroundColor="Transparent"  />
+            </Frame>
+        </StackLayout>
+        <!--Lista-->
         <ScrollView Grid.Row="2" >
-            <CollectionView ItemsSource="{Binding LisEncueta1}"  
+            <CollectionView ItemsSource="{Binding LisEncuestaRecomendados, Mode=TwoWay}"  
                             x:Name="EncuestasCommunity">
-
                 <CollectionView.ItemTemplate>
-                    <DataTemplate >
+                    <DataTemplate>
                         <Frame BorderColor="Black" Padding="1" BackgroundColor="Black" CornerRadius="30">
                             <!--Agregar el comando ir a DeetalleEncuesta-->
                             <Frame.GestureRecognizers>
@@ -56,8 +69,8 @@
                                         <GradientStop Offset="0.9" Color="Blue" />
                                     </LinearGradientBrush>
                                 </StackLayout.Background>
+                                <!--Stack contenedor general lista -->    
                                 <StackLayout Margin="5" >
-
                                     <!--Stack Local-->
                                     <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                                         <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
@@ -65,7 +78,7 @@
                                             <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
                                                 <Label.FormattedText>
                                                     <FormattedString>
-                                                        <Span Text="{Binding NomLocal, StringFormat='El local {0}'}" />
+                                                        <Span Text="{Binding NomLocal, StringFormat='El local {0}'}" />       
                                                         <Span Text="{Binding Categorias, StringFormat=' de {0}'}" />
                                                         <Span Text="{Binding Barrio, StringFormat=' del barrio {0}'}" />
                                                     </FormattedString>

@@ -17,6 +17,8 @@ namespace HuecasAppUsers.Datos
     {
 
         public string IdEncuesta;
+
+        #region Insertar
         public async Task<string> InsertarEncuesta(EncuestaM parametros)
         {
 
@@ -43,6 +45,53 @@ namespace HuecasAppUsers.Datos
                 });
             IdEncuesta = data.Key;
             return IdEncuesta;
+        }
+        #endregion
+        #region MostrarEncuesta
+
+        public async Task<List<EncuestaM>> MostEncuesta()
+        {
+            return (await Constantes.firebase
+                .Child("Encuesta")
+                .OnceAsync<EncuestaM>())
+                .Select(item => new EncuestaM
+                {
+                    IdEncuesta = item.Key,
+                    Estado = item.Object.Estado,
+                    FechaData = item.Object.FechaData,
+                    IdCalificacion = item.Object.IdCalificacion,
+                    IdPlatoLocal = item.Object.IdPlatoLocal,
+                    IdPlato = item.Object.IdPlato,
+                    IdLocal = item.Object.IdLocal,
+                    IdUsuario = item.Object.IdUsuario,
+                    NomUsuario = item.Object.NomUsuario,
+                    NomLocal = item.Object.NomLocal,
+                    NomPlato = item.Object.NomPlato,
+                    PromCalificacion = item.Object.PromCalificacion
+                }).ToList();
+        }
+
+        public async Task<List<EncuestaM>> MostEncuestaXNomLocal(EncuestaM p)
+        {
+            return (await Constantes.firebase
+                .Child("Encuesta")
+                .OnceAsync<EncuestaM>())
+                .Where(item => item.Object.NomLocal == p.NomLocal && item.Object.Recomendado == true)
+                .Select(item => new EncuestaM
+                {
+                    IdEncuesta = item.Key,
+                    Estado = item.Object.Estado,
+                    FechaData = item.Object.FechaData,
+                    IdCalificacion = item.Object.IdCalificacion,
+                    IdPlatoLocal = item.Object.IdPlatoLocal,
+                    IdPlato = item.Object.IdPlato,
+                    IdLocal = item.Object.IdLocal,
+                    IdUsuario = item.Object.IdUsuario,
+                    NomUsuario = item.Object.NomUsuario,
+                    NomLocal = item.Object.NomLocal,
+                    NomPlato = item.Object.NomPlato,
+                    PromCalificacion = item.Object.PromCalificacion
+                }).ToList();
         }
 
         public async Task<List<EncuestaM>> MostEncuestaRecomendada()
@@ -77,7 +126,6 @@ namespace HuecasAppUsers.Datos
         }
 
 
-
         public async Task<List<EncuestaM>> MostEncuestaIdUser(string p)
         {
             return (await Constantes.firebase
@@ -107,6 +155,7 @@ namespace HuecasAppUsers.Datos
                 .ToList();
         }
 
+        #endregion
 
     }
 }

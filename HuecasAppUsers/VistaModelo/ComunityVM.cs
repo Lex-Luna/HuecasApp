@@ -6,9 +6,11 @@ using HuecasAppUsers.Vista;
 using Newtonsoft.Json;
 using Rg.Plugins.Popup.Extensions;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -29,7 +31,7 @@ namespace HuecasAppUsers.VistaModelo
             }).Wait();
             Task.Run(async () =>
             {
-                await MostrarEncuestas();
+                await MostrarEncuestas(SearchBarText);
             }).Wait();
 
         }
@@ -38,15 +40,17 @@ namespace HuecasAppUsers.VistaModelo
         string _IdUsuario;
         string _apellido;
         string _correo;
+        string searchBarText;
         string _nombre;
         string _contrania;
         string _idAdmin;
         bool _estado;
         int _numEncuesta;
         string IdEncuesta;
+        ObservableCollection <EncuestaM> lisEncuestaRecomendados;
 
-        
-        
+
+
 
 
         EncuestaM selectEncuesta;
@@ -56,9 +60,27 @@ namespace HuecasAppUsers.VistaModelo
         #endregion
         #region OBJETOS 
 
-        public List<EncuestaM> ListaEncueta { get { return listaEncueta; } set { SetProperty(ref listaEncueta, value); IdEncuesta = selectEncuesta.IdEncuesta; } }
+        //public List<EncuestaM> ListaEncueta { get { return listaEncueta; } set { SetProperty(ref listaEncueta, value); IdEncuesta = selectEncuesta.IdEncuesta; } }
         public EncuestaM SelectEncuesta { get { return selectEncuesta; } set { SetProperty(ref selectEncuesta, value); IdEncuesta = selectEncuesta.IdEncuesta; } }
-        public ObservableCollection<EncuestaM> LisEncueta1 { get; set; }
+        public ObservableCollection<EncuestaM> LisEncuestaRecomendados1 { get; set; }
+        public ObservableCollection<EncuestaM> LisEncuestaRecomendados
+        {
+            get => lisEncuestaRecomendados;
+            set
+            {
+                lisEncuestaRecomendados = value;
+                OnPropertyChanged();Debug.WriteLine("LisEncuestaRecomendados changed");
+            }
+        }
+        public string SearchBarText
+        {
+            get  => searchBarText; 
+            set 
+            {
+                searchBarText = value;
+                Task task = MostrarEncuestas(searchBarText);
+            }
+        }
 
         public int NumEncuesta
         {
@@ -109,6 +131,8 @@ namespace HuecasAppUsers.VistaModelo
 
         #endregion
         #region PROCESOS
+        EncuestaD f = new EncuestaD();
+        
 
         private async Task obtenerDataUserAsync()
         {
@@ -139,24 +163,43 @@ namespace HuecasAppUsers.VistaModelo
 
 
 
-        public async Task MostrarEncuestas()
+        
+
+
+        public async Task MostrarEncuestas(string searchText)
         {
-                EncuestaD f = new EncuestaD();
-                var encuestas = await f.MostEncuestaRecomendada();
-                LisEncueta1 = new ObservableCollection<EncuestaM>(encuestas);
+            var encuestas = await f.MostEncuestaRecomendada();
+           if (!string.IsNullOrEmpty(searchText))
+            {
+                encuestas = encuestas.Where(e => e.NomPlato.Contains(searchText)).ToList();/* ||
+                                                 e.NomLocal.Contains(searchText) ||
+                                                 e.PromCalificacion.ToString().Contains(searchText) ||
+                                                 e.NomUsuario.Contains(searchText) ||
+                                                 e.Categorias.Contains(searchText) ||
+                                                 e.Barrio.Contains(searchText) || 
+                                                 e.Precio.Contains(searchText)).ToList();*/
+            }
+            LisEncuestaRecomendados = new ObservableCollection<EncuestaM>(encuestas);
+            Debug.WriteLine("LisEncuestaRecomendados updated: " + LisEncuestaRecomendados.Count);
         }
+
+
+
 
 
 
         private async Task IrDetalleEncuesta(EncuestaM p)
         {
-                await Navigation.PushAsync(new DetalleEncuestaUser(p));
+            await Navigation.PushAsync(new DetalleEncuestaUser(p));
         }
-        
+
         #endregion
         #region COMANDOS
 
         public ICommand IrDetalleEncuestaCommand => new Command<EncuestaM>(async (p) => await IrDetalleEncuesta(p));
+        
+
+
 
         #endregion
     }

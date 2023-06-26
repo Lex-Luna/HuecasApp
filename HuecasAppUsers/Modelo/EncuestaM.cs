@@ -6,7 +6,6 @@ namespace HuecasAppUsers.Modelo
 {
     public class EncuestaM
     {
-        
         public string IdEncuesta { get; set; }
         public bool Estado { get; set; }
         public string NomPlato { get; set; }
@@ -25,7 +24,5 @@ namespace HuecasAppUsers.Modelo
         public string Precio { get; set; }
         public int TotalEncuesta { get; set; }
         public bool Recomendado { get; set; }
-        
-        
     }
 }
