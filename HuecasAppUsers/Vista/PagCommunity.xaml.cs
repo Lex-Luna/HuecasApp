@@ -26,6 +26,7 @@ namespace HuecasAppUsers.Vista
             InitializeComponent();
             //BindingContext = new ComunityVM(Navigation);
             BindingContext = this;
+            VistaPrinccipal();
             Task.Run(async () =>
             {
                 await MostrarEncuestas();
@@ -34,7 +35,7 @@ namespace HuecasAppUsers.Vista
         }
         #endregion
         #region Variables
-        string _IdUsuario;
+        /*string _IdUsuario;
         string _apellido;
         string _correo;
         string searchBarText;
@@ -44,7 +45,7 @@ namespace HuecasAppUsers.Vista
         bool _estado;
         int _numEncuesta;
         string IdEncuesta;
-        EncuestaM selectEncuesta;
+        EncuestaM selectEncuesta;  */
         ObservableCollection<EncuestaM> lisEncuestaRecomendados;
 
 
@@ -102,17 +103,6 @@ namespace HuecasAppUsers.Vista
                 await DisplayAlert("Alerta", "X tu seguridad la sesion se a cerrado", "Ok");
             }
         }
-
-        //Texto de Busqueda
-        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-            var searchTerm = e.NewTextValue;
-            var filteredItems = LisEncuestaRecomendados.Where(item => item.NomPlato != null && item.NomPlato.Contains(searchTerm)).ToList();
-            EncuestasCommunity.ItemsSource = filteredItems;
-
-        }
-
         public async Task MostrarEncuestas()
         {
             EncuestaD f = new EncuestaD();
@@ -120,8 +110,114 @@ namespace HuecasAppUsers.Vista
             LisEncuestaRecomendados = new ObservableCollection<EncuestaM>(encuestas);
 
         }
+        //Botones
+        void VistaPrinccipal()
+        {
+            PanelComida.IsVisible = false;
+            PanelPrincipal.IsVisible = true;
+            PanelRestaurante.IsVisible = false;
+            PanelPrecio.IsVisible = false;
+            PanelCategoria.IsVisible = false;
+            PanelBarrio.IsVisible = false;
+        }
+
+        private void BtnRestaurante_Clicked(object sender, EventArgs e)
+        {
+            PanelComida.IsVisible = false;
+            PanelPrincipal.IsVisible = false;
+            PanelRestaurante.IsVisible = true;
+            PanelPrecio.IsVisible = false;
+            PanelCategoria.IsVisible = false;
+            PanelBarrio.IsVisible = false;
+        }
+        private void BtnCategoria_Clicked(object sender, EventArgs e)
+        {
+            PanelComida.IsVisible = false;
+            PanelPrincipal.IsVisible = false;
+            PanelRestaurante.IsVisible = false;
+            PanelPrecio.IsVisible = false;
+            PanelCategoria.IsVisible = true;
+            PanelBarrio.IsVisible = false;
+        }
+        
+        private void BtnPlato_Clicked(object sender, EventArgs e)
+        {
+            PanelComida.IsVisible = true;
+            PanelPrincipal.IsVisible = false;
+            PanelRestaurante.IsVisible = false;
+            PanelPrecio.IsVisible = false;
+            PanelCategoria.IsVisible = false;
+            PanelBarrio.IsVisible = false;
+        }
+        private void BtnBarrio_Clicked(object sender, EventArgs e)
+        {
+            PanelComida.IsVisible = false;
+            PanelPrincipal.IsVisible = false;
+            PanelRestaurante.IsVisible = false;
+            PanelPrecio.IsVisible = false;
+            PanelCategoria.IsVisible = false;
+            PanelBarrio.IsVisible = true;
+        }
+        private void BtnPrecios_Clicked(object sender, EventArgs e)
+        {
+            PanelComida.IsVisible = false;
+            PanelPrincipal.IsVisible = false;
+            PanelRestaurante.IsVisible = false;
+            PanelPrecio.IsVisible = true;
+            PanelCategoria.IsVisible = false;
+            PanelBarrio.IsVisible = false;
+        }
+
+
+        //Textos de Busqueda
+        private void BuscarRestaurante_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchTerm = e.NewTextValue;
+            var filteredItems = LisEncuestaRecomendados.Where(item =>
+                item.NomLocal != null && item.NomLocal.Contains(searchTerm)).ToList();
+            RestauranteCommunity.ItemsSource = filteredItems;
+        }
+        private void BuscarCategoria_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchTerm = e.NewTextValue;
+            var filteredItems = LisEncuestaRecomendados.Where(item =>
+                item.Categorias != null && item.Categorias.Contains(searchTerm)).ToList();
+            CategoriaCommunity.ItemsSource = filteredItems;
+        }
+        private void BuscarComida_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchTerm = e.NewTextValue;
+            var filteredItems = LisEncuestaRecomendados.Where(item =>
+                item.NomPlato != null && item.NomPlato.Contains(searchTerm)).ToList();
+            ComidaCommunity.ItemsSource = filteredItems;
+
+        }
+
+        private void BuscarBarrio_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchTerm = e.NewTextValue;
+            var filteredItems = LisEncuestaRecomendados.Where(item =>
+                item.Barrio != null && item.Barrio.Contains(searchTerm)).ToList();
+            ComidaCommunity.ItemsSource = filteredItems;
+        }
+        private void BuscarPrecio_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchTerm = e.NewTextValue;
+            // Separa el rango de precios ingresado en el SearchBar
+            var precios = searchTerm.Split('-');
+            if (precios.Length == 2 && double.TryParse(precios[0], out double minPrecio) && double.TryParse(precios[1], out double maxPrecio))
+            {
+                // Filtra los elementos de la lista por el rango de precios
+                var filteredItems = LisEncuestaRecomendados.Where(item => item.Precio.Equals(minPrecio) && item.Precio.Equals(maxPrecio)).ToList();
+                PrecioCommunity.ItemsSource = filteredItems;
+            }
+        }
+
+
+
 
 
         #endregion
+
     }
 }

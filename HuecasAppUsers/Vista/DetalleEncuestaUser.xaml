@@ -5,34 +5,34 @@
              x:Class="HuecasAppUsers.Vista.DetalleEncuestaUser">
     <ContentPage.Resources>
         <ResourceDictionary>
-               <local:BoolToRecomendationConverter x:Key="BoolToRecommendationConverter"/>
+            <local:BoolToRecomendationConverter x:Key="BoolToRecommendationConverter"/>
             <!--local:BoolToRecommendationConverter x:Key="BoolToRecommendationConverter"/-->
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content  >
-        
-        <StackLayout BackgroundColor="Black" VerticalOptions="Center" HorizontalOptions="Center" >
-            <Grid  RowDefinitions="*">
 
+        <StackLayout BackgroundColor="Black" VerticalOptions="Center" HorizontalOptions="Center" >
+
+            <Grid  RowDefinitions="*">
                 <!--Este es el grid Menu Principal-->
                 <StackLayout  x:Name="MenuBotones"  BackgroundColor="Black">
-
-                    <StackLayout HorizontalOptions="Center"   HeightRequest="600" 
+                    <ScrollView>
+                        <StackLayout HorizontalOptions="Center"   HeightRequest="600" 
                                  Margin="0,80,0,0">
-                        <Label Grid.Row="0" Text="Aqui tienes mas info sobre esta Encuesta" FontSize="25"
+                            <Label Grid.Row="0" Text="Aqui tienes mas info sobre esta Encuesta" FontSize="25"
                                FontAttributes="Bold" TextColor="#4196E8" Margin="20" HorizontalTextAlignment="Center" />
-                        <Label Grid.Row="0" Text="Sobre que necesitas saber:" FontSize="15" HorizontalTextAlignment="Center"
+                            <Label Grid.Row="0" Text="Sobre que necesitas saber:" FontSize="15" HorizontalTextAlignment="Center"
                                FontAttributes="Bold" TextColor="#E1E841" Margin="20"/>
 
 
-                        <Button Text="Informacion del Local" x:Name="btnLocal" Clicked="btnLocal_Clicked" CornerRadius="30" />
-                        <Button Text="Informacion de la comida" x:Name="btnComida" Clicked="btnComida_Clicked" CornerRadius="30" />
-                        <Button Text="Informacion de la calificacion" x:Name="btnCalificacion" Clicked="btnCalificacion_Clicked" CornerRadius="30" />
-                        <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
+                            <Button Text="Informacion del Local" x:Name="btnLocal" Clicked="btnLocal_Clicked" CornerRadius="30" />
+                            <Button Text="Informacion de la comida" x:Name="btnComida" Clicked="btnComida_Clicked" CornerRadius="30" />
+                            <Button Text="Informacion de la calificacion" x:Name="btnCalificacion" Clicked="btnCalificacion_Clicked" CornerRadius="30" />
+                            <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
                                      BackgroundColor="Red" Margin="0,120,0,0" CornerRadius="50" Padding="10"
                                       x:Name="Atras" Clicked="Atras_Clicked"/>
-                    </StackLayout>
-
+                        </StackLayout>
+                    </ScrollView>
                 </StackLayout>
                 <!--Informacion de tu Local-->
                 <Grid  RowDefinitions="auto,*,*,auto" VerticalOptions="Center" x:Name="InfoLocal" HeightRequest ="800"
@@ -76,9 +76,11 @@
 
                                     <Entry Text="{Binding Geolocalizacion}" BackgroundColor="Black" HorizontalTextAlignment="Center"
                                            HorizontalOptions="Center" TextColor="#4196E8"/>
-
+                                    <StackLayout>
+                                    <ScrollView>
                                     <Image Source="{Binding FotoFachada}"  />
-
+                                    </ScrollView>
+                                    </StackLayout> 
                                 </StackLayout>
 
                             </DataTemplate>
@@ -175,19 +177,21 @@
                                             StringFormat='La Local fue: {0}'}" 
                                                HorizontalTextAlignment="Center" TextColor="#4196E8" FontSize="Medium"/>
                                     </Frame>
-                                    
+
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
-                    
+
                     <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
                                      BackgroundColor="Red" Margin="0,0,0,0" CornerRadius="50" Padding="10" Grid.Row="2"
                                  x:Name="CerrarCalificacion" Clicked="btnCerrar3_Clicked"/>
-                
-                    </Grid>
+
+                </Grid>
 
             </Grid>
+
         </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>
