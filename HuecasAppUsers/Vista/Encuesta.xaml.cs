@@ -83,10 +83,7 @@ namespace HuecasAppUsers.Vista
         #region CalificacionVariable
         public string _idCalificacion;
         #endregion
-        #region CalificacionObjetos
-        //public string IdCalificacion { get { return _idCalificacion; } set { SetValue(ref _idCalificacion, value); } }
-
-        #endregion
+        
         #region CalificacionProceso
 
         private  void Calificacion_Clicked(object sender, EventArgs e)

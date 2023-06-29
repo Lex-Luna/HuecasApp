@@ -45,14 +45,13 @@ namespace HuecasAppUsers.Vista
         bool _estado;
         int _numEncuesta;
         string IdEncuesta;
-        EncuestaM selectEncuesta;  */
+        ;  */
+        EncuestaM selectEncuesta;
         ObservableCollection<EncuestaM> lisEncuestaRecomendados;
-
 
         #endregion
         #region Objetos
-        //public EncuestaM SelectEncuesta { get { return selectEncuesta; } set { SetProperty(ref selectEncuesta, value); IdEncuesta = selectEncuesta.IdEncuesta; } }
-        //public ObservableCollection<EncuestaM> LisEncuestaRecomendados1 { get; set; }
+
         public ObservableCollection<EncuestaM> LisEncuestaRecomendados
         {
             get => lisEncuestaRecomendados;
@@ -110,7 +109,7 @@ namespace HuecasAppUsers.Vista
             LisEncuestaRecomendados = new ObservableCollection<EncuestaM>(encuestas);
 
         }
-        //Botones
+        //Botones Abrir
         void VistaPrinccipal()
         {
             PanelComida.IsVisible = false;
@@ -120,6 +119,7 @@ namespace HuecasAppUsers.Vista
             PanelCategoria.IsVisible = false;
             PanelBarrio.IsVisible = false;
         }
+        
 
         private void BtnRestaurante_Clicked(object sender, EventArgs e)
         {
@@ -139,7 +139,7 @@ namespace HuecasAppUsers.Vista
             PanelCategoria.IsVisible = true;
             PanelBarrio.IsVisible = false;
         }
-        
+
         private void BtnPlato_Clicked(object sender, EventArgs e)
         {
             PanelComida.IsVisible = true;
@@ -167,7 +167,30 @@ namespace HuecasAppUsers.Vista
             PanelCategoria.IsVisible = false;
             PanelBarrio.IsVisible = false;
         }
+        //Botones Cerrar
+        private void Atras_Clicked(object sender, EventArgs e)
+        {
+            VistaPrinccipal();
+        }
+        private void Atras1_Clicked(object sender, EventArgs e)
+        {
+            VistaPrinccipal();
+        }
 
+        private void Atras2_Clicked(object sender, EventArgs e)
+        {
+            VistaPrinccipal();
+        }
+
+        private void Atras3_Clicked(object sender, EventArgs e)
+        {
+            VistaPrinccipal();
+        }
+
+        private void Atras4_Clicked(object sender, EventArgs e)
+        {
+            VistaPrinccipal();
+        }
 
         //Textos de Busqueda
         private void BuscarRestaurante_TextChanged(object sender, TextChangedEventArgs e)
@@ -203,16 +226,25 @@ namespace HuecasAppUsers.Vista
         private void BuscarPrecio_TextChanged(object sender, TextChangedEventArgs e)
         {
             var searchTerm = e.NewTextValue;
-            // Separa el rango de precios ingresado en el SearchBar
-            var precios = searchTerm.Split('-');
-            if (precios.Length == 2 && double.TryParse(precios[0], out double minPrecio) && double.TryParse(precios[1], out double maxPrecio))
+            if (int.TryParse(searchTerm, out int precioBusqueda))
             {
-                // Filtra los elementos de la lista por el rango de precios
-                var filteredItems = LisEncuestaRecomendados.Where(item => item.Precio.Equals(minPrecio) && item.Precio.Equals(maxPrecio)).ToList();
+                var filteredItems = LisEncuestaRecomendados.Where(item =>
+                {
+                    if (item.Precio != null && double.TryParse(item.Precio, out double precio))
+                    {
+                        return precio <= precioBusqueda;
+                    }
+                    else
+                    {
+                        // Manejar el error de conversión aquí
+                        return false;
+                    }
+                }).ToList();
                 PrecioCommunity.ItemsSource = filteredItems;
-            }
-        }
 
+            }
+
+        }
 
 
 
