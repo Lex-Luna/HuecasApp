@@ -19,6 +19,7 @@ namespace HuecasAppUsers.VistaModelo
 {
     public class UsuarioVM : BaseVM
     {
+        /*
         #region CONSTRUCTOR
         public UsuarioVM(INavigation navigation)
         {
@@ -176,6 +177,8 @@ namespace HuecasAppUsers.VistaModelo
         public ICommand MostrarPerfilcomamd => new Command(async () => await MostrarPerfil());
         public ICommand IrDetalleEncuestaCommand => new Command<EncuestaM>(async (p) => await IrDetalleEncuesta(p));
 
-        #endregion
-    }
+        #endregion*/
+    }   
 }
+
+        

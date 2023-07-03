@@ -6,7 +6,6 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:BoolToRecomendationConverter x:Key="BoolToRecommendationConverter"/>
-            <!--local:BoolToRecommendationConverter x:Key="BoolToRecommendationConverter"/-->
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content  >
@@ -174,7 +173,7 @@
                                     <Frame Grid.Row="3" CornerRadius="20" BackgroundColor="Transparent" 
                                            Margin="7" Padding="2" BorderColor="#52524A">
                                         <Label Text="{Binding Recomendacion, Converter={StaticResource BoolToRecommendationConverter}, 
-                                            StringFormat='La Local fue: {0}'}" 
+                                            StringFormat='El Local fue: {0}'}" 
                                                HorizontalTextAlignment="Center" TextColor="#4196E8" FontSize="Medium"/>
                                     </Frame>
 

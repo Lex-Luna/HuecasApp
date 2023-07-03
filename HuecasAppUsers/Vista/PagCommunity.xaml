@@ -53,6 +53,12 @@
                 <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start"
                                      BackgroundColor="Red" Margin="10,10,0,0" CornerRadius="50" Padding="10"
                                       x:Name="Atras1" Clicked="Atras1_Clicked"/>
+                <Label Text="Escribe el nombre del Restaaurante que estas buscando por favor"
+                       TextColor="#4196E8"
+                       FontSize="30"
+                       FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"/>
                 <!--SearchBar-->
                 <StackLayout Margin="10,10,10,0"  >
                     <Frame Padding="0" CornerRadius="25">
@@ -150,6 +156,12 @@
                 <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start"
                                      BackgroundColor="Red" Margin="10,10,0,0" CornerRadius="50" Padding="10"
                                       x:Name="Atras2" Clicked="Atras2_Clicked"/>
+                <Label Text="Escribe el nombre del el tipo de Restaurante que estas buscando por favor"
+                       TextColor="#4196E8"
+                       FontSize="30"
+                       FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"/>
                 <!--Stack SearchBar-->
                 <StackLayout Margin="10,10,10,0"  >
                     <Frame Padding="0" CornerRadius="25">

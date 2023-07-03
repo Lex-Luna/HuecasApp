@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using Xamarin.Essentials;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows.Input;
 
 namespace HuecasAppUsers.Vista
 {
@@ -24,7 +25,7 @@ namespace HuecasAppUsers.Vista
         public PagCommunity()
         {
             InitializeComponent();
-            //BindingContext = new ComunityVM(Navigation);
+            
             BindingContext = this;
             VistaPrinccipal();
             Task.Run(async () =>
@@ -35,18 +36,7 @@ namespace HuecasAppUsers.Vista
         }
         #endregion
         #region Variables
-        /*string _IdUsuario;
-        string _apellido;
-        string _correo;
-        string searchBarText;
-        string _nombre;
-        string _contrania;
-        string _idAdmin;
-        bool _estado;
-        int _numEncuesta;
-        string IdEncuesta;
-        ;  */
-        EncuestaM selectEncuesta;
+        
         ObservableCollection<EncuestaM> lisEncuestaRecomendados;
 
         #endregion
@@ -119,8 +109,6 @@ namespace HuecasAppUsers.Vista
             PanelCategoria.IsVisible = false;
             PanelBarrio.IsVisible = false;
         }
-        
-
         private void BtnRestaurante_Clicked(object sender, EventArgs e)
         {
             PanelComida.IsVisible = false;
@@ -246,9 +234,25 @@ namespace HuecasAppUsers.Vista
 
         }
 
+        private async Task IrDetalleEncuesta(EncuestaM p)
+        {
+            try
+            {
+                await Navigation.PushAsync(new DetalleEncuestaUser(p));
+            }
+            catch (Exception e)
+            {
+
+                Debug.WriteLine("Error: No se pudo tomar el ID " + e);
+
+            }
+        }
 
 
 
+        #endregion
+        #region Comandos
+        public ICommand IrDetalleEncuestaCommand => new Command<EncuestaM>(async (p) => await IrDetalleEncuesta(p));
         #endregion
 
     }
