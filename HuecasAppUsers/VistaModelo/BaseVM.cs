@@ -30,6 +30,16 @@ namespace HuecasAppUsers.VistaModelo
                 OnpropertyChanged();
             }
         }
+        private ImageSource video;
+        public ImageSource  Video
+        {
+            get { return video; }
+            set
+            {
+                foto = value;
+                OnpropertyChanged();
+            }
+        }
         //comportamiento para displayalert
         public async Task DisplayAlert(string title, string message, string cancel)
         {

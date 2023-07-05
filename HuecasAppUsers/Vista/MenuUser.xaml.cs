@@ -223,16 +223,40 @@ namespace HuecasAppUsers.Vista
         public ICommand IrDetalleEncuestaCommand => new Command<EncuestaM>(async (p) => await IrDetalleEncuesta(p));
 
         #endregion
-        #region Paneles
+        
         
         void VistaPreincipal()
         {
-            PanelPrincipal.IsVisible = true;
-            PanelRestaurante.IsVisible = false;
+            PanelPrincipal.IsVisible = false;
+            PanelRestaurante.IsVisible = true;
         }
 
-        #endregion
 
+        
 
+        private void BtnRestaurante_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnCategoria_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnPlato_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnBarrio_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnPrecios_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -23134,6 +23134,9 @@ namespace HuecasAppUsers.Droid
 			// aapt resource value: 0x7F0700B2
 			public const int usuario = 2131165362;
 			
+			// aapt resource value: 0x7F0700B3
+			public const int video = 2131165363;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

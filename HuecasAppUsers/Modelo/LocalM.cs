@@ -11,6 +11,7 @@ namespace HuecasAppUsers.Modelo
         public string IdCiudad { get; set; }
         public string Direccion { get; set; }
         public string FotoFachada { get; set; }
+        public string Video{ get; set; }
         public string Geolocalizacion { get; set; }
         public string NombreLocal { get; set; }
         public string IdPais { get; set; }

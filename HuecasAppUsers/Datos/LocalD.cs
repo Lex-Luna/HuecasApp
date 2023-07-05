@@ -20,9 +20,15 @@ namespace HuecasAppUsers.Datos
 {
     public class LocalD
     {
+        #region Variables
         string rutafoto;
+        string rutaVideo;
         public string _IdLocal;
-        public async Task <string> InsertarLocal(LocalM parametros)
+
+        #endregion
+
+        #region Insertar
+        public async Task<string> InsertarLocal(LocalM parametros)
         {
             var data = await Constantes.firebase.Child("Local")
                 .PostAsync(new LocalM()
@@ -32,27 +38,17 @@ namespace HuecasAppUsers.Datos
                     FotoFachada = parametros.FotoFachada,
                     Geolocalizacion = parametros.Geolocalizacion,
                     NombreLocal = parametros.NombreLocal,
+                    Video = parametros.Video,
                     IdPais = parametros.IdPais,
-                    IdCiudad= parametros.IdCiudad,
-                    Categorias= parametros.Categorias,
+                    IdCiudad = parametros.IdCiudad,
+                    Categorias = parametros.Categorias,
                     IdLocal = parametros.IdLocal
                 });
             _IdLocal = data.Key;
             return _IdLocal;
         }
-
-        public async Task<string> SubirFotoFachada(Stream imagen, string identificacion)
-        {
-            
-            var storageImagen = await new FirebaseStorage("huecasapp-d8da1.appspot.com")
-                .Child("Local")
-                .Child(identificacion + ".jpg")
-                .PutAsync(imagen);
-            rutafoto = storageImagen;
-            return rutafoto;
-        }
-
-
+        #endregion
+        #region Mostrar
         public async Task<List<LocalM>> MostLocal()
         {
             return (await Constantes.firebase
@@ -64,13 +60,12 @@ namespace HuecasAppUsers.Datos
                     Direccion = item.Object.Direccion,
                     FotoFachada = item.Object.FotoFachada,
                     Geolocalizacion = item.Object.Geolocalizacion,
+                    Video = item.Object.Video,
                     NombreLocal = item.Object.NombreLocal,
                     IdPais = item.Object.IdPais,
                     Categorias = item.Object.Categorias
                 }).ToList();
         }
-
-
         public async Task<List<LocalM>> MostLocalXId(string p)
         {
             var local = await Constantes.firebase
@@ -79,6 +74,43 @@ namespace HuecasAppUsers.Datos
                 .OnceSingleAsync<LocalM>();
             return new List<LocalM> { local };
         }
+        #endregion
+        #region Multimedia
+        public async Task<string> SubirFotoFachada(Stream imagen, string identificacion)
+        {
+
+            var storageImagen = await new FirebaseStorage("huecasapp-d8da1.appspot.com")
+                .Child("Local")
+                .Child(identificacion + ".jpg")
+                .PutAsync(imagen);
+            rutafoto = storageImagen;
+            return rutafoto;
+        }
+
+        public async Task<string> SubirVideo(Stream video, string identificacion)
+        {
+            var storageVideo = await new FirebaseStorage("huecasapp-d8da1.appspot.com")
+                .Child("Local")
+                .Child(identificacion + ".mp4")
+                .PutAsync(video);
+            rutaVideo = storageVideo;
+            return rutaVideo;
+        }
+        public async Task SeleccionarVideo(string nombreDelVideo)
+        {
+            var storage = new FirebaseStorage("huecasapp-d8da1.appspot.com");
+            string rutaVideo = await storage
+                .Child("Local")
+                .Child(nombreDelVideo + ".mp4")
+                .GetDownloadUrlAsync();
+            string RutaVideoSeleccionado = rutaVideo;
+        }
+
+        #endregion
+
+
+
+
 
     }
 }

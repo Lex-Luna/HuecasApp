@@ -44,7 +44,7 @@ namespace HuecasAppUsers.VistaModelo
             {
                 await obtenerDataUserAsync();
             }).Wait();
-            
+
             Task.Run(async () =>
             {
                 await VistaNormal();
@@ -139,7 +139,7 @@ namespace HuecasAppUsers.VistaModelo
             try
             {
                 PanelEncuesta = true;
-                PanelGeo= false;
+                PanelGeo = false;
                 PanelFoto = false;
                 await Task.Delay(500);
             }
@@ -155,28 +155,31 @@ namespace HuecasAppUsers.VistaModelo
         public string IdLocal;
         public List<UbicacionM> listPais = new List<UbicacionM>();
         public List<UbicacionM> listCiudad = new List<UbicacionM>();
-        
+
         string txtBarrio;
         string txtDireccion;
         public string IdPais;
         public string IdCiudad;
-        
+
         public string FotoFachada;
         string _identificacion;
         UbicacionM selectPais;
         UbicacionM selectCiudad;
-        
+
         //variables de las fotos
         string rutafoto;
+        string rutaVideo;
+
         MediaFile foto;
+        MediaFile video;
 
 
 
         #endregion
         #region ObjetosLocal 
         //De la categoria
-        
-        
+
+
         public List<string> Propiedades { get; set; } = new List<string> { "Comida Internacional", "Comida Marina", "Comida Rápida", "Comida Típica", "Postres", "Bebidas", "Otros" };
         public string PropiedadSeleccionada { get; set; }
         //FIn
@@ -187,35 +190,37 @@ namespace HuecasAppUsers.VistaModelo
 
         public UbicacionM SelectPais { get { return selectPais; } set { SetProperty(ref selectPais, value); IdPais = selectPais.IdPais; } }
         public UbicacionM SelectCiudad { get { return selectCiudad; } set { SetProperty(ref selectCiudad, value); IdCiudad = selectCiudad.IdCiudad; } }
-        
+
         // pais ciudad 
 
-        public List<UbicacionM> Listpais { get { return listPais; } set { SetValue(ref listPais, value); } } 
+        public List<UbicacionM> Listpais { get { return listPais; } set { SetValue(ref listPais, value); } }
         public List<UbicacionM> Listciudad { get { return listCiudad; } set { SetValue(ref listCiudad, value); } }
 
-        
+
         #endregion
         #region ProcesosLocal
 
         async Task AgregarLocal()
         {
-            
-                await SubirFoto();
-                var funcion = new LocalD();
-                var parametros = new LocalM();
-                parametros.Geolocalizacion = Geolocalizacion;
-                parametros.FotoFachada = rutafoto;
-                parametros.NombreLocal = TxtNombreLocal;
-                parametros.Direccion = TxtDireccion;
-                parametros.Barrio = TxtBarrio;
-                parametros.IdPais = IdPais;
-                parametros.IdCiudad = IdCiudad;
-                parametros.Categorias = PropiedadSeleccionada;
-                _IdLocal = await funcion.InsertarLocal(parametros);
-            
+
+            await SubirFoto();
+            await SubirVideo();
+            var funcion = new LocalD();
+            var parametros = new LocalM();
+            parametros.Geolocalizacion = Geolocalizacion;
+            parametros.FotoFachada = rutafoto;
+            parametros.Video = rutaVideo;
+            parametros.NombreLocal = TxtNombreLocal;
+            parametros.Direccion = TxtDireccion;
+            parametros.Barrio = TxtBarrio;
+            parametros.IdPais = IdPais;
+            parametros.IdCiudad = IdCiudad;
+            parametros.Categorias = PropiedadSeleccionada;
+            _IdLocal = await funcion.InsertarLocal(parametros);
+
         }
 
-        
+
 
         async Task MostrarPais()
         {
@@ -232,7 +237,53 @@ namespace HuecasAppUsers.VistaModelo
         {
             await Navigation.PopAsync();
         }
-        
+        public async Task SubirVideo()
+        {
+            try
+            {
+                var funcion = new LocalD();
+                if (rutaVideo == null)
+                {
+                    rutaVideo = await funcion.SubirVideo(video.GetStream(), IdLocal);
+                }
+                else
+                {
+                    await DisplayAlert("No gravaste el video", "La seccion video saldra vacia", "Ok");
+                    rutaVideo = "No hay Video";
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+        public async Task CapturarVideo()
+        {
+            var opcionesCamara = new StoreVideoOptions();
+            opcionesCamara.Quality = VideoQuality.Medium;
+            opcionesCamara.DesiredLength = TimeSpan.FromSeconds(10);
+            opcionesCamara.SaveToAlbum = true;
+            try
+            {
+                video = await Plugin.Media.CrossMedia.Current.TakeVideoAsync(opcionesCamara);
+                if (video != null)
+                {
+                    Video = ImageSource.FromStream(() =>
+                    {
+                        return video.GetStream();
+                    });
+                    PanelEncuesta = false;
+                    PanelFoto = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
 
         public async Task SubirFoto()
         {
@@ -253,8 +304,10 @@ namespace HuecasAppUsers.VistaModelo
             {
                 throw e;
             }
-            
+
         }
+
+
 
         public async Task TomarFoto()
         {
@@ -278,22 +331,22 @@ namespace HuecasAppUsers.VistaModelo
             {
                 throw e;
             }
-            
+
         }
 
         void MostrarpanelGeo()
         {
-            PanelGeo= true;
-            PanelEncuesta= false;
+            PanelGeo = true;
+            PanelEncuesta = false;
         }
 
-        async Task  OkFoto()
+        async Task OkFoto()
         {
             try
             {
                 PanelEncuesta = true;
                 PanelFoto = false;
-                await Task.Delay(500); 
+                await Task.Delay(500);
             }
             catch (Exception e)
             {
@@ -305,7 +358,7 @@ namespace HuecasAppUsers.VistaModelo
             try
             {
                 PanelEncuesta = true;
-                PanelGeo= false;
+                PanelGeo = false;
                 await Task.Delay(500);
             }
             catch (Exception e)
@@ -329,6 +382,7 @@ namespace HuecasAppUsers.VistaModelo
         public ICommand OkGeoComamd => new Command(async () => await OkGeo());
         public ICommand MostrarpanelGeoComamd => new Command(() => MostrarpanelGeo());
         public ICommand TomarFotoComamd => new Command(async () => await TomarFoto());
+        public ICommand CapturarVideoComamd => new Command(async () => await CapturarVideo());
         public ICommand PagGeoComamd => new Command(async () => await PagGeo());
 
 

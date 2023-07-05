@@ -24,7 +24,7 @@
                 <Label Text="¿Cual es el termino de busqueda que deseas?" TextColor="#E1E841" FontSize="Medium" Padding="0,0,0,20" HorizontalOptions="Center"/>
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="200"  >
 
-                    <!--Button Text="Nombre de Restaurante" TextTransform="None" CornerRadius="25" Padding="3"
+                    <Button Text="Nombre de Restaurante" TextTransform="None" CornerRadius="25" Padding="3"
                                 x:Name="BtnRestaurante" Clicked="BtnRestaurante_Clicked"/>
                     <Button Text="Tipo de Restaurante" TextTransform="None" CornerRadius="25"  Padding="3" 
                                 x:Name="BtnCategoria" Clicked="BtnCategoria_Clicked"/>
@@ -33,10 +33,14 @@
                     <Button Text="Barrio" TextTransform="None" CornerRadius="25"  Padding="3"
                                 x:Name="BtnBarrio" Clicked="BtnBarrio_Clicked"/>
                     <Button Text="Rango de Precios" TextTransform="None" CornerRadius="25"  Padding="3" 
-                                x:Name="BtnPrecios" Clicked="BtnPrecios_Clicked"/-->
+                                x:Name="BtnPrecios" Clicked="BtnPrecios_Clicked"/>
 
                 </StackLayout>
             </StackLayout>
+            
+            
+            
+            
             <!--Panel Restaurante-->
             <Grid x:Name="PanelRestaurante" RowDefinitions="auto,auto,auto,auto,*"
                 BackgroundColor="#1C1D22"  >

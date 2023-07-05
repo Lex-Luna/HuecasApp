@@ -78,6 +78,7 @@
                                     <StackLayout>
                                     <ScrollView>
                                     <Image Source="{Binding FotoFachada}"  />
+                                    
                                     </ScrollView>
                                     </StackLayout> 
                                 </StackLayout>
