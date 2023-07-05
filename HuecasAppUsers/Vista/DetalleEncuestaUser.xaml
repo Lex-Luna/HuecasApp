@@ -75,12 +75,14 @@
 
                                     <Entry Text="{Binding Geolocalizacion}" BackgroundColor="Black" HorizontalTextAlignment="Center"
                                            HorizontalOptions="Center" TextColor="#4196E8"/>
+                                    <Button Text="Ver foto de la fachada del local" x:Name="btnfoto" Clicked="btnfoto_Clicked" />
+                                    <Button Text="Ver video del interior del local" x:Name="btnlocal" Clicked="btnlocal_Clicked_1" />
                                     <StackLayout>
-                                    <ScrollView>
-                                    <Image Source="{Binding FotoFachada}"  />
-                                    
-                                    </ScrollView>
-                                    </StackLayout> 
+                                        <Label Text="Video" HorizontalOptions="Center" />
+                                        <ScrollView>
+                                            <WebView Source="{Binding Video}"  />
+                                        </ScrollView>
+                                    </StackLayout>
                                 </StackLayout>
 
                             </DataTemplate>
@@ -188,7 +190,27 @@
                                  x:Name="CerrarCalificacion" Clicked="btnCerrar3_Clicked"/>
 
                 </Grid>
-
+                <!--panel foto-->
+                <StackLayout x:Name="PanelFoto" >
+                    <Label Text="Imaagen" HorizontalOptions="Center" />
+                    <ScrollView>
+                        <Image Source="{Binding FotoFachada}"  />
+                    </ScrollView>
+                    <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
+                                     BackgroundColor="Red" Margin="0,0,0,0" CornerRadius="50" Padding="10"  Grid.Row="3"
+                                 x:Name="CerrarFoto" Clicked="CerrarFoto_Clicked"/>
+                </StackLayout>
+                <!--panel video-->
+                <StackLayout x:Name="PanelVideo" >
+                    <Label Text="Video" HorizontalOptions="Center" />
+                    <ScrollView>
+                        <Image Source="{Binding Video}"  />
+                    </ScrollView>
+                    <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
+                                     BackgroundColor="Red" Margin="0,0,0,0" CornerRadius="50" Padding="10"  Grid.Row="3"
+                                 x:Name="CerrarVideo" Clicked="CerrarVideo_Clicked"/>
+                </StackLayout>
+                
             </Grid>
 
         </StackLayout>
