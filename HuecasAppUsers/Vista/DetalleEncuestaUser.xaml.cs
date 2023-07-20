@@ -28,8 +28,7 @@ namespace HuecasAppUsers.Vista
             InfoCalificacion.IsVisible = false;
             InfoLocal.IsVisible = false;
             InfoPlato.IsVisible = false;
-            PanelVideo.IsVisible = false;
-            PanelFoto.IsVisible = false;
+            
         }
 
         private void btnLocal_Clicked(object sender, EventArgs e)
@@ -38,8 +37,7 @@ namespace HuecasAppUsers.Vista
             InfoCalificacion.IsVisible = false;
             InfoLocal.IsVisible = true;
             InfoPlato.IsVisible = false;
-            PanelVideo.IsVisible = false;
-            PanelFoto.IsVisible = false;
+            
         }
 
         private void btnComida_Clicked(object sender, EventArgs e)
@@ -48,8 +46,7 @@ namespace HuecasAppUsers.Vista
             InfoCalificacion.IsVisible = false;
             InfoLocal.IsVisible = false;
             InfoPlato.IsVisible = true;
-            PanelVideo.IsVisible = false;
-            PanelFoto.IsVisible = false;
+            
         }
 
         private void btnCalificacion_Clicked(object sender, EventArgs e)
@@ -58,8 +55,7 @@ namespace HuecasAppUsers.Vista
             InfoCalificacion.IsVisible = true;
             InfoLocal.IsVisible = false;
             InfoPlato.IsVisible = false;
-            PanelVideo.IsVisible = false;
-            PanelFoto.IsVisible = false;
+            
         }
 
         private void btnCerrar1_Clicked(object sender, EventArgs e)
@@ -86,8 +82,7 @@ namespace HuecasAppUsers.Vista
             InfoCalificacion.IsVisible = false;
             InfoLocal.IsVisible = true;
             InfoPlato.IsVisible = false;
-            PanelVideo.IsVisible = false;
-            PanelFoto.IsVisible = false;
+            
         }
 
         private void CerrarVideo_Clicked(object sender, EventArgs e)
@@ -96,8 +91,7 @@ namespace HuecasAppUsers.Vista
             InfoCalificacion.IsVisible = false;
             InfoLocal.IsVisible = true;
             InfoPlato.IsVisible = false;
-            PanelVideo.IsVisible = false;
-            PanelFoto.IsVisible = false;
+            
         }
 
         private void btnfoto_Clicked(object sender, EventArgs e)
@@ -106,8 +100,7 @@ namespace HuecasAppUsers.Vista
             InfoCalificacion.IsVisible = false;
             InfoLocal.IsVisible = false;
             InfoPlato.IsVisible = false;
-            PanelVideo.IsVisible = false;
-            PanelFoto.IsVisible = true;
+            
         }
 
         private void btnlocal_Clicked_1(object sender, EventArgs e)
@@ -116,8 +109,7 @@ namespace HuecasAppUsers.Vista
             InfoCalificacion.IsVisible = false;
             InfoLocal.IsVisible = true;
             InfoPlato.IsVisible = false;
-            PanelVideo.IsVisible = false;
-            PanelFoto.IsVisible = false;
+            
         }
     }
 }
