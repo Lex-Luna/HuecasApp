@@ -244,7 +244,7 @@ namespace HuecasAppUsers.VistaModelo
                 var funcion = new LocalD();
                 if (rutaVideo == null)
                 {
-                    rutaVideo = await funcion.SubirVideo(video.GetStream(), IdLocal);
+                    rutaVideo = await funcion.SubirVideo(video.GetStream(), TxtNombreLocal);
                 }
                 else
                 {

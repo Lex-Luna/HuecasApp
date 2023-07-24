@@ -87,11 +87,11 @@ namespace HuecasAppUsers.Datos
             return rutafoto;
         }
 
-        public async Task<string> SubirVideo(Stream video, string identificacion)
+        public async Task<string> SubirVideo(Stream video, string nombreLocal)
         {
             var storageVideo = await new FirebaseStorage("huecasapp-d8da1.appspot.com")
                 .Child("Local")
-                .Child(identificacion + ".mp4")
+                .Child(nombreLocal + ".mp4")
                 .PutAsync(video);
             rutaVideo = storageVideo;
             return rutaVideo;
