@@ -59,15 +59,15 @@ namespace HuecasAppUsers.VistaModelo
         string _idAdmin;
         bool _estado;
         int _numEncuesta;
-        
+        string video;
 
 
         #endregion
         #region Objetos
 
         public ObservableCollection<CalificacionM> LisCalificacion { get; set; }
-        public ObservableCollection<PlatoM> LisPlato{ get; set; }
-        public ObservableCollection<LocalM> LisLocal{ get; set; }
+        public ObservableCollection<PlatoM> LisPlato { get; set; }
+        public ObservableCollection<LocalM> LisLocal { get; set; }
         public int NumEncuesta
         {
             get { return _numEncuesta; }
@@ -114,16 +114,35 @@ namespace HuecasAppUsers.VistaModelo
             get { return _correo; }
             set { SetValue(ref _correo, value); }
         }
+        public string Video {set; get;}
+        public string IdCalificacion { get; set; }
+        public string IdPlato { get; set; }
+        public string IdLocal { get; set; }
 
         #endregion
         #region Procesos
-        public string IdCalificacion { get; set; }
-        public string IdPlato{ get; set; }
-        public string IdLocal{ get; set; }
+
         private async Task Volver()
         {
             await Navigation.PopAsync();
         }
+        public async Task MostrarLocalId(string Id)
+        {
+            try
+            {
+                LocalD f = new LocalD();
+                var local = await f.MostLocalXId(Id);
+                LisLocal = new ObservableCollection<LocalM>(local);
+                
+                
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error: No se pudo consulta la tabla Calificacion " + e);
+            }
+
+        } 
+        
         private async Task obtenerDataUserAsync()
         {
             try
@@ -154,6 +173,7 @@ namespace HuecasAppUsers.VistaModelo
                 await DisplayAlert("Alerta", "X tu seguridad la sesion se a cerrado", "Ok");
             }
         }
+
         public async Task MostrarCalificacionId(string Id)
         {
             try
@@ -169,21 +189,6 @@ namespace HuecasAppUsers.VistaModelo
 
         }
 
-        public async Task MostrarLocalId(string Id)
-        {
-            try
-            {
-                LocalD f = new LocalD();
-                var local = await f.MostLocalXId(Id);
-                LisLocal = new ObservableCollection<LocalM>(local);
-                
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Error: No se pudo consulta la tabla Calificacion " + e);
-            }
-
-        } 
 
         public async Task MostrarPlatoId(string Id)
         {
@@ -198,7 +203,10 @@ namespace HuecasAppUsers.VistaModelo
                 Debug.WriteLine("Error: No se pudo consulta la tabla Calificacion " + e);
             }
 
-        } 
+        }
+
+        
+
 
         #endregion
         #region Comandos

@@ -44,7 +44,7 @@
 
 
                     <CollectionView ItemsSource="{Binding LisLocal}" Grid.Row="1" Grid.RowSpan="2"
-                        Margin="5,15,5,5" VerticalOptions="Center" >
+                        Margin="5,15,5,5" VerticalOptions="Center" x:Name="ListaLocal" >
                         <CollectionView.ItemTemplate>
                             <DataTemplate >
 
@@ -75,23 +75,26 @@
 
                                     <Entry Text="{Binding Geolocalizacion}" BackgroundColor="Black" HorizontalTextAlignment="Center"
                                            HorizontalOptions="Center" TextColor="#4196E8"/>
-                                    <!--Button Text="Ver foto de la fachada del local" x:Name="btnfoto" Clicked="btnfoto_Clicked" /-->
+
                                     <StackLayout x:Name="PanelFoto" >
                                         <Label Text="Imaagen" HorizontalOptions="Center" />
                                         <ScrollView>
                                             <Image Source="{Binding FotoFachada}"  />
                                         </ScrollView>
-                                        <!--ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
-                                     BackgroundColor="Red" Margin="0,0,0,0" CornerRadius="50" Padding="10"  Grid.Row="3"
-                                 x:Name="CerrarFoto" Clicked="CerrarFoto_Clicked"/-->
+
                                     </StackLayout>
-                                    <!--Button Text="Ver video del interior del local" x:Name="btnlocal" Clicked="btnlocal_Clicked_1" /-->
-                                    <StackLayout x:Name="PanelVideo"  >
-                                        <Label Text="Video" HorizontalOptions="Center" />
-                                        <ScrollView>
-                                            <WebView Source="{Binding Video}"  />
-                                        </ScrollView>
-                                    </StackLayout>
+                                    <Frame CornerRadius="50" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="red">
+                                        <Grid RowDefinitions="*" >
+                                            <Label Text="Descargue el Video del Restaurante" TextColor="Black" HorizontalTextAlignment="Center" FontSize="Medium" Grid.Row="0" />
+                                            <Label Text="{Binding Video}" TextColor="Transparent" BackgroundColor="Transparent" Grid.Row="0">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="OnLabelTapped" />
+                                                </Label.GestureRecognizers>
+
+                                            </Label>
+                                        </Grid>
+                                    </Frame>
+
                                 </StackLayout>
 
                             </DataTemplate>
@@ -150,7 +153,7 @@
                                 x:Name="CerrarPlato" Clicked="btnCerrar1_Clicked" />
 
                 </Grid>
-                <!--info de tu calificacion-->
+                
                 <Grid RowDefinitions="Auto,auto,Auto" VerticalOptions="Center" BackgroundColor="Black"
                       HorizontalOptions="Center" x:Name="InfoCalificacion" HeightRequest="800"  >
                     <Label Grid.Row="0" Text="Calificacion" FontSize="Large"
@@ -199,27 +202,8 @@
                                  x:Name="CerrarCalificacion" Clicked="btnCerrar3_Clicked"/>
 
                 </Grid>
-                <!--panel foto>
-                <StackLayout x:Name="PanelFoto" >
-                    <Label Text="Imaagen" HorizontalOptions="Center" />
-                    <ScrollView>
-                        <Image Source="{Binding FotoFachada}"  />
-                    </ScrollView>
-                    <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
-                                     BackgroundColor="Red" Margin="0,0,0,0" CornerRadius="50" Padding="10"  Grid.Row="3"
-                                 x:Name="CerrarFoto" Clicked="CerrarFoto_Clicked"/>
-                </StackLayout>
                 
-                <StackLayout x:Name="PanelVideo" >
-                    <Label Text="Video" HorizontalOptions="Center" />
-                    <ScrollView>
-                        <Image Source="{Binding Video}"  />
-                    </ScrollView>
-                    <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
-                                     BackgroundColor="Red" Margin="0,0,0,0" CornerRadius="50" Padding="10"  Grid.Row="3"
-                                 x:Name="CerrarVideo" Clicked="CerrarVideo_Clicked"/>
-                </StackLayout-->
-                
+
             </Grid>
 
         </StackLayout>

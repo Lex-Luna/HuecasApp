@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,6 +20,11 @@ namespace HuecasAppUsers.Vista
             BindingContext = new DetalleEncuestaUserVM(Navigation, e);
             VIstaPrincipal();
 
+        }
+        string lblVideo;
+        public string LblVideo
+        {
+            set; get;
         }
 
         private void VIstaPrincipal()
@@ -111,5 +116,14 @@ namespace HuecasAppUsers.Vista
             InfoPlato.IsVisible = false;
             
         }
+        private void  OnLabelTapped(object sender, EventArgs e)
+        {
+            var label = (Label)sender;
+            string text = label.Text;
+            
+            Launcher.OpenAsync(text);
+            // Utiliza el texto del Label según sea necesario
+        }
+
     }
 }
