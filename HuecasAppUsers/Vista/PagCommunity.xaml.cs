@@ -108,6 +108,7 @@ namespace HuecasAppUsers.Vista
             PanelPrecio.IsVisible = false;
             PanelCategoria.IsVisible = false;
             PanelBarrio.IsVisible = false;
+            PanelFecha.IsVisible=false;
         }
         private void BtnRestaurante_Clicked(object sender, EventArgs e)
         {
@@ -117,6 +118,7 @@ namespace HuecasAppUsers.Vista
             PanelPrecio.IsVisible = false;
             PanelCategoria.IsVisible = false;
             PanelBarrio.IsVisible = false;
+            PanelFecha.IsVisible = false;
         }
         private void BtnCategoria_Clicked(object sender, EventArgs e)
         {
@@ -126,6 +128,7 @@ namespace HuecasAppUsers.Vista
             PanelPrecio.IsVisible = false;
             PanelCategoria.IsVisible = true;
             PanelBarrio.IsVisible = false;
+            PanelFecha.IsVisible = false;
         }
 
         private void BtnPlato_Clicked(object sender, EventArgs e)
@@ -136,6 +139,7 @@ namespace HuecasAppUsers.Vista
             PanelPrecio.IsVisible = false;
             PanelCategoria.IsVisible = false;
             PanelBarrio.IsVisible = false;
+            PanelFecha.IsVisible = false;
         }
         private void BtnBarrio_Clicked(object sender, EventArgs e)
         {
@@ -145,6 +149,7 @@ namespace HuecasAppUsers.Vista
             PanelPrecio.IsVisible = false;
             PanelCategoria.IsVisible = false;
             PanelBarrio.IsVisible = true;
+            PanelFecha.IsVisible = false;
         }
         private void BtnPrecios_Clicked(object sender, EventArgs e)
         {
@@ -154,7 +159,19 @@ namespace HuecasAppUsers.Vista
             PanelPrecio.IsVisible = true;
             PanelCategoria.IsVisible = false;
             PanelBarrio.IsVisible = false;
+            PanelFecha.IsVisible = false;
         }
+        private void BtnFecha_Clicked(object sender, EventArgs e)
+        {
+            PanelComida.IsVisible = false;
+            PanelPrincipal.IsVisible = false;
+            PanelRestaurante.IsVisible = false;
+            PanelPrecio.IsVisible = false;
+            PanelCategoria.IsVisible = false;
+            PanelBarrio.IsVisible = false;
+            PanelFecha.IsVisible = true;
+        }
+
         //Botones Cerrar
         private void Atras_Clicked(object sender, EventArgs e)
         {
@@ -179,6 +196,10 @@ namespace HuecasAppUsers.Vista
         {
             VistaPrinccipal();
         }
+        private void Atras_Clicked_1(object sender, EventArgs e)
+        {
+            VistaPrinccipal();
+        }
 
         //Textos de Busqueda
         private void BuscarRestaurante_TextChanged(object sender, TextChangedEventArgs e)
@@ -188,12 +209,13 @@ namespace HuecasAppUsers.Vista
                 item.NomLocal != null && item.NomLocal.Contains(searchTerm)).ToList();
             RestauranteCommunity.ItemsSource = filteredItems;
         }
-        private void BuscarCategoria_TextChanged(object sender, TextChangedEventArgs e)
+            
+        private void BuscarBarrio_TextChanged(object sender, TextChangedEventArgs e)
         {
             var searchTerm = e.NewTextValue;
             var filteredItems = LisEncuestaRecomendados.Where(item =>
-                item.Categorias != null && item.Categorias.Contains(searchTerm)).ToList();
-            CategoriaCommunity.ItemsSource = filteredItems;
+                item.Barrio != null && item.Barrio.Contains(searchTerm)).ToList();
+            ComidaCommunity.ItemsSource = filteredItems;
         }
         private void BuscarComida_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -204,13 +226,6 @@ namespace HuecasAppUsers.Vista
 
         }
 
-        private void BuscarBarrio_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var searchTerm = e.NewTextValue;
-            var filteredItems = LisEncuestaRecomendados.Where(item =>
-                item.Barrio != null && item.Barrio.Contains(searchTerm)).ToList();
-            ComidaCommunity.ItemsSource = filteredItems;
-        }
         private void BuscarPrecio_TextChanged(object sender, TextChangedEventArgs e)
         {
             var searchTerm = e.NewTextValue;
@@ -234,6 +249,15 @@ namespace HuecasAppUsers.Vista
 
         }
 
+        private void BuscarFecha_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+            var searchTerm = e.NewTextValue;
+            var filteredItems = LisEncuestaRecomendados.Where(item =>
+                item.FechaData != null && item.FechaData.ToString("dd/MM/yyyy").Contains(searchTerm)).ToList();
+            FechaCommunity.ItemsSource = filteredItems;
+        }
+        
+
         private async Task IrDetalleEncuesta(EncuestaM p)
         {
             try
@@ -253,6 +277,8 @@ namespace HuecasAppUsers.Vista
         #endregion
         #region Comandos
         public ICommand IrDetalleEncuestaCommand => new Command<EncuestaM>(async (p) => await IrDetalleEncuesta(p));
+
+
         #endregion
 
     }
