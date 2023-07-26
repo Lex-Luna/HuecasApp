@@ -121,28 +121,6 @@ namespace HuecasAppUsers.VistaModelo
 
         #endregion
         #region Procesos
-
-        private async Task Volver()
-        {
-            await Navigation.PopAsync();
-        }
-        public async Task MostrarLocalId(string Id)
-        {
-            try
-            {
-                LocalD f = new LocalD();
-                var local = await f.MostLocalXId(Id);
-                LisLocal = new ObservableCollection<LocalM>(local);
-                
-                
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Error: No se pudo consulta la tabla Calificacion " + e);
-            }
-
-        } 
-        
         private async Task obtenerDataUserAsync()
         {
             try
@@ -173,6 +151,28 @@ namespace HuecasAppUsers.VistaModelo
                 await DisplayAlert("Alerta", "X tu seguridad la sesion se a cerrado", "Ok");
             }
         }
+
+        private async Task Volver()
+        {
+            await Navigation.PopAsync();
+        }
+        public async Task MostrarLocalId(string Id)
+        {
+            try
+            {
+                LocalD f = new LocalD();
+                var local = await f.MostLocalXId(Id);
+                LisLocal = new ObservableCollection<LocalM>(local);
+                
+                
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error: No se pudo consulta la tabla Calificacion " + e);
+            }
+
+        } 
+        
 
         public async Task MostrarCalificacionId(string Id)
         {

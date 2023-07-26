@@ -448,9 +448,9 @@ namespace HuecasAppUsers.VistaModelo
 
         #endregion
         #region ProcesosEncuesta
-        private async Task IrMenuUser()
+        private async Task IrContenedor()
         {
-            await Navigation.PushAsync(new MenuUser());
+            await Navigation.PushAsync(new Contenedor());
         }
         private async Task obtenerDataUserAsync()
         {
@@ -535,7 +535,7 @@ namespace HuecasAppUsers.VistaModelo
             await EditEncuestaUserAdd();
 
             _IdEncuesta = await funcion2.InsertarEncuesta(parametros2);
-            await IrMenuUser();
+            await IrContenedor();
         }
 
 
