@@ -5,56 +5,58 @@
              xmlns:firebase="clr-namespace:Firebase.Auth;assembly=Firebase.Auth"
              xmlns:degradado="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              x:Class="HuecasAppUsers.Vista.Login">
-    <Frame>
-        <Frame.Background>
-            <LinearGradientBrush EndPoint="1,0">
-                <GradientStop Color="DarkSlateBlue" Offset="0.1"/>
-                <GradientStop Color="#350A56" Offset="1.0"/>
-            </LinearGradientBrush>
-        </Frame.Background>
-        <StackLayout VerticalOptions="Center" >
+    <ScrollView>
+        <Frame>
+            <Frame.Background>
+                <LinearGradientBrush EndPoint="1,0">
+                    <GradientStop Color="DarkSlateBlue" Offset="0.1"/>
+                    <GradientStop Color="#350A56" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Frame.Background>
+            <StackLayout VerticalOptions="Center" >
 
 
 
-        <Grid Margin="20">
+                <Grid Margin="20">
 
-            <!--Definicion de FIlas-->
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+                    <!--Definicion de FIlas-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-            <Grid VerticalOptions="Center" Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
+                    <Grid VerticalOptions="Center" Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
 
-                    <Frame  CornerRadius="50" Padding="0" Margin="0,0,0,40">
-                        <Image Source="LogoHuecasApp.png"/>
-                    </Frame>
-            </Grid>
-            <StackLayout Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="200">
-                <StackLayout Orientation="Horizontal">
-                        <Image WidthRequest="25" Source="gmail.png"/>
-                    <Entry Placeholder="Correo"
+                        <Frame  CornerRadius="50" Margin="0,0,0,40" BackgroundColor="#ACCBE4" Padding="0" 
+                                WidthRequest="280" HorizontalOptions="Center">
+                            <Image Source="LogoHuecasApp.png" />
+                        </Frame>
+                    </Grid>
+                    <StackLayout Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="200">
+                        <StackLayout Orientation="Horizontal">
+                            <Image WidthRequest="25" Source="gmail.png"/>
+                            <Entry Placeholder="Correo"
                        Text="{Binding Correo}"
                        PlaceholderColor="#7F7F7F"
                        TextColor="White"
                        FontAttributes="Bold"
-                       WidthRequest="200"/>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                        <Image WidthRequest="25" Source="lock.png"/>
-                    <Entry Placeholder="Contraseña"
+                       WidthRequest="180"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Image WidthRequest="25" Source="lock.png"/>
+                            <Entry Placeholder="Contraseña"
                        Text="{Binding Contraseña}"
                        PlaceholderColor="#7F7F7F"
                        TextColor="White"
                        FontAttributes="Bold"
-                       WidthRequest="200" IsPassword="True" />
-                </StackLayout>
-                <Button Text="Iniciar" HorizontalOptions="Center"
+                       WidthRequest="180" IsPassword="True" />
+                        </StackLayout>
+                        <Button Text="Iniciar" HorizontalOptions="Center"
                         BorderColor="#ACCBE4"
                         BorderWidth="3"
                     TextColor="White"
@@ -64,7 +66,7 @@
                     FontAttributes="Bold"
                     CornerRadius="15" 
                     Command="{Binding btnIniciarcomamd}"    />
-                <Button  TextColor="White"
+                        <Button  TextColor="White"
                      BackgroundColor="Transparent"
                      Text="Crear Cuenta" 
                      FontAttributes="Bold"
@@ -75,10 +77,11 @@
                         BorderWidth="3"
                      TextTransform="None"
                      Command="{Binding btnCrearCuentaComand}"/>
+                    </StackLayout>
+
+
+                </Grid>
             </StackLayout>
-
-
-        </Grid>
-    </StackLayout>
-    </Frame>
+        </Frame>
+    </ScrollView>
 </ContentPage>
