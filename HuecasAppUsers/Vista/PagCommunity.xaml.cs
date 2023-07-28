@@ -281,5 +281,12 @@ namespace HuecasAppUsers.Vista
 
         #endregion
 
+        private void BuscarCategoria_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchTerm = e.NewTextValue;
+            var filteredItems = LisEncuestaRecomendados.Where(item =>
+                item.Categorias != null && item.Categorias.Contains(searchTerm)).ToList();
+            ComidaCommunity.ItemsSource = filteredItems;
+        }
     }
 }

@@ -566,14 +566,14 @@
 
                 <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start"
                                      BackgroundColor="Red" Margin="10,10,0,0" CornerRadius="50" Padding="10"
-                                      x:Name="Atras" Clicked="Atras_Clicked_1"/>
+                                      x:Name="Atras10" Clicked="Atras_Clicked_1"/>
                 <Label Text="Busqueda de 0 hasa el precio que usted Indique" HorizontalTextAlignment="Center"  
                    HorizontalOptions="Center" FontSize="Medium" />
                 <!--Stack SearchBar-->
                 <StackLayout Margin="10,0,10,0" >
 
-                    <Frame BackgroundColor="Black" Padding="8" CornerRadius="15" x:Name="FrComida">
-                        <Label Text="{Binding TxtComida, Mode=TwoWay}" x:Name="lblPrecio" 
+                    <Frame BackgroundColor="Black" Padding="8" CornerRadius="15" x:Name="FrFecha">
+                        <Label Text="{Binding TxtComida, Mode=TwoWay}" x:Name="lblFecha" 
                                                TextColor="White" FontAttributes="Bold"/>
                     </Frame>
                     <Frame Padding="0" CornerRadius="25">
