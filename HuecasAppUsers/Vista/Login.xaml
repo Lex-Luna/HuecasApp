@@ -9,7 +9,7 @@
         <Frame>
             <Frame.Background>
                 <LinearGradientBrush EndPoint="1,0">
-                    <GradientStop Color="DarkSlateBlue" Offset="0.1"/>
+                    <GradientStop Color="#132C6A " Offset="0.1"/>
                     <GradientStop Color="#350A56" Offset="1.0"/>
                 </LinearGradientBrush>
             </Frame.Background>
@@ -32,7 +32,7 @@
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
 
-                        <Frame  CornerRadius="50" Margin="0,0,0,40" BackgroundColor="#ACCBE4" Padding="0" 
+                        <Frame  BackgroundColor="Transparent"
                                 WidthRequest="280" HorizontalOptions="Center">
                             <Image Source="LogoHuecasApp.png" />
                         </Frame>
