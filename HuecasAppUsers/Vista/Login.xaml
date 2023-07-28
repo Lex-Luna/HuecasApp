@@ -31,33 +31,13 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <degradado:PancakeView  CornerRadius="0,0,30,30">
-                    <Frame BackgroundColor="DarkGoldenrod" CornerRadius="25">
-                        <Frame.Background>
-                            <LinearGradientBrush EndPoint="1,0">
-                                    <GradientStop Color="#BA081A" Offset="0.1"/>
-                                    <GradientStop Color="#CD3F2A" Offset="1.0"/>
-                            </LinearGradientBrush>
-                        </Frame.Background>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
-                            <Label Text="Huecas"
-                                       CharacterSpacing="10"
-                                       FontSize="18"
-                                       FontAttributes="Bold"
-                                       VerticalOptions="Center"/>
-                            <Label Text="App"
-                                        BackgroundColor="#C6FEFD"
-                                        FontAttributes="Bold"
-                                    HorizontalOptions="Center"
-                                    TextColor="YellowGreen"
-                                        FontSize="20"/>
-                        </StackLayout>
+                    <Frame  CornerRadius="50" Padding="0">
+                        <Image Source="LogoHuecasApp.png"/>
                     </Frame>
-                </degradado:PancakeView>
             </Grid>
             <StackLayout Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center">
                 <StackLayout Orientation="Horizontal">
-                    <Image WidthRequest="25" Source="https://i.ibb.co/9NBxhW5/dispon.png"/>
+                        <Image WidthRequest="25" Source="gmail.png"/>
                     <Entry Placeholder="Correo"
                        Text="{Binding Correo}"
                        PlaceholderColor="#7F7F7F"
@@ -66,7 +46,7 @@
                        WidthRequest="300"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Image WidthRequest="25" Source="https://i.ibb.co/tM0wWKb/premi.png"/>
+                        <Image WidthRequest="25" Source="lock.png"/>
                     <Entry Placeholder="Contraseña"
                        Text="{Binding Contraseña}"
                        PlaceholderColor="#7F7F7F"
