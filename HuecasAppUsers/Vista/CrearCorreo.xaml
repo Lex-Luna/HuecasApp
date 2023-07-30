@@ -7,7 +7,7 @@
     <ScrollView>
         <Grid >
             <Grid.RowDefinitions >
-                <RowDefinition Height="240"/>
+                <RowDefinition Height="280"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <degradado:PancakeView Grid.RowSpan="2"
@@ -15,48 +15,64 @@
                                BackgroundGradientEndPoint="0,0" >
                 <degradado:PancakeView.BackgroundGradientStops >
                     <degradado:GradientStopCollection >
-                        <degradado:GradientStop Color="#F44A32" Offset="0"/>
-                        <degradado:GradientStop Color="#E83C40" Offset="0.8"/>
+                        <degradado:GradientStop Color="#132C6A" Offset="0.1"/>
+                        <degradado:GradientStop Color="#350A56" Offset="0.9"/>
 
                     </degradado:GradientStopCollection>
                 </degradado:PancakeView.BackgroundGradientStops>
 
             </degradado:PancakeView>
-            <Image Source="bjorn1.png" Margin="0,20,0,0" Grid.Row="0"/>
+            <Frame  BackgroundColor="Transparent"
+                                WidthRequest="280" 
+                    HorizontalOptions="Center" Margin="0,20,0,0">
+                <Image Source="LogoHuecasApp.png" />
+            </Frame>
             <StackLayout Grid.Row="1"
                      Margin="20"
-                     Orientation="Vertical">
+                     Orientation="Vertical"
+                         HorizontalOptions="Center">
                 <StackLayout Orientation="Horizontal" HeightRequest="50">
                     
                     <Image Source="https://i.ibb.co/RjRCr5M/camara-fotografica.png"
                        x:Name="Fotoperfil"/>
                 </StackLayout>
                 <Entry TextColor="White" FontAttributes="Bold" 
-                   PlaceholderColor="White"
-                   Placeholder="Nombres"
+                   PlaceholderColor="#7F7F7F"
+                   Placeholder="Nombre"
                        Text="{Binding TxtNombre}"/>
                 <Entry TextColor="White" FontAttributes="Bold" 
-                   PlaceholderColor="White"
+                   PlaceholderColor="#7F7F7F"
                    Placeholder="Apellido"
                        Text="{Binding TxtApellido}"/>
                 <Entry TextColor="White" FontAttributes="Bold" 
                    Text="{Binding TxtCorreo}"
-                   PlaceholderColor="White"
+                   PlaceholderColor="#7F7F7F"
                    Placeholder="Correo"/>
                 <Entry TextColor="White" FontAttributes="Bold"
                    Text="{Binding TxtContraseña}"
-                   PlaceholderColor="White"
+                   PlaceholderColor="#7F7F7F"
                    Placeholder="Contraseña"
                    IsPassword="True"/>
                 <Button Text="Crear cuenta"
                         Command="{Binding btnCrearcuentaComand}"
-                    BackgroundColor="White"
+                    BackgroundColor="#ACCBE4"
                     TextColor="Black"
                     CornerRadius="10"
                     WidthRequest="250"
+                        Margin="0,20,0,0"
                     HorizontalOptions="Center"
                     FontAttributes="Bold"
                     x:Name="btnCrearcuenta"/>
+                <Button Text="Volver"
+                        Command="{Binding Volver}"
+                    BackgroundColor="#ACCBE4"
+                    TextColor="Black"
+                    CornerRadius="10"
+                    WidthRequest="250"
+                        Margin="0,20,0,0"
+                    HorizontalOptions="Center"
+                    FontAttributes="Bold"
+                    x:Name="btnAtras"/>
 
 
             </StackLayout>

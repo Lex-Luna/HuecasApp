@@ -129,10 +129,10 @@ namespace HuecasAppUsers.VistaModelo
         }
 
 
-        private void CerrarSesion()
+        /*private void CerrarSesion()
         {
             Preferences.Remove("MyFirebaseRefreshToken");
-        }
+        }*/
 
         private async Task Volver()
         {
