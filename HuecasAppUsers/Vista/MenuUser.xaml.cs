@@ -73,7 +73,7 @@ namespace HuecasAppUsers.Vista
             get => _numEncuesta;
             set
             {
- 
+                _numEncuesta = value;
                 OnPropertyChanged();
             }
         }
@@ -210,16 +210,13 @@ namespace HuecasAppUsers.Vista
 
             }
         }
-        private async Task MostrarPerfil()
-        {
-            await Navigation.PushPopupAsync(new PerfilUser());
-        }
+       
         #endregion
         #region COMANDOS
         
 
         public ICommand IrEncuestacomamd => new Command(async () => await IrEncuesta());
-        public ICommand MostrarPerfilcomamd => new Command(async () => await MostrarPerfil());
+       
         public ICommand IrDetalleEncuestaCommand => new Command<EncuestaM>(async (p) => await IrDetalleEncuesta(p));
 
         #endregion

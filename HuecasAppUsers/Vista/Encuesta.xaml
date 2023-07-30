@@ -4,88 +4,84 @@
              NavigationPage.HasNavigationBar="False"
              x:Class="HuecasAppUsers.Vista.Encuesta">
     <ScrollView>
-        <Grid RowDefinitions="*,*,*">
+        <Grid RowDefinitions="*,*,*" BackgroundColor="Black">
             <Grid RowDefinitions="*, 2*, Auto" Grid.Row="0" 
                   x:Name="GridLocal" IsVisible="{Binding PanelEncuesta}">
 
-                <!--Degradados-->
-                <BoxView Grid.RowSpan="3">
-                    <BoxView.Background>
-                        <LinearGradientBrush>
-                            <GradientStopCollection>
-                                <GradientStop Offset="0.1" Color="Blue"/>
-                                <GradientStop Offset="0.9" Color="#A4FFAA"/>
-                            </GradientStopCollection>
-                        </LinearGradientBrush>
-                    </BoxView.Background>
-                </BoxView>
+                
                 <!--grid de la franela-->
                 <Grid>
 
-                    <Path Data="M0,0H375V262.033s-9.025,4.813-55.426-10.71-70.141-83.047-130.3-83.22-83.544,67.7-130.893,83.22S0,262.033,0,262.033Z" Aspect="Fill" Fill="#5B55E1" Opacity="0.7"/>
+                    <!--Path Data="M0,0H375V262.033s-9.025,4.813-55.426-10.71-70.141-83.047-130.3-83.22-83.544,67.7-130.893,83.22S0,262.033,0,262.033Z" Aspect="Fill" Fill="#132C6A" Opacity="0.9"/-->
                 </Grid>
                 <!--Stack del titulo-->
                 <Frame Grid.Row="0"  Margin="5" BackgroundColor="Transparent" 
                        HeightRequest="50" Padding="0">
                     <StackLayout HorizontalOptions="Center"  >
-                        <Label Text="Sobre el Local" FontSize="50" TextColor="White" />
-                        <Label Text="1/3" HorizontalTextAlignment="Center" FontSize="Large"/>
+                        <Label Text="Sobre el Local" FontSize="50" TextColor="#ACCBE4" FontAttributes="Bold,Italic" />
+                        <Label Text="1/3" HorizontalTextAlignment="Center" FontSize="Large" TextColor="#ACCBE4" />
                     </StackLayout>
                 </Frame>
 
                 <StackLayout Grid.Row="1" HorizontalOptions="Center" Margin="0,-140,0,0" Spacing="30">
                     <!--Frame de la imagen principal-->
-                    <Frame Padding="-20" BackgroundColor="Transparent" Margin="0">
+                    <Frame Padding="-20" BackgroundColor="Transparent" Margin="0" HeightRequest="200">
                         <Grid HeightRequest="190" WidthRequest="190" HorizontalOptions="Center">
                             <Image x:Name="hueca" Source="restaurant.png" HeightRequest="180" 
-                               WidthRequest="180" HorizontalOptions="Center" 
+                               WidthRequest="180" HorizontalOptions="Center"  
                                VerticalOptions="Center"/>
                         </Grid>
                     </Frame>
                     <StackLayout HorizontalOptions="Center" Spacing="15">
                         <StackLayout Orientation="Horizontal">
                             <!--frame Foto-->
-                            <Frame BackgroundColor="Gray" Padding="2" CornerRadius="20">
+                            <Frame BackgroundColor="#ACCBE4" Padding="2" CornerRadius="20">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding TomarFotoComamd}"/>
                                 </Frame.GestureRecognizers>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 
-                                    <Label Text="Fachada del local" TextColor="White" 
+                                    <Label Text="Fachada del local" TextColor="black" 
                                        HorizontalOptions="Center"
                                        FontAttributes="Bold" FontSize="14"  HorizontalTextAlignment="Center" />
                                     <Image Source="camara.png" HeightRequest="30" />
                                 </StackLayout>
                             </Frame>
                             <!--Frame video-->
-                            <Frame BackgroundColor="Red" Padding="2" CornerRadius="20">
+                            <Frame BackgroundColor="#ACCBE4" Padding="2" CornerRadius="20">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding CapturarVideoComamd}"/>
                                 </Frame.GestureRecognizers>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 
-                                    <Label Text="Video del interior" TextColor="White" 
+                                    <Label Text="Video del interior" TextColor="Black" 
                                        HorizontalOptions="Center"
                                        FontAttributes="Bold" FontSize="14"  HorizontalTextAlignment="Center" />
                                     <Image Source="video.png" HeightRequest="30" />
                                 </StackLayout>
                             </Frame>
                             <!--frame Geo-->
-                            <Frame BackgroundColor="#D7E720" Padding="2" CornerRadius="20">
+                            <Frame BackgroundColor="#ACCBE4" Padding="2" CornerRadius="20">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding MostrarpanelGeoComamd}"/>
                                 </Frame.GestureRecognizers>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 
-                                    <Label Text="Geolocalizacion Local" TextColor="White" 
+                                    <Label Text="Geolocalizacion" TextColor="black" 
                                        HorizontalOptions="Center"
                                        FontAttributes="Bold" FontSize="14"  HorizontalTextAlignment="Center" />
                                     <Image Source="geolocalizacion.png" HeightRequest="30" />
                                 </StackLayout>
                             </Frame>
                         </StackLayout>
-                        <Frame Grid.Row="1" Padding="5" Margin="0" CornerRadius="40" BackgroundColor="#5B55E1" >
-                            <StackLayout Margin="10" VerticalOptions="Center">
+                        <Frame Grid.Row="1" Padding="5" Margin="0" CornerRadius="40" HorizontalOptions="Center">
+                            <Frame.Background>
+                                <LinearGradientBrush EndPoint="1,0">
+                                    <GradientStop Color="#132C6A" Offset="0.1"/>
+                                    <GradientStop Color="#350A56" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Frame.Background>
+                            <StackLayout Margin="10" VerticalOptions="Center"  >
                                 <!--Stack nombre local-->
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="Nombre:" FontSize="15" FontAttributes="Bold" 
@@ -157,49 +153,44 @@
                             </StackLayout>
                             <!--Boton guardar-->
                         </Frame>
-                        <ImageButton x:Name="BtnLocal" Clicked="BtnLocal_Clicked" Source="fleAbajo.png" BackgroundColor="#5B55E1" 
+                        <ImageButton x:Name="BtnLocal" Clicked="BtnLocal_Clicked" Source="fleAbajo.png" BackgroundColor="#ACCBE4" 
                                      HeightRequest="50" CornerRadius="20"  
                                  HorizontalOptions="Center" Command="{Binding AgregarLocalComamd}" />
                     </StackLayout>
                 </StackLayout>
             </Grid>
 
-            <Grid RowDefinitions="*, 2*, Auto" Grid.Row="1" x:Name="gridPlato">
+            <Grid RowDefinitions="*, 2*, Auto" Grid.Row="1" x:Name="gridPlato" BackgroundColor="Black">
                 <!--Degradados-->
-                <BoxView Grid.RowSpan="3">
-                    <BoxView.Background>
-                        <LinearGradientBrush>
-                            <GradientStopCollection>
-                                <GradientStop Offset="0.1" Color="Blue"/>
-                                <GradientStop Offset="0.9" Color="#A4FFAA"/>
-                            </GradientStopCollection>
-                        </LinearGradientBrush>
-                    </BoxView.Background>
-                </BoxView>
+                
                 <Grid>
-                    <Path Data="M0,0H375V262.033s-9.025,4.813-55.426-10.71-70.141-83.047-130.3-83.22-83.544,67.7-130.893,83.22S0,262.033,0,262.033Z" Aspect="Fill" Fill="#5B55E1" Opacity="0.7"/>
+                    <Path Data="M0,0H375V262.033s-9.025,4.813-55.426-10.71-70.141-83.047-130.3-83.22-83.544,67.7-130.893,83.22S0,262.033,0,262.033Z" Aspect="Fill" Fill="#132C6A" Opacity="0.7"/>
                     <!--Imagenes importantes q no estan aun-->
                     <Image Source="menu." WidthRequest="20" HeightRequest="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="25"/>
                     <Image Source="search.png" WidthRequest="20" HeightRequest="20" HorizontalOptions="End" VerticalOptions="Start" Margin="25" />
                 </Grid>
                 <!--Cuerpo -->
                 <StackLayout  Grid.Row="0"  HorizontalOptions="Center" Margin="10">
-                    <Label Text="Encuesta" FontSize="50" TextColor="White" />
-                    <Label Text="2/3" HorizontalTextAlignment="Center" FontSize="Large"/>
+                    <Label Text="Comida" FontSize="50" TextColor="#ACCBE4" FontAttributes="Bold,Italic" />
+                    <Label Text="2/3" HorizontalTextAlignment="Center" FontSize="Large" TextColor="#ACCBE4"/>
                 </StackLayout>
 
                 <StackLayout  Grid.Row="1" HorizontalOptions="Center" Margin="0,-140,0,0" Spacing="30">
                     <!--Grid de la imagen principal-->
                     <Grid HeightRequest="210" WidthRequest="210" HorizontalOptions="Center">
-                        <Ellipse Stroke="white" StrokeThickness="2" Aspect="Fill"/>
+                        <Ellipse Stroke="#ACCBE4" StrokeThickness="2" Aspect="Fill"/>
                         <Image x:Name="Bannerimg3" Source="IMG03.png" HeightRequest="195" WidthRequest="195" HorizontalOptions="Center" VerticalOptions="Center"/>
                     </Grid>
 
-                    <StackLayout HorizontalOptions="Center" Spacing="15">
-                        <Label Text="¿Que tal la comida?" TextColor="White" FontAttributes="Bold" 
-                               FontSize="18" HorizontalOptions="Center" />
-                        <Frame Grid.Row="1" Padding="0" HeightRequest="275"  Margin="0" CornerRadius="15"
-                   BackgroundColor="#5B55E1">
+                    
+                        
+                        <Frame Grid.Row="1" Padding="0" HeightRequest="275"  Margin="0" HorizontalOptions="Center" CornerRadius="15">
+                            <Frame.Background>
+                                <LinearGradientBrush EndPoint="1,0">
+                                    <GradientStop Color="#132C6A" Offset="0.1"/>
+                                    <GradientStop Color="#350A56" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Frame.Background>
                             <StackLayout Margin="10" VerticalOptions="Center">
                                 <!--Stack nobre plato-->
                                 <StackLayout Orientation="Horizontal">
@@ -255,33 +246,24 @@
                             </StackLayout>
                         </Frame>
                         <ImageButton x:Name="BtnPlato" Clicked="BtnPlato_Clicked" 
-                                     Source="fleAbajo.png" BackgroundColor="#5B55E1" 
+                                     Source="fleAbajo.png" BackgroundColor="#ACCBE4" 
                                      HeightRequest="50" CornerRadius="20"  
                                  HorizontalOptions="Center" Command="{Binding AgregarPlatoComand}"/>
                     </StackLayout>
-                </StackLayout>
+                
             </Grid>
 
             <Grid RowDefinitions="*, 2*, Auto" Grid.Row="2" x:Name="gridCalificaciones">
                 <!--Degradados-->
-                <BoxView Grid.RowSpan="3">
-                    <BoxView.Background>
-                        <LinearGradientBrush>
-                            <GradientStopCollection>
-                                <GradientStop Offset="0.1" Color="Blue"/>
-                                <GradientStop Offset="0.9" Color="#A4FFAA"/>
-                            </GradientStopCollection>
-                        </LinearGradientBrush>
-                    </BoxView.Background>
-                </BoxView>
+                
                 <Grid>
-                    <Path Data="M0,0H375V262.033s-9.025,4.813-55.426-10.71-70.141-83.047-130.3-83.22-83.544,67.7-130.893,83.22S0,262.033,0,262.033Z" Aspect="Fill" Fill="#5B55E1" Opacity="0.8"/>
+                    <Path Data="M0,0H375V262.033s-9.025,4.813-55.426-10.71-70.141-83.047-130.3-83.22-83.544,67.7-130.893,83.22S0,262.033,0,262.033Z" Aspect="Fill" Fill="#132C6A" Opacity="0.8"/>
                     <!--Imagenes importantes q no estan aun-->
                 </Grid>
                 <!--Cuerpo -->
                 <StackLayout Grid.Row="0"  HorizontalOptions="Center" Margin="10">
-                    <Label Text="Encuesta" FontSize="50" TextColor="White" />
-                    <Label Text="3/3" HorizontalTextAlignment="Center" FontSize="Large"/>
+                    <Label Text="Calificacion" FontSize="50" TextColor="#ACCBE4" FontAttributes="Bold,Italic" />
+                    <Label Text="3/3" HorizontalTextAlignment="Center" FontSize="Large" TextColor="#ACCBE4"/>
                 </StackLayout>
 
                 <StackLayout Grid.Row="1" HorizontalOptions="Center" Margin="0,-140,0,0" Spacing="30">
@@ -292,8 +274,14 @@
                     </Grid>
 
                     <StackLayout HorizontalOptions="Center" Spacing="15">
-                        <Label Text="¿Desliza para mostrarnos tu Calificacion ;)?" TextColor="White" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" />
-                        <Frame Grid.Row="1" Padding="0" HeightRequest="275" Margin="0" CornerRadius="15" BackgroundColor="#5B55E1">
+                        <Label Text="¿Desliza para mostrarnos tu Calificacion ;)?" TextColor="#ACCBE4" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" />
+                        <Frame Grid.Row="1" Padding="0" HeightRequest="275" Margin="0" CornerRadius="15" >
+                            <Frame.Background>
+                                <LinearGradientBrush EndPoint="1,0">
+                                    <GradientStop Color="#132C6A" Offset="0.1"/>
+                                    <GradientStop Color="#350A56" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Frame.Background>
                             <StackLayout>
                                 <!--Stack Slider atencion-->
                                 <StackLayout Orientation="Horizontal" Margin="13">
@@ -334,7 +322,7 @@
                                 </StackLayout>
                                 <!--Stack Recomendado-->
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="¿Lo recomiendarias a la comunidad de usuarios?"
+                                    <Label Text="  ¿Lo recomiendas?      "
                                             FontSize="15"
                                             FontAttributes="Bold"
                                             VerticalOptions="Center"

@@ -5,9 +5,9 @@
             xmlns:local="clr-namespace:HuecasAppUsers.Vista"
             xmlns:local1="clr-namespace:HuecasAppUsers.Vista"
              x:Class="HuecasAppUsers.Vista.Contenedor"
-            BarTextColor="WhiteSmoke" BarBackgroundColor="#E83D40"
+            BarTextColor="WhiteSmoke" BarBackgroundColor="#132C6A"
             SelectedTabColor="White"
-            UnselectedTabColor="#F99680">
+            UnselectedTabColor="#ACCBE4">
     <!--Pages can be added as references or inline-->
     <local:MenuUser Title="Usuario" IconImageSource="userqueda.png"/>
     <local:PagCommunity Title="Comunidad" IconImageSource="Home.png"/>
