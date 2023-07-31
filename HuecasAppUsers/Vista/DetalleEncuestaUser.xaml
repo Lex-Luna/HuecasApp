@@ -24,9 +24,33 @@
 
 
 
-                            <Button Text="Informacion del Local" x:Name="btnLocal" Clicked="btnLocal_Clicked" CornerRadius="30" VerticalOptions="Center" BackgroundColor="Transparent" BorderColor="#ACCBE4" BorderWidth="3" Margin="5" />
-                            <Button Text="Informacion de la comida" x:Name="btnComida" Clicked="btnComida_Clicked" CornerRadius="30" VerticalOptions="Center" BackgroundColor="Transparent" BorderColor="#ACCBE4" BorderWidth="3" Margin="5"  />
-                            <Button Text="Informacion de la calificacion" x:Name="btnCalificacion" Clicked="btnCalificacion_Clicked" VerticalOptions="Center" CornerRadius="30" BackgroundColor="Transparent" BorderColor="#ACCBE4" BorderWidth="3" Margin="5"  />
+                            <Button Text="Informacion del Local" x:Name="btnLocal" Clicked="btnLocal_Clicked" CornerRadius="30" 
+                                    VerticalOptions="Center"   Margin="5" TextColor="#ACCBE4" >
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="1,0">
+                                        <GradientStop Color="#132C6A" Offset="0.1"/>
+                                        <GradientStop Color="#350A56" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <Button Text="Informacion de la comida" x:Name="btnComida" Clicked="btnComida_Clicked" CornerRadius="30" 
+                                    VerticalOptions="Center" TextColor="#ACCBE4" Margin="5">
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="1,0">
+                                        <GradientStop Color="#132C6A" Offset="0.1"/>
+                                        <GradientStop Color="#350A56" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <Button Text="Informacion de la calificacion" x:Name="btnCalificacion" Clicked="btnCalificacion_Clicked" 
+                                    VerticalOptions="Center" CornerRadius="30"  Margin="5" TextColor="#ACCBE4"  >
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="1,0">
+                                        <GradientStop Color="#132C6A" Offset="0.1"/>
+                                        <GradientStop Color="#350A56" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
                             <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
                                      BackgroundColor="#ACCBE4" Margin="0,120,0,0" CornerRadius="50" Padding="10"
                                       x:Name="Atras" Clicked="Atras_Clicked"/>
@@ -74,17 +98,17 @@
                                     <Label Text="Copiar Geolocalizacion en Google Maps:" 
                                                HorizontalTextAlignment="Center" Margin="0,7,0,0" FontSize="Medium" TextColor="#ACCBE4" />
 
-                                    <Entry Text="{Binding Geolocalizacion}" BackgroundColor="#ACCBE4" HorizontalTextAlignment="Center"
-                                           HorizontalOptions="Center" TextColor="Black"  Margin="0,0,0,0"/>
+                                    <Entry Text="{Binding Geolocalizacion}" BackgroundColor="Transparent" HorizontalTextAlignment="Center"
+                                           HorizontalOptions="Center" TextColor="#ACCBE4"  Margin="0,0,0,10" />
 
-                                    <StackLayout x:Name="PanelFoto" >
-                                        <Label Text="Imaagen" HorizontalOptions="Center" TextColor="#ACCBE4" />
-                                        <ScrollView>
-                                            <Image Source="{Binding FotoFachada}"  />
-                                        </ScrollView>
-
-                                    </StackLayout>
-                                    <Frame CornerRadius="50" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent" BorderColor="#ACCBE4" Padding="-1">
+                                    <Frame CornerRadius="50" VerticalOptions="Center" HorizontalOptions="Center" 
+                                           Padding="-1" HeightRequest="40" WidthRequest="250">
+                                        <Frame.Background>
+                                            <LinearGradientBrush EndPoint="1,0">
+                                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                                <GradientStop Color="#350A56" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </Frame.Background>
                                         <Grid RowDefinitions="*" >
                                             <Label Text="Descargue el Video Local" TextColor="#ACCBE4" HorizontalTextAlignment="Center" FontSize="Medium" Grid.Row="0" VerticalOptions="Center" />
                                             <Label Text="{Binding Video}" TextColor="Transparent" BackgroundColor="Transparent" Grid.Row="0">
@@ -95,7 +119,14 @@
                                             </Label>
                                         </Grid>
                                     </Frame>
-
+                                    <Frame Padding="-4" BackgroundColor="Transparent" CornerRadius="50">
+                                        <StackLayout x:Name="PanelFoto" >
+                                            <Label Text="Imaagen" HorizontalOptions="Center" TextColor="#ACCBE4" />
+                                            <ScrollView>
+                                                <Image Source="{Binding FotoFachada}"  />
+                                            </ScrollView>
+                                        </StackLayout>
+                                    </Frame>
                                 </StackLayout>
 
                             </DataTemplate>

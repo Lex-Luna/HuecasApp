@@ -354,15 +354,16 @@
             </StackLayout>
 
             <!--Panel Geolocalizacion-->
-            <StackLayout x:Name="Panelgeolocalizacion" Grid.Row="0"
+            <StackLayout x:Name="Panelgeolocalizacion" Grid.Row="0" BackgroundColor="Black"
                          VerticalOptions="Center" IsVisible="{Binding PanelGeo}">
                 <Label Text="Geolocalizar"
                        FontSize="30"
+                       TextColor="#ACCBE4"
                        FontAttributes="Bold"
                        HorizontalOptions="Center"
                        />
                 <ImageButton Source="https://i.ibb.co/KsppHRw/002-de-origen-local-1.png"
-                             BackgroundColor="#6FEDB4"
+                             BackgroundColor="#ACCBE4"
                              HorizontalOptions="Center"
                              CornerRadius="20"
                              HeightRequest="80"
@@ -370,10 +371,7 @@
                              BorderColor="White"
                              BorderWidth="4" Command="{Binding PagGeoComamd}"/>
 
-                <Button Text="Guardar" Margin="0,10,0,0"
-                        HorizontalOptions="Center"
-                        CornerRadius="10"
-                        FontAttributes="Bold" />
+                
                 <!--/Button>Command="{Binding Agregarclientecommand}"/-->
 
                 <Button Text="Volver"

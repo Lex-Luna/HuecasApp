@@ -18,28 +18,70 @@
                      Margin="10" HorizontalOptions="Center">
 
                     <Label Text="Recomendaciones de la Comunidad"
-                       TextColor="#4196E8"
+                       TextColor="#ACCBE4"
                        FontSize="30"
                        FontAttributes="Bold"
                            HorizontalTextAlignment="Center"
                        HorizontalOptions="Center"/>
 
                 </StackLayout>
-                <Label Text="¿Cual es el termino de busqueda que deseas?" TextColor="#E1E841" FontSize="Medium" Padding="0,0,0,20" HorizontalOptions="Center"/>
+                <Label Text="Escoja termino de busqueda" TextColor="#ACCBE4" FontSize="Medium" Padding="0,0,0,20" HorizontalOptions="Center"/>
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="200"  >
 
                     <Button Text="Nombre de Restaurante" TextTransform="None" CornerRadius="25" Padding="3"
-                                x:Name="BtnRestaurante" Clicked="BtnRestaurante_Clicked"/>
+                                x:Name="BtnRestaurante" Clicked="BtnRestaurante_Clicked" Margin="3">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                <GradientStop Color="#350A56" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
                     <Button Text="Tipo De Comida" TextTransform="None" CornerRadius="25"  Padding="3" 
-                                x:Name="BtnCategoria" Clicked="BtnCategoria_Clicked"/>
+                                x:Name="BtnCategoria" Clicked="BtnCategoria_Clicked">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                <GradientStop Color="#350A56" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
                     <Button Text="Nombre de un Plato" TextTransform="None" CornerRadius="25" Padding="3" 
-                                x:Name="BtnPlato" Clicked="BtnPlato_Clicked"/>
+                                x:Name="BtnPlato" Clicked="BtnPlato_Clicked" Margin="3">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                <GradientStop Color="#350A56" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
                     <Button Text="Barrio" TextTransform="None" CornerRadius="25"  Padding="3"
-                                x:Name="BtnBarrio" Clicked="BtnBarrio_Clicked"/>
+                                x:Name="BtnBarrio" Clicked="BtnBarrio_Clicked" Margin="3">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                <GradientStop Color="#350A56" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
                     <Button Text="Rango de Precios" TextTransform="None" CornerRadius="25"  Padding="3" 
-                                x:Name="BtnPrecios" Clicked="BtnPrecios_Clicked"/>
-                    <Button Text="Rango de Precios" TextTransform="None" CornerRadius="25"  Padding="3" 
-                                x:Name="BtnFecha" Clicked="BtnFecha_Clicked"/>
+                                x:Name="BtnPrecios" Clicked="BtnPrecios_Clicked" Margin="3">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                <GradientStop Color="#350A56" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button Text="Fecha" TextTransform="None" CornerRadius="25"  Padding="3" 
+                                x:Name="BtnFecha" Clicked="BtnFecha_Clicked" Margin="3">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                <GradientStop Color="#350A56" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
                     
 
                 </StackLayout>
@@ -54,7 +96,7 @@
             <!--Panel Restaurante-->
             <StackLayout x:Name="PanelRestaurante" Grid.Row="0">
                 <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start"
-                                     BackgroundColor="Red" Margin="10,10,0,0" CornerRadius="50" Padding="10"
+                                     BackgroundColor="#ACCBE4" Margin="10,10,0,0" CornerRadius="50" Padding="10"
                                       x:Name="Atras1" Clicked="Atras1_Clicked"/>
                 
                 <!--SearchBar-->
@@ -83,9 +125,9 @@
                                             <!--color Degradado-->
                                             <StackLayout.Background>
                                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                                    <GradientStop Offset="0.1" Color="#A4FFAA" />
-                                                    <GradientStop Offset="0.9" Color="Blue" />
-                                                </LinearGradientBrush>
+                                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                                <GradientStop Color="#350A56" Offset="1.0"/>
+                                            </LinearGradientBrush>
                                             </StackLayout.Background>
                                             <!--Stack contenedor general lista -->
                                             <StackLayout Margin="5" >
@@ -93,7 +135,7 @@
                                                 <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                                                     <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                        HasShadow="True" HorizontalOptions="FillAndExpand" >
-                                                        <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16"  HorizontalTextAlignment="Center" TextColor="White">
                                                             <Label.FormattedText>
                                                                 <FormattedString>
                                                                     <Span Text="{Binding NomLocal, StringFormat='El local {0}'}" />
@@ -113,7 +155,7 @@
                                                     <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                        HasShadow="True" HorizontalOptions="FillAndExpand">
 
-                                                        <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
                                                             <Label.FormattedText>
                                                                 <FormattedString>
                                                                     <Span Text="{Binding NomPlato, StringFormat='Hizo un pedido fue un {0} '}"/>
@@ -128,7 +170,7 @@
                                                 <StackLayout  Orientation="Horizontal" >
                                                     <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                        HasShadow="True" HorizontalOptions="FillAndExpand">
-                                                        <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
                                                             <Label.FormattedText>
                                                                 <FormattedString>
                                                                     <Span Text="{Binding NomUsuario, StringFormat='Recomendado por {0}'}"/>
@@ -151,15 +193,10 @@
 
             <!--Panel Categoria-->
             <StackLayout x:Name="PanelCategoria" Grid.Row="0">
-                <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start"
-                                     BackgroundColor="Red" Margin="10,10,0,0" CornerRadius="50" Padding="10"
+                <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Center" HorizontalOptions="Start"
+                                     BackgroundColor="#ACCBE4" Margin="10,10,0,0" CornerRadius="50" Padding="10"
                                       x:Name="Atras2" Clicked="Atras2_Clicked"/>
-                <Label Text="Escribe el nombre del el tipo de Restaurante que estas buscando por favor"
-                       TextColor="#4196E8"
-                       FontSize="30"
-                       FontAttributes="Bold"
-                           HorizontalTextAlignment="Center"
-                       HorizontalOptions="Center"/>
+                
                 <!--Stack SearchBar-->
                 <StackLayout Margin="10,10,10,0"  >
                     <Frame Padding="0" CornerRadius="25">
@@ -188,8 +225,8 @@
                                         <!--color Degradado-->
                                         <StackLayout.Background>
                                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                                <GradientStop Offset="0.1" Color="#A4FFAA" />
-                                                <GradientStop Offset="0.9" Color="Blue" />
+                                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                                <GradientStop Color="#350A56" Offset="1.0"/>
                                             </LinearGradientBrush>
                                         </StackLayout.Background>
                                         <!--Stack contenedor general lista -->
@@ -198,7 +235,7 @@
                                             <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                                                 <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                        HasShadow="True" HorizontalOptions="FillAndExpand" >
-                                                    <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="{Binding NomLocal, StringFormat='El local {0}'}" />
@@ -218,7 +255,7 @@
                                                 <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                        HasShadow="True" HorizontalOptions="FillAndExpand">
 
-                                                    <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="{Binding NomPlato, StringFormat='Hizo un pedido fue un {0} '}"/>
@@ -233,7 +270,7 @@
                                             <StackLayout  Orientation="Horizontal" >
                                                 <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                        HasShadow="True" HorizontalOptions="FillAndExpand">
-                                                    <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="{Binding NomUsuario, StringFormat='Recomendado por {0}'}"/>
@@ -257,7 +294,7 @@
             <!--Panel Comida-->
             <StackLayout x:Name="PanelComida" Grid.Row="0">
                 <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start"
-                                     BackgroundColor="Red" Margin="10,10,0,0" CornerRadius="50" Padding="10"
+                                     BackgroundColor="#ACCBE4" Margin="10,10,0,0" CornerRadius="50" Padding="10"
                                       x:Name="Atras3" Clicked="Atras3_Clicked"/>
                 <!--Stack SearchBar-->
                 <StackLayout Margin="10,10,10,0"  >
@@ -287,8 +324,8 @@
                                         <!--color Degradado-->
                                         <StackLayout.Background>
                                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                                <GradientStop Offset="0.1" Color="#A4FFAA" />
-                                                <GradientStop Offset="0.9" Color="Blue" />
+                                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                                <GradientStop Color="#350A56" Offset="1.0"/>
                                             </LinearGradientBrush>
                                         </StackLayout.Background>
                                         <!--Stack contenedor general lista -->
@@ -297,7 +334,7 @@
                                             <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                                                 <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                    HasShadow="True" HorizontalOptions="FillAndExpand" >
-                                                    <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="{Binding NomLocal, StringFormat='El local {0}'}" />
@@ -317,7 +354,7 @@
                                                 <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                    HasShadow="True" HorizontalOptions="FillAndExpand">
 
-                                                    <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="{Binding NomPlato, StringFormat='Hizo un pedido fue un {0} '}"/>
@@ -332,7 +369,7 @@
                                             <StackLayout  Orientation="Horizontal" >
                                                 <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                    HasShadow="True" HorizontalOptions="FillAndExpand">
-                                                    <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="{Binding NomUsuario, StringFormat='Recomendado por {0}'}"/>
@@ -356,7 +393,7 @@
             <!--Panel Barrio-->
             <StackLayout x:Name="PanelBarrio" Grid.Row="0">
                 <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start"
-                                     BackgroundColor="Red" Margin="10,10,0,0" CornerRadius="50" Padding="10"
+                                     BackgroundColor="#ACCBE4" Margin="10,10,0,0" CornerRadius="50" Padding="10"
                                       x:Name="Atras4" Clicked="Atras4_Clicked"/>
                 <!--Stack SearchBar-->
                 <StackLayout Margin="10,10,10,0"  >
@@ -387,8 +424,8 @@
                                         <!--color Degradado-->
                                         <StackLayout.Background>
                                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                                <GradientStop Offset="0.1" Color="#A4FFAA" />
-                                                <GradientStop Offset="0.9" Color="Blue" />
+                                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                                <GradientStop Color="#350A56" Offset="1.0"/>
                                             </LinearGradientBrush>
                                         </StackLayout.Background>
                                         <!--Stack contenedor general lista -->
@@ -397,7 +434,7 @@
                                             <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                                                 <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                        HasShadow="True" HorizontalOptions="FillAndExpand" >
-                                                    <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="{Binding NomLocal, StringFormat='El local {0}'}" />
@@ -417,7 +454,7 @@
                                                 <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                        HasShadow="True" HorizontalOptions="FillAndExpand">
 
-                                                    <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="{Binding NomPlato, StringFormat='Hizo un pedido fue un {0} '}"/>
@@ -432,7 +469,7 @@
                                             <StackLayout  Orientation="Horizontal" >
                                                 <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                        HasShadow="True" HorizontalOptions="FillAndExpand">
-                                                    <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="{Binding NomUsuario, StringFormat='Recomendado por {0}'}"/>
@@ -458,10 +495,9 @@
             <StackLayout x:Name="PanelPrecio" Grid.Row="0">
                 
                 <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start"
-                                     BackgroundColor="Red" Margin="10,10,0,0" CornerRadius="50" Padding="10"
+                                     BackgroundColor="#ACCBE4" Margin="10,10,0,0" CornerRadius="50" Padding="10"
                                       x:Name="Atras" Clicked="Atras_Clicked"/>
-                <Label Text="Busqueda de 0 hasa el precio que usted Indique" HorizontalTextAlignment="Center"  
-                   HorizontalOptions="Center" FontSize="Medium" />
+                
                 <!--Stack SearchBar-->
                 <StackLayout Margin="10,0,10,0" >
                     
@@ -475,7 +511,7 @@
                            x:Name="BuscarPrecio"
                                    TextColor="Black"
                            TextChanged="BuscarPrecio_TextChanged"
-                                   Placeholder="Rango de precios"
+                                   Placeholder="Rango de precio de 0 a:"
                                    PlaceholderColor="Black" 
                            BackgroundColor="Transparent"  />
                     </Frame>
@@ -496,8 +532,8 @@
                                         <!--color Degradado-->
                                         <StackLayout.Background>
                                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                                <GradientStop Offset="0.1" Color="#A4FFAA" />
-                                                <GradientStop Offset="0.9" Color="Blue" />
+                                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                                <GradientStop Color="#350A56" Offset="1.0"/>
                                             </LinearGradientBrush>
                                         </StackLayout.Background>
                                         <!--Stack contenedor general lista -->
@@ -506,7 +542,7 @@
                                             <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                                                 <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                    HasShadow="True" HorizontalOptions="FillAndExpand" >
-                                                    <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="{Binding NomLocal, StringFormat='El local {0}'}" />
@@ -526,7 +562,7 @@
                                                 <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                    HasShadow="True" HorizontalOptions="FillAndExpand">
 
-                                                    <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="{Binding NomPlato, StringFormat='Hizo un pedido fue un {0} '}"/>
@@ -541,7 +577,7 @@
                                             <StackLayout  Orientation="Horizontal" >
                                                 <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                    HasShadow="True" HorizontalOptions="FillAndExpand">
-                                                    <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="{Binding NomUsuario, StringFormat='Recomendado por {0}'}"/>
@@ -565,10 +601,9 @@
             <StackLayout x:Name="PanelFecha" Grid.Row="0">
 
                 <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start"
-                                     BackgroundColor="Red" Margin="10,10,0,0" CornerRadius="50" Padding="10"
+                                     BackgroundColor="#ACCBE4" Margin="10,10,0,0" CornerRadius="50" Padding="10"
                                       x:Name="Atras10" Clicked="Atras_Clicked_1"/>
-                <Label Text="Busqueda de 0 hasa el precio que usted Indique" HorizontalTextAlignment="Center"  
-                   HorizontalOptions="Center" FontSize="Medium" />
+                
                 <!--Stack SearchBar-->
                 <StackLayout Margin="10,0,10,0" >
 
@@ -582,7 +617,7 @@
                            x:Name="BuscarFecha"
                                    TextColor="Black"
                            TextChanged="BuscarFecha_TextChanged_1"
-                                   Placeholder="Rango de precios"
+                                   Placeholder="Ingrrese la Fecha"
                                    PlaceholderColor="Black" 
                            BackgroundColor="Transparent"  />
                     </Frame>
@@ -603,8 +638,8 @@
                                         <!--color Degradado-->
                                         <StackLayout.Background>
                                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                                <GradientStop Offset="0.1" Color="#A4FFAA" />
-                                                <GradientStop Offset="0.9" Color="Blue" />
+                                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                                <GradientStop Color="#350A56" Offset="1.0"/>
                                             </LinearGradientBrush>
                                         </StackLayout.Background>
                                         <!--Stack contenedor general lista -->
@@ -613,7 +648,7 @@
                                             <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                                                 <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                    HasShadow="True" HorizontalOptions="FillAndExpand" >
-                                                    <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="{Binding NomLocal, StringFormat='El local {0}'}" />
@@ -633,7 +668,7 @@
                                                 <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                    HasShadow="True" HorizontalOptions="FillAndExpand">
 
-                                                    <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="{Binding NomPlato, StringFormat='Hizo un pedido fue un {0} '}"/>
@@ -648,7 +683,7 @@
                                             <StackLayout  Orientation="Horizontal" >
                                                 <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
                                                    HasShadow="True" HorizontalOptions="FillAndExpand">
-                                                    <Label  FontSize="16" TextColor="Black" HorizontalTextAlignment="Center">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="{Binding NomUsuario, StringFormat='Recomendado por {0}'}"/>
