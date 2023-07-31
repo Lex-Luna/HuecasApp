@@ -8,35 +8,7 @@
     <ScrollView>
         <Grid>
             <!--Menu Principal-->
-            <StackLayout x:Name="PanelPrincipal" Grid.Row="0" >
-                <!--Stack Titulo-->
-                <StackLayout 
-                     Margin="10" HorizontalOptions="Center">
-
-                    <Label Text="Recomendaciones de la Comunidad"
-                       TextColor="#4196E8"
-                       FontSize="30"
-                       FontAttributes="Bold"
-                           HorizontalTextAlignment="Center"
-                       HorizontalOptions="Center"/>
-
-                </StackLayout>
-                <Label Text="¿Cual es el termino de busqueda que deseas?" TextColor="#E1E841" FontSize="Medium" Padding="0,0,0,20" HorizontalOptions="Center"/>
-                <StackLayout VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="200"  >
-
-                    <Button Text="Nombre de Restaurante" TextTransform="None" CornerRadius="25" Padding="3"
-                                x:Name="BtnRestaurante" Clicked="BtnRestaurante_Clicked"/>
-                    <Button Text="Tipo de Restaurante" TextTransform="None" CornerRadius="25"  Padding="3" 
-                                x:Name="BtnCategoria" Clicked="BtnCategoria_Clicked"/>
-                    <Button Text="Nombre de un Plato" TextTransform="None" CornerRadius="25" Padding="3" 
-                                x:Name="BtnPlato" Clicked="BtnPlato_Clicked"/>
-                    <Button Text="Barrio" TextTransform="None" CornerRadius="25"  Padding="3"
-                                x:Name="BtnBarrio" Clicked="BtnBarrio_Clicked"/>
-                    <Button Text="Rango de Precios" TextTransform="None" CornerRadius="25"  Padding="3" 
-                                x:Name="BtnPrecios" Clicked="BtnPrecios_Clicked"/>
-
-                </StackLayout>
-            </StackLayout>
+            
             
             
             

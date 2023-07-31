@@ -35,7 +35,7 @@ namespace HuecasAppUsers.Vista
             {
                 await MostrarMisEncuestas(IdUsuario);
             }).Wait();
-            VistaPreincipal();
+            
         }
 
         #endregion
@@ -222,38 +222,6 @@ namespace HuecasAppUsers.Vista
         #endregion
         
         
-        void VistaPreincipal()
-        {
-            PanelPrincipal.IsVisible = false;
-            PanelRestaurante.IsVisible = true;
-        }
-
-
         
-
-        private void BtnRestaurante_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtnCategoria_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtnPlato_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtnBarrio_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtnPrecios_Clicked(object sender, EventArgs e)
-        {
-
-        }
     }
 }
