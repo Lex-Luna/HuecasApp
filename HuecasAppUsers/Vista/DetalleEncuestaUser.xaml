@@ -100,7 +100,7 @@
 
                                     <Entry Text="{Binding Geolocalizacion}" BackgroundColor="Transparent" HorizontalTextAlignment="Center"
                                            HorizontalOptions="Center" TextColor="#ACCBE4"  Margin="0,0,0,10" />
-
+                                    <!--Framme Video-->
                                     <Frame CornerRadius="50" VerticalOptions="Center" HorizontalOptions="Center" 
                                            Padding="-1" HeightRequest="40" WidthRequest="250">
                                         <Frame.Background>
@@ -119,6 +119,7 @@
                                             </Label>
                                         </Grid>
                                     </Frame>
+                                    <!--Framme Fotografia-->
                                     <Frame Padding="-4" BackgroundColor="Transparent" CornerRadius="50">
                                         <StackLayout x:Name="PanelFoto" >
                                             <Label Text="Imaagen" HorizontalOptions="Center" TextColor="#ACCBE4" />

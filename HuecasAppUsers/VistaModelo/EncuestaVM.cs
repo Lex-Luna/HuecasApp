@@ -507,8 +507,8 @@ namespace HuecasAppUsers.VistaModelo
             parametros.CalificacionComida = TxtComida;
             parametros.CalificacionLugar = TxtLocal;
             parametros.Recomendacion = Recomendado;
-            parametros.IdLocal = _IdLocal;
-            parametros.IdPlato = _IdPlato;
+            //parametros.IdLocal = _IdLocal;
+            //parametros.IdPlato = _IdPlato;
             Promedio = (TxtAtencion + TxtComida + TxtLocal) / 3;
 
             _IdCalificacion = await funcion.InserCalificacion(parametros);
