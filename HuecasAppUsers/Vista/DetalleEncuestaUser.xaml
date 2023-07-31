@@ -10,36 +10,37 @@
     </ContentPage.Resources>
     <ContentPage.Content  >
 
-        <StackLayout BackgroundColor="Black" VerticalOptions="Center" HorizontalOptions="Center" >
+        <StackLayout BackgroundColor="Black"  HorizontalOptions="Center"  >
 
             <Grid  RowDefinitions="*">
                 <!--Este es el grid Menu Principal-->
-                <StackLayout  x:Name="MenuBotones"  BackgroundColor="Black">
+                <StackLayout  x:Name="MenuBotones"  >
+                    
                     <ScrollView>
-                        <StackLayout HorizontalOptions="Center"   HeightRequest="600" 
+                        <StackLayout HorizontalOptions="Center"   HeightRequest="600" WidthRequest="300"
                                  Margin="0,80,0,0">
-                            <Label Grid.Row="0" Text="Aqui tienes mas info sobre esta Encuesta" FontSize="25"
-                               FontAttributes="Bold" TextColor="#4196E8" Margin="20" HorizontalTextAlignment="Center" />
-                            <Label Grid.Row="0" Text="Sobre que necesitas saber:" FontSize="15" HorizontalTextAlignment="Center"
-                               FontAttributes="Bold" TextColor="#E1E841" Margin="20"/>
+                            <Label Grid.Row="0" Text="Aqui tienes mas info sobre esta Encuesta" FontSize="25" FontAttributes="Bold,Italic" 
+                                TextColor="#ACCBE4"  HorizontalTextAlignment="Center" Margin="0,0,0,60"/>
 
 
-                            <Button Text="Informacion del Local" x:Name="btnLocal" Clicked="btnLocal_Clicked" CornerRadius="30" />
-                            <Button Text="Informacion de la comida" x:Name="btnComida" Clicked="btnComida_Clicked" CornerRadius="30" />
-                            <Button Text="Informacion de la calificacion" x:Name="btnCalificacion" Clicked="btnCalificacion_Clicked" CornerRadius="30" />
+
+                            <Button Text="Informacion del Local" x:Name="btnLocal" Clicked="btnLocal_Clicked" CornerRadius="30" VerticalOptions="Center" BackgroundColor="Transparent" BorderColor="#ACCBE4" BorderWidth="3" Margin="5" />
+                            <Button Text="Informacion de la comida" x:Name="btnComida" Clicked="btnComida_Clicked" CornerRadius="30" VerticalOptions="Center" BackgroundColor="Transparent" BorderColor="#ACCBE4" BorderWidth="3" Margin="5"  />
+                            <Button Text="Informacion de la calificacion" x:Name="btnCalificacion" Clicked="btnCalificacion_Clicked" VerticalOptions="Center" CornerRadius="30" BackgroundColor="Transparent" BorderColor="#ACCBE4" BorderWidth="3" Margin="5"  />
                             <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
-                                     BackgroundColor="Red" Margin="0,120,0,0" CornerRadius="50" Padding="10"
+                                     BackgroundColor="#ACCBE4" Margin="0,120,0,0" CornerRadius="50" Padding="10"
                                       x:Name="Atras" Clicked="Atras_Clicked"/>
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>
                 <!--Informacion de tu Local-->
                 <Grid  RowDefinitions="auto,*,*,auto" VerticalOptions="Center" x:Name="InfoLocal" HeightRequest ="800"
-                      HorizontalOptions="Center" BackgroundColor="Black">
+                      HorizontalOptions="Center" >
+                    
 
                     <Label Text="Local" FontSize="25" Grid.Row="0"
-                               FontAttributes="Bold" TextColor="#E1E841" 
-                           Margin="10" VerticalOptions="Center" 
+                               FontAttributes="Bold" TextColor="#ACCBE4" 
+                           Margin="0,20,0,0" VerticalOptions="Center" 
                            HorizontalOptions="Center"/>
 
 
@@ -50,42 +51,42 @@
 
                                 <StackLayout HeightRequest="600" BackgroundColor="Black" 
                                              Margin="20" VerticalOptions="Center">
-
+                                    
                                     <Label Text="{Binding NombreLocal, 
                                             StringFormat='Nombre del local: {0}'}" HorizontalTextAlignment="Center"
-                                           Margin="7" FontSize="Medium" TextColor="#4196E8"/>
+                                           Margin="7" FontSize="Medium" TextColor="#ACCBE4"/>
 
                                     <Label Text="{Binding Categorias, 
                                             StringFormat='El tipo de local es: {0}'}" 
                                                HorizontalTextAlignment="Center"
-                                           Margin="7" FontSize="Medium" TextColor="#4196E8" />
+                                           Margin="7" FontSize="Medium" TextColor="#ACCBE4" />
 
                                     <Label Text="{Binding Barrio, 
                                             StringFormat='Barrio del local: {0}'}" HorizontalTextAlignment="Center"
-                                           Margin="7" FontSize="Medium" TextColor="#4196E8" />
+                                           Margin="7" FontSize="Medium" TextColor="#ACCBE4" />
 
 
                                     <Label Text="{Binding Direccion, 
                                             StringFormat='Las calles en las que se encuentra el local son: {0}'}" 
                                                HorizontalTextAlignment="Center"
-                                           Margin="7" FontSize="Medium" TextColor="#4196E8" />
+                                           Margin="7" FontSize="Medium" TextColor="#ACCBE4" />
 
-                                    <Label Text="Copia esta localizacion en google para encontrar este ubicacion:" 
-                                               HorizontalTextAlignment="Center" Margin="7" FontSize="Medium" TextColor="#4196E8" />
+                                    <Label Text="Copiar Geolocalizacion en Google Maps:" 
+                                               HorizontalTextAlignment="Center" Margin="0,7,0,0" FontSize="Medium" TextColor="#ACCBE4" />
 
-                                    <Entry Text="{Binding Geolocalizacion}" BackgroundColor="Black" HorizontalTextAlignment="Center"
-                                           HorizontalOptions="Center" TextColor="#4196E8"/>
+                                    <Entry Text="{Binding Geolocalizacion}" BackgroundColor="#ACCBE4" HorizontalTextAlignment="Center"
+                                           HorizontalOptions="Center" TextColor="Black"  Margin="0,0,0,0"/>
 
                                     <StackLayout x:Name="PanelFoto" >
-                                        <Label Text="Imaagen" HorizontalOptions="Center" />
+                                        <Label Text="Imaagen" HorizontalOptions="Center" TextColor="#ACCBE4" />
                                         <ScrollView>
                                             <Image Source="{Binding FotoFachada}"  />
                                         </ScrollView>
 
                                     </StackLayout>
-                                    <Frame CornerRadius="50" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="red">
+                                    <Frame CornerRadius="50" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent" BorderColor="#ACCBE4" Padding="-1">
                                         <Grid RowDefinitions="*" >
-                                            <Label Text="Descargue el Video del Restaurante" TextColor="Black" HorizontalTextAlignment="Center" FontSize="Medium" Grid.Row="0" />
+                                            <Label Text="Descargue el Video Local" TextColor="#ACCBE4" HorizontalTextAlignment="Center" FontSize="Medium" Grid.Row="0" VerticalOptions="Center" />
                                             <Label Text="{Binding Video}" TextColor="Transparent" BackgroundColor="Transparent" Grid.Row="0">
                                                 <Label.GestureRecognizers>
                                                     <TapGestureRecognizer Tapped="OnLabelTapped" />
@@ -101,7 +102,7 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                     <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
-                                     BackgroundColor="Red" Margin="0,0,0,0" CornerRadius="50" Padding="10"  Grid.Row="3"
+                                     BackgroundColor="#ACCBE4"   Margin="0,0,0,0" CornerRadius="50" Padding="10"  Grid.Row="3"
                                  x:Name="CerrarLocal" Clicked="btnCerrar2_Clicked"/>
 
                 </Grid>
@@ -109,8 +110,8 @@
                 <Grid  RowDefinitions="auto,*,*,auto" x:Name="InfoPlato" HeightRequest="800" BackgroundColor="Black"
                       HorizontalOptions="Center" VerticalOptions="Center"  >
 
-                    <Label Grid.Row="0" Text="Plato" FontSize="Large"
-                               FontAttributes="Bold" TextColor="#E1E841"
+                    <Label Grid.Row="0" Text="Plato" FontSize="25"
+                               FontAttributes="Bold" TextColor="#ACCBE4"
                            Margin="0,90,0,0"  VerticalOptions="Center" 
                            HorizontalOptions="Center"/>
 
@@ -118,30 +119,30 @@
                         Margin="5,15,5,5" Grid.Row="1" Grid.RowSpan="2">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Grid RowDefinitions="*,*,*,*" >
+                                <Grid RowDefinitions="*,*,*,*"  >
                                     <Frame Grid.Row="0" CornerRadius="20" BackgroundColor="Transparent" 
-                                           Margin="7" Padding="2" BorderColor="#52524A">
+                                           Margin="7" Padding="2"  VerticalOptions="Center">
                                         <Label Grid.Row="0" Text="{Binding Nombre, 
                                             StringFormat='Nombre del Plato: {0}'}"  Margin="7" FontSize="Medium"
-                                               HorizontalTextAlignment="Center" TextColor="#4196E8"/>
+                                               HorizontalTextAlignment="Center" TextColor="#ACCBE4"/>
                                     </Frame>
                                     <Frame Grid.Row="1" CornerRadius="20" BackgroundColor="Transparent" 
-                                           Margin="7" Padding="2" BorderColor="#52524A">
+                                           Margin="7" Padding="2"  VerticalOptions="Center">
                                         <Label Grid.Row="1" Text="{Binding Precio, 
                                             StringFormat='Precio del Plato: $ {0} '}" Margin="7" FontSize="Medium"
-                                               HorizontalTextAlignment="Center" TextColor="#4196E8"/>
+                                               HorizontalTextAlignment="Center" TextColor="#ACCBE4"/>
                                     </Frame>
                                     <Frame Grid.Row="2" CornerRadius="20" BackgroundColor="Transparent" 
-                                           Margin="7" Padding="2" BorderColor="#52524A">
+                                           Margin="7" Padding="2" VerticalOptions="Center">
                                         <Label Grid.Row="2" Text="{Binding Descripcion, 
-                                            StringFormat='Descripcion de lo que viene: {0}'}" Margin="7" FontSize="Medium"
-                                               HorizontalTextAlignment="Center" TextColor="#4196E8"/>
+                                            StringFormat='Descripcion: {0}'}" Margin="7" FontSize="Medium"
+                                               HorizontalTextAlignment="Center" TextColor="#ACCBE4"/>
                                     </Frame>
                                     <Frame Grid.Row="3" CornerRadius="20" BackgroundColor="Transparent" 
-                                           Margin="7" Padding="2" BorderColor="#52524A">
+                                           Margin="7" Padding="2"  VerticalOptions="Center">
                                         <Label Grid.Row="3" Text="{Binding Comentario, 
-                                            StringFormat='Comentario sobre la calidad de su comida: {0}'}" Margin="7" FontSize="Medium"
-                                               HorizontalTextAlignment="Center" TextColor="#4196E8"/>
+                                            StringFormat='Comentario: {0}'}" Margin="7" FontSize="Medium"
+                                               HorizontalTextAlignment="Center" TextColor="#ACCBE4"/>
                                     </Frame>
                                 </Grid>
                             </DataTemplate>
@@ -149,15 +150,15 @@
                     </CollectionView>
 
                     <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
-                                     BackgroundColor="Red" Margin="0,0,0,0" CornerRadius="50" Padding="10" Grid.Row="3" 
+                                     BackgroundColor="#ACCBE4" Margin="0,0,0,0" CornerRadius="50" Padding="10" Grid.Row="3" 
                                 x:Name="CerrarPlato" Clicked="btnCerrar1_Clicked" />
 
                 </Grid>
                 
                 <Grid RowDefinitions="Auto,auto,Auto" VerticalOptions="Center" BackgroundColor="Black"
                       HorizontalOptions="Center" x:Name="InfoCalificacion" HeightRequest="800"  >
-                    <Label Grid.Row="0" Text="Calificacion" FontSize="Large"
-                               FontAttributes="Bold" TextColor="#E1E841"
+                    <Label Grid.Row="0" Text="Calificacion" FontSize="25"
+                               FontAttributes="Bold" TextColor="#ACCBE4"
                            Margin="20" HorizontalOptions="Center"
                            VerticalOptions="Center" />
 
@@ -168,28 +169,28 @@
                                 <Grid RowDefinitions="*,*,*,*"   Padding="20" VerticalOptions="Center" >
 
                                     <Frame Grid.Row="0" CornerRadius="20" BackgroundColor="Transparent" 
-                                           Margin="7" Padding="2" BorderColor="#52524A">
+                                           Margin="7" Padding="2" >
                                         <Label Text="{Binding CalificacionComida, 
                                             StringFormat='Calificacion de su plato fue de : {0}/10'}" 
-                                               HorizontalTextAlignment="Center" TextColor="#4196E8" FontSize="Medium"/>
+                                               HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
                                     </Frame>
                                     <Frame Grid.Row="1" CornerRadius="20" BackgroundColor="Transparent" 
-                                           Margin="7" Padding="2" BorderColor="#52524A">
+                                           Margin="7" Padding="2" >
                                         <Label  Text="{Binding CalificacionLugar, 
                                             StringFormat='Calificacion de condiciones de este local fue de: {0}/10'}" 
-                                               HorizontalTextAlignment="Center" TextColor="#4196E8" FontSize="Medium"/>
+                                               HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
                                     </Frame>
                                     <Frame Grid.Row="2"  CornerRadius="20" BackgroundColor="Transparent" 
-                                           Margin="7" Padding="2" BorderColor="#52524A">
+                                           Margin="7" Padding="2" >
                                         <Label Text="{Binding CalificacionAtencion, 
                                             StringFormat='Calificacion de la atencion brindada fue  de : {0}/10'}" 
-                                               HorizontalTextAlignment="Center" TextColor="#4196E8" FontSize="Medium"/>
+                                               HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
                                     </Frame>
                                     <Frame Grid.Row="3" CornerRadius="20" BackgroundColor="Transparent" 
-                                           Margin="7" Padding="2" BorderColor="#52524A">
+                                           Margin="7" Padding="2" >
                                         <Label Text="{Binding Recomendacion, Converter={StaticResource BoolToRecommendationConverter}, 
                                             StringFormat='El Local fue: {0}'}" 
-                                               HorizontalTextAlignment="Center" TextColor="#4196E8" FontSize="Medium"/>
+                                               HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
                                     </Frame>
 
                                 </Grid>
@@ -198,7 +199,7 @@
                     </CollectionView>
 
                     <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
-                                     BackgroundColor="Red" Margin="0,0,0,0" CornerRadius="50" Padding="10" Grid.Row="2"
+                                     BackgroundColor="#ACCBE4" Margin="0,0,0,0" CornerRadius="50" Padding="10" Grid.Row="2"
                                  x:Name="CerrarCalificacion" Clicked="btnCerrar3_Clicked"/>
 
                 </Grid>
