@@ -30,22 +30,31 @@ namespace HuecasAppUsers.Datos
         #region Insertar
         public async Task<string> InsertarLocal(LocalM parametros)
         {
-            var data = await Constantes.firebase.Child("Local")
-                .PostAsync(new LocalM()
-                {
-                    Barrio = parametros.Barrio,
-                    Direccion = parametros.Direccion,
-                    FotoFachada = parametros.FotoFachada,
-                    Geolocalizacion = parametros.Geolocalizacion,
-                    NombreLocal = parametros.NombreLocal,
-                    Video = parametros.Video,
-                    IdPais = parametros.IdPais,
-                    IdCiudad = parametros.IdCiudad,
-                    Categorias = parametros.Categorias,
-                    IdLocal = parametros.IdLocal
-                });
-            _IdLocal = data.Key;
-            return _IdLocal;
+            try
+            {
+                var data = await Constantes.firebase.Child("Local")
+              .PostAsync(new LocalM()
+              {
+                  Barrio = parametros.Barrio,
+                  Direccion = parametros.Direccion,
+                  FotoFachada = parametros.FotoFachada,
+                  Geolocalizacion = parametros.Geolocalizacion,
+                  NombreLocal = parametros.NombreLocal,
+                  Video = parametros.Video,
+                  IdPais = parametros.IdPais,
+                  IdCiudad = parametros.IdCiudad,
+                  Categorias = parametros.Categorias,
+                  IdLocal = parametros.IdLocal
+              });
+                _IdLocal = data.Key;
+                return _IdLocal;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+
         }
         #endregion
         #region Mostrar
@@ -107,10 +116,10 @@ namespace HuecasAppUsers.Datos
         }
 
         #endregion
-                  
 
-                                               
-                            
+
+
+
 
     }
 }
