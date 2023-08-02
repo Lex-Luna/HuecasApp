@@ -85,12 +85,12 @@ namespace HuecasAppUsers.Datos
         }
         #endregion
         #region Multimedia
-        public async Task<string> SubirFotoFachada(Stream imagen, string identificacion)
+        public async Task<string> SubirFotoFachada(Stream imagen, string nombreRestaurante)
         {
 
             var storageImagen = await new FirebaseStorage("huecasapp-d8da1.appspot.com")
                 .Child("Local")
-                .Child(identificacion + ".jpg")
+                .Child(nombreRestaurante + ".jpg")
                 .PutAsync(imagen);
             rutafoto = storageImagen;
             return rutafoto;

@@ -50,24 +50,6 @@ namespace HuecasAppUsers.VistaModelo
             await Navigation.PushAsync(new CrearCorreo());
         }
 
-        private async void btnIniciar_Clicked(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(Correo))
-            {
-                if (!string.IsNullOrEmpty(Contraseña))
-                {
-                    await ValidarDatos();
-                }
-                else
-                {
-                    await DisplayAlert("Alerta", "Ingrese su contraseña", "OK");
-                }
-            }
-            else
-            {
-                await DisplayAlert("Alerta", "Ingrese su correo", "OK");
-            }
-        }
         public async Task ValidarDatos()
         {
             try
@@ -85,21 +67,30 @@ namespace HuecasAppUsers.VistaModelo
         }
         private async Task btnIniciar()
         {
-            if (!string.IsNullOrEmpty(Correo))
+            try
             {
-                if (!string.IsNullOrEmpty(Contraseña))
+                if (!string.IsNullOrEmpty(Correo))
                 {
-                    await ValidarDatos();
+                    if (!string.IsNullOrEmpty(Contraseña))
+                    {
+                        await ValidarDatos();
+                    }
+                    else
+                    {
+                        await DisplayAlert("Alerta", "Ingrese su contraseña", "OK");
+                    }
                 }
                 else
                 {
-                    await DisplayAlert("Alerta", "Ingrese su contraseña", "OK");
+                    await DisplayAlert("Alerta", "Ingrese su correo", "OK");
                 }
             }
-            else
+            catch (Exception exs)
             {
-                await DisplayAlert("Alerta", "Ingrese su correo", "OK");
+
+                throw exs;
             }
+            
         }
 
         private async Task btnCrearCuenta()

@@ -122,9 +122,14 @@
                                     <!--Framme Fotografia-->
                                     <Frame Padding="-4" BackgroundColor="Transparent" CornerRadius="50">
                                         <StackLayout x:Name="PanelFoto" >
-                                            <Label Text="Imaagen" HorizontalOptions="Center" TextColor="#ACCBE4" />
+                                            <Label Text="Imagen" HorizontalOptions="Center" TextColor="#ACCBE4" />
                                             <ScrollView>
-                                                <Image Source="{Binding FotoFachada}"  />
+                                                <Image>
+                                                    <Image.Source>
+                                                        <UriImageSource Uri="{Binding FotoFachada}" CachingEnabled="False" />
+                                                    </Image.Source>
+                                                </Image>
+
                                             </ScrollView>
                                         </StackLayout>
                                     </Frame>

@@ -38,32 +38,42 @@ namespace HuecasAppUsers.VistaModelo
 
         public async Task btnCrearcuenta()
         {
-            if (!string.IsNullOrEmpty(TxtNombre))
+
+            try
             {
-                if (!string.IsNullOrEmpty(TxtApellido))
+                if (!string.IsNullOrEmpty(TxtNombre))
                 {
-                    if (!string.IsNullOrEmpty(TxtCorreo))
+                    if (!string.IsNullOrEmpty(TxtApellido))
                     {
-                        if (!string.IsNullOrEmpty(TxtContraseña))
+                        if (!string.IsNullOrEmpty(TxtCorreo))
                         {
-                            await CrearCuenta();
-                            await IniciarSesion();
-                            await ObteberIdUsuario();
-                            await InsertarUsuario();
-                            await NavContenedor();
+                            if (!string.IsNullOrEmpty(TxtContraseña))
+                            {
+                                await CrearCuenta();
+                                await ObteberIdUsuario();
+                                await InsertarUsuario();
+                                await IniciarSesion();
+                                await NavContenedor();
+                            }
+                            else
+                                await DisplayAlert("Alerta", "Agregue una contraseña", "OK");
                         }
                         else
-                            await DisplayAlert("Alerta", "Agregue una contraseña", "OK");
+                            await DisplayAlert("Alerta", "Agregue un correo", "OK");
                     }
                     else
-                        await DisplayAlert("Alerta", "Agregue un correo", "OK");
+                        await DisplayAlert("Alerta", "Agregue un apellido", "OK");
+
                 }
                 else
-                    await DisplayAlert("Alerta", "Agregue un apellido", "OK");
-
+                    await DisplayAlert("Alerta", "Agregue un nombre", "OK");
             }
-            else
-                await DisplayAlert("Alerta", "Agregue un nombre", "OK");
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+           
         }
 
         public async Task CrearCuenta()
