@@ -13,6 +13,8 @@ namespace HuecasAppUsers.Modelo
         public bool Estado { get; set; }
         public string Nombre { get; set; }
         public string IdAdministrador { get; set; }
+        public string FotoUsuario { get; set; }
         public int NumEncuesta{ get; set; }
+        public int EncuestasEliminadas{ get; set; }
     }
 }

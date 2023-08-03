@@ -35,7 +35,7 @@ namespace HuecasAppUsers.Vista
             {
                 await MostrarMisEncuestas(IdUsuario);
             }).Wait();
-            
+
         }
 
         #endregion
@@ -46,6 +46,7 @@ namespace HuecasAppUsers.Vista
         string _correo;
         string _contrania;
         string _idAdmin;
+        string _fotoUsuario;
         bool _estado;
         int _numEncuesta;
 
@@ -56,7 +57,7 @@ namespace HuecasAppUsers.Vista
         #endregion
         #region OBJETOS 
 
-        
+
         public EncuestaM SelectEncuesta { set; get; }
         public ObservableCollection<EncuestaM> LisEncueta1
         {
@@ -83,6 +84,15 @@ namespace HuecasAppUsers.Vista
             set
             {
                 _apellido = value;
+                OnPropertyChanged();
+            }
+        }
+        public string FotoUsuario
+        {
+            get => _fotoUsuario;
+            set
+            {
+                _fotoUsuario = value;
                 OnPropertyChanged();
             }
         }
@@ -172,9 +182,10 @@ namespace HuecasAppUsers.Vista
                 IdAdmin = data[0].IdAdministrador;
                 Contrania = data[0].Contrasenia;
                 Estado = data[0].Estado;
+                FotoUsuario = data[0].FotoUsuario;
 
 
-                //Preferences.Remove("MyFirebaseRefreshToken");  parece que el CPU esta a tope     , v
+                
 
             }
             catch (Exception)

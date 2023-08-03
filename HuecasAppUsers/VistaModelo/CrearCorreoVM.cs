@@ -9,6 +9,7 @@ using System;
 using HuecasAppUsers.Vista;
 using HuecasAppUsers.Datos;
 using HuecasAppUsers.Modelo;
+using Plugin.Media.Abstractions;
 
 namespace HuecasAppUsers.VistaModelo
 {
@@ -26,6 +27,8 @@ namespace HuecasAppUsers.VistaModelo
         string txtApellido;
         string txtCorreo;
         string txtContraseña;
+        string rutafoto;
+        MediaFile foto;
         #endregion
         #region OBJETOS 
         public string TxtNombre { get { return txtNombre; } set { SetValue(ref txtNombre, value); } }
@@ -116,16 +119,18 @@ namespace HuecasAppUsers.VistaModelo
         {
             try
             {
+                await SubirFotoUser();
                 var funcion = new UsuarioD();
                 var parametros = new UsuarioM();
                 parametros.Apellido = TxtApellido;
+                parametros.FotoUsuario = rutafoto;
                 parametros.Contrasenia = TxtContraseña;
                 parametros.Correo = TxtCorreo;
                 parametros.Estado = true;
                 parametros.IdAdministrador = "lUUpQuSwqibNTFqEq4LVQKK8kEG2";
                 parametros.Nombre =TxtNombre;
                 _IdUsuario = await funcion.InserUsuario(parametros);
-                //Process.GetCurrentProcess().CloseMainWindow();
+                
 
 
             }
@@ -138,11 +143,54 @@ namespace HuecasAppUsers.VistaModelo
 
         }
 
-
-        /*private void CerrarSesion()
+        public async Task TomarFoto()
         {
-            Preferences.Remove("MyFirebaseRefreshToken");
-        }*/
+            var camara = new StoreCameraMediaOptions();
+            camara.PhotoSize = PhotoSize.Medium;
+            camara.SaveToAlbum = true;
+            try
+            {
+                foto = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(camara);
+                if (foto != null)
+                {
+                    Foto = ImageSource.FromStream(() =>
+                    {
+                        return foto.GetStream();
+                    });
+                    
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+        public async Task SubirFotoUser()
+        {
+            try
+            {
+                var funcion = new UsuarioD();
+                if (rutafoto == null)
+                {
+                    rutafoto = await funcion.SubirFotoUser(foto.GetStream(), txtNombre);
+                }
+                else
+                {
+                    await DisplayAlert("No tomaste foto", "La seccion foto saldra vacia", "Ok");
+                    rutafoto = "No hay foto";
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+
+
 
         private async Task Volver()
         {
@@ -155,7 +203,7 @@ namespace HuecasAppUsers.VistaModelo
         #region COMANDOS
         public ICommand btnCrearcuentaComand => new Command(async () => await btnCrearcuenta());
         public ICommand Volvercomamd => new Command(async () => await Volver());
-        //public ICommand NavClientesComand => new Command(async () => await NavClientes());
+        public ICommand TomarFotoComand => new Command(async () => await TomarFoto());
 
         #endregion
     }

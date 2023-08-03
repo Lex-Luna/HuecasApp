@@ -72,7 +72,7 @@
                            WidthRequest="150"
                            CornerRadius="75"
                            Margin="40,10,0,5">
-                                <Image Source="usuario.png" HeightRequest="50"/>
+                                <Image Source="{Binding FotoUsuario}" HeightRequest="50"/>
                             </Frame>
 
                             <StackLayout HorizontalOptions="EndAndExpand" Margin="100,15,0,0">

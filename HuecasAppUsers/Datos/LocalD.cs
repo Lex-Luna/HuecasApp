@@ -105,15 +105,7 @@ namespace HuecasAppUsers.Datos
             rutaVideo = storageVideo;
             return rutaVideo;
         }
-        public async Task SeleccionarVideo(string nombreDelVideo)
-        {
-            var storage = new FirebaseStorage("huecasapp-d8da1.appspot.com");
-            string rutaVideo = await storage
-                .Child("Local")
-                .Child(nombreDelVideo + ".mp4")
-                .GetDownloadUrlAsync();
-            string RutaVideoSeleccionado = rutaVideo;
-        }
+        
 
         #endregion
 

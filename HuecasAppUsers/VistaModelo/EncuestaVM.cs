@@ -203,7 +203,7 @@ namespace HuecasAppUsers.VistaModelo
         async Task AgregarLocal()
         {
 
-            await SubirFoto();
+            await SubirFotoFachada();
             await SubirVideo();
             var funcion = new LocalD();
             var parametros = new LocalM();
@@ -285,7 +285,7 @@ namespace HuecasAppUsers.VistaModelo
         }
 
 
-        public async Task SubirFoto()
+        public async Task SubirFotoFachada()
         {
             try
             {
