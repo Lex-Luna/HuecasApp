@@ -37,7 +37,7 @@
 
 
                     </StackLayout>
-                    <Button Text="+ Añadir Nueva Encuesta"
+                    <Button Text="+ Añadir Encuesta"
                     CornerRadius="15"
                     HeightRequest="40"
                     VerticalOptions="CenterAndExpand"
