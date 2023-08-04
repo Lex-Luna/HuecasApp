@@ -11,5 +11,5 @@
     <!--Pages can be added as references or inline-->
     <local:MenuUser Title="Usuario" IconImageSource="userqueda.png"/>
     <local:PagCommunity Title="Comunidad" IconImageSource="Home.png"/>
-    <local:Informacion Title="Informacion" IconImageSource="megafono.png"/>
+    <local:Informacion Title="Información" IconImageSource="megafono.png"/>
 </TabbedPage>

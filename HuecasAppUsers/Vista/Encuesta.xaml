@@ -54,7 +54,7 @@
                                 </Frame.GestureRecognizers>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 
-                                    <Label Text="Video del interior" TextColor="Black" 
+                                    <Label Text="Vídeo del interior" TextColor="Black" 
                                        HorizontalOptions="Center"
                                        FontAttributes="Bold" FontSize="14"  HorizontalTextAlignment="Center" />
                                     <Image Source="video.png" HeightRequest="30" />
@@ -67,7 +67,7 @@
                                 </Frame.GestureRecognizers>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 
-                                    <Label Text="Geolocalizacion" TextColor="black" 
+                                    <Label Text="Geolocalización" TextColor="black" 
                                        HorizontalOptions="Center"
                                        FontAttributes="Bold" FontSize="14"  HorizontalTextAlignment="Center" />
                                     <Image Source="geolocalizacion.png" HeightRequest="30" />
@@ -92,7 +92,7 @@
                                 </StackLayout>
                                 <!--Piker Categorias local -->
                                 <StackLayout Orientation="Horizontal"   >
-                                    <Label Text="Categoria:" FontSize="15"
+                                    <Label Text="Categoría:" FontSize="15"
                                        FontAttributes="Bold" TextColor="White"
                                        VerticalOptions="Center"/>
                                     <Picker HorizontalOptions="FillAndExpand"                            
@@ -103,14 +103,14 @@
                                 <!--ItemDisplayBinding="{Binding Descripcion}"-->
                                 <!--Piker pais local -->
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="Pais:" FontSize="15"
+                                    <Label Text="País:" FontSize="15"
                                        FontAttributes="Bold" TextColor="White"
                                        VerticalOptions="Center"/>
                                     <Picker HorizontalOptions="FillAndExpand"                            
                                         ItemsSource="{Binding Listpais}"
                                         ItemDisplayBinding="{Binding Pais}"
                                         SelectedItem="{Binding SelectPais}"
-                                        Title="Pais del local"/>
+                                        Title="País del local"/>
                                 </StackLayout>
                                 <!--Piker Ciudad local-->
                                 <StackLayout Orientation="Horizontal">
@@ -138,7 +138,7 @@
                                 </StackLayout>
                                 <!--stack Direccion local-->
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="Direccion:"
+                                    <Label Text="Dirección:"
                                        FontSize="15"
                                        FontAttributes="Bold"
                                        VerticalOptions="Center"
@@ -233,7 +233,7 @@
 
                                 <!--stak local Comntario-->
                                 <StackLayout Orientation="Vertical">
-                                    <Label Text="¿Que opinion tienes de tu comida?"
+                                <Label Text="¿Que opinión tienes de tu comida?"
                                FontSize="15"
                                FontAttributes="Bold"
                                VerticalOptions="Center"
@@ -245,7 +245,7 @@
                                 </StackLayout>
                                 <!-- stack descripcion PLato-->
                                 <StackLayout Orientation="Vertical">
-                                    <Label Text="¿Como describirias tu plato?"
+                                <Label Text="¿Como describirías tu plato?"
                                FontSize="15"
                                FontAttributes="Bold"
                                VerticalOptions="Center"
@@ -274,7 +274,7 @@
                 </Grid>
                 <!--Cuerpo -->
                 <StackLayout Grid.Row="0"  HorizontalOptions="Center" Margin="10">
-                    <Label Text="Calificacion" FontSize="50" TextColor="#ACCBE4" FontAttributes="Bold,Italic" />
+                    <Label Text="Calificación" FontSize="50" TextColor="#ACCBE4" FontAttributes="Bold,Italic" />
                     <Label Text="3/3" HorizontalTextAlignment="Center" FontSize="Large" TextColor="#ACCBE4"/>
                 </StackLayout>
 
@@ -286,7 +286,7 @@
                     </Grid>
 
                     <StackLayout HorizontalOptions="Center" Spacing="15">
-                        <Label Text="¿Desliza para mostrarnos tu Calificacion ;)?" TextColor="#ACCBE4" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" />
+                        <Label Text="¿Desliza para mostrarnos tu calificación ;)?" TextColor="#ACCBE4" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" />
                         <Frame Grid.Row="1" Padding="0" HeightRequest="275" Margin="0" CornerRadius="15" >
                             <Frame.Background>
                                 <LinearGradientBrush EndPoint="1,0">

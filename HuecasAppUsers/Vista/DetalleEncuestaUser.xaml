@@ -156,13 +156,11 @@
                         Margin="5,15,5,5" Grid.Row="1" Grid.RowSpan="2">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Grid RowDefinitions="*,*,*,*"  >
-                                    <Frame Grid.Row="0" CornerRadius="20" BackgroundColor="Transparent" 
-                                           Margin="7" Padding="2"  VerticalOptions="Center">
-                                        <Label Grid.Row="0" Text="{Binding Nombre, 
+                                <StackLayout   >
+                                    <Label Grid.Row="0" Text="{Binding Nombre, 
                                             StringFormat='Nombre del Plato: {0}'}"  Margin="7" FontSize="Medium"
                                                HorizontalTextAlignment="Center" TextColor="#ACCBE4"/>
-                                    </Frame>
+
                                     <Frame Grid.Row="1" CornerRadius="20" BackgroundColor="Transparent" 
                                            Margin="7" Padding="2"  VerticalOptions="Center">
                                         <Label Grid.Row="1" Text="{Binding Precio, 
@@ -182,7 +180,7 @@
                                                HorizontalTextAlignment="Center" TextColor="#ACCBE4"/>
                                     </Frame>
                                     <!--Frame Imagen-->
-                                    <Frame Padding="-4" BackgroundColor="Transparent" CornerRadius="50">
+                                    <Frame Padding="-4" BackgroundColor="Transparent" CornerRadius="50" Grid.Row="4" >
                                         <StackLayout x:Name="PanelFoto" >
                                             <Label Text="Imagen del Plato" HorizontalOptions="Center" TextColor="#ACCBE4" />
                                             <ScrollView>
@@ -195,7 +193,7 @@
                                             </ScrollView>
                                         </StackLayout>
                                     </Frame>
-                                </Grid>
+                                </StackLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
