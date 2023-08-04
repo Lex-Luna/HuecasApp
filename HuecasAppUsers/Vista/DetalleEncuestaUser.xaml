@@ -181,6 +181,20 @@
                                             StringFormat='Comentario: {0}'}" Margin="7" FontSize="Medium"
                                                HorizontalTextAlignment="Center" TextColor="#ACCBE4"/>
                                     </Frame>
+                                    <!--Frame Imagen-->
+                                    <Frame Padding="-4" BackgroundColor="Transparent" CornerRadius="50">
+                                        <StackLayout x:Name="PanelFoto" >
+                                            <Label Text="Imagen del Plato" HorizontalOptions="Center" TextColor="#ACCBE4" />
+                                            <ScrollView>
+                                                <Image>
+                                                    <Image.Source>
+                                                        <UriImageSource Uri="{Binding FotoPlato}" CachingEnabled="False" />
+                                                    </Image.Source>
+                                                </Image>
+
+                                            </ScrollView>
+                                        </StackLayout>
+                                    </Frame>
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

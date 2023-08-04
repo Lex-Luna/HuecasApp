@@ -37,7 +37,7 @@
                             <!--frame Foto-->
                             <Frame BackgroundColor="#ACCBE4" Padding="2" CornerRadius="20">
                                 <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding TomarFotoComamd}"/>
+                                    <TapGestureRecognizer Command="{Binding TomarFotoLocalComamd}"/>
                                 </Frame.GestureRecognizers>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 
@@ -182,9 +182,21 @@
                         <Image x:Name="Bannerimg3" Source="IMG03.png" HeightRequest="195" WidthRequest="195" HorizontalOptions="Center" VerticalOptions="Center"/>
                     </Grid>
 
-                    
-                        
-                        <Frame Grid.Row="1" Padding="0" HeightRequest="275"  Margin="0" HorizontalOptions="Center" CornerRadius="15">
+
+                    <!--frame Foto-->
+                    <Frame BackgroundColor="#ACCBE4" Padding="2" CornerRadius="20">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TomarFotoPlatoComand}"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+
+                            <Label Text="Foto Del Plato" TextColor="black" 
+                                       HorizontalOptions="Center"
+                                       FontAttributes="Bold" FontSize="14"  HorizontalTextAlignment="Center" />
+                            <Image Source="camara.png" HeightRequest="30" />
+                        </StackLayout>
+                    </Frame>
+                    <Frame Grid.Row="1" Padding="0" HeightRequest="275"  Margin="0" HorizontalOptions="Center" CornerRadius="15">
                             <Frame.Background>
                                 <LinearGradientBrush EndPoint="1,0">
                                     <GradientStop Color="#132C6A" Offset="0.1"/>

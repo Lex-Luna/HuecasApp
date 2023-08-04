@@ -204,7 +204,7 @@ namespace HuecasAppUsers.VistaModelo
         {
 
             await SubirFotoFachada();
-            await SubirVideo();
+            await SubirVideoLocal();
             var funcion = new LocalD();
             var parametros = new LocalM();
             parametros.Geolocalizacion = Geolocalizacion;
@@ -237,7 +237,7 @@ namespace HuecasAppUsers.VistaModelo
         {
             await Navigation.PopAsync();
         }
-        public async Task SubirVideo()
+        public async Task SubirVideoLocal()
         {
             try
             {
@@ -309,7 +309,7 @@ namespace HuecasAppUsers.VistaModelo
 
 
 
-        public async Task TomarFoto()
+        public async Task TomarFotoLocal()
         {
             var camara = new StoreCameraMediaOptions();
             camara.PhotoSize = PhotoSize.Medium;
@@ -381,19 +381,20 @@ namespace HuecasAppUsers.VistaModelo
         public ICommand OkFotoComamd => new Command(async () => await OkFoto());
         public ICommand OkGeoComamd => new Command(async () => await OkGeo());
         public ICommand MostrarpanelGeoComamd => new Command(() => MostrarpanelGeo());
-        public ICommand TomarFotoComamd => new Command(async () => await TomarFoto());
+        public ICommand TomarFotoLocalComamd => new Command(async () => await TomarFotoLocal());
         public ICommand CapturarVideoComamd => new Command(async () => await CapturarVideo());
         public ICommand PagGeoComamd => new Command(async () => await PagGeo());
 
 
         #endregion
 
-
         #region VariablesPlato
         string txtPrecioPlato;
         string txtComentario;
         string txtDescripcion;
-        #endregion
+        MediaFile fotoPlato;
+        string rutafotoPlato;
+        #endregion--
         #region ObjetosPlato 
         public string TxtPrecioPlato { get { return txtPrecioPlato; } set { SetValue(ref txtPrecioPlato, value); } }
         public string TxtComentario { get { return txtComentario; } set { SetValue(ref txtComentario, value); } }
@@ -403,12 +404,59 @@ namespace HuecasAppUsers.VistaModelo
         #region ProcesosPlato
 
 
+        public async Task TomarFotoPlato()
+        {
+            var camara = new StoreCameraMediaOptions();
+            camara.PhotoSize = PhotoSize.Medium;
+            camara.SaveToAlbum = true;
+            try
+            {
+                fotoPlato = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(camara);
+                if (fotoPlato != null)
+                {
+                    Foto = ImageSource.FromStream(() =>
+                    {
+                        return fotoPlato.GetStream();
+                    });
+                    PanelEncuesta = false;
+                    PanelFoto = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+        public async Task SubirFotoPlato()
+        {
+            try
+            {
+                var funcion = new PlatoD();
+                if (rutafotoPlato == null)
+                {
+                    rutafotoPlato = await funcion.SubirFotoPlato(fotoPlato.GetStream(), _IdPlato);
+                }
+                else
+                {
+                    await DisplayAlert("No tomaste foto", "La seccion foto saldra vacia", "Ok");
+                    rutafotoPlato = "No hay foto";
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
         public async Task AgregarPlato()
         {
-            //await Subirfoto();
+            await SubirFotoPlato();
             var funcion = new PlatoD();
             var parametros = new PlatoM();
             parametros.Nombre = TxtNombrePlato;
+            parametros.FotoPlato = rutafotoPlato;
             parametros.Descripcion = TxtDescripcion;
             parametros.Comentario = TxtComentario;
             parametros.Precio = TxtPrecioPlato;
@@ -424,6 +472,7 @@ namespace HuecasAppUsers.VistaModelo
         #endregion
         #region ComandosPlato
         public ICommand AgregarPlatoComand => new Command(async () => await AgregarPlato());
+        public ICommand TomarFotoPlatoComand => new Command(async () => await TomarFotoPlato());
 
 
         #endregion

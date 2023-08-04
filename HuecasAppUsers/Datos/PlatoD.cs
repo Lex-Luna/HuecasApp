@@ -1,8 +1,10 @@
 ﻿using Firebase.Database.Query;
+using Firebase.Storage;
 using HuecasAppUsers.Conexiones;
 using HuecasAppUsers.Modelo;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +13,11 @@ namespace HuecasAppUsers.Datos
 {
     public class PlatoD
     {
+        #region Variables
         public string _IdPLato;
+        public string rutafoto;
+        #endregion
+        #region Insertar
         public async Task<string> InserPlato(PlatoM parametros)
         {
             var data =await Constantes.firebase.Child("Plato")
@@ -19,12 +25,15 @@ namespace HuecasAppUsers.Datos
                 {
                     Comentario = parametros.Comentario,
                     Descripcion = parametros.Descripcion,
+                    FotoPlato= parametros.FotoPlato,
                     Nombre = parametros.Nombre,
                     Precio = parametros.Precio,
                 });
             _IdPLato = data.Key;
             return _IdPLato;
         }
+        #endregion
+        #region Mostrar
 
 
         public async Task<List<PlatoM>> MostPlato()
@@ -38,7 +47,8 @@ namespace HuecasAppUsers.Datos
                     Comentario = item.Object.Comentario,
                     Descripcion = item.Object.Descripcion,
                     Nombre = item.Object.Nombre,
-                    Precio = item.Object.Precio
+                    Precio = item.Object.Precio,
+                    FotoPlato = item.Object.FotoPlato
 
                 }).ToList();
         }
@@ -52,5 +62,20 @@ namespace HuecasAppUsers.Datos
 
             return new List<PlatoM> { plato };
         }
+
+        #endregion
+
+        #region Multimedia
+        public async Task<string> SubirFotoPlato(Stream imagen, string nombreplato)
+        {
+
+            var storageImagen = await new FirebaseStorage("huecasapp-d8da1.appspot.com")
+                .Child("Plato")
+                .Child(nombreplato + ".jpg")
+                .PutAsync(imagen);
+            rutafoto = storageImagen;
+            return rutafoto;
+        }
+        #endregion
     }
 }

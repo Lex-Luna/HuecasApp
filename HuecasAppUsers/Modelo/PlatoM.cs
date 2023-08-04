@@ -11,6 +11,7 @@ namespace HuecasAppUsers.Modelo
         public string Descripcion { get; set; }
         public string Nombre { get; set; }
         public string Precio { get; set; }
+        public string FotoPlato { get; set; }
 
     }
 }

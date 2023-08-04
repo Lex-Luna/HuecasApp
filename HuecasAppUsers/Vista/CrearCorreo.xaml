@@ -34,7 +34,7 @@
                 <StackLayout Orientation="Horizontal" HeightRequest="50">
                     
                     <ImageButton Source="https://i.ibb.co/RjRCr5M/camara-fotografica.png"
-                       x:Name="Fotoperfil" Command="{Binding TomarFotoComand}"/>
+                       x:Name="Fotoperfil" Command="{Binding TomarFotoComand}" BackgroundColor="Transparent"/>
                 </StackLayout>
                 <Entry TextColor="White" FontAttributes="Bold" 
                    PlaceholderColor="#7F7F7F"
