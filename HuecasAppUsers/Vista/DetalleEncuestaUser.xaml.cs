@@ -21,11 +21,11 @@ namespace HuecasAppUsers.Vista
             VIstaPrincipal();
 
         }
-        string lblVideo;
+        /*string lblVideo;
         public string LblVideo
         {
             set; get;
-        }
+        }*/
 
         private void VIstaPrincipal()
         {
@@ -122,7 +122,7 @@ namespace HuecasAppUsers.Vista
             string text = label.Text;
             
             Launcher.OpenAsync(text);
-            // Utiliza el texto del Label según sea necesario
+            
         }
 
     }

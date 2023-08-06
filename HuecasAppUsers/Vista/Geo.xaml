@@ -4,7 +4,7 @@
              NavigationPage.HasNavigationBar="False"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              x:Class="HuecasAppUsers.Vista.Geo">
-    <Grid BackgroundColor="#6FEDB4"
+    <Grid BackgroundColor="Black"
           RowDefinitions="90,*">
         <StackLayout Margin="0,30,10,0"
                      VerticalOptions="Center">
