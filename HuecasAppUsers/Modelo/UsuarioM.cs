@@ -7,6 +7,7 @@ namespace HuecasAppUsers.Modelo
      public class UsuarioM
     {
         public string IdUsuario { get; set; }
+        public bool Admin { get; set; }
         public string Apellido { get; set; }
         public string Contrasenia { get; set; }
         public string Correo { get; set; }

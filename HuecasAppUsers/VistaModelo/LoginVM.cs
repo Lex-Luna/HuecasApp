@@ -57,7 +57,6 @@ namespace HuecasAppUsers.VistaModelo
                 var funcion = new CuentaD();
                 await funcion.ValidCuenta(Correo, Contraseña);
 
-
             }
             catch (Exception)
             {

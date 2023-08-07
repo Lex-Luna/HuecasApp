@@ -26,6 +26,7 @@ namespace HuecasAppUsers.Datos
                .Child("Usuario")
                .PostAsync(new UsuarioM()
                {
+                   Admin = parametros.Admin,
                    FotoUsuario = parametros.FotoUsuario,
                    Apellido = parametros.Apellido,
                    Contrasenia = parametros.Contrasenia,
@@ -69,6 +70,7 @@ namespace HuecasAppUsers.Datos
                 .OnceAsync<UsuarioM>()).Select(item => new UsuarioM
                 {
                     IdUsuario = item.Key,
+                    Admin = item.Object.Admin,
                     Apellido = item.Object.Apellido,
                     Contrasenia = item.Object.Contrasenia,
                     FotoUsuario = item.Object.FotoUsuario,
@@ -89,6 +91,7 @@ namespace HuecasAppUsers.Datos
                 .Select(item => new UsuarioM
                 {
                     IdUsuario = item.Key,
+                    Admin =item.Object.Admin,
                     FotoUsuario = item.Object.FotoUsuario,
                     Apellido = item.Object.Apellido,
                     Contrasenia = item.Object.Contrasenia,
