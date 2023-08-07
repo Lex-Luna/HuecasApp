@@ -1,4 +1,6 @@
-﻿using HuecasAppUsers.VistaModelo;
+﻿using HuecasAppUsers.Datos;
+using HuecasAppUsers.Modelo;
+using HuecasAppUsers.VistaModelo;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -98,23 +100,12 @@ namespace HuecasAppUsers.Vista
             }
         }
         
-
-
-       /* private async void btnConfirmar_Clicked(object sender, EventArgs e)
+        async Task BuscarRestauranteGeo()
         {
-            await LocalizacionActual();
-
-            if (latitud != 0 && longitud != 0)
-            {
-                EncuestaVM.Geolocalizacion = latitud + "," + longitud;
-                await Navigation.PopAsync();
-            }
-            else
-            {
-                await DisplayAlert("Sin datos", "Ubique un punto", "OK");            
-            }
-        }/**/
-
+            var f = new LocalD();
+            var p = new LocalM();
+        }
+       
         private async void btnConfirmar1_Clicked(object sender, EventArgs e)
         {
 
