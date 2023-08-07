@@ -59,7 +59,7 @@ namespace HuecasAppUsers.VistaModelo
         string _idAdmin;
         bool _estado;
         int _numEncuesta;
-        string video;
+        //string video;
 
 
         #endregion
@@ -114,7 +114,7 @@ namespace HuecasAppUsers.VistaModelo
             get { return _correo; }
             set { SetValue(ref _correo, value); }
         }
-        public string Video {set; get;}
+        //public string Video {set; get;}
         public string IdCalificacion { get; set; }
         public string IdPlato { get; set; }
         public string IdLocal { get; set; }
@@ -210,9 +210,9 @@ namespace HuecasAppUsers.VistaModelo
 
         #endregion
         #region Comandos
-        //public ICommand InsertarRecolecoresComand => new Command(async () => await InsertarRecolecoresProces());
+        
         public ICommand Volvercomamd => new Command(async () => await Volver());
-        //public ICommand NavClientesComand => new Command(async () => await NavClientes());
+        
 
         #endregion
 

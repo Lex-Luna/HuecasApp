@@ -1,6 +1,4 @@
-﻿using HuecasAppUsers.Datos;
-using HuecasAppUsers.Modelo;
-using HuecasAppUsers.VistaModelo;
+﻿using HuecasAppUsers.VistaModelo;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -100,11 +98,7 @@ namespace HuecasAppUsers.Vista
             }
         }
         
-        async Task BuscarRestauranteGeo()
-        {
-            var f = new LocalD();
-            var p = new LocalM();
-        }
+        
        
         private async void btnConfirmar1_Clicked(object sender, EventArgs e)
         {

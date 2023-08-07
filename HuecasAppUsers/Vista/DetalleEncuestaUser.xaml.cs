@@ -26,6 +26,7 @@ namespace HuecasAppUsers.Vista
         {
             set; get;
         }*/
+        
 
         private void VIstaPrincipal()
         {
@@ -125,5 +126,17 @@ namespace HuecasAppUsers.Vista
             
         }
 
+        [Obsolete]
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            var label = (Label)sender;
+            string ubicacion = label.Text;
+            string[] separadas = ubicacion.Split(',');
+            double latitud = Convert.ToDouble(separadas[0]);
+            double longitud = Convert.ToDouble(separadas[1]);
+
+            var uri = new Uri($"https://maps.google.com/?q={latitud},{longitud}");
+            Device.OpenUri(uri);
+        }
     }
 }

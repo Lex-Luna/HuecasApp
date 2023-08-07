@@ -95,11 +95,28 @@
                                                HorizontalTextAlignment="Center"
                                            Margin="7" FontSize="Medium" TextColor="#ACCBE4" />
 
-                                    <Label Text="Copiar Geolocalizacion en Google Maps:" 
-                                               HorizontalTextAlignment="Center" Margin="0,7,0,0" FontSize="Medium" TextColor="#ACCBE4" />
+                                    
 
-                                    <Entry Text="{Binding Geolocalizacion}" BackgroundColor="Transparent" HorizontalTextAlignment="Center"
-                                           HorizontalOptions="Center" TextColor="#ACCBE4"  Margin="0,0,0,10" />
+                                    <!--Framme Geolocalizacion-->
+                                    <Frame CornerRadius="50" VerticalOptions="Center" HorizontalOptions="Center" 
+                                           Padding="-1" HeightRequest="40" WidthRequest="250">
+                                        <Frame.Background>
+                                            <LinearGradientBrush EndPoint="1,0">
+                                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                                <GradientStop Color="#350A56" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </Frame.Background>
+                                        <Grid RowDefinitions="*" >
+                                            <Label Text="Ir a geolocalizacion" TextColor="#ACCBE4" HorizontalTextAlignment="Center" FontSize="Medium" Grid.Row="0" VerticalOptions="Center" />
+                                            <Label x:Name="lblGeo" Text="{Binding Geolocalizacion}" TextColor="Transparent" BackgroundColor="Transparent" Grid.Row="0">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                                </Label.GestureRecognizers>
+
+                                            </Label>
+                                        </Grid>
+                                    </Frame>
+                                    
                                     <!--Framme Video-->
                                     <Frame CornerRadius="50" VerticalOptions="Center" HorizontalOptions="Center" 
                                            Padding="-1" HeightRequest="40" WidthRequest="250">
@@ -110,7 +127,7 @@
                                             </LinearGradientBrush>
                                         </Frame.Background>
                                         <Grid RowDefinitions="*" >
-                                            <Label Text="Descargue el Video Local" TextColor="#ACCBE4" HorizontalTextAlignment="Center" FontSize="Medium" Grid.Row="0" VerticalOptions="Center" />
+                                            <Label Text="Descargar Video" TextColor="#ACCBE4" HorizontalTextAlignment="Center" FontSize="Medium" Grid.Row="0" VerticalOptions="Center" />
                                             <Label Text="{Binding Video}" TextColor="Transparent" BackgroundColor="Transparent" Grid.Row="0">
                                                 <Label.GestureRecognizers>
                                                     <TapGestureRecognizer Tapped="OnLabelTapped" />
