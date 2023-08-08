@@ -1,18 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
              xmlns:degradado="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              x:Class="HuecasAppUsers.Vista.MenuAdmin">
     <ScrollView>
         <Grid>
-            <!--Menu Principal-->
-
-
-
-
-
-            <!--Panel Restaurante-->
-            <Grid x:Name="PanelRestaurante" RowDefinitions="auto,auto,auto,auto,*"
+            <Grid  RowDefinitions="auto,auto,auto,auto,*"
                 BackgroundColor="#1C1D22"  >
                 <StackLayout Orientation="Horizontal" Margin="0,10,0,10" HorizontalOptions="Center">
                     <Image Source="letrasLogo.png" HeightRequest="90"/>
@@ -21,33 +15,18 @@
                 <StackLayout Orientation="Horizontal" Grid.Row="1"
                      
                      Margin="15,0,15,0">
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Hola"
-                       TextColor="#ACCBE4"
-                       FontSize="30"
-                       FontAttributes="Bold"/>
-                        <Label Text="{Binding Nombre}"
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
+
+                        <Label Text="Administrador"
                        x:Name="lblNombre"
                        TextColor="#ACCBE4"
                        FontAttributes="Bold"   
-                           
+                       HorizontalTextAlignment="Center" Margin="80,0,0,0"    
                        FontSize="30"/>
 
 
                     </StackLayout>
-                    <Button Text="+ Añadir Encuesta"
-                    CornerRadius="15"
-                    HeightRequest="40"
-                    VerticalOptions="CenterAndExpand"
-                    BackgroundColor="Transparent"
-                    TextColor="#ACCBE4"
-                            BorderColor="#ACCBE4"
-                            BorderWidth="3"
-                    FontAttributes="Bold"
-                    TextTransform="None"
-                    HorizontalOptions="EndAndExpand"
-                    
-                    Command="{Binding IrEncuestacomamd}"/>
+
                 </StackLayout>
                 <degradado:PancakeView Grid.Row="2"
                                Margin="15"
@@ -130,86 +109,84 @@
                 </degradado:PancakeView>
                 <StackLayout Grid.Row="3" Margin="15,0,15,0">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <Label Text="Mis Encuestas"
+                        <Label Text="Control de Contenido"
                        TextColor="#ACCBE4" FontSize="Medium" FontAttributes="Bold"/>
 
                     </StackLayout>
 
                 </StackLayout>
-
-                <ScrollView Grid.Row="4" >
-                    <CollectionView ItemsSource="{Binding LisEncueta1, Mode=TwoWay}" 
-                                x:Name="EncuestasUser">
-
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate >
-                                <Frame BorderColor="Black" Padding="1" BackgroundColor="Black">
-                                    <!--Agregar el comando ir a DeetalleEncuesta-->
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaCommand, 
-                                        Source={x:Reference EncuestasUser}}" CommandParameter="{Binding .}"/>
-                                    </Frame.GestureRecognizers>
-
-                                    <StackLayout Margin="0,0,0,10" >
-                                        <!--Degradado-->
-                                        <StackLayout.Background>
-                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                                <GradientStop Offset="0.1" Color="#132C6A" />
-                                                <GradientStop Offset="0.9" Color="#350A56" />
-                                            </LinearGradientBrush>
-                                        </StackLayout.Background>
-                                        <!--Funcionalidad al Item-->
-
-                                        <Grid Margin="5" RowDefinitions="Auto,Auto" ColumnDefinitions="230,1,*">
-                                            <StackLayout Grid.Row="0" Grid.Column="0" 
-                                                     HorizontalOptions="FillAndExpand" 
-                                                     Orientation="Horizontal">
-                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
-                                                   HasShadow="True" HorizontalOptions="FillAndExpand">
-                                                    <Label Text="{Binding NomLocal, StringFormat='Local: {0}'}" 
-                                                       FontAttributes="Bold" FontSize="16" TextColor="#ACCBE4" 
-                                                       HorizontalTextAlignment="Start" />
-
-                                                </Frame>
-                                            </StackLayout>
-                                            <!--Nombre del plato-->
-                                            <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal" >
-                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
-                                                   HasShadow="True" HorizontalOptions="FillAndExpand">
-                                                    <Label Text="{Binding NomPlato, StringFormat='Plato: {0}'}" 
-                                                       FontAttributes="Bold" FontSize="16" TextColor="#ACCBE4" 
-                                                       HorizontalTextAlignment="Start" />
-                                                </Frame>
-                                            </StackLayout>
-                                            <!--Calificacion del local-->
-                                            <StackLayout Grid.Row="1" Grid.Column="2" Orientation="Vertical" 
-                                                     VerticalOptions="Center" HorizontalOptions="EndAndExpand">
-                                                <Frame CornerRadius="30" BackgroundColor="Transparent" BorderColor="#D8D8D8"
-                                                   HasShadow="True" Padding="5" Opacity="0.7">
-                                                    <Label Text="{Binding PromCalificacion, StringFormat='Promedio: {0}/10'}" 
-                                                       HorizontalTextAlignment="Center" FontSize="18" TextColor="#ACCBE4" 
-                                                       HorizontalOptions="Center" />
-                                                </Frame>
-                                            </StackLayout>
-
-                                            <!-- Fecha-->
-                                            <StackLayout Grid.Row="0" Grid.Column="2" Orientation="Vertical" 
-                                                     VerticalOptions="Center" HorizontalOptions="EndAndExpand">
-                                                <Frame CornerRadius="5" BackgroundColor="transparent" 
-                                                   BorderColor="#D8D8D8" HasShadow="True" Padding="5">
-                                                    <Label Text="{Binding FechaData, StringFormat=' {0:d MMMM yyyy}'}" 
-                                                       HorizontalTextAlignment="Center" FontSize="18" 
-                                                       TextColor="#ACCBE4" HorizontalOptions="Center" />
-                                                </Frame>
-                                            </StackLayout>
-
-                                        </Grid>
-                                    </StackLayout>
+                <ScrollView Grid.Row="4">
+                    <Grid ColumnDefinitions="*,*"
+                  RowDefinitions="auto,auto,auto"
+                  Margin="20">
+                        <Frame CornerRadius="15"
+                       HasShadow="False" >
+                            <Frame.Background>
+                                <LinearGradientBrush EndPoint="1,0">
+                                    <GradientStop Color="#132C6A" Offset="0.1"/>
+                                    <GradientStop Color="#350A56" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Frame.Background>
+                            <StackLayout VerticalOptions="Center">
+                                <Frame CornerRadius="200"
+                               BackgroundColor="#D0F2D8"
+                               HasShadow="False"
+                               HorizontalOptions="Center">
+                                    <Frame BackgroundColor="#A1E6B2"
+                                   CornerRadius="100"
+                                   HasShadow="False">
+                                        <Image Source="usuario.png"/>
+                                    </Frame>
                                 </Frame>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                                <Label Text="Usuarios"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#ACCBE4"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavClientesComand}"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Frame CornerRadius="15"
+                       HasShadow="False"
+                       Grid.Row="0"
+                       Grid.Column="1">
+                            <Frame.Background>
+                                <LinearGradientBrush EndPoint="1,0">
+                                    <GradientStop Color="#132C6A" Offset="0.1"/>
+                                    <GradientStop Color="#350A56" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Frame.Background>
+                            <StackLayout VerticalOptions="Center">
+                                <Frame CornerRadius="200"
+                               BackgroundColor="#D0F2D8"
+                               HasShadow="False"
+                                HorizontalOptions="Center">
+                                    <Frame BackgroundColor="#A1E6B2"
+                                   CornerRadius="100"
+                                   HasShadow="False">
+                                        <Image Source="encuesta.png"/>
+                                    </Frame>
+                                </Frame>
+                                <Label Text="Encestas"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#ACCBE4"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               />
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavegarProductosconfigcomamd}"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+
+                    </Grid>
                 </ScrollView>
+
+
 
 
 

@@ -32,7 +32,7 @@ namespace HuecasAppUsers.Datos
             set
             {
                 _correo = value;
-                //OnPropertyChanged();
+                
             }
         }
         public bool Admin {
@@ -40,7 +40,7 @@ namespace HuecasAppUsers.Datos
             set
             {
                 _admin = value;
-                //OnPropertyChanged();
+                
             }
         }
 
@@ -104,37 +104,6 @@ namespace HuecasAppUsers.Datos
             }
 
         }
-        /*private async Task obtenerDataUserAsync()
-        {
-            try
-            {
-                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.WebapyFirebase));
-                var guardarId = JsonConvert.DeserializeObject<FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
-                var refrescarCOntenido = await authProvider.RefreshAuthAsync(guardarId);
-                Preferences.Set("MyFirebaseRefreshToken", JsonConvert.SerializeObject(refrescarCOntenido));
-                Correo = guardarId.User.Email;
-                var f = new UsuarioD();
-                var p = new UsuarioM();
-                p.Correo = Correo;
-                var data = await f.MostUsuarioXcorreo(p);
-                Admin = data[0].Admin;
-                /*Apellido = data[0].Apellido;
-                IdUsuario = data[0].IdUsuario;
-                NumEncuesta = data[0].NumEncuesta;
-                IdAdmin = data[0].IdAdministrador;
-                Contrania = data[0].Contrasenia;
-                Estado = data[0].Estado;
-                FotoUsuario = data[0].FotoUsuario;
-
-
-
-
-            }
-            catch (Exception e)
-            {
-                throw e;
-
-            }
-        }*/
+        
     }
 }
