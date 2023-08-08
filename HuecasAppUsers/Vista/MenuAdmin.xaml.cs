@@ -28,10 +28,7 @@ namespace HuecasAppUsers.Vista
             {
                 await obtenerDataUserAsync();
             }).Wait();
-            Task.Run(async () =>
-            {
-                await MostrarMisEncuestas(IdUsuario);
-            }).Wait();
+            
         }
         #region VARIABLES
         string _nombre;
@@ -177,15 +174,10 @@ namespace HuecasAppUsers.Vista
                 Contrania = data[0].Contrasenia;
                 Estado = data[0].Estado;
                 FotoUsuario = data[0].FotoUsuario;
-
-
-
-
             }
             catch (Exception)
             {
                 await DisplayAlert("Alerta", "X tu seguridad la sesion se a cerrado", "Ok");
-
             }
         }
         private async Task IrEncuesta()
@@ -194,12 +186,7 @@ namespace HuecasAppUsers.Vista
         }
 
 
-        public async Task MostrarMisEncuestas(string idUser)
-        {
-            EncuestaD f = new EncuestaD();
-            var encuestas = await f.MostEncuestaIdUser(idUser);
-            LisEncueta1 = new ObservableCollection<EncuestaM>(encuestas);
-        }
+        
 
 
         private async Task IrDetalleEncuesta(EncuestaM p)
@@ -210,11 +197,17 @@ namespace HuecasAppUsers.Vista
             }
             catch (Exception e)
             {
-
                 Debug.WriteLine("Error: No se pudo tomar el ID " + e);
-
             }
         }
+        private void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new UsuarioAdmin());
+        }
+
+
+
+
 
         #endregion
         #region COMANDOS
@@ -224,7 +217,13 @@ namespace HuecasAppUsers.Vista
 
         public ICommand IrDetalleEncuestaCommand => new Command<EncuestaM>(async (p) => await IrDetalleEncuesta(p));
 
+
+
         #endregion
 
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new EncuestaAdmin());
+        }
     }
 }

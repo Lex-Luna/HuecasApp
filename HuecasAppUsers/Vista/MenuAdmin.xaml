@@ -146,7 +146,7 @@
                                VerticalOptions="Center"/>
                             </StackLayout>
                             <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding NavClientesComand}"/>
+                                <TapGestureRecognizer  Tapped="TapGestureRecognizer_Tapped_1" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame CornerRadius="15"
@@ -179,7 +179,7 @@
                                />
                             </StackLayout>
                             <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding NavegarProductosconfigcomamd}"/>
+                                <TapGestureRecognizer  Tapped="TapGestureRecognizer_Tapped" />
                             </Frame.GestureRecognizers>
                         </Frame>
 
