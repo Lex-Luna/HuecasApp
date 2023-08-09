@@ -1,0 +1,708 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="HuecasAppUsers.Vista.EncuestaAdmin">
+    <ScrollView>
+        <!--COntenedor de la Pagina-->
+        <Grid BackgroundColor="Black">
+            <!--Menu Principal-->
+            <StackLayout x:Name="PanelPrincipal" Grid.Row="0" >
+                <!--Stack Titulo-->
+                <StackLayout 
+                     Margin="10" HorizontalOptions="Center">
+
+                    <Label Text="Control de Contenido de las Encuestas"
+                       TextColor="#ACCBE4"
+                       FontSize="30"
+                       FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"/>
+
+                </StackLayout>
+                <Label Text="Escoja termino de busqueda" TextColor="#ACCBE4" FontSize="Medium" Padding="0,0,0,20" HorizontalOptions="Center"/>
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="200"  >
+
+                    <Button Text="Nombre de Restaurante" TextTransform="None" CornerRadius="25" Padding="3"
+                                x:Name="BtnRestaurante" Clicked="BtnRestaurante_Clicked" Margin="3">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                <GradientStop Color="#350A56" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button Text="Tipo De Comida" TextTransform="None" CornerRadius="25"  Padding="3" 
+                                x:Name="BtnCategoria" Clicked="BtnCategoria_Clicked">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                <GradientStop Color="#350A56" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button Text="Nombre de un Plato" TextTransform="None" CornerRadius="25" Padding="3" 
+                                x:Name="BtnPlato" Clicked="BtnPlato_Clicked" Margin="3">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                <GradientStop Color="#350A56" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button Text="Barrio" TextTransform="None" CornerRadius="25"  Padding="3"
+                                x:Name="BtnBarrio" Clicked="BtnBarrio_Clicked" Margin="3">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                <GradientStop Color="#350A56" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button Text="Rango de Precios" TextTransform="None" CornerRadius="25"  Padding="3" 
+                                x:Name="BtnPrecios" Clicked="BtnPrecios_Clicked" Margin="3">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                <GradientStop Color="#350A56" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button Text="Fecha" TextTransform="None" CornerRadius="25"  Padding="3" 
+                                x:Name="BtnFecha" Clicked="BtnFecha_Clicked" Margin="3">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                <GradientStop Color="#350A56" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
+                                     BackgroundColor="#ACCBE4" Margin="0,120,0,0" CornerRadius="50" Padding="10"
+                                      x:Name="Atras" Clicked="Atras_Clicked_2"/>
+
+                </StackLayout>
+            </StackLayout>
+
+
+
+
+
+
+
+            <!--Panel Restaurante-->
+            <StackLayout x:Name="PanelRestaurante" Grid.Row="0">
+                <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start"
+                                     BackgroundColor="#ACCBE4" Margin="10,10,0,0" CornerRadius="50" Padding="10"
+                                      x:Name="Atras1" Clicked="Atras1_Clicked"/>
+
+                <!--SearchBar-->
+                <StackLayout Margin="10,10,10,0"  >
+                    <Frame Padding="0" CornerRadius="25">
+                        <SearchBar Text="{Binding SearchBarText}"  
+                               x:Name="BuscarRestaurante"  Placeholder="Nombre del restaurante"
+                               TextChanged="BuscarRestaurante_TextChanged"
+                                       TextColor="Black"
+                               BackgroundColor="Transparent" PlaceholderColor="Black" />
+                    </Frame>
+                </StackLayout>
+                <!--Lista Restaurante-->
+                <ScrollView >
+                    <CollectionView ItemsSource="{Binding LisEncuestaRecomendados, Mode=TwoWay}"  
+                                x:Name="RestauranteCommunity">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BorderColor="Black" Padding="1" BackgroundColor="Black" CornerRadius="30">
+                                    <!--Agregar el comando ir a DeetalleEncuesta-->
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaCommand, 
+                                                    Source={x:Reference RestauranteCommunity}}" CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout Margin="0,0,0,10" >
+                                        <!--color Degradado-->
+                                        <StackLayout.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                                <GradientStop Color="#350A56" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </StackLayout.Background>
+                                        <!--Stack contenedor general lista -->
+                                        <StackLayout Margin="5" >
+                                            
+                                            <!--Stack Local-->
+                                            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                       HasShadow="True" HorizontalOptions="FillAndExpand" >
+                                                    <Label  FontSize="16"  HorizontalTextAlignment="Center" TextColor="White">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomLocal, StringFormat='El local {0}'}" />
+                                                                <Span Text="{Binding Categorias, StringFormat=' de {0}'}" />
+                                                                <Span Text="{Binding Barrio, StringFormat=' del barrio {0}'}" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+
+                                            <!--Stack Plato-->
+                                            <StackLayout 
+                                                         HorizontalOptions="FillAndExpand" 
+                                                         Orientation="Horizontal" >
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                       HasShadow="True" HorizontalOptions="FillAndExpand">
+
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomPlato, StringFormat='Hizo un pedido fue un {0} '}"/>
+                                                                <Span Text="{Binding Precio, StringFormat=' con un costo de $ {0}'}"/>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+                                            <!--Stack Usuario calificacion Fecha-->
+                                            <StackLayout  Orientation="Horizontal" >
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                       HasShadow="True" HorizontalOptions="FillAndExpand">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomUsuario, StringFormat='Recomendado por {0}'}"/>
+                                                                <Span Text="{Binding PromCalificacion, StringFormat=' con un promedio de {0}/10'}"/>
+                                                                <!--Span Text="{Binding FechaData, StringFormat=' el {0:dd/MMMM/yyyy}'}"/-->
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </StackLayout>
+
+            <!--Panel Categoria-->
+            <StackLayout x:Name="PanelCategoria" Grid.Row="0">
+                <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Center" HorizontalOptions="Start"
+                                     BackgroundColor="#ACCBE4" Margin="10,10,0,0" CornerRadius="50" Padding="10"
+                                      x:Name="Atras2" Clicked="Atras2_Clicked"/>
+
+                <!--Stack SearchBar-->
+                <StackLayout Margin="10,10,10,0"  >
+                    <Frame Padding="0" CornerRadius="25">
+                        <SearchBar Text="{Binding SearchBarText}"  
+                               Placeholder="Buscar Tipo Restaurante"    
+                               x:Name="BuscarCategoria"
+                               TextColor="Black"    
+                               TextChanged="BuscarCategoria_TextChanged"
+                                   PlaceholderColor="Black" 
+                               BackgroundColor="Transparent"  />
+                    </Frame>
+                </StackLayout>
+                <!--ListaCategoria-->
+                <ScrollView >
+                    <CollectionView ItemsSource="{Binding LisEncuestaRecomendados, Mode=TwoWay}"  
+                                x:Name="CategoriaCommunity">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BorderColor="Black" Padding="1" BackgroundColor="Black" CornerRadius="30">
+                                    <!--Agregar el comando ir a DeetalleEncuesta-->
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaCommand, 
+                                            Source={x:Reference CategoriaCommunity}}" CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout Margin="0,0,0,10" >
+                                        <!--color Degradado-->
+                                        <StackLayout.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                                <GradientStop Color="#350A56" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </StackLayout.Background>
+                                        <!--Stack contenedor general lista -->
+                                        <StackLayout Margin="5" >
+                                            <!--Stack Local-->
+                                            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                       HasShadow="True" HorizontalOptions="FillAndExpand" >
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomLocal, StringFormat='El local {0}'}" />
+                                                                <Span Text="{Binding Categorias, StringFormat=' de {0}'}" />
+                                                                <Span Text="{Binding Barrio, StringFormat=' del barrio {0}'}" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+
+                                            <!--Stack Plato-->
+                                            <StackLayout 
+                                                         HorizontalOptions="FillAndExpand" 
+                                                         Orientation="Horizontal" >
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                       HasShadow="True" HorizontalOptions="FillAndExpand">
+
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomPlato, StringFormat='Hizo un pedido fue un {0} '}"/>
+                                                                <Span Text="{Binding Precio, StringFormat='con un costo de $ {0}'}"/>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+                                            <!--Stack Usuario calificacion Fecha-->
+                                            <StackLayout  Orientation="Horizontal" >
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                       HasShadow="True" HorizontalOptions="FillAndExpand">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomUsuario, StringFormat='Recomendado por {0}'}"/>
+                                                                <Span Text="{Binding PromCalificacion, StringFormat=' con un promedio de {0}/10'}"/>
+                                                                <!--Span Text="{Binding FechaData, StringFormat=' el {0:dd/MMMM/yyyy}'}"/-->
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </StackLayout>
+
+            <!--Panel Comida-->
+            <StackLayout x:Name="PanelComida" Grid.Row="0">
+                <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start"
+                                     BackgroundColor="#ACCBE4" Margin="10,10,0,0" CornerRadius="50" Padding="10"
+                                      x:Name="Atras3" Clicked="Atras3_Clicked"/>
+                <!--Stack SearchBar-->
+                <StackLayout Margin="10,10,10,0"  >
+                    <Frame Padding="0" CornerRadius="25">
+                        <SearchBar Text="{Binding SearchBarText}" 
+                           Placeholder="Buscar Tipo Restaurante"    
+                                       PlaceholderColor="Black"
+                                   TextColor="Black"
+                           x:Name="BuscarComida"
+                           TextChanged="BuscarComida_TextChanged"
+                           BackgroundColor="Transparent"  />
+                    </Frame>
+                </StackLayout>
+                <!--Lista-->
+                <ScrollView >
+                    <CollectionView ItemsSource="{Binding LisEncuestaRecomendados, Mode=TwoWay}"  
+                            x:Name="ComidaCommunity">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BorderColor="Black" Padding="1" BackgroundColor="Black" CornerRadius="30">
+                                    <!--Agregar el comando ir a DeetalleEncuesta-->
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaCommand, 
+                                        Source={x:Reference ComidaCommunity}}" CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout Margin="0,0,0,10" >
+                                        <!--color Degradado-->
+                                        <StackLayout.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                                <GradientStop Color="#350A56" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </StackLayout.Background>
+                                        <!--Stack contenedor general lista -->
+                                        <StackLayout Margin="5" >
+                                            <!--Stack Local-->
+                                            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                   HasShadow="True" HorizontalOptions="FillAndExpand" >
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomLocal, StringFormat='El local {0}'}" />
+                                                                <Span Text="{Binding Categorias, StringFormat=' de {0}'}" />
+                                                                <Span Text="{Binding Barrio, StringFormat=' del barrio {0}'}" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+
+                                            <!--Stack Plato-->
+                                            <StackLayout 
+                                                     HorizontalOptions="FillAndExpand" 
+                                                     Orientation="Horizontal" >
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                   HasShadow="True" HorizontalOptions="FillAndExpand">
+
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomPlato, StringFormat='Hizo un pedido fue un {0} '}"/>
+                                                                <Span Text="{Binding Precio, StringFormat='con un costo de $ {0}'}"/>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+                                            <!--Stack Usuario calificacion Fecha-->
+                                            <StackLayout  Orientation="Horizontal" >
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                   HasShadow="True" HorizontalOptions="FillAndExpand">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomUsuario, StringFormat='Recomendado por {0}'}"/>
+                                                                <Span Text="{Binding PromCalificacion, StringFormat=' con un promedio de {0}/10'}"/>
+                                                                <!--Span Text="{Binding FechaData, StringFormat=' el {0:dd/MMMM/yyyy}'}"/-->
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </StackLayout>
+
+            <!--Panel Barrio-->
+            <StackLayout x:Name="PanelBarrio" Grid.Row="0">
+                <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start"
+                                     BackgroundColor="#ACCBE4" Margin="10,10,0,0" CornerRadius="50" Padding="10"
+                                      x:Name="Atras4" Clicked="Atras4_Clicked"/>
+                <!--Stack SearchBar-->
+                <StackLayout Margin="10,10,10,0"  >
+                    <Frame Padding="0" CornerRadius="25">
+                        <SearchBar Text="{Binding SearchBarText}" 
+                               Placeholder="Buscar Barrio Restaurante"        
+                               x:Name="BuscarBarrio"
+                                   TextColor="Black"
+                                   PlaceholderColor="Black" 
+
+                               TextChanged="BuscarBarrio_TextChanged"
+                               BackgroundColor="Transparent"  />
+                    </Frame>
+                </StackLayout>
+                <!--Lista-->
+                <ScrollView >
+                    <CollectionView ItemsSource="{Binding LisEncuestaRecomendados, Mode=TwoWay}"  
+                                x:Name="BarrioCommunity">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BorderColor="Black" Padding="1" BackgroundColor="Black" CornerRadius="30">
+                                    <!--Agregar el comando ir a DeetalleEncuesta-->
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaCommand, 
+                                            Source={x:Reference BarrioCommunity}}" CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout Margin="0,0,0,10" >
+                                        <!--color Degradado-->
+                                        <StackLayout.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                                <GradientStop Color="#350A56" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </StackLayout.Background>
+                                        <!--Stack contenedor general lista -->
+                                        <StackLayout Margin="5" >
+                                            <!--Stack Local-->
+                                            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                       HasShadow="True" HorizontalOptions="FillAndExpand" >
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomLocal, StringFormat='El local {0}'}" />
+                                                                <Span Text="{Binding Categorias, StringFormat=' de {0}'}" />
+                                                                <Span Text="{Binding Barrio, StringFormat=' del barrio {0}'}" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+
+                                            <!--Stack Plato-->
+                                            <StackLayout 
+                                                         HorizontalOptions="FillAndExpand" 
+                                                         Orientation="Horizontal" >
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                       HasShadow="True" HorizontalOptions="FillAndExpand">
+
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomPlato, StringFormat='Hizo un pedido fue un {0} '}"/>
+                                                                <Span Text="{Binding Precio, StringFormat='con un costo de $ {0}'}"/>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+                                            <!--Stack Usuario calificacion Fecha-->
+                                            <StackLayout  Orientation="Horizontal" >
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                       HasShadow="True" HorizontalOptions="FillAndExpand">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomUsuario, StringFormat='Recomendado por {0}'}"/>
+                                                                <Span Text="{Binding PromCalificacion, StringFormat=' con un promedio de {0}/10'}"/>
+                                                                <!--Span Text="{Binding FechaData, StringFormat=' el {0:dd/MMMM/yyyy}'}"/-->
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </StackLayout>
+
+            <!--Panel Precio-->
+
+            <StackLayout x:Name="PanelPrecio" Grid.Row="0">
+
+                <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start"
+                                     BackgroundColor="#ACCBE4" Margin="10,10,0,0" CornerRadius="50" Padding="10"
+                                      x:Name="Vuelve" Clicked="Vuelve_Clicked"/>
+
+                <!--Stack SearchBar-->
+                <StackLayout Margin="10,0,10,0" >
+
+                    <Frame BackgroundColor="Black" Padding="8" CornerRadius="15" x:Name="FrComida">
+                        <Label Text="{Binding TxtComida, Mode=TwoWay}" x:Name="lblPrecio" 
+                                               TextColor="White" FontAttributes="Bold"/>
+                    </Frame>
+                    <Frame Padding="0" CornerRadius="25">
+                        <SearchBar Text="{Binding SearchBarText}"  
+                                   Keyboard="Numeric"
+                           x:Name="BuscarPrecio"
+                                   TextColor="Black"
+                           TextChanged="BuscarPrecio_TextChanged"
+                                   Placeholder="Rango de precio de 0 a:"
+                                   PlaceholderColor="Black" 
+                           BackgroundColor="Transparent"  />
+                    </Frame>
+                </StackLayout>
+                <!--Lista-->
+                <ScrollView >
+                    <CollectionView ItemsSource="{Binding LisEncuestaRecomendados, Mode=TwoWay}"  
+                            x:Name="PrecioCommunity">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BorderColor="Black" Padding="1" BackgroundColor="Black" CornerRadius="30">
+                                    <!--Agregar el comando ir a DeetalleEncuesta-->
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaCommand, 
+                                        Source={x:Reference PrecioCommunity}}" CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout Margin="0,0,0,10" >
+                                        <!--color Degradado-->
+                                        <StackLayout.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                                <GradientStop Color="#350A56" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </StackLayout.Background>
+                                        <!--Stack contenedor general lista -->
+                                        <StackLayout Margin="5" >
+                                            <!--Stack Local-->
+                                            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                   HasShadow="True" HorizontalOptions="FillAndExpand" >
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomLocal, StringFormat='El local {0}'}" />
+                                                                <Span Text="{Binding Categorias, StringFormat=' de {0}'}" />
+                                                                <Span Text="{Binding Barrio, StringFormat=' del barrio {0}'}" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+
+                                            <!--Stack Plato-->
+                                            <StackLayout 
+                                                     HorizontalOptions="FillAndExpand" 
+                                                     Orientation="Horizontal" >
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                   HasShadow="True" HorizontalOptions="FillAndExpand">
+
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomPlato, StringFormat='Hizo un pedido fue un {0} '}"/>
+                                                                <Span Text="{Binding Precio, StringFormat='con un costo de $ {0}'}"/>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+                                            <!--Stack Usuario calificacion Fecha-->
+                                            <StackLayout  Orientation="Horizontal" >
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                   HasShadow="True" HorizontalOptions="FillAndExpand">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomUsuario, StringFormat='Recomendado por {0}'}"/>
+                                                                <Span Text="{Binding PromCalificacion, StringFormat=' con un promedio de {0}/10'}"/>
+                                                                <!--Span Text="{Binding FechaData, StringFormat=' el {0:dd/MMMM/yyyy}'}"/-->
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </StackLayout>
+            <!--Panel Fecha-->
+            <StackLayout x:Name="PanelFecha" Grid.Row="0">
+
+                <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start"
+                                     BackgroundColor="#ACCBE4" Margin="10,10,0,0" CornerRadius="50" Padding="10"
+                                      x:Name="Atras10" Clicked="Atras_Clicked_1"/>
+
+                <!--Stack SearchBar-->
+                <StackLayout Margin="10,0,10,0" >
+
+                    <Frame BackgroundColor="Black" Padding="8" CornerRadius="15" x:Name="FrFecha">
+                        <Label Text="{Binding TxtComida, Mode=TwoWay}" x:Name="lblFecha" 
+                                               TextColor="White" FontAttributes="Bold"/>
+                    </Frame>
+                    <Frame Padding="0" CornerRadius="25">
+                        <SearchBar Text="{Binding SearchBarText}"  
+                                   Keyboard="Numeric"
+                           x:Name="BuscarFecha"
+                                   TextColor="Black"
+                           TextChanged="BuscarFecha_TextChanged_1"
+                                   Placeholder="Ingrrese la Fecha"
+                                   PlaceholderColor="Black" 
+                           BackgroundColor="Transparent"  />
+                    </Frame>
+                </StackLayout>
+                <!--Lista-->
+                <ScrollView >
+                    <CollectionView ItemsSource="{Binding LisEncuestaRecomendados, Mode=TwoWay}"  
+                            x:Name="FechaCommunity">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BorderColor="Black" Padding="1" BackgroundColor="Black" CornerRadius="30">
+                                    <!--Agregar el comando ir a DeetalleEncuesta-->
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaCommand, 
+                                        Source={x:Reference FechaCommunity}}" CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout Margin="0,0,0,10" >
+                                        <!--color Degradado-->
+                                        <StackLayout.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                                <GradientStop Color="#350A56" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </StackLayout.Background>
+                                        <!--Stack contenedor general lista -->
+                                        <StackLayout Margin="5" >
+                                            <!--Stack Local-->
+                                            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                   HasShadow="True" HorizontalOptions="FillAndExpand" >
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomLocal, StringFormat='El local {0}'}" />
+                                                                <Span Text="{Binding Categorias, StringFormat=' de {0}'}" />
+                                                                <Span Text="{Binding Barrio, StringFormat=' del barrio {0}'}" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+
+                                            <!--Stack Plato-->
+                                            <StackLayout 
+                                                     HorizontalOptions="FillAndExpand" 
+                                                     Orientation="Horizontal" >
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                   HasShadow="True" HorizontalOptions="FillAndExpand">
+
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomPlato, StringFormat='Hizo un pedido fue un {0} '}"/>
+                                                                <Span Text="{Binding Precio, StringFormat='con un costo de $ {0}'}"/>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+                                            <!--Stack Usuario calificacion Fecha-->
+                                            <StackLayout  Orientation="Horizontal" >
+                                                <Frame Padding="0" CornerRadius="5" BackgroundColor="Transparent"  
+                                                   HasShadow="True" HorizontalOptions="FillAndExpand">
+                                                    <Label  FontSize="16" TextColor="White" HorizontalTextAlignment="Center">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding NomUsuario, StringFormat='Recomendado por {0}'}"/>
+                                                                <Span Text="{Binding PromCalificacion, StringFormat=' con un promedio de {0}/10'}"/>
+                                                                <Span Text="{Binding FechaData, StringFormat=' el {0:dd/MMMM/yyyy}'}"/>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Frame>
+                                            </StackLayout>
+
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </StackLayout>
+
+        </Grid>
+
+    </ScrollView>
+</ContentPage>

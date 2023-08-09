@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HuecasAppUsers.Vista.DetalleEncuestaAdmin">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="Black"  HorizontalOptions="Center"  >
+
+            <Grid  RowDefinitions="*">
+                <!--Este es el grid Menu Principal-->
+                <StackLayout  x:Name="MenuBotones"  >
+
+                    <ScrollView>
+                        <StackLayout HorizontalOptions="Center"   HeightRequest="600" WidthRequest="300"
+                                 Margin="0,80,0,0">
+                            <Label Grid.Row="0" Text="Aqui tienes mas info sobre esta Encuesta" FontSize="25" FontAttributes="Bold,Italic" 
+                                TextColor="#ACCBE4"  HorizontalTextAlignment="Center" Margin="0,0,0,60"/>
+
+
+
+                            <Button Text="Informacion del Local" x:Name="btnLocal" Clicked="btnLocal_Clicked" CornerRadius="30" 
+                                    VerticalOptions="Center"   Margin="5" TextColor="#ACCBE4" >
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="1,0">
+                                        <GradientStop Color="#132C6A" Offset="0.1"/>
+                                        <GradientStop Color="#350A56" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <Button Text="Informacion de la comida" x:Name="btnComida" Clicked="btnComida_Clicked" CornerRadius="30" 
+                                    VerticalOptions="Center" TextColor="#ACCBE4" Margin="5">
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="1,0">
+                                        <GradientStop Color="#132C6A" Offset="0.1"/>
+                                        <GradientStop Color="#350A56" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <Button Text="Informacion de la calificacion" x:Name="btnCalificacion" Clicked="btnCalificacion_Clicked" 
+                                    VerticalOptions="Center" CornerRadius="30"  Margin="5" TextColor="#ACCBE4"  >
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="1,0">
+                                        <GradientStop Color="#132C6A" Offset="0.1"/>
+                                        <GradientStop Color="#350A56" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
+                                     BackgroundColor="#ACCBE4" Margin="0,120,0,0" CornerRadius="50" Padding="10"
+                                      x:Name="Volver" Clicked="Volver_Clicked"/>
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>
+                <!--Informacion de tu Local-->
+                <Grid  RowDefinitions="auto,*,*,auto" VerticalOptions="Center" x:Name="InfoLocal" HeightRequest ="800"
+                      HorizontalOptions="Center" >
+
+
+                    <Label Text="Local" FontSize="25" Grid.Row="0"
+                               FontAttributes="Bold" TextColor="#ACCBE4" 
+                           Margin="0,20,0,0" VerticalOptions="Center" 
+                           HorizontalOptions="Center"/>
+
+
+                    <CollectionView ItemsSource="{Binding LisLocal}" Grid.Row="1" Grid.RowSpan="2"
+                        Margin="5,15,5,5" VerticalOptions="Center" x:Name="ListaLocal" >
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate >
+
+                                <StackLayout HeightRequest="600" BackgroundColor="Black" 
+                                             Margin="20" VerticalOptions="Center">
+
+                                    <Label Text="{Binding NombreLocal, 
+                                            StringFormat='Nombre del local: {0}'}" HorizontalTextAlignment="Center"
+                                           Margin="7" FontSize="Medium" TextColor="#ACCBE4"/>
+
+                                    <Label Text="{Binding Categorias, 
+                                            StringFormat='El tipo de local es: {0}'}" 
+                                               HorizontalTextAlignment="Center"
+                                           Margin="7" FontSize="Medium" TextColor="#ACCBE4" />
+
+                                    <Label Text="{Binding Barrio, 
+                                            StringFormat='Barrio del local: {0}'}" HorizontalTextAlignment="Center"
+                                           Margin="7" FontSize="Medium" TextColor="#ACCBE4" />
+
+
+                                    <Label Text="{Binding Direccion, 
+                                            StringFormat='Las calles en las que se encuentra el local son: {0}'}" 
+                                               HorizontalTextAlignment="Center"
+                                           Margin="7" FontSize="Medium" TextColor="#ACCBE4" />
+
+
+
+                                    <!--Framme Geolocalizacion-->
+                                    <Frame CornerRadius="50" VerticalOptions="Center" HorizontalOptions="Center" 
+                                           Padding="-1" HeightRequest="40" WidthRequest="250">
+                                        <Frame.Background>
+                                            <LinearGradientBrush EndPoint="1,0">
+                                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                                <GradientStop Color="#350A56" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </Frame.Background>
+                                        <Grid RowDefinitions="*" >
+                                            <Label Text="Ir a geolocalizacion" TextColor="#ACCBE4" HorizontalTextAlignment="Center" FontSize="Medium" Grid.Row="0" VerticalOptions="Center" />
+                                            <Label x:Name="lblGeo" Text="{Binding Geolocalizacion}" TextColor="Transparent" BackgroundColor="Transparent" Grid.Row="0">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                                </Label.GestureRecognizers>
+
+                                            </Label>
+                                        </Grid>
+                                    </Frame>
+
+                                    <!--Framme Video-->
+                                    <Frame CornerRadius="50" VerticalOptions="Center" HorizontalOptions="Center" 
+                                           Padding="-1" HeightRequest="40" WidthRequest="250">
+                                        <Frame.Background>
+                                            <LinearGradientBrush EndPoint="1,0">
+                                                <GradientStop Color="#132C6A" Offset="0.1"/>
+                                                <GradientStop Color="#350A56" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </Frame.Background>
+                                        <Grid RowDefinitions="*" >
+                                            <Label Text="Descargar Video" TextColor="#ACCBE4" HorizontalTextAlignment="Center" FontSize="Medium" Grid.Row="0" VerticalOptions="Center" />
+                                            <Label Text="{Binding Video}" TextColor="Transparent" BackgroundColor="Transparent" Grid.Row="0">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="OnLabelTapped" />
+                                                </Label.GestureRecognizers>
+
+                                            </Label>
+                                        </Grid>
+                                    </Frame>
+                                    <!--Framme Fotografia-->
+                                    <Frame Padding="-4" BackgroundColor="Transparent" CornerRadius="50">
+                                        <StackLayout x:Name="PanelFoto" >
+                                            <Label Text="Imagen" HorizontalOptions="Center" TextColor="#ACCBE4" />
+                                            <ScrollView>
+                                                <Image>
+                                                    <Image.Source>
+                                                        <UriImageSource Uri="{Binding FotoFachada}" CachingEnabled="False" />
+                                                    </Image.Source>
+                                                </Image>
+
+                                            </ScrollView>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
+                                     BackgroundColor="#ACCBE4"   Margin="0,0,0,0" CornerRadius="50" Padding="10"  Grid.Row="3"
+                                 x:Name="CerrarLocal" Clicked="btnCerrar2_Clicked"/>
+
+                </Grid>
+                <!--Info del la comida-->
+                <Grid  RowDefinitions="auto,*,*,auto" x:Name="InfoPlato" HeightRequest="800" BackgroundColor="Black"
+                      HorizontalOptions="Center" VerticalOptions="Center"  >
+
+                    <Label Grid.Row="0" Text="Plato" FontSize="25"
+                               FontAttributes="Bold" TextColor="#ACCBE4"
+                           Margin="0,90,0,0"  VerticalOptions="Center" 
+                           HorizontalOptions="Center"/>
+
+                    <CollectionView ItemsSource="{Binding LisPlato}"
+                        Margin="5,15,5,5" Grid.Row="1" Grid.RowSpan="2">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout   >
+                                    <Label Grid.Row="0" Text="{Binding Nombre, 
+                                            StringFormat='Nombre del Plato: {0}'}"  Margin="7" FontSize="Medium"
+                                               HorizontalTextAlignment="Center" TextColor="#ACCBE4"/>
+
+                                    <Frame Grid.Row="1" CornerRadius="20" BackgroundColor="Transparent" 
+                                           Margin="7" Padding="2"  VerticalOptions="Center">
+                                        <Label Grid.Row="1" Text="{Binding Precio, 
+                                            StringFormat='Precio del Plato: $ {0} '}" Margin="7" FontSize="Medium"
+                                               HorizontalTextAlignment="Center" TextColor="#ACCBE4"/>
+                                    </Frame>
+                                    <Frame Grid.Row="2" CornerRadius="20" BackgroundColor="Transparent" 
+                                           Margin="7" Padding="2" VerticalOptions="Center">
+                                        <Label Grid.Row="2" Text="{Binding Descripcion, 
+                                            StringFormat='Descripcion: {0}'}" Margin="7" FontSize="Medium"
+                                               HorizontalTextAlignment="Center" TextColor="#ACCBE4"/>
+                                    </Frame>
+                                    <Frame Grid.Row="3" CornerRadius="20" BackgroundColor="Transparent" 
+                                           Margin="7" Padding="2"  VerticalOptions="Center">
+                                        <Label Grid.Row="3" Text="{Binding Comentario, 
+                                            StringFormat='Comentario: {0}'}" Margin="7" FontSize="Medium"
+                                               HorizontalTextAlignment="Center" TextColor="#ACCBE4"/>
+                                    </Frame>
+                                    <!--Frame Imagen-->
+                                    <Frame Padding="-4" BackgroundColor="Transparent" CornerRadius="50" Grid.Row="4" >
+                                        <StackLayout x:Name="PanelFoto" >
+                                            <Label Text="Imagen del Plato" HorizontalOptions="Center" TextColor="#ACCBE4" />
+                                            <ScrollView>
+                                                <Image>
+                                                    <Image.Source>
+                                                        <UriImageSource Uri="{Binding FotoPlato}" CachingEnabled="False" />
+                                                    </Image.Source>
+                                                </Image>
+
+                                            </ScrollView>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
+                                     BackgroundColor="#ACCBE4" Margin="0,0,0,0" CornerRadius="50" Padding="10" Grid.Row="3" 
+                                x:Name="CerrarPlato" Clicked="btnCerrar1_Clicked" />
+
+                </Grid>
+
+                <Grid RowDefinitions="Auto,auto,Auto" VerticalOptions="Center" BackgroundColor="Black"
+                      HorizontalOptions="Center" x:Name="InfoCalificacion" HeightRequest="800"  >
+                    <Label Grid.Row="0" Text="Calificacion" FontSize="25"
+                               FontAttributes="Bold" TextColor="#ACCBE4"
+                           Margin="20" HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+
+                    <CollectionView ItemsSource="{Binding LisCalificacion}" Grid.Row="1" 
+                        Margin="5,15,5,5" >
+                        <CollectionView.ItemTemplate >
+                            <DataTemplate  >
+                                <Grid RowDefinitions="*,*,*,*"   Padding="20" VerticalOptions="Center" >
+
+                                    <Frame Grid.Row="0" CornerRadius="20" BackgroundColor="Transparent" 
+                                           Margin="7" Padding="2" >
+                                        <Label Text="{Binding CalificacionComida, 
+                                            StringFormat='Calificacion de su plato fue de : {0}/10'}" 
+                                               HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
+                                    </Frame>
+                                    <Frame Grid.Row="1" CornerRadius="20" BackgroundColor="Transparent" 
+                                           Margin="7" Padding="2" >
+                                        <Label  Text="{Binding CalificacionLugar, 
+                                            StringFormat='Calificacion de condiciones de este local fue de: {0}/10'}" 
+                                               HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
+                                    </Frame>
+                                    <Frame Grid.Row="2"  CornerRadius="20" BackgroundColor="Transparent" 
+                                           Margin="7" Padding="2" >
+                                        <Label Text="{Binding CalificacionAtencion, 
+                                            StringFormat='Calificacion de la atencion brindada fue  de : {0}/10'}" 
+                                               HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
+                                    </Frame>
+                                    <Frame Grid.Row="3" CornerRadius="20" BackgroundColor="Transparent" 
+                                           Margin="7" Padding="2" >
+                                        <Label Text="{Binding Recomendacion, Converter={StaticResource BoolToRecommendationConverter}, 
+                                            StringFormat='El Local fue: {0}'}" 
+                                               HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
+                                    </Frame>
+
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
+                                     BackgroundColor="#ACCBE4" Margin="0,0,0,0" CornerRadius="50" Padding="10" Grid.Row="2"
+                                 x:Name="CerrarCalificacion" Clicked="btnCerrar3_Clicked"/>
+
+                </Grid>
+
+
+            </Grid>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
