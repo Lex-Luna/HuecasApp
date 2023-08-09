@@ -47,6 +47,23 @@ namespace HuecasAppUsers.Datos
             return IdEncuesta;
         }
         #endregion
+        #region Actualizar
+        public async Task EncuestaVaneada(EncuestaM p)
+        {
+            var obtenerData = (await Conexiones.Constantes.firebase
+                .Child("Encuesta")
+                .OnceAsync<EncuestaM>()).Where(a => a.Object.IdEncuesta == p.IdEncuesta)
+                .FirstOrDefault();
+
+            var encuesta = obtenerData.Object;
+            encuesta.Estado = false;
+
+            await Conexiones.Constantes.firebase
+               .Child("Encuesta")
+               .Child(obtenerData.Key)
+               .PutAsync(encuesta);
+        }
+        #endregion
         #region MostrarEncuesta
 
         public async Task<List<EncuestaM>> MostEncuesta()
@@ -71,28 +88,7 @@ namespace HuecasAppUsers.Datos
                 }).ToList();
         }
 
-        public async Task<List<EncuestaM>> MostEncuestaXNomLocal(EncuestaM p)
-        {
-            return (await Constantes.firebase
-                .Child("Encuesta")
-                .OnceAsync<EncuestaM>())
-                .Where(item => item.Object.NomLocal == p.NomLocal && item.Object.Recomendado == true)
-                .Select(item => new EncuestaM
-                {
-                    IdEncuesta = item.Key,
-                    Estado = item.Object.Estado,
-                    FechaData = item.Object.FechaData,
-                    IdCalificacion = item.Object.IdCalificacion,
-                    IdPlatoLocal = item.Object.IdPlatoLocal,
-                    IdPlato = item.Object.IdPlato,
-                    IdLocal = item.Object.IdLocal,
-                    IdUsuario = item.Object.IdUsuario,
-                    NomUsuario = item.Object.NomUsuario,
-                    NomLocal = item.Object.NomLocal,
-                    NomPlato = item.Object.NomPlato,
-                    PromCalificacion = item.Object.PromCalificacion
-                }).ToList();
-        }
+        
 
         public async Task<List<EncuestaM>> MostEncuestaRecomendada()
         {
@@ -100,7 +96,7 @@ namespace HuecasAppUsers.Datos
             .Child("Encuesta")
             .OnceAsync<EncuestaM>();
             return result
-                .Where(item => item.Object.Recomendado == true)
+                .Where(item => item.Object.Recomendado == true && item.Object.Estado==true)
                 .Select(item => new EncuestaM
                 {
                     IdEncuesta = item.Key,

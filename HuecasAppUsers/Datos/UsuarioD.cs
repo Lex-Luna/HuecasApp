@@ -46,6 +46,8 @@ namespace HuecasAppUsers.Datos
             }
             
         }
+        #endregion
+        #region Actualizar
         public async Task AddNumEncuesta(UsuarioM p)
         {
             var obtenerData = (await Conexiones.Constantes.firebase
@@ -61,6 +63,22 @@ namespace HuecasAppUsers.Datos
                .Child(obtenerData.Key)
                .PutAsync(usuario);
         }
+        public async Task UsuarioVaneado(UsuarioM p)
+        {
+            var obtenerData = (await Conexiones.Constantes.firebase
+                .Child("Usuario")
+                .OnceAsync<UsuarioM>()).Where(a => a.Object.IdUsuario == p.IdUsuario)
+                .FirstOrDefault();
+
+            var usuario = obtenerData.Object;
+            usuario.Estado=false;
+
+            await Conexiones.Constantes.firebase
+               .Child("Usuario")
+               .Child(obtenerData.Key)
+               .PutAsync(usuario);
+        }
+
         #endregion
         #region Mostrar
         public async Task<List<UsuarioM>> MostUsuario()
@@ -87,7 +105,7 @@ namespace HuecasAppUsers.Datos
             return (await Constantes.firebase
                 .Child("Usuario")
                 .OnceAsync<UsuarioM>())
-                .Where(a=>a.Object.Correo==p.Correo)
+                .Where(a=>a.Object.Correo==p.Correo && a.Object.Estado== true)
                 .Select(item => new UsuarioM
                 {
                     IdUsuario = item.Key,

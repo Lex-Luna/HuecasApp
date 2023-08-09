@@ -256,6 +256,13 @@ namespace HuecasAppUsers.Vista
                 item.FechaData != null && item.FechaData.ToString("dd/MM/yyyy").Contains(searchTerm)).ToList();
             FechaCommunity.ItemsSource = filteredItems;
         }
+        private void BuscarCategoria_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchTerm = e.NewTextValue;
+            var filteredItems = LisEncuestaRecomendados.Where(item =>
+                item.Categorias != null && item.Categorias.Contains(searchTerm)).ToList();
+            ComidaCommunity.ItemsSource = filteredItems;
+        }
         
 
         private async Task IrDetalleEncuesta(EncuestaM p)
@@ -281,12 +288,5 @@ namespace HuecasAppUsers.Vista
 
         #endregion
 
-        private void BuscarCategoria_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var searchTerm = e.NewTextValue;
-            var filteredItems = LisEncuestaRecomendados.Where(item =>
-                item.Categorias != null && item.Categorias.Contains(searchTerm)).ToList();
-            ComidaCommunity.ItemsSource = filteredItems;
-        }
     }
 }

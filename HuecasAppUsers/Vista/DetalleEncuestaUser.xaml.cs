@@ -21,11 +21,7 @@ namespace HuecasAppUsers.Vista
             VIstaPrincipal();
 
         }
-        /*string lblVideo;
-        public string LblVideo
-        {
-            set; get;
-        }*/
+        
         
 
         private void VIstaPrincipal()
