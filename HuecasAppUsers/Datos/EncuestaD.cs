@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Xamarin.Forms.BehaviorsPack;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.Shapes;
 
@@ -50,19 +51,35 @@ namespace HuecasAppUsers.Datos
         #region Actualizar
         public async Task EncuestaVaneada(EncuestaM p)
         {
-            var obtenerData = (await Conexiones.Constantes.firebase
-                .Child("Encuesta")
-                .OnceAsync<EncuestaM>()).Where(a => a.Object.IdEncuesta == p.IdEncuesta)
-                .FirstOrDefault();
+            try
+            {
 
-            var encuesta = obtenerData.Object;
-            encuesta.Estado = false;
 
-            await Conexiones.Constantes.firebase
-               .Child("Encuesta")
-               .Child(obtenerData.Key)
-               .PutAsync(encuesta);
+                var obtenerData = (await Conexiones.Constantes.firebase
+                    .Child("Encuesta")
+                    .OnceAsync<EncuestaM>()).Where(a => a.Key == p.IdEncuesta)
+                    .FirstOrDefault();
+
+                if (obtenerData != null)
+                {
+                    var encuesta = obtenerData.Object;
+                    encuesta.Estado = false;
+
+                    await Conexiones.Constantes.firebase
+                       .Child("Encuesta")
+                       .Child(obtenerData.Key)
+                       .PutAsync(encuesta);
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+
         }
+
         #endregion
         #region MostrarEncuesta
 
@@ -71,6 +88,7 @@ namespace HuecasAppUsers.Datos
             return (await Constantes.firebase
                 .Child("Encuesta")
                 .OnceAsync<EncuestaM>())
+                .Where(item => item.Object.Estado == true)
                 .Select(item => new EncuestaM
                 {
                     IdEncuesta = item.Key,
@@ -88,7 +106,7 @@ namespace HuecasAppUsers.Datos
                 }).ToList();
         }
 
-        
+
 
         public async Task<List<EncuestaM>> MostEncuestaRecomendada()
         {
@@ -96,7 +114,7 @@ namespace HuecasAppUsers.Datos
             .Child("Encuesta")
             .OnceAsync<EncuestaM>();
             return result
-                .Where(item => item.Object.Recomendado == true && item.Object.Estado==true)
+                .Where(item => item.Object.Recomendado == true && item.Object.Estado == true)
                 .Select(item => new EncuestaM
                 {
                     IdEncuesta = item.Key,

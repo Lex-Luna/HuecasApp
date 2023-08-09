@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
              x:Class="HuecasAppUsers.Vista.DetalleEncuestaAdmin">
     <ContentPage.Content>
         <StackLayout BackgroundColor="Black"  HorizontalOptions="Center"  >
@@ -44,6 +45,9 @@
                                     </LinearGradientBrush>
                                 </Button.Background>
                             </Button>
+                            <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
+                                     BackgroundColor="red" Margin="0,0,0,0" CornerRadius="50" Padding="10"
+                                      x:Name="Eliminar" Command="{Binding VanearEncuestaCommand}"/>
                             <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
                                      BackgroundColor="#ACCBE4" Margin="0,120,0,0" CornerRadius="50" Padding="10"
                                       x:Name="Volver" Clicked="Volver_Clicked"/>

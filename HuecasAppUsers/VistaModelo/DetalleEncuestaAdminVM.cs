@@ -20,6 +20,7 @@ namespace HuecasAppUsers.VistaModelo
         public DetalleEncuestaAdminVM(INavigation navigation, EncuestaM e)
         {
             Navigation = navigation;
+            IdEncuesta = e.IdEncuesta;
             IdCalificacion = e.IdCalificacion;
             IdPlato = e.IdPlato;
             IdLocal = e.IdLocal;
@@ -45,6 +46,7 @@ namespace HuecasAppUsers.VistaModelo
             {
                 await obtenerDataUserAsync();
             }).Wait();
+            VanearEncuestaCommand = new Command(async () => await VanearEncuesta(IdEncuesta));
         }
         #region Variables
         string _IdUsuario;
@@ -111,6 +113,7 @@ namespace HuecasAppUsers.VistaModelo
             set { SetValue(ref _correo, value); }
         }
         
+        public string IdEncuesta{ get; set; }
         public string IdCalificacion { get; set; }
         public string IdPlato { get; set; }
         public string IdLocal { get; set; }
@@ -197,7 +200,21 @@ namespace HuecasAppUsers.VistaModelo
             }
 
         }
+        async Task VanearEncuesta(string id)
+        {
+            try
+            {
+                var f = new EncuestaD();
+                var p = new EncuestaM { IdEncuesta = id };
 
+                await f.EncuestaVaneada(p);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
 
 
 
@@ -205,7 +222,7 @@ namespace HuecasAppUsers.VistaModelo
         #region Comandos
 
         public ICommand Volvercomamd => new Command(async () => await Volver());
-
+        public Command VanearEncuestaCommand { get; }
 
         #endregion
     }

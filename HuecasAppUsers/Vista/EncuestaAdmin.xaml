@@ -491,7 +491,7 @@
             <!--Panel Precio-->
 
             <StackLayout x:Name="PanelPrecio" Grid.Row="0">
-
+                
                 <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start"
                                      BackgroundColor="#ACCBE4" Margin="10,10,0,0" CornerRadius="50" Padding="10"
                                       x:Name="Vuelve" Clicked="Vuelve_Clicked"/>

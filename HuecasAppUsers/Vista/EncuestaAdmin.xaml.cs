@@ -284,7 +284,7 @@ namespace HuecasAppUsers.Vista
         {
             try
             {
-                await Navigation.PushAsync(new DetalleEncuestaUser(p));
+                await Navigation.PushAsync(new DetalleEncuestaAdmin(p));
             }
             catch (Exception e)
             {

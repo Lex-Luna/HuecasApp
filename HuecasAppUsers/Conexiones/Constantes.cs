@@ -12,8 +12,7 @@ namespace HuecasAppUsers.Conexiones
         public static string storage = "huecasapp-d8da1.appspot.com";
         // huecasApppublic const string GoogleMapsApiKey = "AIzaSyB9wL83cfuVVhtBKW_HW7muDjr4LSf6GUc";
         public const string GoogleMapsApiKey = "AIzaSyDkbzFWQC_jmqn6NY1_F92aOLVfoKbrRr8"; //ecoba
-        //api de youtube
-        //public const string YoutubeKey = "AIzaSyDTPc4MQtRsTTkvW6Cz1iSM-Cdr93uW0rc";
+        
     }
 
 }

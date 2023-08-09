@@ -121,6 +121,9 @@ namespace HuecasAppUsers.VistaModelo
 
         #endregion
         #region Procesos
+
+
+       
         private async Task obtenerDataUserAsync()
         {
             try
