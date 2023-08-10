@@ -18,7 +18,7 @@ namespace HuecasAppUsers.Datos
         public string _IdUsuario;
         #endregion
         #region Insertar
-        public async Task <string> InserUsuario(UsuarioM parametros)
+        public async Task<string> InserUsuario(UsuarioM parametros)
         {
             try
             {
@@ -34,6 +34,7 @@ namespace HuecasAppUsers.Datos
                    Estado = true,
                    Nombre = parametros.Nombre,
                    NumEncuesta = parametros.NumEncuesta,
+                   EncuestasEliminadas = parametros.EncuestasEliminadas,
                    IdAdministrador = "lUUpQuSwqibNTFqEq4LVQKK8kEG2"
                });
                 _IdUsuario = data.Key;
@@ -44,7 +45,7 @@ namespace HuecasAppUsers.Datos
 
                 throw e;
             }
-            
+
         }
         #endregion
         #region Actualizar
@@ -63,6 +64,31 @@ namespace HuecasAppUsers.Datos
                .Child(obtenerData.Key)
                .PutAsync(usuario);
         }
+        public async Task AddNumVaneoEncuesta(UsuarioM p)
+        {
+            try
+            {
+
+
+                var obtenerData = (await Conexiones.Constantes.firebase
+                    .Child("Usuario")
+                    .OnceAsync<UsuarioM>()).Where(a => a.Key == p.IdUsuario)
+                    .FirstOrDefault();
+
+                var usuario = obtenerData.Object;
+                usuario.EncuestasEliminadas++;
+
+                await Conexiones.Constantes.firebase
+                   .Child("Usuario")
+                   .Child(obtenerData.Key)
+                   .PutAsync(usuario);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
         public async Task UsuarioVaneado(UsuarioM p)
         {
             var obtenerData = (await Conexiones.Constantes.firebase
@@ -71,7 +97,7 @@ namespace HuecasAppUsers.Datos
                 .FirstOrDefault();
 
             var usuario = obtenerData.Object;
-            usuario.Estado=false;
+            usuario.Estado = false;
 
             await Conexiones.Constantes.firebase
                .Child("Usuario")
@@ -105,11 +131,11 @@ namespace HuecasAppUsers.Datos
             return (await Constantes.firebase
                 .Child("Usuario")
                 .OnceAsync<UsuarioM>())
-                .Where(a=>a.Object.Correo==p.Correo && a.Object.Estado== true)
+                .Where(a => a.Object.Correo == p.Correo && a.Object.Estado == true)
                 .Select(item => new UsuarioM
                 {
                     IdUsuario = item.Key,
-                    Admin =item.Object.Admin,
+                    Admin = item.Object.Admin,
                     FotoUsuario = item.Object.FotoUsuario,
                     Apellido = item.Object.Apellido,
                     Contrasenia = item.Object.Contrasenia,

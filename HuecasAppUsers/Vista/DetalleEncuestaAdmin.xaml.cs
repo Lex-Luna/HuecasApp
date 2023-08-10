@@ -49,11 +49,20 @@ namespace HuecasAppUsers.Vista
 
         private void btnCalificacion_Clicked(object sender, EventArgs e)
         {
-            MenuBotones.IsVisible = false;
-            InfoCalificacion.IsVisible = true;
-            InfoLocal.IsVisible = false;
-            InfoPlato.IsVisible = false;
+            try
+            {
+                MenuBotones.IsVisible = false;
+                InfoCalificacion.IsVisible = true;
+                InfoLocal.IsVisible = false;
+                InfoPlato.IsVisible = false;
 
+            }
+            catch (Exception err)
+            {
+
+                throw err;
+            }
+            
         }
 
         private void btnCerrar1_Clicked(object sender, EventArgs e)

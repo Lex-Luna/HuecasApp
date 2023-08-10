@@ -45,8 +45,8 @@
                                     </LinearGradientBrush>
                                 </Button.Background>
                             </Button>
-                            <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
-                                     BackgroundColor="red" Margin="0,0,0,0" CornerRadius="50" Padding="10"
+                            <Button Text="Vanear esta encuesta" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
+                                     BackgroundColor="red" Margin="0,20,0,0" CornerRadius="50" Padding="3"
                                       x:Name="Eliminar" Command="{Binding VanearEncuestaCommand}"/>
                             <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
                                      BackgroundColor="#ACCBE4" Margin="0,120,0,0" CornerRadius="50" Padding="10"

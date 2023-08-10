@@ -22,6 +22,7 @@ namespace HuecasAppUsers.VistaModelo
             Navigation = navigation;
             IdEncuesta = e.IdEncuesta;
             IdCalificacion = e.IdCalificacion;
+            IdUsuario = e.IdUsuario;
             IdPlato = e.IdPlato;
             IdLocal = e.IdLocal;
             Task.Run(async () =>
@@ -41,6 +42,13 @@ namespace HuecasAppUsers.VistaModelo
                 await MostrarPlatoId(IdPlato);
 
             }).Wait();
+
+            Task.Run(async () =>
+            {
+                await MostrarCalificacionId(IdCalificacion);
+
+            }).Wait();
+
 
             Task.Run(async () =>
             {
@@ -135,7 +143,7 @@ namespace HuecasAppUsers.VistaModelo
                 var data = await f.MostUsuarioXcorreo(p);
                 Nombre = data[0].Nombre;
                 Apellido = data[0].Apellido;
-                IdUsuario = data[0].IdUsuario;
+                //IdUsuario = data[0].IdUsuario;
                 NumEncuesta = data[0].NumEncuesta;
                 IdAdmin = data[0].IdAdministrador;
                 Contrania = data[0].Contrasenia;
@@ -206,7 +214,7 @@ namespace HuecasAppUsers.VistaModelo
             {
                 var f = new EncuestaD();
                 var p = new EncuestaM { IdEncuesta = id };
-
+                await NumEnncuestaVaneada(IdUsuario);
                 await f.EncuestaVaneada(p);
             }
             catch (Exception ex)
@@ -214,6 +222,23 @@ namespace HuecasAppUsers.VistaModelo
 
                 throw ex;
             }
+        }
+        private async Task NumEnncuestaVaneada(string id)
+        {
+            try
+            {
+                var f = new UsuarioD();
+                var p = new UsuarioM { IdUsuario= id };
+
+
+                await f.AddNumVaneoEncuesta(p);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            
         }
 
 

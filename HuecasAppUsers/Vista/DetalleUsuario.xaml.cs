@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace HuecasAppUsers.Vista
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class UsuarioAdmin : ContentPage
+    public partial class DetalleUsuario : ContentPage
     {
-        public UsuarioAdmin()
+        public DetalleUsuario()
         {
             InitializeComponent();
         }
