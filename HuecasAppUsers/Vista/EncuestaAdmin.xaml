@@ -115,7 +115,7 @@
                                 <Frame BorderColor="Black" Padding="1" BackgroundColor="Black" CornerRadius="30">
                                     <!--Agregar el comando ir a DeetalleEncuesta-->
                                     <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaCommand, 
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaAdminCommand, 
                                                     Source={x:Reference RestauranteCommunity}}" CommandParameter="{Binding .}"/>
                                     </Frame.GestureRecognizers>
                                     <StackLayout Margin="0,0,0,10" >
@@ -216,7 +216,7 @@
                                 <Frame BorderColor="Black" Padding="1" BackgroundColor="Black" CornerRadius="30">
                                     <!--Agregar el comando ir a DeetalleEncuesta-->
                                     <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaCommand, 
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaAdminCommand, 
                                             Source={x:Reference CategoriaCommunity}}" CommandParameter="{Binding .}"/>
                                     </Frame.GestureRecognizers>
                                     <StackLayout Margin="0,0,0,10" >
@@ -315,7 +315,7 @@
                                 <Frame BorderColor="Black" Padding="1" BackgroundColor="Black" CornerRadius="30">
                                     <!--Agregar el comando ir a DeetalleEncuesta-->
                                     <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaCommand, 
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaAdminCommand, 
                                         Source={x:Reference ComidaCommunity}}" CommandParameter="{Binding .}"/>
                                     </Frame.GestureRecognizers>
                                     <StackLayout Margin="0,0,0,10" >
@@ -415,7 +415,7 @@
                                 <Frame BorderColor="Black" Padding="1" BackgroundColor="Black" CornerRadius="30">
                                     <!--Agregar el comando ir a DeetalleEncuesta-->
                                     <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaCommand, 
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaAdminCommand, 
                                             Source={x:Reference BarrioCommunity}}" CommandParameter="{Binding .}"/>
                                     </Frame.GestureRecognizers>
                                     <StackLayout Margin="0,0,0,10" >
@@ -523,7 +523,7 @@
                                 <Frame BorderColor="Black" Padding="1" BackgroundColor="Black" CornerRadius="30">
                                     <!--Agregar el comando ir a DeetalleEncuesta-->
                                     <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaCommand, 
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaAdminCommand, 
                                         Source={x:Reference PrecioCommunity}}" CommandParameter="{Binding .}"/>
                                     </Frame.GestureRecognizers>
                                     <StackLayout Margin="0,0,0,10" >
@@ -629,7 +629,7 @@
                                 <Frame BorderColor="Black" Padding="1" BackgroundColor="Black" CornerRadius="30">
                                     <!--Agregar el comando ir a DeetalleEncuesta-->
                                     <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaCommand, 
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleEncuestaAdminCommand, 
                                         Source={x:Reference FechaCommunity}}" CommandParameter="{Binding .}"/>
                                     </Frame.GestureRecognizers>
                                     <StackLayout Margin="0,0,0,10" >

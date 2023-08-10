@@ -21,15 +21,11 @@ namespace HuecasAppUsers.VistaModelo
         {
             Navigation = navigation;
             IdEncuesta = e.IdEncuesta;
-            IdCalificacion = e.IdCalificacion;
             IdUsuario = e.IdUsuario;
             IdPlato = e.IdPlato;
             IdLocal = e.IdLocal;
-            Task.Run(async () =>
-            {
-                await MostrarCalificacionId(IdCalificacion);
-
-            }).Wait();
+            IdCalificacion = e.IdCalificacion;
+            
 
             Task.Run(async () =>
             {
@@ -50,11 +46,7 @@ namespace HuecasAppUsers.VistaModelo
             }).Wait();
 
 
-            Task.Run(async () =>
-            {
-                await obtenerDataUserAsync();
-            }).Wait();
-            VanearEncuestaCommand = new Command(async () => await VanearEncuesta(IdEncuesta));
+            
         }
         #region Variables
         string _IdUsuario;

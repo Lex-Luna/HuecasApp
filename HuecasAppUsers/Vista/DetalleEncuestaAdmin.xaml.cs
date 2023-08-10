@@ -20,6 +20,8 @@ namespace HuecasAppUsers.Vista
             BindingContext = new DetalleEncuestaAdminVM(Navigation, e);
             VIstaPrincipal();
         }
+        #region Paneles
+        
         private void VIstaPrincipal()
         {
             MenuBotones.IsVisible = true;
@@ -46,8 +48,7 @@ namespace HuecasAppUsers.Vista
             InfoPlato.IsVisible = true;
 
         }
-
-        private void btnCalificacion_Clicked(object sender, EventArgs e)
+        private void btnCalificacion_Clicked_1(object sender, EventArgs e)
         {
             try
             {
@@ -62,8 +63,12 @@ namespace HuecasAppUsers.Vista
 
                 throw err;
             }
-            
         }
+
+        
+        #endregion
+        #region BotonesCerrar
+        
 
         private void btnCerrar1_Clicked(object sender, EventArgs e)
         {
@@ -119,6 +124,9 @@ namespace HuecasAppUsers.Vista
             InfoPlato.IsVisible = false;
 
         }
+        #endregion
+        #region Procesos
+        
         private void OnLabelTapped(object sender, EventArgs e)
         {
             var label = (Label)sender;
@@ -140,6 +148,7 @@ namespace HuecasAppUsers.Vista
             var uri = new Uri($"https://maps.google.com/?q={latitud},{longitud}");
             Device.OpenUri(uri);
         }
+        #endregion
 
     }
 }

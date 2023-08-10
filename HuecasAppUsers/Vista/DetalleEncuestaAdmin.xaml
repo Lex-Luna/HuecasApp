@@ -36,7 +36,7 @@
                                     </LinearGradientBrush>
                                 </Button.Background>
                             </Button>
-                            <Button Text="Informacion de la calificacion" x:Name="btnCalificacion" Clicked="btnCalificacion_Clicked" 
+                            <Button Text="Informacion de la calificacion" x:Name="btnCalificacion" Clicked="btnCalificacion_Clicked_1" 
                                     VerticalOptions="Center" CornerRadius="30"  Margin="5" TextColor="#ACCBE4"  >
                                 <Button.Background>
                                     <LinearGradientBrush EndPoint="1,0">
@@ -217,7 +217,7 @@
                                 x:Name="CerrarPlato" Clicked="btnCerrar1_Clicked" />
 
                 </Grid>
-
+                <!--Info del la Calificacion-->
                 <Grid RowDefinitions="Auto,auto,Auto" VerticalOptions="Center" BackgroundColor="Black"
                       HorizontalOptions="Center" x:Name="InfoCalificacion" HeightRequest="800"  >
                     <Label Grid.Row="0" Text="Calificacion" FontSize="25"
@@ -225,7 +225,7 @@
                            Margin="20" HorizontalOptions="Center"
                            VerticalOptions="Center" />
 
-                    <CollectionView ItemsSource="{Binding LisCalificacion}" Grid.Row="1" 
+                    <CollectionView ItemsSource="{Binding LisCalificacion }" Grid.Row="1" 
                         Margin="5,15,5,5" >
                         <CollectionView.ItemTemplate >
                             <DataTemplate  >
@@ -249,12 +249,12 @@
                                             StringFormat='Calificacion de la atencion brindada fue  de : {0}/10'}" 
                                                HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
                                     </Frame>
-                                    <Frame Grid.Row="3" CornerRadius="20" BackgroundColor="Transparent" 
+                                    <!--Frame Grid.Row="3" CornerRadius="20" BackgroundColor="Transparent" 
                                            Margin="7" Padding="2" >
                                         <Label Text="{Binding Recomendacion, Converter={StaticResource BoolToRecommendationConverter}, 
                                             StringFormat='El Local fue: {0}'}" 
                                                HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
-                                    </Frame>
+                                    </Frame-->
 
                                 </Grid>
                             </DataTemplate>
