@@ -14,14 +14,14 @@ using Xamarin.Forms.Xaml;
 namespace HuecasAppUsers.Vista
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class UsuarioAdmin : ContentPage
+    public partial class Userqueda : ContentPage
     {
-        public UsuarioAdmin()
+        public Userqueda()
         {
             InitializeComponent();
+            BindingContext = this;
             Task.Run(async () =>
             {
-                BindingContext = this;
                 await MostrarUsuarios();
             }).Wait();
         }
@@ -40,7 +40,7 @@ namespace HuecasAppUsers.Vista
             var f = new UsuarioD();
             var usuario = await f.MostUsuario();
             LisUsuarios = new ObservableCollection<UsuarioM>(usuario);
-            
+
         }
 
     }
