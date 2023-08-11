@@ -2,8 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              NavigationPage.HasNavigationBar="False"
+             xmlns:local="clr-namespace:HuecasAppUsers.Convertidores"
              x:Class="HuecasAppUsers.Vista.DetalleEncuestaAdmin">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:BoolToRecomendationConverter x:Key="BoolToRecommendationConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
+        
         <StackLayout BackgroundColor="Black"  HorizontalOptions="Center"  >
 
             <Grid  RowDefinitions="*">
@@ -249,12 +256,12 @@
                                             StringFormat='Calificacion de la atencion brindada fue  de : {0}/10'}" 
                                                HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
                                     </Frame>
-                                    <!--Frame Grid.Row="3" CornerRadius="20" BackgroundColor="Transparent" 
+                                    <Frame Grid.Row="3" CornerRadius="20" BackgroundColor="Transparent" 
                                            Margin="7" Padding="2" >
                                         <Label Text="{Binding Recomendacion, Converter={StaticResource BoolToRecommendationConverter}, 
                                             StringFormat='El Local fue: {0}'}" 
                                                HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
-                                    </Frame-->
+                                    </Frame>
 
                                 </Grid>
                             </DataTemplate>

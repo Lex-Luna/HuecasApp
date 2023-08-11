@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:HuecasAppUsers.Convertidores"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:HuecasAppUsers.Convertidores"
              NavigationPage.HasNavigationBar="False"
              x:Class="HuecasAppUsers.Vista.DetalleEncuestaUser">
     <ContentPage.Resources>
@@ -220,7 +221,7 @@
                                 x:Name="CerrarPlato" Clicked="btnCerrar1_Clicked" />
 
                 </Grid>
-                
+                <!--Info del la calif-->
                 <Grid RowDefinitions="Auto,auto,Auto" VerticalOptions="Center" BackgroundColor="Black"
                       HorizontalOptions="Center" x:Name="InfoCalificacion" HeightRequest="800"  >
                     <Label Grid.Row="0" Text="Calificacion" FontSize="25"
@@ -233,7 +234,6 @@
                         <CollectionView.ItemTemplate >
                             <DataTemplate  >
                                 <Grid RowDefinitions="*,*,*,*"   Padding="20" VerticalOptions="Center" >
-
                                     <Frame Grid.Row="0" CornerRadius="20" BackgroundColor="Transparent" 
                                            Margin="7" Padding="2" >
                                         <Label Text="{Binding CalificacionComida, 

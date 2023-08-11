@@ -122,7 +122,8 @@ namespace HuecasAppUsers.Datos
                     Estado = item.Object.Estado,
                     IdAdministrador = item.Object.IdAdministrador,
                     Nombre = item.Object.Nombre,
-                    NumEncuesta = item.Object.NumEncuesta
+                    NumEncuesta = item.Object.NumEncuesta ,
+                    EncuestasEliminadas = item.Object.EncuestasEliminadas
 
                 }).ToList();
         }
