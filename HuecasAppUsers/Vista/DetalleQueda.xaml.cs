@@ -19,5 +19,10 @@ namespace HuecasAppUsers.Vista
             InitializeComponent();
             BindingContext = new DetalleQuedaVM(Navigation, u);
         }
+
+        private void Atras_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+        }
     }
 }

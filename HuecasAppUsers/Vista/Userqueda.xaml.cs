@@ -47,7 +47,7 @@ namespace HuecasAppUsers.Vista
             try
             {
                 await Navigation.PushAsync(new DetalleQueda(p));
-            }
+                }
             catch (Exception e)
             {
 

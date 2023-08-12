@@ -11,7 +11,7 @@
                            Margin="20" HorizontalOptions="Center"
                            VerticalOptions="Center" />
 
-        <CollectionView ItemsSource="{Binding LisUsuarios}" Grid.Row="1" 
+        <CollectionView ItemsSource="{Binding LisUsuario}" Grid.Row="1" 
                         Margin="5,15,5,5">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -25,33 +25,24 @@
                                     <GradientStop Color="#350A56" Offset="1.0"/>
                                 </LinearGradientBrush>
                             </Frame.Background>
-                            <!--Comando DetalleUsuario-->
-                            <!--Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Path=BindingContext.IrDetalleQuedaCommand, 
-                                        Source={x:Reference EncuestasUser}}" CommandParameter="{Binding .}"/>
-                            </Frame.GestureRecognizers-->
+                            
                             <StackLayout>
+                                <Frame CornerRadius="20" BackgroundColor="Transparent" 
+                                           Margin="7" Padding="2" >
+                                    <Image Source="{Binding FotoUsuario}" />
+                                </Frame>
                                 <Frame CornerRadius="20" BackgroundColor="Transparent" 
                                            Margin="7" Padding="2" >
                                     <Label Text="{Binding Nombre, StringFormat='Nombre de Usuario: {0}'}" 
                                     HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
                                 </Frame>
-                                <Frame  CornerRadius="20" BackgroundColor="Transparent" Margin="7" Padding="2" >
-                                    <Label Text="{Binding Apellido, StringFormat='Apellido de Usuario: {0}'}" 
-                                    HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
-                                </Frame>
+                                
                                 <Frame  CornerRadius="20" BackgroundColor="Transparent" Margin="7" Padding="2" >
                                     <Label Text="{Binding Correo, StringFormat='Correo del Usuario: {0}'}" 
                                     HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
                                 </Frame>
-                                <Frame CornerRadius="20" BackgroundColor="Transparent" Margin="7" Padding="2" >
-                                    <Label Text="{Binding NumEncuesta, StringFormat='Numero de  encuestas del Usuario: {0}'}" 
-                                    HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
-                                </Frame>
-                                <Frame  CornerRadius="20" BackgroundColor="Transparent" Margin="7" Padding="2" >
-                                    <Label Text="{Binding EncuestasEliminadas, StringFormat='Numero de encuestas eliminadas: {0}'}" 
-                                    HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
-                                </Frame>
+                                
+                                
                             </StackLayout>
                         </Frame>
                     </StackLayout>
@@ -59,6 +50,13 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Button Text="Vanear esta encuesta" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
+                                     BackgroundColor="red" Margin="0,20,0,0" CornerRadius="50" Padding="3"
+                                      x:Name="Eliminar" Command="{Binding VanearUsuarioComamd}"/>
+        <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
+                                     BackgroundColor="#ACCBE4" Margin="0,120,0,0" CornerRadius="50" Padding="10"
+                                      x:Name="Atras" Clicked="Atras_Clicked"/>
+        
     </StackLayout>
     
    

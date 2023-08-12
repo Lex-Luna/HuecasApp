@@ -55,6 +55,7 @@ namespace HuecasAppUsers.VistaModelo
         string _nombre;
         string _contrania;
         string _idAdmin;
+        string fotoUsuario;
         bool _estado;
         int _numEncuesta;
         //string video;
@@ -112,7 +113,12 @@ namespace HuecasAppUsers.VistaModelo
             get { return _correo; }
             set { SetValue(ref _correo, value); }
         }
-        
+        public string FotoUsuario
+        {
+            get { return fotoUsuario; }
+            set { SetValue(ref fotoUsuario, value); }
+        }
+
         public string IdEncuesta{ get; set; }
         public string IdCalificacion { get; set; }
         public string IdPlato { get; set; }

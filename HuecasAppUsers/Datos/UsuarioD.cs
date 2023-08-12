@@ -91,18 +91,29 @@ namespace HuecasAppUsers.Datos
         }
         public async Task UsuarioVaneado(UsuarioM p)
         {
-            var obtenerData = (await Conexiones.Constantes.firebase
-                .Child("Usuario")
-                .OnceAsync<UsuarioM>()).Where(a => a.Object.IdUsuario == p.IdUsuario)
-                .FirstOrDefault();
+            try
+            {
 
-            var usuario = obtenerData.Object;
-            usuario.Estado = false;
 
-            await Conexiones.Constantes.firebase
-               .Child("Usuario")
-               .Child(obtenerData.Key)
-               .PutAsync(usuario);
+
+                var obtenerData = (await Conexiones.Constantes.firebase
+                    .Child("Usuario")
+                    .OnceAsync<UsuarioM>()).Where(a => a.Key == p.IdUsuario)
+                    .FirstOrDefault();
+
+                var usuario = obtenerData.Object;
+                usuario.Estado = false;
+
+                await Conexiones.Constantes.firebase
+                   .Child("Usuario")
+                   .Child(obtenerData.Key)
+                   .PutAsync(usuario);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         #endregion
@@ -149,6 +160,48 @@ namespace HuecasAppUsers.Datos
                 }).ToList();
         }
 
+
+        public async Task<List<UsuarioM>> MostUsuarioXId(string p)
+        {
+            var usuario = await Constantes.firebase
+                .Child("Usuario")
+                .Child(p)
+                .OnceSingleAsync<UsuarioM>();
+            return new List<UsuarioM> { usuario};
+        }
+
+        #endregion
+        #region Actualizar
+        public async Task EncuestaVaneada(UsuarioM p)
+        {
+            try
+            {
+
+
+                var obtenerData = (await Conexiones.Constantes.firebase
+                    .Child("Usuario")
+                    .OnceAsync<UsuarioM>()).Where(a => a.Key == p.IdUsuario)
+                    .FirstOrDefault();
+
+                if (obtenerData != null)
+                {
+                    var encuesta = obtenerData.Object;
+                    encuesta.Estado = false;
+
+                    await Conexiones.Constantes.firebase
+                       .Child("Usuario")
+                       .Child(obtenerData.Key)
+                       .PutAsync(encuesta);
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+
+        }
         #endregion
 
         #region Multimedia
