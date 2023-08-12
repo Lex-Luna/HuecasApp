@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -42,6 +42,20 @@ namespace HuecasAppUsers.Vista
             LisUsuarios = new ObservableCollection<UsuarioM>(usuario);
 
         }
+        private async Task IrDetalleQueda(UsuarioM p)
+        {
+            try
+            {
+                await Navigation.PushAsync(new DetalleQueda(p));
+            }
+            catch (Exception e)
+            {
+
+                Debug.WriteLine("Error: No se pudo tomar el ID " + e);
+
+            }
+        }
+        public ICommand IrDetalleQuedaCommand => new Command<UsuarioM>(async (p) => await IrDetalleQueda(p));
 
     }
 }
