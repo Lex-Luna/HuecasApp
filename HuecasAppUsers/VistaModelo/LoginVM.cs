@@ -61,7 +61,7 @@ namespace HuecasAppUsers.VistaModelo
             catch (Exception)
             {
 
-                await DisplayAlert("Alerta", "Correo o contraseñ invlidaa", "OK");
+                await DisplayAlert("Alerta", "Correo o contraseña invlidaa", "OK");
             }
         }
         private async Task btnIniciar()

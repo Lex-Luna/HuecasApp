@@ -44,24 +44,7 @@ namespace HuecasAppUsers.Datos
             }
         }
 
-        /*private void OnPropertyChanged()
-        {
-            base.OnPropertyChanged(propertyName);
-            foreach (var logicalChildren in ChildrenNotDrawnByThisElement)
-            {
-                if (logicalChildren is IPropertyPropagationController controller)
-                    PropertyPropagationExtensions.PropagatePropertyChanged(propertyName, this, new[] { logicalChildren });
-            }
-
-            if (_effects == null || _effects.Count == 0)
-                return;
-
-            var args = new PropertyChangedEventArgs(propertyName);
-            foreach (Effect effect in _effects)
-            {
-                effect?.SendOnElementPropertyChanged(args);
-            }
-        }*/
+        
 
         public async Task CrearCuenta(string correo, string pass)
         {

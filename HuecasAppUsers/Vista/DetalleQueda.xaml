@@ -41,8 +41,13 @@
                                     <Label Text="{Binding Correo, StringFormat='Correo del Usuario: {0}'}" 
                                     HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
                                 </Frame>
-                                
-                                
+
+                                <Frame  CornerRadius="20" BackgroundColor="Transparent" Margin="7" Padding="2" >
+                                    <Label Text="{Binding Estado, StringFormat='Estado del usuario: {0}'}" 
+                                    HorizontalTextAlignment="Center" TextColor="#ACCBE4" FontSize="Medium"/>
+                                </Frame>
+
+
                             </StackLayout>
                         </Frame>
                     </StackLayout>
@@ -50,7 +55,7 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Text="Vanear esta encuesta" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
+        <Button Text="Vanear este usuario" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
                                      BackgroundColor="red" Margin="0,20,0,0" CornerRadius="50" Padding="3"
                                       x:Name="Eliminar" Command="{Binding VanearUsuarioComamd}"/>
         <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
