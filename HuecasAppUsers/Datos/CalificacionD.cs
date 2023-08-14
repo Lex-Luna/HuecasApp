@@ -21,8 +21,7 @@ namespace HuecasAppUsers.Datos
                     CalificacionComida = parametros.CalificacionComida,
                     CalificacionLugar = parametros.CalificacionLugar,
                     Recomendacion = parametros.Recomendacion,
-                    IdLocal = parametros.IdLocal,
-                    IdPlato = parametros.IdPlato
+                    IdPlatoLocal = parametros.IdPlatoLocal
 
                 });
             _IdCalificacion = data.Key;
@@ -40,8 +39,7 @@ namespace HuecasAppUsers.Datos
                     CalificacionAtencion = item.Object.CalificacionAtencion,
                     CalificacionComida = item.Object.CalificacionComida,
                     CalificacionLugar = item.Object.CalificacionLugar,
-                    IdLocal = item.Object.IdLocal,
-                    IdPlato = item.Object.IdPlato,
+                    IdPlatoLocal = item.Object.IdPlatoLocal,
                     Recomendacion=item.Object.Recomendacion
 
                 }).ToList();

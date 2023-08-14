@@ -82,7 +82,8 @@
                                FontSize="18">
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span Text="{Binding NumEncuesta, StringFormat='N° Encuestas Realizadas: {0}'}"  TextColor="#ACCBE4" FontAttributes="Bold" FontSize="20"/>
+                                            <Span Text="{Binding NumEncuesta, StringFormat='N° Encuestas Realizadas: {0}'}"  
+                                                  TextColor="#ACCBE4" FontAttributes="Bold" FontSize="20"/>
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>

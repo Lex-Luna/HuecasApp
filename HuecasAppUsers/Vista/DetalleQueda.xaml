@@ -12,7 +12,7 @@
                            VerticalOptions="Center" />
 
         <CollectionView ItemsSource="{Binding LisUsuario}" Grid.Row="1" 
-                        Margin="5,15,5,5">
+                        Margin="5,15,5,5"  HeightRequest="1500">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
 

@@ -202,7 +202,10 @@ namespace HuecasAppUsers.VistaModelo
 
         async Task AgregarLocal()
         {
+            try
+            {
 
+           
             await SubirFotoFachada();
             await SubirVideoLocal();
             var funcion = new LocalD();
@@ -217,6 +220,12 @@ namespace HuecasAppUsers.VistaModelo
             parametros.IdCiudad = IdCiudad;
             parametros.Categorias = PropiedadSeleccionada;
             _IdLocal = await funcion.InsertarLocal(parametros);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
 
         }
 
@@ -452,6 +461,10 @@ namespace HuecasAppUsers.VistaModelo
 
         public async Task AgregarPlato()
         {
+            try
+            {
+
+            
             await SubirFotoPlato();
             var funcion = new PlatoD();
             var parametros = new PlatoM();
@@ -466,6 +479,12 @@ namespace HuecasAppUsers.VistaModelo
             parametros2.IdLocal = _IdLocal;
             parametros2.IdPLato = _IdPlato;
             _IdPlatoLocal = await funcion2.InserPlatoLocal(parametros2);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
         }
 
 
@@ -550,41 +569,50 @@ namespace HuecasAppUsers.VistaModelo
 
         public async Task AddEncusta()
         {
-            var funcion = new CalificacionD();
-            var parametros = new CalificacionM();
-            parametros.CalificacionAtencion = TxtAtencion;
-            parametros.CalificacionComida = TxtComida;
-            parametros.CalificacionLugar = TxtLocal;
-            parametros.Recomendacion = Recomendado;
-            //parametros.IdLocal = _IdLocal;
-            //parametros.IdPlato = _IdPlato;
-            Promedio = (TxtAtencion + TxtComida + TxtLocal) / 3;
+            try
+            {
 
-            _IdCalificacion = await funcion.InserCalificacion(parametros);
 
-            var funcion2 = new EncuestaD();
-            var parametros2 = new EncuestaM();
-            parametros2.IdPlatoLocal = _IdPlatoLocal;
-            parametros2.IdPlato = _IdPlato;
-            parametros2.IdLocal = _IdLocal;
-            parametros2.IdCalificacion = _IdCalificacion;
-            parametros2.IdUsuario = IdUsuario;
-            parametros2.FechaData = DateTime.Now;
-            parametros2.Estado = true;
-            parametros2.NomUsuario = NombreCompleto;
-            parametros2.NomLocal = txtNombreLocal;
-            parametros2.NomPlato = txtNombrePlato;
-            parametros2.PromCalificacion = Promedio;
-            parametros2.TotalEncuesta = Totalencuesta;
-            parametros2.Recomendado = Recomendado;
-            parametros2.Categorias = PropiedadSeleccionada;
-            parametros2.Barrio = TxtBarrio;
-            parametros2.Precio = TxtPrecioPlato;
+                var funcion = new CalificacionD();
+                var parametros = new CalificacionM();
+                parametros.CalificacionAtencion = TxtAtencion;
+                parametros.CalificacionComida = TxtComida;
+                parametros.CalificacionLugar = TxtLocal;
+                parametros.Recomendacion = Recomendado;
+                parametros.IdPlatoLocal = _IdPlatoLocal;
+                Promedio = (TxtAtencion + TxtComida + TxtLocal) / 3;
 
-            await EditEncuestaUserAdd();
+                _IdCalificacion = await funcion.InserCalificacion(parametros);
 
-            _IdEncuesta = await funcion2.InsertarEncuesta(parametros2);
-            await IrContenedor();
+                var funcion2 = new EncuestaD();
+                var parametros2 = new EncuestaM();
+                parametros2.IdPlatoLocal = _IdPlatoLocal;
+                parametros2.IdPlato = _IdPlato;
+                parametros2.IdLocal = _IdLocal;
+                parametros2.IdCalificacion = _IdCalificacion;
+                parametros2.IdUsuario = IdUsuario;
+                parametros2.FechaData = DateTime.Now;
+                parametros2.Estado = true;
+                parametros2.NomUsuario = NombreCompleto;
+                parametros2.NomLocal = txtNombreLocal;
+                parametros2.NomPlato = txtNombrePlato;
+                parametros2.PromCalificacion = Promedio;
+                parametros2.TotalEncuesta = Totalencuesta;
+                parametros2.Recomendado = Recomendado;
+                parametros2.Categorias = PropiedadSeleccionada;
+                parametros2.Barrio = TxtBarrio;
+                parametros2.Precio = TxtPrecioPlato;
+
+                await EditEncuestaUserAdd();
+
+                _IdEncuesta = await funcion2.InsertarEncuesta(parametros2);
+                await IrContenedor();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
         }
 
 

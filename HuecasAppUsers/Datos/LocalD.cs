@@ -77,11 +77,20 @@ namespace HuecasAppUsers.Datos
         }
         public async Task<List<LocalM>> MostLocalXId(string p)
         {
-            var local = await Constantes.firebase
-                .Child("Local")
-                .Child(p)
-                .OnceSingleAsync<LocalM>();
-            return new List<LocalM> { local };
+            try
+            {
+
+                var local = await Constantes.firebase
+                    .Child("Local")
+                    .Child(p)
+                    .OnceSingleAsync<LocalM>();
+                return new List<LocalM> { local };
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         #endregion
         #region Multimedia
@@ -105,7 +114,7 @@ namespace HuecasAppUsers.Datos
             rutaVideo = storageVideo;
             return rutaVideo;
         }
-        
+
 
         #endregion
 
