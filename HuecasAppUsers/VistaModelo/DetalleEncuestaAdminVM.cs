@@ -2,6 +2,7 @@
 using HuecasAppUsers.Conexiones;
 using HuecasAppUsers.Datos;
 using HuecasAppUsers.Modelo;
+using HuecasAppUsers.Vista;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -217,6 +218,7 @@ namespace HuecasAppUsers.VistaModelo
                 var p = new EncuestaM { IdEncuesta = id };
                 await f.EncuestaVaneada(p);
                 await DisplayAlert("Alerta", "Encuesta Baneada Correctamente", "OK");
+                await Navigation.PushAsync(new MenuAdmin());
             }
             catch (Exception ex)
             {
