@@ -25,7 +25,7 @@ namespace HuecasAppUsers.VistaModelo
             IdPlato = e.IdPlato;
             IdLocal = e.IdLocal;
             IdCalificacion = e.IdCalificacion;
-            
+
 
             Task.Run(async () =>
             {
@@ -46,7 +46,9 @@ namespace HuecasAppUsers.VistaModelo
             }).Wait();
 
 
-            
+
+            VanearEncuestaCommand = new Command(async () => await VanearEncuesta(IdEncuesta));
+
         }
         #region Variables
         string _IdUsuario;
@@ -119,7 +121,7 @@ namespace HuecasAppUsers.VistaModelo
             set { SetValue(ref fotoUsuario, value); }
         }
 
-        public string IdEncuesta{ get; set; }
+        public string IdEncuesta { get; set; }
         public string IdCalificacion { get; set; }
         public string IdPlato { get; set; }
         public string IdLocal { get; set; }
@@ -208,12 +210,13 @@ namespace HuecasAppUsers.VistaModelo
         }
         async Task VanearEncuesta(string id)
         {
+            await NumEnncuestaVaneada(IdUsuario);
             try
             {
                 var f = new EncuestaD();
                 var p = new EncuestaM { IdEncuesta = id };
-                await NumEnncuestaVaneada(IdUsuario);
                 await f.EncuestaVaneada(p);
+                await DisplayAlert("Alerta", "Encuesta Baneada Correctamente", "OK");
             }
             catch (Exception ex)
             {
@@ -226,7 +229,7 @@ namespace HuecasAppUsers.VistaModelo
             try
             {
                 var f = new UsuarioD();
-                var p = new UsuarioM { IdUsuario= id };
+                var p = new UsuarioM { IdUsuario = id };
 
 
                 await f.AddNumVaneoEncuesta(p);
@@ -236,7 +239,7 @@ namespace HuecasAppUsers.VistaModelo
 
                 throw e;
             }
-            
+
         }
 
 

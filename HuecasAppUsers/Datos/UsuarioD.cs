@@ -176,8 +176,6 @@ namespace HuecasAppUsers.Datos
         {
             try
             {
-
-
                 var obtenerData = (await Conexiones.Constantes.firebase
                     .Child("Usuario")
                     .OnceAsync<UsuarioM>()).Where(a => a.Key == p.IdUsuario)

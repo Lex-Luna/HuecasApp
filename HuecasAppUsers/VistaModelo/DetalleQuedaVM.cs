@@ -104,7 +104,7 @@ namespace HuecasAppUsers.VistaModelo
                 var p = new UsuarioM { IdUsuario = id };
                 
                 await f.UsuarioVaneado(p);
-                await DisplayAlert("Alerta", "Usuario Vaneado Correctamente", "OK");
+                await DisplayAlert("Alerta", "Usuario Baneado Correctamente", "OK");
             }
             catch (Exception ex)
             {

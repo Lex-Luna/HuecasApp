@@ -53,8 +53,6 @@ namespace HuecasAppUsers.Datos
         {
             try
             {
-
-
                 var obtenerData = (await Conexiones.Constantes.firebase
                     .Child("Encuesta")
                     .OnceAsync<EncuestaM>()).Where(a => a.Key == p.IdEncuesta)
