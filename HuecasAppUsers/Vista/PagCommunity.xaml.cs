@@ -65,41 +65,9 @@ namespace HuecasAppUsers.Vista
 
         public string Correo { set; get; }
         #endregion
-        #region Procesos
-        private async Task obtenerDataUserAsync()
-        {
-            try
-            {
-                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.WebapyFirebase));
-                var guardarId = JsonConvert.DeserializeObject<FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
-                var refrescarCOntenido = await authProvider.RefreshAuthAsync(guardarId);
-                Preferences.Set("MyFirebaseRefreshToken", JsonConvert.SerializeObject(refrescarCOntenido));
-                Correo = guardarId.User.Email;
-                var f = new UsuarioD();
-                var p = new UsuarioM();
-                p.Correo = Correo;
-                var data = await f.MostUsuarioXcorreo(p);
-                Nombre = data[0].Nombre;
-                Apellido = data[0].Apellido;
-                IdUsuario = data[0].IdUsuario;
-                NumEncuesta = data[0].NumEncuesta;
-                IdAdmin = data[0].IdAdministrador;
-                Contrania = data[0].Contrasenia;
-                Estado = data[0].Estado;
-            }
-            catch (Exception)
-            {
-                await DisplayAlert("Alerta", "X tu seguridad la sesion se a cerrado", "Ok");
-            }
-        }
-        public async Task MostrarEncuestas()
-        {
-            EncuestaD f = new EncuestaD();
-            var encuestas = await f.MostEncuestaRecomendada();
-            LisEncuestaRecomendados = new ObservableCollection<EncuestaM>(encuestas);
 
-        }
-        //Botones Abrir
+
+        #region BotonPaneles
         void VistaPrinccipal()
         {
             PanelComida.IsVisible = false;
@@ -171,8 +139,8 @@ namespace HuecasAppUsers.Vista
             PanelBarrio.IsVisible = false;
             PanelFecha.IsVisible = true;
         }
-
-        //Botones Cerrar
+        #endregion
+        #region BotonCerrar
         private void Atras_Clicked(object sender, EventArgs e)
         {
             VistaPrinccipal();
@@ -200,8 +168,8 @@ namespace HuecasAppUsers.Vista
         {
             VistaPrinccipal();
         }
-
-        //Textos de Busqueda
+        #endregion
+        #region TextosBusqueda
         private void BuscarRestaurante_TextChanged(object sender, TextChangedEventArgs e)
         {
             var searchTerm = e.NewTextValue;
@@ -210,12 +178,12 @@ namespace HuecasAppUsers.Vista
             RestauranteCommunity.ItemsSource = filteredItems;
         }
             
-        private void BuscarBarrio_TextChanged(object sender, TextChangedEventArgs e)
+        private void BuscarCategoria_TextChanged(object sender, TextChangedEventArgs e)
         {
             var searchTerm = e.NewTextValue;
             var filteredItems = LisEncuestaRecomendados.Where(item =>
-                item.Barrio != null && item.Barrio.Contains(searchTerm)).ToList();
-            ComidaCommunity.ItemsSource = filteredItems;
+                item.Categorias != null && item.Categorias.Contains(searchTerm)).ToList();
+            CategoriaCommunity.ItemsSource = filteredItems;
         }
         private void BuscarComida_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -224,6 +192,13 @@ namespace HuecasAppUsers.Vista
                 item.NomPlato != null && item.NomPlato.Contains(searchTerm)).ToList();
             ComidaCommunity.ItemsSource = filteredItems;
 
+        }
+        private void BuscarBarrio_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchTerm = e.NewTextValue;
+            var filteredItems = LisEncuestaRecomendados.Where(item =>
+                item.Barrio != null && item.Barrio.Contains(searchTerm)).ToList();
+            BarrioCommunity.ItemsSource = filteredItems;
         }
 
         private void BuscarPrecio_TextChanged(object sender, TextChangedEventArgs e)
@@ -256,15 +231,8 @@ namespace HuecasAppUsers.Vista
                 item.FechaData != null && item.FechaData.ToString("dd/MM/yyyy").Contains(searchTerm)).ToList();
             FechaCommunity.ItemsSource = filteredItems;
         }
-        private void BuscarCategoria_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var searchTerm = e.NewTextValue;
-            var filteredItems = LisEncuestaRecomendados.Where(item =>
-                item.Categorias != null && item.Categorias.Contains(searchTerm)).ToList();
-            ComidaCommunity.ItemsSource = filteredItems;
-        }
-        
-
+        #endregion
+        #region Procesos
         private async Task IrDetalleEncuesta(EncuestaM p)
         {
             try
@@ -278,7 +246,39 @@ namespace HuecasAppUsers.Vista
 
             }
         }
+        private async Task obtenerDataUserAsync()
+        {
+            try
+            {
+                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.WebapyFirebase));
+                var guardarId = JsonConvert.DeserializeObject<FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
+                var refrescarCOntenido = await authProvider.RefreshAuthAsync(guardarId);
+                Preferences.Set("MyFirebaseRefreshToken", JsonConvert.SerializeObject(refrescarCOntenido));
+                Correo = guardarId.User.Email;
+                var f = new UsuarioD();
+                var p = new UsuarioM();
+                p.Correo = Correo;
+                var data = await f.MostUsuarioXcorreo(p);
+                Nombre = data[0].Nombre;
+                Apellido = data[0].Apellido;
+                IdUsuario = data[0].IdUsuario;
+                NumEncuesta = data[0].NumEncuesta;
+                IdAdmin = data[0].IdAdministrador;
+                Contrania = data[0].Contrasenia;
+                Estado = data[0].Estado;
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Alerta", "X tu seguridad la sesion se a cerrado", "Ok");
+            }
+        }
+        public async Task MostrarEncuestas()
+        {
+            EncuestaD f = new EncuestaD();
+            var encuestas = await f.MostEncuestaRecomendada();
+            LisEncuestaRecomendados = new ObservableCollection<EncuestaM>(encuestas);
 
+        }
 
 
         #endregion

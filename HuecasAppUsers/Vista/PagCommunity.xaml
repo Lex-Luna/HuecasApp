@@ -301,7 +301,7 @@
                 <StackLayout Margin="10,10,10,0"  >
                     <Frame Padding="0" CornerRadius="25">
                         <SearchBar Text="{Binding SearchBarText}" 
-                           Placeholder="Buscar Tipo Restaurante"    
+                           Placeholder="Buscar Comida"    
                                        PlaceholderColor="Black"
                                    TextColor="Black"
                            x:Name="BuscarComida"

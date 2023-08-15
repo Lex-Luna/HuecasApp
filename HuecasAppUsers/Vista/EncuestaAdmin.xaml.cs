@@ -185,6 +185,13 @@ namespace HuecasAppUsers.Vista
                 item.NomLocal != null && item.NomLocal.Contains(searchTerm)).ToList();
             RestauranteCommunity.ItemsSource = filteredItems;
         }
+        private void BuscarCategoria_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchTerm = e.NewTextValue;
+            var filteredItems = LisEncuestaRecomendados.Where(item =>
+                item.Categorias != null && item.Categorias.Contains(searchTerm)).ToList();
+            CategoriaCommunity.ItemsSource = filteredItems;
+        }
 
         private void BuscarBarrio_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -240,13 +247,6 @@ namespace HuecasAppUsers.Vista
             var filteredItems = LisEncuestaRecomendados.Where(item =>
                 item.FechaData != null && item.FechaData.ToString("dd/MM/yyyy").Contains(searchTerm)).ToList();
             FechaCommunity.ItemsSource = filteredItems;
-        }
-        private void BuscarCategoria_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var searchTerm = e.NewTextValue;
-            var filteredItems = LisEncuestaRecomendados.Where(item =>
-                item.Categorias != null && item.Categorias.Contains(searchTerm)).ToList();
-            ComidaCommunity.ItemsSource = filteredItems;
         }
         #endregion
         #region Procesos

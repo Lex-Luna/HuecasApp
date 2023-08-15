@@ -161,7 +161,7 @@
                                  x:Name="CerrarLocal" Clicked="btnCerrar2_Clicked"/>
 
                 </Grid>
-                <!--Info del la comida-->
+                <!--Info del la plato-->
                 <Grid  RowDefinitions="auto,*,*,auto" x:Name="InfoPlato" HeightRequest="800" BackgroundColor="Black"
                       HorizontalOptions="Center" VerticalOptions="Center"  >
 
