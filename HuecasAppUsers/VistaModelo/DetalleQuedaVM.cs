@@ -1,5 +1,6 @@
 ﻿using HuecasAppUsers.Datos;
 using HuecasAppUsers.Modelo;
+using HuecasAppUsers.Vista;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -105,6 +106,7 @@ namespace HuecasAppUsers.VistaModelo
                 
                 await f.UsuarioVaneado(p);
                 await DisplayAlert("Alerta", "Usuario Baneado Correctamente", "OK");
+                await Navigation.PushAsync(new MenuAdmin());
             }
             catch (Exception ex)
             {
