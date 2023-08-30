@@ -1,10 +1,13 @@
-﻿using HuecasAppUsers.Datos;
+﻿using Firebase.Auth;
+using HuecasAppUsers.Conexiones;
+using HuecasAppUsers.Datos;
 using HuecasAppUsers.Vista;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace HuecasAppUsers.VistaModelo
@@ -16,14 +19,31 @@ namespace HuecasAppUsers.VistaModelo
         public LoginVM(INavigation navigation)
         {
             Navigation = navigation;
+            Task.Run(async () =>
+            {
+                await VistaPrincipal();
+            }).Wait();
+            
         }
         #endregion
         #region VARIABLES
         string correo;
         string contraseña;
+        bool panelLogin;
+        bool recuperarContrasenia;
         #endregion
 
         #region OBJETOS 
+        public bool PanelLogin
+        {
+            get { return panelLogin; }
+            set { SetValue(ref panelLogin, value); }
+        }
+        public bool RecuperarContrasenia
+        {
+            get { return recuperarContrasenia; }
+            set { SetValue(ref recuperarContrasenia, value); }
+        }
         public string Correo
         {
             get { return correo; }
@@ -40,9 +60,32 @@ namespace HuecasAppUsers.VistaModelo
         #endregion
 
         #region PROCESOS
-        private async Task Volver()
+       
+        private async Task ResetPasswordAsync()
         {
-            await Navigation.PopAsync();
+            try
+            {
+                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.WebapyFirebase));
+                await authProvider.SendPasswordResetEmailAsync(Correo);
+                await DisplayAlert("Alerta", "Revisa tu Email y cambia de contraseña", "Ok");
+                await VistaPrincipal();
+            }
+            catch (Exception e)
+            {
+                await DisplayAlert("Alerta", "El usuario no existe en nuestra base de datos", "Ok");
+                throw e;
+            }
+            
+        }
+        async Task VistaPrincipal()
+        {
+            PanelLogin = true;
+            RecuperarContrasenia = false;
+        }
+        async Task VistaRecuperacion()
+        {
+            PanelLogin = false;
+            RecuperarContrasenia = true;
         }
 
         private async void btnCrearCuenta_Clicked(object sender, EventArgs e)
@@ -101,6 +144,9 @@ namespace HuecasAppUsers.VistaModelo
         
         public ICommand btnIniciarcomamd => new Command(async () => await btnIniciar());
         public ICommand btnCrearCuentaComand => new Command(async () => await btnCrearCuenta());
+        public ICommand RecuperarCuentaComand => new Command(async () => await ResetPasswordAsync());
+        public ICommand VistaPrincipalComand => new Command(async () =>  await VistaPrincipal());
+        public ICommand VistaRecuperacionComand => new Command(async () =>  await VistaRecuperacion());
 
         #endregion
     }

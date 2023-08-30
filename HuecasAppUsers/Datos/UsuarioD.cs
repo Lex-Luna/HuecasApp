@@ -1,4 +1,5 @@
-﻿using Firebase.Database.Query;
+﻿using Firebase.Auth;
+using Firebase.Database.Query;
 using Firebase.Storage;
 using HuecasAppUsers.Conexiones;
 using HuecasAppUsers.Modelo;
@@ -8,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace HuecasAppUsers.Datos
 {
@@ -115,7 +117,35 @@ namespace HuecasAppUsers.Datos
                 throw ex;
             }
         }
+        public async Task EncuestaVaneada(UsuarioM p)
+        {
+            try
+            {
+                var obtenerData = (await Conexiones.Constantes.firebase
+                    .Child("Usuario")
+                    .OnceAsync<UsuarioM>()).Where(a => a.Key == p.IdUsuario)
+                    .FirstOrDefault();
 
+                if (obtenerData != null)
+                {
+                    var encuesta = obtenerData.Object;
+                    encuesta.Estado = false;
+
+                    await Conexiones.Constantes.firebase
+                       .Child("Usuario")
+                       .Child(obtenerData.Key)
+                       .PutAsync(encuesta);
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+
+        }
+        
         #endregion
         #region Mostrar
         public async Task<List<UsuarioM>> MostUsuario()
@@ -171,36 +201,7 @@ namespace HuecasAppUsers.Datos
         }
 
         #endregion
-        #region Actualizar
-        public async Task EncuestaVaneada(UsuarioM p)
-        {
-            try
-            {
-                var obtenerData = (await Conexiones.Constantes.firebase
-                    .Child("Usuario")
-                    .OnceAsync<UsuarioM>()).Where(a => a.Key == p.IdUsuario)
-                    .FirstOrDefault();
-
-                if (obtenerData != null)
-                {
-                    var encuesta = obtenerData.Object;
-                    encuesta.Estado = false;
-
-                    await Conexiones.Constantes.firebase
-                       .Child("Usuario")
-                       .Child(obtenerData.Key)
-                       .PutAsync(encuesta);
-                }
-
-            }
-            catch (Exception e)
-            {
-
-                throw e;
-            }
-
-        }
-        #endregion
+        
 
         #region Multimedia
 
