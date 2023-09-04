@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -177,19 +178,34 @@ namespace HuecasAppUsers.Vista
         }
         #endregion
         #region Busquedas 
-        
+        public static string RemoveDiacritics(string text)
+        {
+            var normalizedString = text.Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder();
+
+            foreach (var c in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+        }
         private void BuscarRestaurante_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var searchTerm = e.NewTextValue;
+            var searchTerm = e.NewTextValue.ToLower();
             var filteredItems = LisEncuestaRecomendados.Where(item =>
-                item.NomLocal != null && item.NomLocal.Contains(searchTerm)).ToList();
+                item.NomLocal != null && RemoveDiacritics(item.NomLocal.ToLower()).Contains(searchTerm)).ToList();
             RestauranteCommunity.ItemsSource = filteredItems;
         }
         private void BuscarCategoria_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var searchTerm = e.NewTextValue;
+            var searchTerm = e.NewTextValue.ToLower();
             var filteredItems = LisEncuestaRecomendados.Where(item =>
-                item.Categorias != null && item.Categorias.Contains(searchTerm)).ToList();
+                item.Categorias != null && RemoveDiacritics(item.Categorias.ToLower()).Contains(searchTerm)).ToList();
             CategoriaCommunity.ItemsSource = filteredItems;
         }
 
@@ -197,9 +213,9 @@ namespace HuecasAppUsers.Vista
         {
             try
             {
-                var searchTerm = e.NewTextValue;
+                var searchTerm = e.NewTextValue.ToLower();
                 var filteredItems = LisEncuestaRecomendados.Where(item =>
-                    item.Barrio != null && item.Barrio.Contains(searchTerm)).ToList();
+                    item.Barrio != null && RemoveDiacritics(item.Barrio.ToLower()).Contains(searchTerm)).ToList();
                 BarrioCommunity.ItemsSource = filteredItems;
             }
             catch (Exception ex)
@@ -211,9 +227,9 @@ namespace HuecasAppUsers.Vista
         }
         private void BuscarComida_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var searchTerm = e.NewTextValue;
+            var searchTerm = e.NewTextValue.ToLower();
             var filteredItems = LisEncuestaRecomendados.Where(item =>
-                item.NomPlato != null && item.NomPlato.Contains(searchTerm)).ToList();
+                item.NomPlato != null && RemoveDiacritics(item.NomPlato.ToLower()).Contains(searchTerm)).ToList();
             ComidaCommunity.ItemsSource = filteredItems;
 
         }
