@@ -81,11 +81,13 @@ namespace HuecasAppUsers.VistaModelo
         {
             PanelLogin = true;
             RecuperarContrasenia = false;
+            await Task.CompletedTask;
         }
         async Task VistaRecuperacion()
         {
             PanelLogin = false;
             RecuperarContrasenia = true;
+            await Task.CompletedTask;
         }
 
         private async void btnCrearCuenta_Clicked(object sender, EventArgs e)

@@ -3,22 +3,24 @@ using HuecasAppUsers.Conexiones;
 using HuecasAppUsers.Vista;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
+//using System.Collections.Generic;
+//using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
-using System.Threading.Tasks;
+
+
+//using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
-using Firebase.Auth;
-using HuecasAppUsers.Conexiones;
-using Newtonsoft.Json;
-using Xamarin.Essentials;
-using System;
-using Firebase.Database.Query;
+//using Firebase.Auth;
+//using HuecasAppUsers.Conexiones;
+//using Newtonsoft.Json;
+//using Xamarin.Essentials;
+//using System;
+//using Firebase.Database.Query;
 using HuecasAppUsers.Modelo;
-using System.ComponentModel;
-using Xamarin.Forms.Internals;
+//using System.ComponentModel;
+//using Xamarin.Forms.Internals;
 
 namespace HuecasAppUsers.Datos
 {
@@ -82,8 +84,6 @@ namespace HuecasAppUsers.Datos
             catch (Exception er)
             {
                 throw er;
-                await App.Current.MainPage.DisplayAlert("Error", "Datos incorrectos", "OK");
-
             }
 
         }

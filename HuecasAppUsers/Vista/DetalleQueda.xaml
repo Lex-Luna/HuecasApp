@@ -56,8 +56,15 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
         <Button Text="Banear este usuario" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
-                                     BackgroundColor="red" Margin="0,20,0,0" CornerRadius="50" Padding="3"
-                                      x:Name="Eliminar" Command="{Binding VanearUsuarioComamd}"/>
+                                     Margin="0,20,0,0" CornerRadius="50" Padding="3"
+                                      x:Name="Eliminar" Command="{Binding VanearUsuarioComamd}">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="1,0">
+                    <GradientStop Color="#132C6A" Offset="0.1"/>
+                    <GradientStop Color="#350A56" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <ImageButton Source="flecha.png" HeightRequest="60" VerticalOptions="End" HorizontalOptions="Center"
                                      BackgroundColor="#ACCBE4" Margin="0,120,0,0" CornerRadius="50" Padding="10"
                                       x:Name="Atras" Clicked="Atras_Clicked"/>
