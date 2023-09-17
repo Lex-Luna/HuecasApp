@@ -8,8 +8,15 @@
         <StackLayout BackgroundColor="Black">
             <StackLayout HorizontalOptions="CenterAndExpand" Margin="20" Orientation="Horizontal">
                 <Label Text="Hola" FontSize="40"/>
-                <Label Text="UserName" FontSize="40" TextColor="LightGoldenrodYellow"/>
-            </StackLayout>
+                    <Label  FontSize="16" TextColor="#ACCBE4"  HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Nombre, StringFormat='{0}'}"  FontSize="40" TextColor="#ACCBE4"  />
+                                <Span Text="{Binding Apellido, StringFormat=' {0}'}"  FontSize="40" TextColor="#ACCBE4"  />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
 
             <Label HorizontalTextAlignment="Center"  
                Text="Dejame explicarte las Reglas del juego:" FontSize="20" TextColor="LightCyan"   />
@@ -17,22 +24,22 @@
                 <Label Text="#1" TextColor="White" FontAttributes="Bold" FontSize="20"/>
                 <Frame CornerRadius="20" BackgroundColor="FloralWhite" Padding="0,7" Margin="0,5" >
                     <Label HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="15" TextColor="DarkRed"  
-                    Text="Recuerda que solo debeas añadir establecimientos de comida medianos o pequeños, nada de cadena de comida como MC'Donlads o Burger King, la idea es apoyar y dar a conocer a la microempresa, pero tampoco se debera encuestar a locales ambulantes ya que es necesario que des a conocer su ubicacion asi que pilas." />
+                    Text="Recuerda que solo debes añadir establecimientos de comida medianos o pequeños, nada de cadenas de comida como McDonald’s o Burger King. La idea es apoyar y dar a conocer a la microempresa, pero tampoco se deberá encuestar a locales ambulantes ya que es necesario que des a conocer su ubicación. Así que, ¡pilas!" />
                 </Frame >
                 <Label Text="#2" TextColor="White" FontAttributes="Bold" FontSize="20"/>
                 <Frame CornerRadius="20" BackgroundColor="LightCyan" Padding="0,7" Margin="0,5" >
                     <Label HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="15" TextColor="DarkRed"  
-                Text="Tu opinion nos importa, asi que puedes ser lo mas trasnsparente posible al dar tu opinion sobre los locales que vayas conociendo y podras añadir las encuestas que desees, no hay limite" />
+                Text="Tu opinión nos importa, así que puedes ser lo más transparente posible al dar tu opinión sobre los locales que vayas conociendo y podrás añadir las encuestas que desees, no hay límite." />
                 </Frame>
                 <Label Text="#3" TextColor="White" FontAttributes="Bold" FontSize="20"/>
                 <Frame CornerRadius="20" BackgroundColor="LightBlue" Padding="0,7" Margin="0,5" >
                     <Label HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="15" TextColor="DarkRed"    
-                    Text="Como ya mencionamos, podras enterarte de todas las opiniones de nuestra comunidad entrandote de una gran variedad de sitios a los que no habias conocido"/>
+                    Text="omo ya mencionamos, podrás enterarte de todas las opiniones de nuestra comunidad, conociendo una gran variedad de sitios a los que no habías conocido."/>
                 </Frame>
                 <Label Text="#4" TextColor="White" FontAttributes="Bold" FontSize="20"/>
                 <Frame CornerRadius="20" BackgroundColor="LightYellow" Padding="0,7" Margin="0,5" >
                     <Label HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="15" TextColor="DarkRed"  
-                Text="Por favor todas tu opiniones podran ser leidas por nueestra comunidad de usuarios, asi que porfaver ten mucho respeto o el administrador se vera obligado a borrar tu cuenta."  />
+                Text="Por favor, todas tus opiniones podrán ser leídas por nuestra comunidad de usuarios, así que por favor ten mucho respeto o el administrador se verá obligado a borrar tu cuenta."  />
                 </Frame>
             </StackLayout>
         </StackLayout>
