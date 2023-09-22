@@ -492,7 +492,6 @@
             </StackLayout>
 
             <!--Panel Precio-->
-
             <StackLayout x:Name="PanelPrecio" Grid.Row="0">
 
                 <ImageButton Source="flecha.png" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start"
@@ -598,6 +597,9 @@
                     </CollectionView>
                 </ScrollView>
             </StackLayout>
+            
+            
+            
             <!--Panel Fecha-->
             <StackLayout x:Name="PanelFecha" Grid.Row="0">
 
@@ -605,24 +607,9 @@
                                      BackgroundColor="#ACCBE4" Margin="10,10,0,0" CornerRadius="50" Padding="10"
                                       x:Name="Atras10" Clicked="Atras_Clicked_1"/>
 
-                <!--Stack SearchBar-->
-                <StackLayout Margin="10,0,10,0" >
+                <!--Stack tatePicker-->
+                <DatePicker x:Name="datePicker" DateSelected="datePicker_DateSelected" Format="D" />
 
-                    <Frame BackgroundColor="Black" Padding="8" CornerRadius="15" x:Name="FrFecha">
-                        <Label Text="{Binding TxtComida, Mode=TwoWay}" x:Name="lblFecha" 
-                                               TextColor="White" FontAttributes="Bold"/>
-                    </Frame>
-                    <Frame Padding="0" CornerRadius="25">
-                        <SearchBar Text="{Binding SearchBarText}"  
-                                   Keyboard="Numeric"
-                           x:Name="BuscarFecha"
-                                   TextColor="Black"
-                           TextChanged="BuscarFecha_TextChanged_1"
-                                   Placeholder="Ingrrese la Fecha"
-                                   PlaceholderColor="Black" 
-                           BackgroundColor="Transparent"  />
-                    </Frame>
-                </StackLayout>
                 <!--Lista-->
                 <ScrollView >
                     <CollectionView ItemsSource="{Binding LisEncuestaRecomendados, Mode=TwoWay}"  

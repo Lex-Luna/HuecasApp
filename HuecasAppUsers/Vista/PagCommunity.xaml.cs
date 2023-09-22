@@ -37,8 +37,10 @@ namespace HuecasAppUsers.Vista
         }
         #endregion
         #region Variables
+        private DateTime fechaSeleccionada;
         
         ObservableCollection<EncuestaM> lisEncuestaRecomendados;
+        ObservableCollection<EncuestaM> lisEncuestaFiltrados;
 
         #endregion
         #region Objetos
@@ -48,23 +50,21 @@ namespace HuecasAppUsers.Vista
             get => lisEncuestaRecomendados;
             set
             {
-                lisEncuestaRecomendados = value;
+                lisEncuestaRecomendados= value;
+                OnPropertyChanged(); Debug.WriteLine("LisEncuestaRecomendados changed");
+            }
+        }
+        public ObservableCollection<EncuestaM> LisEncuestaFiltrados
+        {
+            get => lisEncuestaFiltrados;
+            set
+            {
+                lisEncuestaFiltrados= value;
                 OnPropertyChanged(); Debug.WriteLine("LisEncuestaRecomendados changed");
             }
         }
 
-        public int NumEncuesta { set; get; }
-        public string Apellido { set; get; }
-        public string Contrania { set; get; }
-        public string IdAdmin { set; get; }
-
-        public bool Estado { set; get; }
-        public string Nombre { set; get; }
-
-
-        public string IdUsuario { set; get; }
-
-        public string Correo { set; get; }
+        
         #endregion
 
 
@@ -171,6 +171,7 @@ namespace HuecasAppUsers.Vista
         }
         #endregion
         #region TextosBusqueda
+
         public static string RemoveDiacritics(string text)
         {
             var normalizedString = text.Normalize(NormalizationForm.FormD);
@@ -249,6 +250,18 @@ namespace HuecasAppUsers.Vista
             FechaCommunity.ItemsSource = filteredItems;
         }
         #endregion
+        #region BusquedaDatePicker
+        private void datePicker_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            
+            var filteredItems = LisEncuestaRecomendados.
+                Where(item => item.FechaData.Date == e.NewDate.Date)
+                .ToList();
+                FechaCommunity.ItemsSource = filteredItems;
+
+        }
+
+        #endregion
         #region Procesos
         private async Task IrDetalleEncuesta(EncuestaM p)
         {
@@ -263,32 +276,6 @@ namespace HuecasAppUsers.Vista
 
             }
         }
-        private async Task obtenerDataUserAsync()
-        {
-            try
-            {
-                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.WebapyFirebase));
-                var guardarId = JsonConvert.DeserializeObject<FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
-                var refrescarCOntenido = await authProvider.RefreshAuthAsync(guardarId);
-                Preferences.Set("MyFirebaseRefreshToken", JsonConvert.SerializeObject(refrescarCOntenido));
-                Correo = guardarId.User.Email;
-                var f = new UsuarioD();
-                var p = new UsuarioM();
-                p.Correo = Correo;
-                var data = await f.MostUsuarioXcorreo(p);
-                Nombre = data[0].Nombre;
-                Apellido = data[0].Apellido;
-                IdUsuario = data[0].IdUsuario;
-                NumEncuesta = data[0].NumEncuesta;
-                IdAdmin = data[0].IdAdministrador;
-                Contrania = data[0].Contrasenia;
-                Estado = data[0].Estado;
-            }
-            catch (Exception)
-            {
-                await DisplayAlert("Alerta", "X tu seguridad la sesion se a cerrado", "Ok");
-            }
-        }
         public async Task MostrarEncuestas()
         {
             EncuestaD f = new EncuestaD();
@@ -296,6 +283,7 @@ namespace HuecasAppUsers.Vista
             LisEncuestaRecomendados = new ObservableCollection<EncuestaM>(encuestas);
 
         }
+        
 
 
         #endregion
