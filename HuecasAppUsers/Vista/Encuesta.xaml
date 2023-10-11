@@ -5,15 +5,13 @@
              x:Class="HuecasAppUsers.Vista.Encuesta">
     <ScrollView>
         <Grid RowDefinitions="*,*,*" BackgroundColor="Black">
+            
+
             <Grid RowDefinitions="*, 2*, Auto" Grid.Row="0" 
                   x:Name="GridLocal" IsVisible="{Binding PanelEncuesta}">
 
                 
-                <!--grid de la franela-->
-                <Grid>
-
-                    <!--Path Data="M0,0H375V262.033s-9.025,4.813-55.426-10.71-70.141-83.047-130.3-83.22-83.544,67.7-130.893,83.22S0,262.033,0,262.033Z" Aspect="Fill" Fill="#132C6A" Opacity="0.9"/-->
-                </Grid>
+                
                 <!--Stack del titulo-->
                 <Frame Grid.Row="0"  Margin="5" BackgroundColor="Transparent" 
                        HeightRequest="50" Padding="0">
@@ -101,7 +99,7 @@
                                         Title="Tipo de Negocio:"/>
                                 </StackLayout>
                                 <!--ItemDisplayBinding="{Binding Descripcion}"-->
-                                <!--Piker pais local -->
+                                <!--Piker pais  -->
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="País:" FontSize="15"
                                        FontAttributes="Bold" TextColor="White"
@@ -112,7 +110,7 @@
                                         SelectedItem="{Binding SelectPais}"
                                         Title="País del local"/>
                                 </StackLayout>
-                                <!--Piker Ciudad local-->
+                                <!--Piker Ciudad -->
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="Ciudad:" FontSize="15"
                                        FontAttributes="Bold" TextColor="White"
@@ -123,7 +121,7 @@
                                         SelectedItem="{Binding SelectCiudad}"
                                         Title="Ciudad del local"/>
                                 </StackLayout>
-                                <!--stak barrio local-->
+                                <!--stak barrio -->
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="Barrio:"
                                        FontSize="15"
@@ -136,7 +134,7 @@
                                        TextColor="White"
                                        Text="{Binding TxtBarrio}"/>
                                 </StackLayout>
-                                <!--stack Direccion local-->
+                                <!--stack Direccion -->
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="Dirección:"
                                        FontSize="15"
@@ -153,7 +151,7 @@
                             </StackLayout>
                             <!--Boton guardar-->
                         </Frame>
-                        <ImageButton x:Name="BtnLocal" Clicked="BtnLocal_Clicked" Source="fleAbajo.png" BackgroundColor="#ACCBE4" 
+                        <ImageButton x:Name="BtnLocal" Clicked="BtnLocal_Clicked" Source="fleAbajo.png" BackgroundColor="red" 
                                      HeightRequest="50" CornerRadius="20"  
                                  HorizontalOptions="Center" Command="{Binding AgregarLocalComamd}" />
                     </StackLayout>
@@ -258,7 +256,7 @@
                             </StackLayout>
                         </Frame>
                         <ImageButton x:Name="BtnPlato" Clicked="BtnPlato_Clicked" 
-                                     Source="fleAbajo.png" BackgroundColor="#ACCBE4" 
+                                     Source="fleAbajo.png" BackgroundColor="red" 
                                      HeightRequest="50" CornerRadius="20"  
                                  HorizontalOptions="Center" Command="{Binding AgregarPlatoComand}"/>
                     </StackLayout>
@@ -384,7 +382,7 @@
                              BorderWidth="4" Command="{Binding PagGeoComamd}"/>
 
                 
-                <!--/Button>Command="{Binding Agregarclientecommand}"/-->
+                
 
                 <Button Text="Volver"
                         HorizontalOptions="Center"

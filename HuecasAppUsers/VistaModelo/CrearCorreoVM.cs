@@ -41,41 +41,47 @@ namespace HuecasAppUsers.VistaModelo
 
         public async Task btnCrearcuenta()
         {
-
-            try
+            bool answer = await DisplayAlert("Confirmación", "¿Esta seguro  de  haberse tomado una foto usando el icono de la camara?", "Sí", "No");
+            if (answer)
             {
-                if (!string.IsNullOrEmpty(TxtNombre))
+                try
                 {
-                    if (!string.IsNullOrEmpty(TxtApellido))
+                    if (!string.IsNullOrEmpty(TxtNombre))
                     {
-                        if (!string.IsNullOrEmpty(TxtCorreo))
+                        if (!string.IsNullOrEmpty(TxtApellido))
                         {
-                            if (!string.IsNullOrEmpty(TxtContraseña))
+                            if (!string.IsNullOrEmpty(TxtCorreo))
                             {
-                                await CrearCuenta();
-                                await ObteberIdUsuario();
-                                await InsertarUsuario();
-                                await IniciarSesion();
-                                await NavContenedor();
+                                if (!string.IsNullOrEmpty(TxtContraseña))
+                                {
+                                    await CrearCuenta();
+                                    await ObteberIdUsuario();
+                                    await InsertarUsuario();
+                                    await IniciarSesion();
+                                    await NavContenedor();
+                                    await DisplayAlert("Alerta", "Asegurese de haber ttomado una foto en el ", "No", "OK");
+                                }
+                                else
+                                    await DisplayAlert("Alerta", "Agregue una contraseña", "OK");
                             }
                             else
-                                await DisplayAlert("Alerta", "Agregue una contraseña", "OK");
+                                await DisplayAlert("Alerta", "Agregue un correo", "OK");
                         }
                         else
-                            await DisplayAlert("Alerta", "Agregue un correo", "OK");
+                            await DisplayAlert("Alerta", "Agregue un apellido", "OK");
+
                     }
                     else
-                        await DisplayAlert("Alerta", "Agregue un apellido", "OK");
-
+                        await DisplayAlert("Alerta", "Agregue un nombre", "OK");
                 }
-                else
-                    await DisplayAlert("Alerta", "Agregue un nombre", "OK");
-            }
-            catch (Exception e)
-            {
+                catch (Exception e)
+                {
 
-                throw e;
+                    throw e;
+                }
             }
+
+            
            
         }
 
@@ -182,9 +188,10 @@ namespace HuecasAppUsers.VistaModelo
                     rutafoto = "No hay foto";
                 }
             }
-            catch (Exception e)
+            catch (Exception )
             {
-                throw e;
+                await DisplayAlert("No tomaste foto", "La seccion foto saldra vacia", "Ok");
+                rutafoto = "No hay foto";
             }
 
         }

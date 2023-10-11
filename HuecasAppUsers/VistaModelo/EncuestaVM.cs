@@ -202,30 +202,32 @@ namespace HuecasAppUsers.VistaModelo
 
         async Task AgregarLocal()
         {
+
             try
             {
 
-           
-            await SubirFotoFachada();
-            await SubirVideoLocal();
-            var funcion = new LocalD();
-            var parametros = new LocalM();
-            parametros.Geolocalizacion = Geolocalizacion;
-            parametros.FotoFachada = rutafoto;
-            parametros.Video = rutaVideo;
-            parametros.NombreLocal = TxtNombreLocal;
-            parametros.Direccion = TxtDireccion;
-            parametros.Barrio = TxtBarrio;
-            parametros.IdPais = IdPais;
-            parametros.IdCiudad = IdCiudad;
-            parametros.Categorias = PropiedadSeleccionada;
-            _IdLocal = await funcion.InsertarLocal(parametros);
+
+                await SubirFotoFachada();
+                await SubirVideoLocal();
+                var funcion = new LocalD();
+                var parametros = new LocalM();
+                parametros.Geolocalizacion = Geolocalizacion;
+                parametros.FotoFachada = rutafoto;
+                parametros.Video = rutaVideo;
+                parametros.NombreLocal = TxtNombreLocal;
+                parametros.Direccion = TxtDireccion;
+                parametros.Barrio = TxtBarrio;
+                parametros.IdPais = IdPais;
+                parametros.IdCiudad = IdCiudad;
+                parametros.Categorias = PropiedadSeleccionada;
+                _IdLocal = await funcion.InsertarLocal(parametros);
             }
             catch (Exception e)
             {
 
                 throw e;
             }
+
 
         }
 
@@ -261,9 +263,10 @@ namespace HuecasAppUsers.VistaModelo
                     rutaVideo = "No hay Video";
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                await DisplayAlert("No gravaste el video", "La seccion video saldra vacia", "Ok");
+                rutaVideo = "No hay Video";
             }
 
         }
@@ -309,9 +312,10 @@ namespace HuecasAppUsers.VistaModelo
                     rutafoto = "No hay foto";
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                await DisplayAlert("No tomaste foto", "La seccion foto saldra vacia", "Ok");
+                rutafoto = "No hay foto";
             }
 
         }
@@ -461,32 +465,34 @@ namespace HuecasAppUsers.VistaModelo
 
         public async Task AgregarPlato()
         {
+
             try
             {
 
-            
-            await SubirFotoPlato();
-            var funcion = new PlatoD();
-            var parametros = new PlatoM();
-            parametros.Nombre = TxtNombrePlato;
-            parametros.FotoPlato = rutafotoPlato;
-            parametros.Descripcion = TxtDescripcion;
-            parametros.Comentario = TxtComentario;
-            parametros.Precio = TxtPrecioPlato;
-            _IdPlato = await funcion.InserPlato(parametros);
-            var funcion2 = new PlatoLocalD();
-            var parametros2 = new PlatoLocalM();
-            parametros2.IdLocal = _IdLocal;
-            parametros2.IdPLato = _IdPlato;
-            _IdPlatoLocal = await funcion2.InserPlatoLocal(parametros2);
+
+                await SubirFotoPlato();
+                var funcion = new PlatoD();
+                var parametros = new PlatoM();
+                parametros.Nombre = TxtNombrePlato;
+                parametros.FotoPlato = rutafotoPlato;
+                parametros.Descripcion = TxtDescripcion;
+                parametros.Comentario = TxtComentario;
+                parametros.Precio = TxtPrecioPlato;
+                _IdPlato = await funcion.InserPlato(parametros);
+                var funcion2 = new PlatoLocalD();
+                var parametros2 = new PlatoLocalM();
+                parametros2.IdLocal = _IdLocal;
+                parametros2.IdPLato = _IdPlato;
+                _IdPlatoLocal = await funcion2.InserPlatoLocal(parametros2);
             }
             catch (Exception e)
             {
 
                 throw e;
             }
-        }
 
+
+        }
 
         #endregion
         #region ComandosPlato
@@ -569,49 +575,53 @@ namespace HuecasAppUsers.VistaModelo
 
         public async Task AddEncusta()
         {
-            try
+            bool answer = await DisplayAlert("Llenar las encuestas anteriores", "Si ya lleno todas las encuestas presione OK", "Ok", "No");
+            if (answer)
             {
+                try
+                {
 
 
-                var funcion = new CalificacionD();
-                var parametros = new CalificacionM();
-                parametros.CalificacionAtencion = TxtAtencion;
-                parametros.CalificacionComida = TxtComida;
-                parametros.CalificacionLugar = TxtLocal;
-                parametros.Recomendacion = Recomendado;
-                parametros.IdPlatoLocal = _IdPlatoLocal;
-                Promedio = (TxtAtencion + TxtComida + TxtLocal) / 3;
+                    var funcion = new CalificacionD();
+                    var parametros = new CalificacionM();
+                    parametros.CalificacionAtencion = TxtAtencion;
+                    parametros.CalificacionComida = TxtComida;
+                    parametros.CalificacionLugar = TxtLocal;
+                    parametros.Recomendacion = Recomendado;
+                    parametros.IdPlatoLocal = _IdPlatoLocal;
+                    Promedio = (TxtAtencion + TxtComida + TxtLocal) / 3;
 
-                _IdCalificacion = await funcion.InserCalificacion(parametros);
+                    _IdCalificacion = await funcion.InserCalificacion(parametros);
 
-                var funcion2 = new EncuestaD();
-                var parametros2 = new EncuestaM();
-                parametros2.IdPlatoLocal = _IdPlatoLocal;
-                parametros2.IdPlato = _IdPlato;
-                parametros2.IdLocal = _IdLocal;
-                parametros2.IdCalificacion = _IdCalificacion;
-                parametros2.IdUsuario = IdUsuario;
-                parametros2.FechaData = DateTime.Now;
-                parametros2.Estado = true;
-                parametros2.NomUsuario = NombreCompleto;
-                parametros2.NomLocal = txtNombreLocal;
-                parametros2.NomPlato = txtNombrePlato;
-                parametros2.PromCalificacion = Promedio;
-                parametros2.TotalEncuesta = Totalencuesta;
-                parametros2.Recomendado = Recomendado;
-                parametros2.Categorias = PropiedadSeleccionada;
-                parametros2.Barrio = TxtBarrio;
-                parametros2.Precio = TxtPrecioPlato;
+                    var funcion2 = new EncuestaD();
+                    var parametros2 = new EncuestaM();
+                    parametros2.IdPlatoLocal = _IdPlatoLocal;
+                    parametros2.IdPlato = _IdPlato;
+                    parametros2.IdLocal = _IdLocal;
+                    parametros2.IdCalificacion = _IdCalificacion;
+                    parametros2.IdUsuario = IdUsuario;
+                    parametros2.FechaData = DateTime.Now;
+                    parametros2.Estado = true;
+                    parametros2.NomUsuario = NombreCompleto;
+                    parametros2.NomLocal = txtNombreLocal;
+                    parametros2.NomPlato = txtNombrePlato;
+                    parametros2.PromCalificacion = Promedio;
+                    parametros2.TotalEncuesta = Totalencuesta;
+                    parametros2.Recomendado = Recomendado;
+                    parametros2.Categorias = PropiedadSeleccionada;
+                    parametros2.Barrio = TxtBarrio;
+                    parametros2.Precio = TxtPrecioPlato;
 
-                await EditEncuestaUserAdd();
+                    await EditEncuestaUserAdd();
 
-                _IdEncuesta = await funcion2.InsertarEncuesta(parametros2);
-                await IrContenedor();
-            }
-            catch (Exception e)
-            {
+                    _IdEncuesta = await funcion2.InsertarEncuesta(parametros2);
+                    await IrContenedor();
+                }
+                catch (Exception e)
+                {
 
-                throw e;
+                    throw e;
+                }
             }
         }
 

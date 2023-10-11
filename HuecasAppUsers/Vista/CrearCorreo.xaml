@@ -64,7 +64,7 @@
                     FontAttributes="Bold"
                     x:Name="btnCrearcuenta"/>
                 <Button Text="Volver"
-                        Command="{Binding Volver}"
+                        Command="{Binding Volvercomamd}"
                     BackgroundColor="#ACCBE4"
                     TextColor="Black"
                     CornerRadius="10"

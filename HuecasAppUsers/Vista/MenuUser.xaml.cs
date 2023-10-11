@@ -197,6 +197,7 @@ namespace HuecasAppUsers.Vista
         private async Task IrEncuesta()
         {
             await Navigation.PushAsync(new Encuesta());
+            await DisplayAlert("Importante", "Intente llenar todos los datos que se solicita en la encueta por favor", "Ok");
         }
 
 
