@@ -97,7 +97,7 @@ namespace HuecasAppUsers.VistaModelo
             await funcion.ValidCuenta(TxtCorreo, TxtContraseña);
         }
 
-        public async Task ObteberIdUsuario()
+        public async Task<string> ObteberIdUsuario()
         {
             try
             {
@@ -107,13 +107,14 @@ namespace HuecasAppUsers.VistaModelo
                 Preferences.Set("MyFirebaseRefreshToken", JsonConvert.SerializeObject(refrescarCOntenido));
                 _IdUsuario = guardarId.User.LocalId;
                 //Preferences.Remove("MyFirebaseRefreshToken");
-
+                
             }
             catch (Exception)
             {
                 await DisplayAlert("Alerta", "X tu seguridad la sesion se a cerrado", "Ok");
 
             }
+            return _IdUsuario;
         }
 
         async Task NavContenedor()
