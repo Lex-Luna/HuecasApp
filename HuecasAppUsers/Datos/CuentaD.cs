@@ -60,11 +60,15 @@ namespace HuecasAppUsers.Datos
             {
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.WebapyFirebase));
                 var auth = await authProvider.SignInWithEmailAndPasswordAsync(correo, pass);
+                /*vamos a generar un nuevo token*/
                 var serializartoken = JsonConvert.SerializeObject(auth);
                 Preferences.Set("MyFirebaseRefreshToken", serializartoken);
-                var guardarId = JsonConvert.DeserializeObject<FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
+                var guardarId = JsonConvert.DeserializeObject<FirebaseAuth>(Preferences.
+                    Get("MyFirebaseRefreshToken", ""));
+                //await App.Current.MainPage
                 var refrescarCOntenido = await authProvider.RefreshAuthAsync(guardarId);
                 Preferences.Set("MyFirebaseRefreshToken", JsonConvert.SerializeObject(refrescarCOntenido));
+
                 Correo = guardarId.User.Email;
                 var f = new UsuarioD();
                 var p = new UsuarioM();

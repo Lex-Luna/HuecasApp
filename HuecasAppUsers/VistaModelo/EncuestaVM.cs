@@ -202,33 +202,82 @@ namespace HuecasAppUsers.VistaModelo
 
         async Task AgregarLocal()
         {
+            bool answer = await DisplayAlert("Advertencia", "¿Esta seguro de haber tomado la foto, el video y la geolocalizacion del local?", "Si", "No");
+            if (answer)
 
-            try
             {
+                try
+                {
+                    await SubirFotoFachada();
+                    await SubirVideoLocal();
+                    var funcion = new LocalD();
+                    var parametros = new LocalM();
 
+                    if (!string.IsNullOrEmpty(Geolocalizacion))
+                    {
+                        if (!string.IsNullOrEmpty(rutafoto))
+                        {
+                            if (!string.IsNullOrEmpty(rutaVideo))
+                            {
+                                if (!string.IsNullOrEmpty(TxtNombreLocal))
+                                {
+                                    if (!string.IsNullOrEmpty(TxtDireccion))
+                                    {
+                                        if (!string.IsNullOrEmpty(TxtBarrio))
+                                        {
+                                            if (!string.IsNullOrEmpty(IdPais))
+                                            {
+                                                if (!string.IsNullOrEmpty(IdCiudad))
+                                                {
+                                                    if (!string.IsNullOrEmpty(PropiedadSeleccionada))
+                                                    {
+                                                        parametros.Geolocalizacion = Geolocalizacion;
+                                                        parametros.FotoFachada = rutafoto;
+                                                        parametros.Video = rutaVideo;
+                                                        parametros.NombreLocal = TxtNombreLocal;
+                                                        parametros.Direccion = TxtDireccion;
+                                                        parametros.Barrio = TxtBarrio;
+                                                        parametros.IdPais = IdPais;
+                                                        parametros.IdCiudad = IdCiudad;
+                                                        parametros.Categorias = PropiedadSeleccionada;
+                                                        _IdLocal = await funcion.InsertarLocal(parametros);
+                                                    }
+                                                    else
+                                                        await DisplayAlert("Alerta", "No se ha seleccionado el tipo de comida del restaurante ", "OK");
+                                                }
+                                                else
+                                                    await DisplayAlert("Alerta", "No se seleccionado la ciudad del local", "OK");
+                                            }
+                                            else
+                                                await DisplayAlert("Alerta", "No se ha seleccionado el pais del local", "OK");
 
-                await SubirFotoFachada();
-                await SubirVideoLocal();
-                var funcion = new LocalD();
-                var parametros = new LocalM();
-                parametros.Geolocalizacion = Geolocalizacion;
-                parametros.FotoFachada = rutafoto;
-                parametros.Video = rutaVideo;
-                parametros.NombreLocal = TxtNombreLocal;
-                parametros.Direccion = TxtDireccion;
-                parametros.Barrio = TxtBarrio;
-                parametros.IdPais = IdPais;
-                parametros.IdCiudad = IdCiudad;
-                parametros.Categorias = PropiedadSeleccionada;
-                _IdLocal = await funcion.InsertarLocal(parametros);
+                                        }
+                                        else
+                                            await DisplayAlert("Alerta", "No se ha agregado el barrio del local", "OK");
+                                    }
+                                    else
+                                        await DisplayAlert("Alerta", "No se ha agregado las calles del local", "OK");
+                                }
+                                else
+                                    await DisplayAlert("Alerta", "No se ha agregado el nombre del local", "OK");
+                            }
+                            else
+                                await DisplayAlert("Alerta", "No se ha agregado un video del interior del local", "OK");
+                        }
+                        else
+                            await DisplayAlert("Alerta", "No se ha agregado una foto del local", "OK");
+
+                    }
+                    else
+                        await DisplayAlert("Alerta", "No se ha agregado la geolocalizacion", "OK");
+                }
+                catch (Exception e)
+                {
+
+                    throw e;
+                }
+
             }
-            catch (Exception e)
-            {
-
-                throw e;
-            }
-
-
         }
 
 
@@ -402,6 +451,7 @@ namespace HuecasAppUsers.VistaModelo
         #endregion
 
         #region VariablesPlato
+
         string txtPrecioPlato;
         string txtComentario;
         string txtDescripcion;
@@ -473,17 +523,44 @@ namespace HuecasAppUsers.VistaModelo
                 await SubirFotoPlato();
                 var funcion = new PlatoD();
                 var parametros = new PlatoM();
-                parametros.Nombre = TxtNombrePlato;
-                parametros.FotoPlato = rutafotoPlato;
-                parametros.Descripcion = TxtDescripcion;
-                parametros.Comentario = TxtComentario;
-                parametros.Precio = TxtPrecioPlato;
-                _IdPlato = await funcion.InserPlato(parametros);
-                var funcion2 = new PlatoLocalD();
-                var parametros2 = new PlatoLocalM();
-                parametros2.IdLocal = _IdLocal;
-                parametros2.IdPLato = _IdPlato;
-                _IdPlatoLocal = await funcion2.InserPlatoLocal(parametros2);
+                if (!string.IsNullOrEmpty(TxtNombrePlato))
+                {
+                    if (!string.IsNullOrEmpty(rutafotoPlato))
+                    {
+                        if (!string.IsNullOrEmpty(TxtDescripcion))
+                        {
+                            if (!string.IsNullOrEmpty(TxtComentario))
+                            {
+                                if (!string.IsNullOrEmpty(TxtPrecioPlato))
+                                {
+                                    parametros.Nombre = TxtNombrePlato;
+                                    parametros.FotoPlato = rutafotoPlato;
+                                    parametros.Descripcion = TxtDescripcion;
+                                    parametros.Comentario = TxtComentario;
+                                    parametros.Precio = TxtPrecioPlato;
+                                    _IdPlato = await funcion.InserPlato(parametros);
+                                    var funcion2 = new PlatoLocalD();
+                                    var parametros2 = new PlatoLocalM();
+                                    parametros2.IdLocal = _IdLocal;
+                                    parametros2.IdPLato = _IdPlato;
+                                    _IdPlatoLocal = await funcion2.InserPlatoLocal(parametros2);
+                                }
+                                else
+                                    await DisplayAlert("Alerta", "Agregue el costo de su plato por favor", "OK");
+                            }
+                            else
+                                await DisplayAlert("Alerta", "Agregue un comentario sobre su plato por favor", "OK");
+                        }
+                        else
+                            await DisplayAlert("Alerta", "Agregue una descripcion de su plato por favor", "OK");
+
+                    }
+                    else
+                        await DisplayAlert("Alerta", "Agregue una foto de su plato por favor ", "OK");
+                }
+                else
+                    await DisplayAlert("Alerta", "Agregue El nombre del plato por favor", "OK");
+
             }
             catch (Exception e)
             {
@@ -580,42 +657,53 @@ namespace HuecasAppUsers.VistaModelo
             {
                 try
                 {
+                    if (!string.IsNullOrEmpty(_IdLocal))
+                    {
+                        if (!string.IsNullOrEmpty(_IdPlato))
+                        {
 
+                            var funcion = new CalificacionD();
+                            var parametros = new CalificacionM();
+                            parametros.CalificacionAtencion = TxtAtencion;
+                            parametros.CalificacionComida = TxtComida;
+                            parametros.CalificacionLugar = TxtLocal;
+                            parametros.Recomendacion = Recomendado;
+                            parametros.IdPlatoLocal = _IdPlatoLocal;
+                            Promedio = (TxtAtencion + TxtComida + TxtLocal) / 3;
 
-                    var funcion = new CalificacionD();
-                    var parametros = new CalificacionM();
-                    parametros.CalificacionAtencion = TxtAtencion;
-                    parametros.CalificacionComida = TxtComida;
-                    parametros.CalificacionLugar = TxtLocal;
-                    parametros.Recomendacion = Recomendado;
-                    parametros.IdPlatoLocal = _IdPlatoLocal;
-                    Promedio = (TxtAtencion + TxtComida + TxtLocal) / 3;
+                            _IdCalificacion = await funcion.InserCalificacion(parametros);
 
-                    _IdCalificacion = await funcion.InserCalificacion(parametros);
+                            var funcion2 = new EncuestaD();
+                            var parametros2 = new EncuestaM();
+                            parametros2.IdPlatoLocal = _IdPlatoLocal;
+                            parametros2.IdLocal = _IdLocal;
+                            parametros2.IdPlato = _IdPlato;
+                            parametros2.IdCalificacion = _IdCalificacion;
+                            parametros2.IdUsuario = IdUsuario;
+                            parametros2.FechaData = DateTime.Now;
+                            parametros2.Estado = true;
+                            parametros2.NomUsuario = NombreCompleto;
+                            parametros2.NomLocal = txtNombreLocal;
+                            parametros2.NomPlato = txtNombrePlato;
+                            parametros2.PromCalificacion = Promedio;
+                            parametros2.TotalEncuesta = Totalencuesta;
+                            parametros2.Recomendado = Recomendado;
+                            parametros2.Categorias = PropiedadSeleccionada;
+                            parametros2.Barrio = TxtBarrio;
+                            parametros2.Precio = TxtPrecioPlato;
+                            _IdEncuesta = await funcion2.InsertarEncuesta(parametros2);
+                            await IrContenedor();
+                        }
+                        else
+                            await DisplayAlert("Alerta", "No ha enviado la encuesta del local", "OK");
+                    }
+                    else
+                        await DisplayAlert("Alerta", "No ha enviado la encuesta de su plato", "OK");
 
-                    var funcion2 = new EncuestaD();
-                    var parametros2 = new EncuestaM();
-                    parametros2.IdPlatoLocal = _IdPlatoLocal;
-                    parametros2.IdPlato = _IdPlato;
-                    parametros2.IdLocal = _IdLocal;
-                    parametros2.IdCalificacion = _IdCalificacion;
-                    parametros2.IdUsuario = IdUsuario;
-                    parametros2.FechaData = DateTime.Now;
-                    parametros2.Estado = true;
-                    parametros2.NomUsuario = NombreCompleto;
-                    parametros2.NomLocal = txtNombreLocal;
-                    parametros2.NomPlato = txtNombrePlato;
-                    parametros2.PromCalificacion = Promedio;
-                    parametros2.TotalEncuesta = Totalencuesta;
-                    parametros2.Recomendado = Recomendado;
-                    parametros2.Categorias = PropiedadSeleccionada;
-                    parametros2.Barrio = TxtBarrio;
-                    parametros2.Precio = TxtPrecioPlato;
 
                     await EditEncuestaUserAdd();
 
-                    _IdEncuesta = await funcion2.InsertarEncuesta(parametros2);
-                    await IrContenedor();
+
                 }
                 catch (Exception e)
                 {

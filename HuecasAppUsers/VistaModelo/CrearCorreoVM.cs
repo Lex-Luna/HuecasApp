@@ -19,6 +19,7 @@ namespace HuecasAppUsers.VistaModelo
         public CrearCorreoVM(INavigation navigation)
         {
             Navigation = navigation;
+            /*CerrarSecion();*/
         }
         #endregion
         #region VARIABLES
@@ -38,13 +39,17 @@ namespace HuecasAppUsers.VistaModelo
 
         #endregion
         #region PROCESOS
+        void CerrarSecion()
+        {
+            Preferences.Remove("MyFirebaseRefreshToken");
 
+        }
         public async Task btnCrearcuenta()
         {
-            bool answer = await DisplayAlert("Confirmación", "¿Esta seguro  de  haberse tomado una foto usando el icono de la camara?", "Sí", "No");
-            if (answer)
+
+            try
             {
-                try
+                if (foto != null)
                 {
                     if (!string.IsNullOrEmpty(TxtNombre))
                     {
@@ -54,12 +59,12 @@ namespace HuecasAppUsers.VistaModelo
                             {
                                 if (!string.IsNullOrEmpty(TxtContraseña))
                                 {
+                                    await DisplayAlert("Alerta", "Esta seguro de haber tomado la foto con el Icono de la camara?", "No", "Si");
                                     await CrearCuenta();
-                                    await ObteberIdUsuario();
+                                    await ObtenerIdUsuario();
                                     await InsertarUsuario();
                                     await IniciarSesion();
                                     await NavContenedor();
-                                    await DisplayAlert("Alerta", "Asegurese de haber ttomado una foto en el ", "No", "OK");
                                 }
                                 else
                                     await DisplayAlert("Alerta", "Agregue una contraseña", "OK");
@@ -74,21 +79,24 @@ namespace HuecasAppUsers.VistaModelo
                     else
                         await DisplayAlert("Alerta", "Agregue un nombre", "OK");
                 }
-                catch (Exception e)
-                {
+                else
+                    await DisplayAlert("Alerta", "No se a tomado una foto al usuario", "OK");
+            }
+            catch (Exception e)
+            {
 
-                    throw e;
-                }
+                throw e;
             }
 
-            
-           
+
+
+
         }
 
         public async Task CrearCuenta()
         {
             var funcion = new CuentaD();
-            await funcion.CrearCuenta(TxtCorreo,TxtContraseña);
+            await funcion.CrearCuenta(TxtCorreo, TxtContraseña);
         }
 
         private async Task IniciarSesion()
@@ -97,17 +105,18 @@ namespace HuecasAppUsers.VistaModelo
             await funcion.ValidCuenta(TxtCorreo, TxtContraseña);
         }
 
-        public async Task<string> ObteberIdUsuario()
+        public async Task<string> ObtenerIdUsuario()
         {
             try
             {
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.WebapyFirebase));
                 var guardarId = JsonConvert.DeserializeObject<FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
                 var refrescarCOntenido = await authProvider.RefreshAuthAsync(guardarId);
+                /*Esete es el token que se guarda en el Usuario*/
                 Preferences.Set("MyFirebaseRefreshToken", JsonConvert.SerializeObject(refrescarCOntenido));
                 _IdUsuario = guardarId.User.LocalId;
                 //Preferences.Remove("MyFirebaseRefreshToken");
-                
+
             }
             catch (Exception)
             {
@@ -135,9 +144,9 @@ namespace HuecasAppUsers.VistaModelo
                 parametros.Correo = TxtCorreo;
                 parametros.Estado = true;
                 parametros.IdAdministrador = "lUUpQuSwqibNTFqEq4LVQKK8kEG2";
-                parametros.Nombre =TxtNombre;
+                parametros.Nombre = TxtNombre;
                 _IdUsuario = await funcion.InserUsuario(parametros);
-                
+
 
 
             }
@@ -164,7 +173,7 @@ namespace HuecasAppUsers.VistaModelo
                     {
                         return foto.GetStream();
                     });
-                    
+
                 }
             }
             catch (Exception e)
@@ -189,7 +198,7 @@ namespace HuecasAppUsers.VistaModelo
                     rutafoto = "No hay foto";
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
                 await DisplayAlert("No tomaste foto", "La seccion foto saldra vacia", "Ok");
                 rutafoto = "No hay foto";
