@@ -202,82 +202,79 @@ namespace HuecasAppUsers.VistaModelo
 
         async Task AgregarLocal()
         {
-            bool answer = await DisplayAlert("Advertencia", "¿Esta seguro de haber tomado la foto, el video y la geolocalizacion del local?", "Si", "No");
-            if (answer)
 
+            try
             {
-                try
-                {
-                    await SubirFotoFachada();
-                    await SubirVideoLocal();
-                    var funcion = new LocalD();
-                    var parametros = new LocalM();
+                await SubirFotoFachada();
+                await SubirVideoLocal();
+                var funcion = new LocalD();
+                var parametros = new LocalM();
 
-                    if (!string.IsNullOrEmpty(Geolocalizacion))
+                if (!string.IsNullOrEmpty(Geolocalizacion))
+                {
+                    if (!string.IsNullOrEmpty(rutafoto))
                     {
-                        if (!string.IsNullOrEmpty(rutafoto))
+                        if (!string.IsNullOrEmpty(rutaVideo))
                         {
-                            if (!string.IsNullOrEmpty(rutaVideo))
+                            if (!string.IsNullOrEmpty(TxtNombreLocal))
                             {
-                                if (!string.IsNullOrEmpty(TxtNombreLocal))
+                                if (!string.IsNullOrEmpty(TxtDireccion))
                                 {
-                                    if (!string.IsNullOrEmpty(TxtDireccion))
+                                    if (!string.IsNullOrEmpty(TxtBarrio))
                                     {
-                                        if (!string.IsNullOrEmpty(TxtBarrio))
+                                        if (!string.IsNullOrEmpty(IdPais))
                                         {
-                                            if (!string.IsNullOrEmpty(IdPais))
+                                            if (!string.IsNullOrEmpty(IdCiudad))
                                             {
-                                                if (!string.IsNullOrEmpty(IdCiudad))
+                                                if (!string.IsNullOrEmpty(PropiedadSeleccionada))
                                                 {
-                                                    if (!string.IsNullOrEmpty(PropiedadSeleccionada))
-                                                    {
-                                                        parametros.Geolocalizacion = Geolocalizacion;
-                                                        parametros.FotoFachada = rutafoto;
-                                                        parametros.Video = rutaVideo;
-                                                        parametros.NombreLocal = TxtNombreLocal;
-                                                        parametros.Direccion = TxtDireccion;
-                                                        parametros.Barrio = TxtBarrio;
-                                                        parametros.IdPais = IdPais;
-                                                        parametros.IdCiudad = IdCiudad;
-                                                        parametros.Categorias = PropiedadSeleccionada;
-                                                        _IdLocal = await funcion.InsertarLocal(parametros);
-                                                    }
-                                                    else
-                                                        await DisplayAlert("Alerta", "No se ha seleccionado el tipo de comida del restaurante ", "OK");
+                                                    parametros.Geolocalizacion = Geolocalizacion;
+                                                    parametros.FotoFachada = rutafoto;
+                                                    parametros.Video = rutaVideo;
+                                                    parametros.NombreLocal = TxtNombreLocal;
+                                                    parametros.Direccion = TxtDireccion;
+                                                    parametros.Barrio = TxtBarrio;
+                                                    parametros.IdPais = IdPais;
+                                                    parametros.IdCiudad = IdCiudad;
+                                                    parametros.Categorias = PropiedadSeleccionada;
+                                                    _IdLocal = await funcion.InsertarLocal(parametros);
                                                 }
                                                 else
-                                                    await DisplayAlert("Alerta", "No se seleccionado la ciudad del local", "OK");
+                                                    await DisplayAlert("Alerta", "No se ha seleccionado el tipo de comida del restaurante ", "OK");
                                             }
                                             else
-                                                await DisplayAlert("Alerta", "No se ha seleccionado el pais del local", "OK");
-
+                                                await DisplayAlert("Alerta", "No se seleccionado la ciudad del local", "OK");
                                         }
                                         else
-                                            await DisplayAlert("Alerta", "No se ha agregado el barrio del local", "OK");
+                                            await DisplayAlert("Alerta", "No se ha seleccionado el pais del local", "OK");
+
                                     }
                                     else
-                                        await DisplayAlert("Alerta", "No se ha agregado las calles del local", "OK");
+                                        await DisplayAlert("Alerta", "No se ha agregado el barrio del local", "OK");
                                 }
                                 else
-                                    await DisplayAlert("Alerta", "No se ha agregado el nombre del local", "OK");
+                                    await DisplayAlert("Alerta", "No se ha agregado las calles del local", "OK");
                             }
                             else
-                                await DisplayAlert("Alerta", "No se ha agregado un video del interior del local", "OK");
+                                await DisplayAlert("Alerta", "No se ha agregado el nombre del local", "OK");
                         }
                         else
-                            await DisplayAlert("Alerta", "No se ha agregado una foto del local", "OK");
-
+                            await DisplayAlert("Alerta", "No se ha agregado un video del interior del local", "OK");
                     }
                     else
-                        await DisplayAlert("Alerta", "No se ha agregado la geolocalizacion", "OK");
-                }
-                catch (Exception e)
-                {
+                        await DisplayAlert("Alerta", "No se ha agregado una foto del local", "OK");
 
-                    throw e;
                 }
-
+                else
+                    await DisplayAlert("Alerta", "No se ha agregado la geolocalizacion", "OK");
             }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+
+
         }
 
 
@@ -518,8 +515,6 @@ namespace HuecasAppUsers.VistaModelo
 
             try
             {
-
-
                 await SubirFotoPlato();
                 var funcion = new PlatoD();
                 var parametros = new PlatoM();
@@ -652,7 +647,7 @@ namespace HuecasAppUsers.VistaModelo
 
         public async Task AddEncusta()
         {
-            bool answer = await DisplayAlert("Llenar las encuestas anteriores", "Si ya lleno todas las encuestas presione OK", "Ok", "No");
+            bool answer = await DisplayAlert("Advertencia", "Llenar todas lase encuestas antes de gurdar la informacion", "Ok", "No");
             if (answer)
             {
                 try
