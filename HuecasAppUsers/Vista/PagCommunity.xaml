@@ -200,15 +200,15 @@
 
                 <!--Stack SearchBar-->
                 <StackLayout Margin="10,10,10,0"  >
-                    <Frame Padding="0" CornerRadius="25">
-                        <SearchBar Text="{Binding SearchBarText}"  
-                               Placeholder="Buscar Tipo Restaurante"    
-                               x:Name="BuscarCategoria"
-                               TextColor="Black"    
-                               TextChanged="BuscarCategoria_TextChanged"
-                                   PlaceholderColor="Black" 
-                               BackgroundColor="Transparent"  />
-                    </Frame>
+                    <Picker x:Name="PkCategorias" 
+                            Title="Selecciona una Categoria"  
+                            ItemsSource="{Binding OpcionCategorias}"
+                            SelectedItem="{Binding CategoriaSeleccionada}"
+                            TextColor="White"
+                            SelectedIndexChanged="PkCategorias_SelectedIndexChanged"
+                            />
+                    
+                    
                 </StackLayout>
                 <!--ListaCategoria-->
                 <ScrollView >

@@ -16,6 +16,8 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Input;
 using System.Globalization;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+using Picker = Xamarin.Forms.Picker;
 
 namespace HuecasAppUsers.Vista
 {
@@ -41,7 +43,8 @@ namespace HuecasAppUsers.Vista
         
         ObservableCollection<EncuestaM> lisEncuestaRecomendados;
         ObservableCollection<EncuestaM> lisEncuestaFiltrados;
-
+        
+         
         #endregion
         #region Objetos
 
@@ -63,8 +66,10 @@ namespace HuecasAppUsers.Vista
                 OnPropertyChanged(); Debug.WriteLine("LisEncuestaRecomendados changed");
             }
         }
+        public List<string>Categorias { get; set; }
+        public List<string> OpcionCategorias { get; set; } = new List<string> { "Comida Internacional", "Comida Marina", "Comida Rápida", "Comida Típica", "Postres", "Bebidas", "Otros" };
+        public string CategoriaSeleccionada { get; set; }
 
-        
         #endregion
 
 
@@ -195,7 +200,8 @@ namespace HuecasAppUsers.Vista
                 item.NomLocal != null && RemoveDiacritics(item.NomLocal.ToLower()).Contains(searchTerm)).ToList();
             RestauranteCommunity.ItemsSource = filteredItems;
         }
-            
+        
+        
         private void BuscarCategoria_TextChanged(object sender, TextChangedEventArgs e)
         {
             var searchTerm = e.NewTextValue.ToLower();
@@ -285,6 +291,21 @@ namespace HuecasAppUsers.Vista
         }
         
 
+        #endregion
+        #region CategoriaPicker
+        private void PkCategorias_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var picker = (Picker)sender;
+            string selectedCategory = (string)picker.SelectedItem;
+
+            var filteredItems = LisEncuestaRecomendados
+                .Where(item => item.Categorias == selectedCategory)
+                .ToList();
+
+            CategoriaCommunity.ItemsSource = filteredItems;
+
+        }
+        
 
         #endregion
         #region Comandos
