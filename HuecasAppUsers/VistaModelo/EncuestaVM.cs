@@ -365,9 +365,6 @@ namespace HuecasAppUsers.VistaModelo
             }
 
         }
-
-
-
         public async Task TomarFotoLocal()
         {
             var camara = new StoreCameraMediaOptions();
@@ -493,7 +490,7 @@ namespace HuecasAppUsers.VistaModelo
             try
             {
                 var funcion = new PlatoD();
-                if (rutafotoPlato == null)
+                if (fotoPlato != null && rutafotoPlato == null)
                 {
                     rutafotoPlato = await funcion.SubirFotoPlato(fotoPlato.GetStream(), _IdPlato);
                 }
@@ -647,56 +644,43 @@ namespace HuecasAppUsers.VistaModelo
 
         public async Task AddEncusta()
         {
-            bool answer = await DisplayAlert("Advertencia", "Llenar todas lase encuestas antes de gurdar la informacion", "Ok", "No");
+            bool answer = await DisplayAlert("Esta seguro de haber llenado las encuestas anteriores", "Si la respuesta es si presiones el boton Si, de lo contrario ´presione No y llene la informacios solicitada por favor", "Si", "No");
             if (answer)
             {
                 try
                 {
-                    if (!string.IsNullOrEmpty(_IdLocal))
-                    {
-                        if (!string.IsNullOrEmpty(_IdPlato))
-                        {
+                    var funcion = new CalificacionD();
+                    var parametros = new CalificacionM();
+                    parametros.CalificacionAtencion = TxtAtencion;
+                    parametros.CalificacionComida = TxtComida;
+                    parametros.CalificacionLugar = TxtLocal;
+                    parametros.Recomendacion = Recomendado;
+                    parametros.IdPlatoLocal = _IdPlatoLocal;
+                    Promedio = (TxtAtencion + TxtComida + TxtLocal) / 3;
 
-                            var funcion = new CalificacionD();
-                            var parametros = new CalificacionM();
-                            parametros.CalificacionAtencion = TxtAtencion;
-                            parametros.CalificacionComida = TxtComida;
-                            parametros.CalificacionLugar = TxtLocal;
-                            parametros.Recomendacion = Recomendado;
-                            parametros.IdPlatoLocal = _IdPlatoLocal;
-                            Promedio = (TxtAtencion + TxtComida + TxtLocal) / 3;
+                    _IdCalificacion = await funcion.InserCalificacion(parametros);
 
-                            _IdCalificacion = await funcion.InserCalificacion(parametros);
-
-                            var funcion2 = new EncuestaD();
-                            var parametros2 = new EncuestaM();
-                            parametros2.IdPlatoLocal = _IdPlatoLocal;
-                            parametros2.IdLocal = _IdLocal;
-                            parametros2.IdPlato = _IdPlato;
-                            parametros2.IdCalificacion = _IdCalificacion;
-                            parametros2.IdUsuario = IdUsuario;
-                            parametros2.FechaData = DateTime.Now;
-                            parametros2.Estado = true;
-                            parametros2.NomUsuario = NombreCompleto;
-                            parametros2.NomLocal = txtNombreLocal;
-                            parametros2.NomPlato = txtNombrePlato;
-                            parametros2.PromCalificacion = Promedio;
-                            parametros2.TotalEncuesta = Totalencuesta;
-                            parametros2.Recomendado = Recomendado;
-                            parametros2.Categorias = PropiedadSeleccionada;
-                            parametros2.Barrio = TxtBarrio;
-                            parametros2.Precio = TxtPrecioPlato;
-                            _IdEncuesta = await funcion2.InsertarEncuesta(parametros2);
-                            await IrContenedor();
-                        }
-                        else
-                            await DisplayAlert("Alerta", "No ha enviado la encuesta del local", "OK");
-                    }
-                    else
-                        await DisplayAlert("Alerta", "No ha enviado la encuesta de su plato", "OK");
-
-
+                    var funcion2 = new EncuestaD();
+                    var parametros2 = new EncuestaM();
+                    parametros2.IdPlatoLocal = _IdPlatoLocal;
+                    parametros2.IdLocal = _IdLocal;
+                    parametros2.IdPlato = _IdPlato;
+                    parametros2.IdCalificacion = _IdCalificacion;
+                    parametros2.IdUsuario = IdUsuario;
+                    parametros2.FechaData = DateTime.Now;
+                    parametros2.Estado = true;
+                    parametros2.NomUsuario = NombreCompleto;
+                    parametros2.NomLocal = txtNombreLocal;
+                    parametros2.NomPlato = txtNombrePlato;
+                    parametros2.PromCalificacion = Promedio;
+                    parametros2.TotalEncuesta = Totalencuesta;
+                    parametros2.Recomendado = Recomendado;
+                    parametros2.Categorias = PropiedadSeleccionada;
+                    parametros2.Barrio = TxtBarrio;
+                    parametros2.Precio = TxtPrecioPlato;
+                    _IdEncuesta = await funcion2.InsertarEncuesta(parametros2);
                     await EditEncuestaUserAdd();
+                    await IrContenedor();
 
 
                 }
