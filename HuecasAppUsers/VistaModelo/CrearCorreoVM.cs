@@ -115,7 +115,8 @@ namespace HuecasAppUsers.VistaModelo
                 /*Esete es el token que se guarda en el Usuario*/
                 Preferences.Set("MyFirebaseRefreshToken", JsonConvert.SerializeObject(refrescarCOntenido));
                 _IdUsuario = guardarId.User.LocalId;
-                //Preferences.Remove("MyFirebaseRefreshToken");
+                //TODO: no se si de error en el futuro la linea de abajo
+                return _IdUsuario;
 
             }
             catch (Exception)
