@@ -10,6 +10,9 @@ using HuecasAppUsers.Vista;
 using HuecasAppUsers.Datos;
 using HuecasAppUsers.Modelo;
 using Plugin.Media.Abstractions;
+using System.Text.RegularExpressions;
+using System.Diagnostics;
+using System.Linq;
 
 namespace HuecasAppUsers.VistaModelo
 {
@@ -59,7 +62,7 @@ namespace HuecasAppUsers.VistaModelo
                             {
                                 if (!string.IsNullOrEmpty(TxtContraseña))
                                 {
-                                    await DisplayAlert("Alerta", "Esta seguro de haber tomado la foto con el Icono de la camara?", "No", "Si");
+                                    //await DisplayAlert("Alerta", "Esta seguro de haber tomado la foto con el Icono de la camara?", "No", "Si");
                                     await CrearCuenta();
                                     await ObtenerIdUsuario();
                                     await InsertarUsuario();
@@ -92,11 +95,61 @@ namespace HuecasAppUsers.VistaModelo
 
 
         }
-
-        public async Task CrearCuenta()
+        //Crear cuenta Antigua
+        /*public async Task CrearCuenta()
         {
             var funcion = new CuentaD();
             await funcion.CrearCuenta(TxtCorreo, TxtContraseña);
+        }*/
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        //Nueva crear Cuenta
+        public async Task CrearCuenta()
+        {
+            try
+            {
+                // Validar formato de correo
+                if (!IsValidEmail(TxtCorreo))
+                {
+                    await DisplayAlert("Error", "Por favor ingrese un correo electrónico válido", "OK");
+                    return;
+                }
+                // Validar longitud de contraseña
+                if (TxtContraseña.Length < 6)
+                {
+                    await DisplayAlert("Error", "La contraseña debe tener al menos 6 caracteres", "OK");
+                    return;
+                }
+
+                var funcion = new CuentaD();
+                await funcion.CrearCuenta(TxtCorreo, TxtContraseña);
+            }
+            catch (FirebaseAuthException ex)
+            {
+                switch (ex.Reason)
+                {
+                    case AuthErrorReason.EmailExists:
+                        await DisplayAlert("Error", "Este correo ya está registrado", "OK");
+                        break;
+                    case AuthErrorReason.WeakPassword:
+                        await DisplayAlert("Error", "La contraseña es muy débil", "OK");
+                        break;
+                    default:
+                        await DisplayAlert("Error", "Error al crear la cuenta: " + ex.Message, "OK");
+                        break;
+                }
+                throw; // Re-lanzar la excepción si necesitas manejarla en un nivel superior
+            }
         }
 
         private async Task IniciarSesion()
@@ -115,8 +168,7 @@ namespace HuecasAppUsers.VistaModelo
                 /*Esete es el token que se guarda en el Usuario*/
                 Preferences.Set("MyFirebaseRefreshToken", JsonConvert.SerializeObject(refrescarCOntenido));
                 _IdUsuario = guardarId.User.LocalId;
-                //TODO: no se si de error en el futuro la linea de abajo
-                return _IdUsuario;
+                //Preferences.Remove("MyFirebaseRefreshToken");
 
             }
             catch (Exception)
@@ -126,7 +178,6 @@ namespace HuecasAppUsers.VistaModelo
             }
             return _IdUsuario;
         }
-
         async Task NavContenedor()
         {
             await Navigation.PushAsync(new NavigationPage(new Contenedor()));
@@ -144,20 +195,17 @@ namespace HuecasAppUsers.VistaModelo
                 parametros.Contrasenia = TxtContraseña;
                 parametros.Correo = TxtCorreo;
                 parametros.Estado = true;
-                parametros.IdAdministrador = "lUUpQuSwqibNTFqEq4LVQKK8kEG2";
+                parametros.IdAdministrador = "";
                 parametros.Nombre = TxtNombre;
-                _IdUsuario = await funcion.InserUsuario(parametros);
-
-
-
+                parametros.IdUsuario = _IdUsuario; 
+                await funcion.InserUsuario(parametros);
+                //_IdUsuario = await funcion.InserUsuario(parametros);
             }
             catch (Exception er)
             {
-
-                await DisplayAlert("Alerta", "no se pudo crear el usuario", "Ok" + er);
+                //await DisplayAlert("Alerta", "no se pudo crear el usuario", "Ok" + er);
+                throw er;
             }
-
-
         }
 
         public async Task TomarFoto()
@@ -207,7 +255,36 @@ namespace HuecasAppUsers.VistaModelo
 
         }
 
+        public async Task<string> VerUsuario()
+        {
+            try
+            {
+                UsuarioD funcion = new UsuarioD();
+                var datos = await funcion.MostUsuario();
 
+                var settings = new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                };
+
+                if (datos != null && datos.Any())
+                {
+                    return JsonConvert.SerializeObject(datos, settings);
+                }
+                else
+                {
+                    return "No se encontraron usuarios";
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", "No se pudo obtener la lista de usuarios: " + ex.Message, "OK");
+                Debug.WriteLine($"Error en VerUsuario: {ex.Message}");
+                return "Error al obtener usuarios: " + ex.Message;
+            }
+        }
 
 
         private async Task Volver()
@@ -222,6 +299,7 @@ namespace HuecasAppUsers.VistaModelo
         public ICommand btnCrearcuentaComand => new Command(async () => await btnCrearcuenta());
         public ICommand Volvercomamd => new Command(async () => await Volver());
         public ICommand TomarFotoComand => new Command(async () => await TomarFoto());
+        public ICommand btnVerUsuario => new Command(async () => await VerUsuario());
 
         #endregion
     }
