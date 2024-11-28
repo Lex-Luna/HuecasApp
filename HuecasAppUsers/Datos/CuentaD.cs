@@ -47,24 +47,36 @@ namespace HuecasAppUsers.Datos
         }
 
         
-
+       
         public async Task CrearCuenta(string correo, string pass)
         {
-            var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.WebapyFirebase));
-            await authProvider.CreateUserWithEmailAndPasswordAsync(correo, pass);
+            try
+            {
 
-        }
+                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.WebapyFirebase));
+                //await authProvider.CreateUserWithEmailAndPasswordAsync(correo, pass);
+                var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(correo, pass);
+                Preferences.Set("MyFirebaseRefreshToken", JsonConvert.SerializeObject(auth));
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+          }
+
         public async Task ValidCuenta(string correo, string pass)
         {
             try
             {
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.WebapyFirebase));
                 var auth = await authProvider.SignInWithEmailAndPasswordAsync(correo, pass);
-                /*vamos a generar un nuevo token*/
+                /*vamos a generar un nuevo token serializado*/
                 var serializartoken = JsonConvert.SerializeObject(auth);
                 Preferences.Set("MyFirebaseRefreshToken", serializartoken);
-                var guardarId = JsonConvert.DeserializeObject<FirebaseAuth>(Preferences.
-                    Get("MyFirebaseRefreshToken", ""));
+                var guardarId = JsonConvert.DeserializeObject<FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
                 //await App.Current.MainPage
                 var refrescarCOntenido = await authProvider.RefreshAuthAsync(guardarId);
                 Preferences.Set("MyFirebaseRefreshToken", JsonConvert.SerializeObject(refrescarCOntenido));

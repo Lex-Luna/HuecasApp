@@ -37,7 +37,8 @@ namespace HuecasAppUsers.Datos
                    Nombre = parametros.Nombre,
                    NumEncuesta = parametros.NumEncuesta,
                    EncuestasEliminadas = parametros.EncuestasEliminadas,
-                   IdAdministrador = "lUUpQuSwqibNTFqEq4LVQKK8kEG2"
+                   IdAdministrador = "",
+                   IdUsuario = parametros.IdUsuario,
                });
                 _IdUsuario = data.Key;
                 return _IdUsuario;
@@ -49,11 +50,12 @@ namespace HuecasAppUsers.Datos
             }
 
         }
+        
         #endregion
         #region Actualizar
         public async Task AddNumEncuesta(UsuarioM p)
         {
-            var obtenerData = (await Conexiones.Constantes.firebase
+            var obtenerData = (await Constantes.firebase
                 .Child("Usuario")
                 .OnceAsync<UsuarioM>()).Where(a => a.Object.Correo == p.Correo)
                 .FirstOrDefault();
@@ -61,7 +63,7 @@ namespace HuecasAppUsers.Datos
             var usuario = obtenerData.Object;
             usuario.NumEncuesta++;
 
-            await Conexiones.Constantes.firebase
+            await Constantes.firebase
                .Child("Usuario")
                .Child(obtenerData.Key)
                .PutAsync(usuario);
@@ -148,9 +150,12 @@ namespace HuecasAppUsers.Datos
         
         #endregion
         #region Mostrar
+        
+
+
         public async Task<List<UsuarioM>> MostUsuario()
         {
-            return (await Constantes.firebase
+            var usuarios = (await Constantes.firebase
                 .Child("Usuario")
                 .OnceAsync<UsuarioM>()).Select(item => new UsuarioM
                 {
@@ -167,6 +172,8 @@ namespace HuecasAppUsers.Datos
                     EncuestasEliminadas = item.Object.EncuestasEliminadas
 
                 }).ToList();
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(usuarios);
+            return usuarios;
         }
         public async Task<List<UsuarioM>> MostUsuarioXcorreo(UsuarioM p)
         {
