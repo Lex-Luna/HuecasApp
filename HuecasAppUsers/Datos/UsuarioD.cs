@@ -3,6 +3,7 @@ using Firebase.Database.Query;
 using Firebase.Storage;
 using HuecasAppUsers.Conexiones;
 using HuecasAppUsers.Modelo;
+using HuecasAppUsers.VistaModelo;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -177,7 +178,7 @@ namespace HuecasAppUsers.Datos
         }
         public async Task<List<UsuarioM>> MostUsuarioXcorreo(UsuarioM p)
         {
-            return (await Constantes.firebase
+            var useXcorreo= (await Constantes.firebase
                 .Child("Usuario")
                 .OnceAsync<UsuarioM>())
                 .Where(a => a.Object.Correo == p.Correo && a.Object.Estado == true)
@@ -195,6 +196,8 @@ namespace HuecasAppUsers.Datos
                     NumEncuesta = item.Object.NumEncuesta
 
                 }).ToList();
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(useXcorreo);
+            return useXcorreo;
         }
 
 

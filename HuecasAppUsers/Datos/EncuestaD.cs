@@ -138,12 +138,12 @@ namespace HuecasAppUsers.Datos
         }
 
 
-        public async Task<List<EncuestaM>> MostEncuestaIdUser(string p)
+        public async Task<List<EncuestaM>> MostEncuestaIdUser(string id)
         {
             return (await Constantes.firebase
                 .Child("Encuesta")
                 .OnceAsync<EncuestaM>())
-                .Where(a => a.Object.IdUsuario == p)
+                .Where(a => a.Object.IdUsuario == id)
                 .OrderByDescending(a => a.Object.FechaData)
                 .Select(item => new EncuestaM
                 {

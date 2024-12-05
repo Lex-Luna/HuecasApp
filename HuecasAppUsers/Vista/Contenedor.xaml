@@ -9,7 +9,7 @@
             SelectedTabColor="White"
             UnselectedTabColor="#ACCBE4">
     <!--Pages can be added as references or inline-->
-    <local:MenuUser Title="Usuario" IconImageSource="userqueda.png"/>
+    <local:MenuUsuario Title="Usuario" IconImageSource="userqueda.png"/>
     <local:PagCommunity Title="Comunidad" IconImageSource="Home.png"/>
     <local:Informacion Title="Información" IconImageSource="megafono.png"/>
 </TabbedPage>
