@@ -62,7 +62,7 @@ namespace HuecasAppUsers.VistaModelo
                             {
                                 if (!string.IsNullOrEmpty(TxtContraseña))
                                 {
-                                    //await DisplayAlert("Alerta", "Esta seguro de haber tomado la foto con el Icono de la camara?", "No", "Si");
+                                    
                                     await CrearCuenta();
                                     await ObtenerIdUsuario();
                                     await InsertarUsuario();
