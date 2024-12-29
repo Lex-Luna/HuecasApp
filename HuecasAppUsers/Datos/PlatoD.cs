@@ -20,17 +20,26 @@ namespace HuecasAppUsers.Datos
         #region Insertar
         public async Task<string> InserPlato(PlatoM parametros)
         {
-            var data =await Constantes.firebase.Child("Plato")
+            try
+            {
+                var data = await Constantes.firebase.Child("Plato")
                 .PostAsync(new PlatoM()
                 {
                     Comentario = parametros.Comentario,
                     Descripcion = parametros.Descripcion,
-                    FotoPlato= parametros.FotoPlato,
+                    FotoPlato = parametros.FotoPlato,
                     Nombre = parametros.Nombre,
                     Precio = parametros.Precio,
                 });
-            _IdPLato = data.Key;
-            return _IdPLato;
+                _IdPLato = data.Key;
+                return _IdPLato;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
         }
         #endregion
         #region Mostrar

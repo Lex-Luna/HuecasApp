@@ -15,7 +15,10 @@ namespace HuecasAppUsers.Datos
             string _IdPlatoLocal;
             public async Task<string> InserPlatoLocal(PlatoLocalM parametros)
             {
-                var data =await Constantes.firebase.Child("PlatoLocal")
+                
+            try
+            {
+                var data = await Constantes.firebase.Child("PlatoLocal")
                     .PostAsync(new PlatoLocalM()
                     {
                         IdLocal = parametros.IdLocal,
@@ -23,6 +26,12 @@ namespace HuecasAppUsers.Datos
                     });
                 _IdPlatoLocal = data.Key;
                 return _IdPlatoLocal;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
             }
 
             public async Task<List<PlatoLocalM>> MostrarPlatoLocal()
