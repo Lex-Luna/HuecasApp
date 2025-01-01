@@ -29,7 +29,7 @@
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="200"  >
 
                     <Button Text="Nombre de Restaurante" TextTransform="None" CornerRadius="25" Padding="3"
-                                x:Name="BtnRestaurante" Clicked="BtnRestaurante_Clicked" Margin="3">
+                                x:Name="BtnRestaurante" Clicked="BtnRestaurante_Clicked" Margin="3" TextColor="#ACCBE4">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="1,0">
                                 <GradientStop Color="#132C6A" Offset="0.1"/>
@@ -38,7 +38,7 @@
                         </Button.Background>
                     </Button>
                     <Button Text="Tipo De Comida" TextTransform="None" CornerRadius="25"  Padding="3" 
-                                x:Name="BtnCategoria" Clicked="BtnCategoria_Clicked">
+                                x:Name="BtnCategoria" Clicked="BtnCategoria_Clicked" TextColor="#ACCBE4">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="1,0">
                                 <GradientStop Color="#132C6A" Offset="0.1"/>
@@ -47,7 +47,7 @@
                         </Button.Background>
                     </Button>
                     <Button Text="Nombre de un Plato" TextTransform="None" CornerRadius="25" Padding="3" 
-                                x:Name="BtnPlato" Clicked="BtnPlato_Clicked" Margin="3">
+                                x:Name="BtnPlato" Clicked="BtnPlato_Clicked" Margin="3" TextColor="#ACCBE4">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="1,0">
                                 <GradientStop Color="#132C6A" Offset="0.1"/>
@@ -56,7 +56,7 @@
                         </Button.Background>
                     </Button>
                     <Button Text="Barrio" TextTransform="None" CornerRadius="25"  Padding="3"
-                                x:Name="BtnBarrio" Clicked="BtnBarrio_Clicked" Margin="3">
+                                x:Name="BtnBarrio" Clicked="BtnBarrio_Clicked" Margin="3" TextColor="#ACCBE4">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="1,0">
                                 <GradientStop Color="#132C6A" Offset="0.1"/>
@@ -65,7 +65,7 @@
                         </Button.Background>
                     </Button>
                     <Button Text="Rango de Precios" TextTransform="None" CornerRadius="25"  Padding="3" 
-                                x:Name="BtnPrecios" Clicked="BtnPrecios_Clicked" Margin="3">
+                                x:Name="BtnPrecios" Clicked="BtnPrecios_Clicked" Margin="3" TextColor="#ACCBE4">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="1,0">
                                 <GradientStop Color="#132C6A" Offset="0.1"/>
@@ -74,7 +74,7 @@
                         </Button.Background>
                     </Button>
                     <Button Text="Fecha" TextTransform="None" CornerRadius="25"  Padding="3" 
-                                x:Name="BtnFecha" Clicked="BtnFecha_Clicked" Margin="3">
+                                x:Name="BtnFecha" Clicked="BtnFecha_Clicked" Margin="3" TextColor="#ACCBE4">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="1,0">
                                 <GradientStop Color="#132C6A" Offset="0.1"/>
