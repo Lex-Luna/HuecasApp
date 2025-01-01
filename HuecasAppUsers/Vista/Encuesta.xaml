@@ -151,9 +151,11 @@
                             </StackLayout>
                             <!--Boton guardar-->
                         </Frame>
-                        <ImageButton x:Name="BtnLocal" Clicked="BtnLocal_Clicked" Source="fleAbajo.png" BackgroundColor="red" 
+                        <ImageButton x:Name="BtnLocal" 
+                                    Command="{Binding AgregarLocalComamd}"
+                                    Clicked="BtnLocal_Clicked" Source="fleAbajo.png" BackgroundColor="red" 
                                      HeightRequest="50" CornerRadius="20"  
-                                 HorizontalOptions="Center" Command="{Binding AgregarLocalComamd}" />
+                                 HorizontalOptions="Center"  />
                     </StackLayout>
                 </StackLayout>
             </Grid>
@@ -255,10 +257,12 @@
                                 </StackLayout>
                             </StackLayout>
                         </Frame>
-                        <ImageButton x:Name="BtnPlato" Clicked="BtnPlato_Clicked" 
+                        <ImageButton x:Name="BtnPlato" 
+                        Command="{Binding AgregarPlatoComand}"
+                        Clicked="BtnPlato_Clicked" 
                                      Source="fleAbajo.png" BackgroundColor="red" 
                                      HeightRequest="50" CornerRadius="20"  
-                                 HorizontalOptions="Center" Command="{Binding AgregarPlatoComand}"/>
+                                 HorizontalOptions="Center" />
                     </StackLayout>
                 
             </Grid>
