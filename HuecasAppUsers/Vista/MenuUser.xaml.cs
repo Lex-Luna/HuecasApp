@@ -161,6 +161,21 @@ namespace HuecasAppUsers.Vista
         #endregion
         #region PROCESOS
 
+        public async Task Logout()
+        {
+            try
+            {
+                // Eliminar el token de autenticación almacenado
+                Preferences.Remove("MyFirebaseRefreshToken");
+
+                // Redirigir al usuario a la página de inicio de sesión
+                Application.Current.MainPage = new NavigationPage(new Login());
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Error al cerrar sesión: " + ex.Message, "OK");
+            }
+        }
 
         private async Task obtenerDataUserAsync()
         {
@@ -227,6 +242,7 @@ namespace HuecasAppUsers.Vista
         #region COMANDOS
         
 
+        public ICommand Logoutacomamd => new Command(async () => await Logout());
         public ICommand IrEncuestacomamd => new Command(async () => await IrEncuesta());
        
         public ICommand IrDetalleEncuestaCommand => new Command<EncuestaM>(async (p) => await IrDetalleEncuesta(p));

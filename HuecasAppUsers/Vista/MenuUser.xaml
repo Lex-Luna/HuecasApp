@@ -8,11 +8,11 @@
     <ScrollView>
         <Grid>
             <!--Menu Principal-->
-            
-            
-            
-            
-            
+
+
+
+
+
             <!--Panel Restaurante-->
             <Grid x:Name="PanelRestaurante" RowDefinitions="auto,auto,auto,auto,*"
                 BackgroundColor="#1C1D22"  >
@@ -37,19 +37,8 @@
 
 
                     </StackLayout>
-                    <Button Text="+ Añadir Encuesta"
-                    CornerRadius="15"
-                    HeightRequest="40"
-                    VerticalOptions="CenterAndExpand"
-                    BackgroundColor="Transparent"
-                    TextColor="#ACCBE4"
-                            BorderColor="#ACCBE4"
-                            BorderWidth="3"
-                    FontAttributes="Bold"
-                    TextTransform="None"
-                    HorizontalOptions="EndAndExpand"
-                    
-                    Command="{Binding IrEncuestacomamd}"/>
+                    <Button BackgroundColor="red" Text="Logout" CornerRadius="25" Command="{Binding Logoutacomamd}"/>
+
                 </StackLayout>
                 <degradado:PancakeView Grid.Row="2"
                                Margin="15"
@@ -63,6 +52,7 @@
                         </degradado:GradientStopCollection>
                     </degradado:PancakeView.BackgroundGradientStops>
                     <StackLayout Margin="10,0,10,0">
+                        
                         <StackLayout Orientation="Horizontal"
                              HeightRequest="83"
                             VerticalOptions="Center">
@@ -87,19 +77,25 @@
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
-                                <Label Text="Encuestas Realizadas"
-                               TextColor="#ACCBE4"
-                               
-                               FontSize="18">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="{Binding NumEncuesta, StringFormat='N° Encuestas Removidas: 0'}"  TextColor="#ACCBE4" FontAttributes="Bold" FontSize="20"/>
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
+                                <Button Text="+ Añadir Encuesta"
+                                CornerRadius="15"
+                                HeightRequest="40"
+                                VerticalOptions="CenterAndExpand"
+                                BackgroundColor="Transparent"
+                                TextColor="#ACCBE4"
+                                        BorderColor="#ACCBE4"
+                                        BorderWidth="3"
+                                FontAttributes="Bold"
+                                TextTransform="None"
+                                HorizontalOptions="EndAndExpand"
+
+                                Command="{Binding IrEncuestacomamd}"/>
+
+
 
                             </StackLayout>
-                        </StackLayout>
+                            </StackLayout>
+                        
                         <StackLayout Orientation="Horizontal"
                              HeightRequest="83"
                              >
@@ -119,11 +115,12 @@
                                FontSize="15"/>
 
                             </StackLayout>
-                            
+
                         </StackLayout>
+                        
                         <StackLayout Orientation="Horizontal"
                              Margin="0,0,0,10">
-                            
+
                             <Label Text="{Binding Lblkgacumulados}"
                            TextColor="#ACCBE4"
                            FontSize="18"
