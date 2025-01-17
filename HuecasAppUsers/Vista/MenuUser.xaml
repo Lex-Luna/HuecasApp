@@ -24,10 +24,8 @@
                      
                      Margin="15,0,15,0">
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Hola"
-                       TextColor="#ACCBE4"
-                       FontSize="30"
-                       FontAttributes="Bold"/>
+                        
+                       
                         <Label Text="{Binding Nombre}"
                        x:Name="lblNombre"
                        TextColor="#ACCBE4"
@@ -37,7 +35,22 @@
 
 
                     </StackLayout>
-                    <Button BackgroundColor="red" Text="Logout" CornerRadius="25" Command="{Binding Logoutacomamd}"/>
+                    <Button Text="Realizar Encuesta"
+                        CornerRadius="15"
+                        HeightRequest="40"
+                        VerticalOptions="CenterAndExpand"
+                        BackgroundColor="Transparent"
+                        TextColor="#ACCBE4"
+                                BorderColor="#ACCBE4"
+                                BorderWidth="3"
+                        FontAttributes="Bold"
+                        TextTransform="None"
+                        HorizontalOptions="EndAndExpand"
+
+                    Command="{Binding IrEncuestacomamd}"/>
+
+                    <Button BackgroundColor="red" Text="Salir" CornerRadius="25" Command="{Binding Logoutacomamd}"/>
+                    
 
                 </StackLayout>
                 <degradado:PancakeView Grid.Row="2"
@@ -77,20 +90,7 @@
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
-                                <Button Text="+ Añadir Encuesta"
-                                CornerRadius="15"
-                                HeightRequest="40"
-                                VerticalOptions="CenterAndExpand"
-                                BackgroundColor="Transparent"
-                                TextColor="#ACCBE4"
-                                        BorderColor="#ACCBE4"
-                                        BorderWidth="3"
-                                FontAttributes="Bold"
-                                TextTransform="None"
-                                HorizontalOptions="EndAndExpand"
-
-                                Command="{Binding IrEncuestacomamd}"/>
-
+                                
 
 
                             </StackLayout>

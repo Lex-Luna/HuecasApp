@@ -34,10 +34,12 @@
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
-    <PackageReference Include="Xamarin.Forms.BehaviorsPack" Version="2.2.0" />
+    <PackageReference Include="Xamarin.Forms.BehaviorsPack" Version="3.0.0" />
     <PackageReference Include="Xamarin.Forms.GoogleMaps" Version="5.0.0" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
     <PackageReference Include="Xamarin.Forms.Skeleton" Version="2.0.0" />
+	<PackageReference Include="Xamarin.Build.Download" Version="0.4.11" />
+
   </ItemGroup>
 
   <ItemGroup>
