@@ -61,7 +61,7 @@ namespace HuecasAppUsers.Vista
             map.MoveToRegion(MapSpan.FromCenterAndRadius(posicion, Distance.FromMeters(500)));
             latitud = e.Pin.Position.Latitude;
             longitud = e.Pin.Position.Longitude;
-            EncuestaVM.Geolocalizacion= latitud+","+longitud;
+            EncuestaVM.Geolocalizacion= latitud+";"+longitud;
         }
         public async Task LocalizacionActual()
         {
@@ -105,7 +105,7 @@ namespace HuecasAppUsers.Vista
 
             if (latitud != 0 && longitud != 0)
             {
-                EncuestaVM.Geolocalizacion = latitud + "," + longitud;
+                EncuestaVM.Geolocalizacion = latitud + ";" + longitud;
                 await Navigation.PopAsync();
             }
             else

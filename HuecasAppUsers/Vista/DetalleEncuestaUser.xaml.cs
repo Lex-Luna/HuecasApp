@@ -2,6 +2,7 @@
 using HuecasAppUsers.VistaModelo;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -127,11 +128,12 @@ namespace HuecasAppUsers.Vista
         {
             var label = (Label)sender;
             string ubicacion = label.Text;
-            string[] separadas = ubicacion.Split(',');
+            string[] separadas = ubicacion.Split(';');
             double latitud = Convert.ToDouble(separadas[0]);
             double longitud = Convert.ToDouble(separadas[1]);
 
-            var uri = new Uri($"https://maps.google.com/?q={latitud},{longitud}");
+            //var uri = new Uri($"https://maps.google.com/?q={latitud},{longitud}");
+            var uri = new Uri($"https://www.google.com/maps/search/?api=1&query={latitud.ToString(CultureInfo.InvariantCulture)},{longitud.ToString(CultureInfo.InvariantCulture)}");
             Device.OpenUri(uri);
         }
     }
